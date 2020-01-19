@@ -331,7 +331,7 @@ class Parse(Yama_parsing_const):
     def parse_prices_with_all_ttx(self, links_df):
 
         df = links_df[['Name', 'Vendor', 'Category']]
-        df.loc['Quantaty'] = None
+        df['Quantaty'] = None
         #df_no_ttx_columns = {'Name', 'Vendor', 'Category', 'Quantaty', 'MinPrice', 'MaxPrice', 'AvgPrice'}
 
         for i, row_df in links_df.iterrows():
@@ -446,9 +446,46 @@ class Parse(Yama_parsing_const):
         exit_filename = price_folder + category + '-Цены-от-' + now + '.xlsx'
         df.to_excel(exit_filename)
 
+    #заполнение спустых строк в файле прайсов
     def no_prices_reparse(self, price_filename, links_filename,
                           price_folder='Prices/', links_folder='Price_link_list/'):
-        pass
+        df = pd.read_excel(price_folder + price_filename, index_col=0)
+        df_none = df[df['Quantaty'].isna()]
+        empty_id = df_none.index
+
+        print(df_none['Name'])
+
+        df_links = pd.read_excel(links_folder + links_filename)
+        df_links = df_links.merge(df_none.loc[:, 'Name'], on='Name')
+
+        df_filled = self.parse_prices_with_all_ttx(df_links)
+
+        #Если список характеристик расширился
+        df_filled__st = set(df_filled.columns)
+        df__st = set(df.columns)
+
+        if df_filled__st.issubset(df__st) == False:
+            new__ls = list(df_filled__st - df__st)
+            for new in new__ls:
+                df[new] = None
+
+        for i in empty_id:
+
+            id_series = df_filled[df_filled['Name'] == df.loc[i]['Name']]
+            for j in id_series.columns:
+                df.loc[i, j] = id_series[j].iloc[0]
+
+        now = datetime.now().strftime('%b-%y----%d--%H-%M')
+        category = df.iloc[0]['Category']
+
+        exit_filename = price_folder + category + '-Цены-от-' + now + '_empfill.xlsx'
+        df.to_excel(exit_filename)
+
+
+
+
+
+
 
 
 
