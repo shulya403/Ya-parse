@@ -305,6 +305,10 @@ class Parse(Yama_parsing_const):
 
             for dl in ttx_table_rows:
                 dl_name = dl.find('span', class_=self.span_spec_name).text
+                comment_find = dl_name.find('?') #Нет ли тут комментария к полю характеристик
+                if comment_find != -1:
+                    dl_name = dl_name[:comment_find]
+
                 spec_value = dl.find('span', class_=self.span_spec_value).text
                 # Забираем только самые полные характеристики в случае дубляжа ТТХ в таблице
                 wth = ttx_dict.setdefault(dl_name, spec_value)

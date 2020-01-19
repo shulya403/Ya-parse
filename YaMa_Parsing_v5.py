@@ -7,7 +7,7 @@ Data = pyama.Parse()
 #links.links_to_excel('Проектор')
 #links.links_to_excel('ИБП')
 
-link_file = 'Cсылки Ноутбук Jan-20----18--18-26.xlsx'
+link_file = 'Cсылки Монитор Jan-20----18--18-36.xlsx'
 Data.prices_to_excel(link_file)
 
 
