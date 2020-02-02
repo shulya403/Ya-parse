@@ -1,3 +1,18 @@
+# парсинг Yandex.Market по категооиям товара
+# class Yama_parsing_const - класс с глобальными переменными
+#   - dict ya_cookies - cookie market.yandex.ru
+#   - def header_(self, referer) - headers market.yandex.ru. referer - динмически формируерумый реферер-пэйдж
+# class Parse_links() - класс-наследник Yama_parsing_const
+#   def links_to_excel(self, category, folder='Price_link_list/') вызывная функция считывания линков на
+#       category из dict self.Categories
+# class Parse_models: - класс-наследник Yama_parsing_const
+#
+#
+#
+#
+
+
+
 import requests
 from pprint import pprint
 from bs4 import BeautifulSoup
@@ -66,22 +81,22 @@ class Yama_parsing_const(object):
     # Плашка 'цены' в серой табличке на странице модели li class
     li_offers = 'n-product-tabs__item n-product-tabs__item_name_offers'
 
-    # Число на плашке 'цены' (Количество предложений) span class
+    # Число на плашке 'цены' (Количество предложений) на странице модели span class
     span_offers = 'n-product-tabs__count'
 
     # Плашка 'характеристики' в серой табличке на странице модели li class
     li_spec = 'n-product-tabs__item n-product-tabs__item_name_spec'
 
-    # Максимальная и минимальная цена в блоке "средняя цена" на странице модели div class
+    # Максимальная и минимальная цена в нижнем блоке "средняя цена" на странице модели div class
     div_price_minmax = '_1S8ob0AgBK'
 
     # Средняя цена в блоке "средняя цена" на странице модели div class
     div_price_avg = '_3TkwCtZtaF'
 
-    # Цена из верхного блока если цена только одна div
+    # Цена из верхного блока если цена только одна на странце модели  div
     div_price_alone = 'n-product-price-cpa2__price'
 
-    # Таблица с ценами на очередной странице выдачи внутри предложений модели div class
+    # Таблица с ценами на очередной странице выдачи внутри предложений (модификаций) модели div class
     div_config_prices_table = 'n-snippet-list n-snippet-list_type_vertical island metrika b-zone b-spy-init b-spy-events i-bem'
 
     # Таблица характеристик (ТТХ) на странице Харктистик модели
@@ -111,8 +126,8 @@ class Yama_parsing_const(object):
 
         return header
 
-
-class Parse(Yama_parsing_const):
+#Скачивание линков на модлеи по категориям
+class Parse_links(Yama_parsing_const):
 
     def __init__(self):
         self.Categories = {
@@ -234,7 +249,7 @@ class Parse(Yama_parsing_const):
 
         return models_list
 
-    #запихиваем линки на модели в эксель
+    #запихиваем линки на модели в эксель. Вызывная функция парсинга
     def links_to_excel(self, category, folder='Price_link_list/'):
 
         parsed_links__ls = self.parse_links(category)
@@ -248,7 +263,11 @@ class Parse(Yama_parsing_const):
 
         df.to_excel(excel_file_name)
 
-    # Забор списка цен из предложений
+class Parse_models(Yama_parsing_const):
+    def __init__(self):
+        pass
+
+    # Считывание цен из предложений
     def offers_prices_harvest(self, offers_href, ref_href):
 
         prices_list = list()
@@ -288,7 +307,12 @@ class Parse(Yama_parsing_const):
             new_ref_href = page_href
             page_href = offers_href + '&page=' + str(page)
 
-        return prices_list
+            price_dict = dict()
+            price_dict['MinPrice'] = prices_list.min()
+            price_dict['MaxPrice'] = prices_list.max()
+            price_dict['AvgPrice'] = prices_list.mean()
+
+        return price_dict
 
     # Сбор всех ТТХ
     def ttx_harvest(self, ttx_href, ref_href):
@@ -320,6 +344,39 @@ class Parse(Yama_parsing_const):
             print(Err_response)
 
         return ttx_dict
+
+    #средняя цена - либо из блока "средняя цена" либо со страницы предложений модели
+    def avg_price_harvest(self, page, prices_count_cell, model_href, **kwargs):
+        price_dict = dict()
+        # а есть ли боттом c ценами?
+        teg_h2 = page.find_all('h2')
+        teg_h2_texts = [i.text for i in teg_h2]
+
+        if 'Средняя цена' in teg_h2_texts:
+            # Если блок средней цены на странице модели есть
+
+            margin_prices = page.find('div', class_=self.div_price_minmax).text
+            margin_prices = margin_prices.replace(' ', '')
+            margin_prices = margin_prices.replace('₽', '')
+            defiss = margin_prices.find('—')
+
+            price_dict['MinPrice'] = margin_prices[:defiss]
+            price_dict['MaxPrice'] = margin_prices[defiss + 1:]
+
+            avg_price = page.find('div', class_=self.div_price_avg)
+            price_dict['AvgPrice'] = int(avg_price.find('span').text.replace(' ', '').replace('₽', ''))
+        else:
+            # тады лезем внутря в список цен, руками:
+            offers_href = self.host + str(prices_count_cell.find('a').get('href'))
+            ref_href = self.host + model_href
+
+            offers_price_list = self.offers_prices_harvest(offers_href, ref_href)
+            price_dict['MinPrice'] = offers_price_list['MinPrice']
+            price_dict['MaxPrice'] = offers_price_list['MaxPrice']
+            price_dict['AvgPrice'] = offers_price_list['AvgPrice']
+
+
+        return price_dict
 
     #скачивание всех данных по моделям из файла линков
     def links_df_read_excel(self, links_filename):
@@ -365,37 +422,16 @@ class Parse(Yama_parsing_const):
                         else:
                             df.loc[i, 'Quantaty'] = 0
 
-                        # Цены Средняя, минимум, максимум со страницы модели в боттоме
-                        # Средняя _3TkwCtZtaF Мин/Макс _1S8ob0AgBK
+                        # Цены Средняя, минимум, максимум со страницы модели в боттоме или со страницы предложений
 
                         if df.loc[i]['Quantaty'] > 2:
 
-                            # а есть ли боттом c ценами?
-                            teg_h2 = page.find_all('h2')
-                            teg_h2_texts = [i.text for i in teg_h2]
+                            price_dict = self.avg_price_harvest(self, page, prices_count_cell, row_df['Href'], Name_id=row_df['Name'])
 
-                            if 'Средняя цена' in teg_h2_texts:
-                                #Если блок средней цены на странице модели есть
+                            df.loc[i, 'MinPrice'] = price_dict['MinPrice']
+                            df.loc[i, 'MaxPrice'] = price_dict['MaxPrice']
+                            df.loc[i, 'AvgPrice'] = price_dict['AvgPrice']
 
-                                margin_prices = page.find('div', class_=self.div_price_minmax).text
-                                margin_prices = margin_prices.replace(' ', '')
-                                margin_prices = margin_prices.replace('₽', '')
-                                defiss = margin_prices.find('—')
-
-                                df.loc[i, 'MinPrice'] = margin_prices[:defiss]
-                                df.loc[i, 'MaxPrice'] = margin_prices[defiss + 1:]
-
-                                avg_price = page.find('div', class_=self.div_price_avg)
-                                df.loc[i, 'AvgPrice'] = int(avg_price.find('span').text.replace(' ', '').replace('₽', ''))
-                            else:
-                                # тады лезем внутря в список цен, руками:
-                                offers_href = self.host + str(prices_count_cell.find('a').get('href'))
-                                ref_href = self.host + row_df['Href']
-                                offers_price_list = pd.Series(
-                                    self.offers_prices_harvest(offers_href, ref_href))
-                                df.loc[i, 'AvgPrice'] = offers_price_list.mean()
-                                df.loc[i, 'MinPrice'] = offers_price_list.min()
-                                df.loc[i, 'MaxPrice'] = offers_price_list.max()
                         else:
                             # если одно предложение (цена) только одна или нет предложений
                             avg_price = page.find('div', class_=self.div_price_alone)
@@ -419,8 +455,6 @@ class Parse(Yama_parsing_const):
                             for new in new_ttx__set:
                                 df[new] = None
                             df.loc[i, list(ttx_dict.keys())] = pd.Series(ttx_dict)
-
-
 
                         except AttributeError as Err_ttx:
                             print(Err_ttx)
@@ -446,7 +480,7 @@ class Parse(Yama_parsing_const):
         exit_filename = price_folder + category + '-Цены-от-' + now + '.xlsx'
         df.to_excel(exit_filename)
 
-    #заполнение спустых строк в файле прайсов
+    #заполнение пустых строк в готовом файле прайсов
     def no_prices_reparse(self, price_filename, links_filename,
                           price_folder='Prices/', links_folder='Price_link_list/'):
         df = pd.read_excel(price_folder + price_filename, index_col=0)
