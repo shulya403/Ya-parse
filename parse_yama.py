@@ -20,41 +20,49 @@ import time
 import pandas as pd
 from datetime import datetime
 from urllib.parse import quote
+import re
 
 class Yama_parsing_const(object):
 
     ya_cookies = {
-        'yandexuid': '1316442951370867155',
-        'fuid01': '4f310da92e0e9ff0.vHkMwDo78qH5TTmHx-stTeCpjL9q0oCG-kHm-t1yw00rSnf7Uxj5eqXaFjpO-Ji3kSQu-TbS-duDcL4tBTDDknJm0Xp2PwtEYgzI74M0t3XEplZr69TXugVdbykMuUYo; yp=1571397397.shlos.0#1600341397.p_sw.1568805397#1572440968.ygu.1#1585616974.szm.1:1680x1050:1614x887',
-        '_ym_uid': '1478001885185024594',
-        'i': '8k0m5URcQTs/D8+3VhGAv5WDga2dnppzBVV1QJC90LIBHvPMRGJZCfTnVJ0n+Mn0B1Jzd5hn+0ZsECAkAdHOR+LT58Y=',
+        '_ym_uid': '1575729574981578479',
         'mda': '0',
         'my': 'YwA=',
-        'yabs': '-frequency=/4/0000000000000000/XtroS9mt81g-FMsSDoUqLB1md3SW/',
-        '_ym_isad': '=2',
+        'categoryQA': '1',
+        'L': 'UWh6d11wUglKWURxVwJKY29/YXNDW2B4IAMqGSkvWi4oDA==.1576330582.14079.396207.a95d6af3485906fe3a5b85ad5e96aae2',
+        'yandex_login': 'dmschulgin',
+        'yandexuid': '7149064641575729573',
+        'yuidss': '7149064641575729573',
+        'currentRegionId': '213',
+        'currentRegionName': '%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D1%83',
+        'settings-notifications-popup': '%7B%22showCount%22%3A2%2C%22showDate%22%3A18280%7D',
+        'ymex': '1896226411.yrts.1580866411',
+        'zm': 'm-white_bender.webp.css-https%3As3home-static_AcrZ-E5XMfrfMIo1gDHPnVN4AdI%3Al',
+        'i': 'f84xXe5i+RDS9ZAAcaeRW6dGVcK3pWOh3j9tHolXBj+4D5wJJOYr2Po2Fq9YoOzQbtqNrKdmeuMJECkYhMP95GcEEWM=',
         'yandex_gid': '213',
-        'font_loaded': 'YSv1',
-        '_ym_wasSynced': '%7B%22time%22%3A1569848959698%2C%22params%22%3A%7B%22eu%22%3A0%7D%2C%22bkParams%22%3A%7B%7D%7D',
-        '_ym_d': '1569848960',
+        'yc': '1581711296.zen.cach%3A1581455687',
+        '_ym_d': '1581452810',
+        'yabs-frequency': '/4/1W0203IoGLu2415U/ht2mSBWv8L21FcsqEITwyZrje3ad/',
+        'skid': '5043396831581538418',
+        '_ym_isad': '2',
+        'cycada': 'tSzluWir/d0SzOW2g4oBs3aLNKnxzLvG+Evc76owb0I=',
+        'Session_id': '3:1581643106.5.0.1576330582444:rTr8bQ:86.1|919128238.0.2|212505.744792.ZdacW_cOsLYLzTuP8fcaSDzt8Zs',
+        'sessionid2': '3:1581643106.5.0.1576330582444:rTr8bQ:86.1|919128238.0.2|212505.224397.B1p8konycmHsBJLQ1AWZJJ_Cwkg',
+        'yp': '1612402412.cld.2270452#1612402412.brd.6158003823#1896394830.sad.1581034830:1581034830:1#1584922830.hks.0#1597131741.szm.1_5:1280x720:1166x626#1581968565.zmblt.1505#1581968565.zmbbr.yandexbrowser:20_2_1_248#1584044087.ygu.1#1581696462.gpauto.55_713436:37_730183:200:1:1581689262',
+        'visits': '1575841847-1579550934-1581689499',
+        'uid': 'AABcEl5Gqpsw4AC4BLSWAg==',
+        'js': '1',
+        'dcm': '1',
         '_ym_visorc_160656': 'b',
         '_ym_visorc_45411513': 'b',
-        'markethistory': '<h><cm>6427101-9238862</cm><cm>6427101-8538765</cm><m>106905-10467479</m><m>432460-7691987</m><c>7156311</c></h>',
-        'cmp-merge': 'true',
-        'reviews-merge': 'true',
-        'head-banner-sovetnik': '%7B%22closingCounter%22%3A0%2C%22showingCounter%22%3A1%2C%22shownAfterClicked%22%3Afalse%2C%22isClicked%22%3Afalse%7D; head-banner-sovetnik-info=%7B%22closingCounter%22%3A0%2C%22showingCounter%22%3A1%2C%22shownAfterClicked%22%3Afalse%2C%22isClicked%22%3Afalse%7D',
-        'head-banner': '%7B%22closingCounter%22%3A0%2C%22showingCounter%22%3A526%2C%22shownAfterClicked%22%3Afalse%2C%22isClicked%22%3Afalse%7D; currentRegionId=213',
-        'currentRegionName': '%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D1%83',
-        'pof': '%7B%22clid%22%3A%5B%22505%22%5D%2C%22mclid%22%3Anull%2C%22distr_type%22%3Anull%2C%22vid%22%3Anull%2C%22opp%22%3Anull%7D',
-        'cpa': '%7B%22clid%22%3A%5B%22505%22%5D%2C%22mclid%22%3Anull%2C%22distr_type%22%3Anull%2C%22vid%22%3Anull%2C%22opp%22%3Anull%7D; visits=1569848974-1569848974-1569848974; parent_reqid_seq=d42a92a5871ff61374b913eb3f4ccf8f%2Cce5b53e8a009fae941bde9127ffccf95%2C07c761fd008a9de5656c84921bf0aa02; utm_campaign=face_abovesearch',
-        'utm_source': 'face_abovesearch',
-        'uid': 'AABbhl2R/o6riwEABZ1KAg==',
-        'js': '1',
-        'first_visit_time': '2019-09-30T16%3A09%3A25%2B03%3A00',
-        'HISTORY_UNAUTH_SESSION': 'true',
+        'first_visit_time': '2020-02-14T17%3A11%3A43%2B03%3A00',
+        'yandexmarket': '48',
         'fonts-loaded': '1',
         'ugcp': '1',
+        'ys': 'def_bro.0#svt.1#wprid.1581682415557470-933073134786648878600067-vla1-1933#ybzcc.ru',
+        'parent_reqid_seq': '4443e96de0ca39b438700c542afbd754%2C9167d730c4966f0d74a8f0e36206d2ac%2C22e8d508c3661ec4b41e9cce6d85bde9',
         'viewtype': 'list'
-    }
+     }
 
     #host name
     host = 'https://market.yandex.ru'
@@ -121,7 +129,7 @@ class Yama_parsing_const(object):
             'Sec-Fetch-Site': 'same-origin',
             'Sec-Fetch-User': '?1',
             'Upgrade-Insecure-Requests': '1',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36'
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.136 YaBrowser/20.2.1.248 Yowser/2.5 Safari/537.36'
         }
 
         return header
@@ -187,7 +195,9 @@ class Parse_links(Yama_parsing_const):
                     pages_full = False
 
                 # Пречень блоков моделей (строк таблицы) на очередной странице выдачи
-                rows_models = iter_page_soup.find_all('div', class_=self.div_row_models_ls)
+                #rows_models = iter_page_soup.find_all('div', class_=self.div_row_models_ls)
+
+                rows_models = iter_page_soup.find_all('div')
 
                 if len(rows_models) != 0:
                     print(page, len(rows_models))
@@ -426,7 +436,7 @@ class Parse_models(Yama_parsing_const):
 
                         if df.loc[i]['Quantaty'] > 2:
 
-                            price_dict = self.avg_price_harvest(self, page, prices_count_cell, row_df['Href'], Name_id=row_df['Name'])
+                            price_dict = self.avg_price_harvest(self, page, prices_count_cell, row_df['Href'], )
 
                             df.loc[i, 'MinPrice'] = price_dict['MinPrice']
                             df.loc[i, 'MaxPrice'] = price_dict['MaxPrice']
