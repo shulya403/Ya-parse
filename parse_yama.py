@@ -31,14 +31,14 @@ class Yama_parsing_const(object):
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
             #'Accept-Encoding': 'gzip, deflate, br',
             'Accept-Language': 'ru,en;q=0.9',
-            #'Connection': 'keep-alive',
+            'Connection': 'keep-alive',
             #'Cache-Control': 'max-age=0',
             #'Host': 'market.yandex.ru',
-            #'Sec-Fetch-Mode': 'navigate',
-            #'Sec-Fetch-Site': 'none',
-            #'Sec-Fetch-User': '?1',
-            #'Upgrade-Insecure-Requests': '1',
-            #'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.136 YaBrowser/20.2.1.248 Yowser/2.5 Safari/537.36',
+            'Sec-Fetch-Mode': 'navigate',
+            'Sec-Fetch-Site': 'none',
+            'Sec-Fetch-User': '?1',
+            'Upgrade-Insecure-Requests': '1',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.136 YaBrowser/20.2.1.248 Yowser/2.5 Safari/537.36',
 
         }
         return header
@@ -189,16 +189,15 @@ class Parse_links(Yama_parsing_const):
             #response = requests.get(page_url, headers=self.header_(referer_), cookies=self.ya_cookies)
 
             gr_.go(page_url,
-                   headers=self.header_())
+                   headers=self.header_(referer_),
+                   cookies=self.ya_cookies)
 
             if gr_.doc.code == 200:
                 print('поехали ', page_url)
                 iter_page_soup = BeautifulSoup(gr_.doc.body, 'html.parser')
                 print(iter_page_soup.title)
 
-                # Проверяем не последняя ли страница выдачи
-                if iter_page_soup.find('a', class_=self.a_button_eol) is None:
-                    pages_full = False
+
 
                 # Пречень блоков моделей (строк таблицы) на очередной странице выдачи
                 rows_models = iter_page_soup.find_all('div', class_=self.div_row_models_ls)
@@ -242,19 +241,23 @@ class Parse_links(Yama_parsing_const):
                         print(model_dict['Name'])
                         models_list.append(model_dict)
 
+                    # Проверяем не последняя ли страница выдачи
+                    if iter_page_soup.find('a', class_=self.a_button_eol) is None:
+                        pages_full = False
+
                     page += 1
 
                 else:
                     capcha_quest = iter_page_soup.find('title')
 
-                    if capcha_quest.text == 'ÐÐ¹!':
+                    if capcha_quest.text == 'Ой!':
                         print(page, 'облом - капча')
                         time.sleep(1)
                     else:
                         print(page, 'фигня какая-то')
                         break
 
-                time.sleep(2)
+                time.sleep(1)
             else:
                 print('облом... ', gr_.doc.code)
 
@@ -264,6 +267,7 @@ class Parse_links(Yama_parsing_const):
     def links_to_excel(self, category, folder='Price_link_list/'):
 
         parsed_links__ls = self.parse_links(category)
+
         print(len(parsed_links__ls))
         df = pd.DataFrame(parsed_links__ls)
         df.drop_duplicates(subset=['Name'], inplace=True)
