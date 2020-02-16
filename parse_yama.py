@@ -20,9 +20,28 @@ import time
 import pandas as pd
 from datetime import datetime
 from urllib.parse import quote
-import re
+#import re
+from grab import Grab
 
 class Yama_parsing_const(object):
+    def header_(self, referer=""):
+
+        header = {
+            #'Referer': referer,
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+            #'Accept-Encoding': 'gzip, deflate, br',
+            'Accept-Language': 'ru,en;q=0.9',
+            #'Connection': 'keep-alive',
+            #'Cache-Control': 'max-age=0',
+            #'Host': 'market.yandex.ru',
+            #'Sec-Fetch-Mode': 'navigate',
+            #'Sec-Fetch-Site': 'none',
+            #'Sec-Fetch-User': '?1',
+            #'Upgrade-Insecure-Requests': '1',
+            #'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.136 YaBrowser/20.2.1.248 Yowser/2.5 Safari/537.36',
+
+        }
+        return header
 
     ya_cookies = {
         '_ym_uid': '1575729574981578479',
@@ -76,7 +95,6 @@ class Yama_parsing_const(object):
     # кнопка "Вперед" на страницах выдачи списков моделей <a> class
     a_button_eol = 'button button_size_s button_theme_pseudo n-pager__button-next i-bem n-smart-link'
 
-
     # строки таблицы моделей (по 48 на страницу обычно) Div class
     div_row_models_ls = 'n-snippet-card2 i-bem b-zone b-spy-visible b-spy-events'
 
@@ -117,23 +135,6 @@ class Yama_parsing_const(object):
     span_spec_value = 'n-product-spec__value-inner'
 
 
-
-    def header_(self, referer):
-        header = {
-            'Referer': referer,
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3',
-            'Accept-Encoding': 'gzip, deflate, br',
-            'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
-            'Connection': 'keep-alive',
-            'Sec-Fetch-Mode': 'navigate',
-            'Sec-Fetch-Site': 'same-origin',
-            'Sec-Fetch-User': '?1',
-            'Upgrade-Insecure-Requests': '1',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.136 YaBrowser/20.2.1.248 Yowser/2.5 Safari/537.36'
-        }
-
-        return header
-
 #Скачивание линков на модлеи по категориям
 class Parse_links(Yama_parsing_const):
 
@@ -165,6 +166,7 @@ class Parse_links(Yama_parsing_const):
 
         url = self.Categories[category]['url']
         category_ls = self.Categories[category]['category']
+        gr_ = Grab() #объект Grab
 
         models_list = list()  # список словарей с моделями с названиеми и ссылками на модели
 
@@ -184,20 +186,22 @@ class Parse_links(Yama_parsing_const):
                 page_url = url + self.link_tail
                 referer_ = self.link_computers
 
-            response = requests.get(page_url, headers=self.header_(referer_), cookies=self.ya_cookies)
+            #response = requests.get(page_url, headers=self.header_(referer_), cookies=self.ya_cookies)
 
-            if response.status_code == 200:
+            gr_.go(page_url,
+                   headers=self.header_())
+
+            if gr_.doc.code == 200:
                 print('поехали ', page_url)
-                iter_page_soup = BeautifulSoup(response.text, 'html.parser')
+                iter_page_soup = BeautifulSoup(gr_.doc.body, 'html.parser')
+                print(iter_page_soup.title)
 
                 # Проверяем не последняя ли страница выдачи
                 if iter_page_soup.find('a', class_=self.a_button_eol) is None:
                     pages_full = False
 
                 # Пречень блоков моделей (строк таблицы) на очередной странице выдачи
-                #rows_models = iter_page_soup.find_all('div', class_=self.div_row_models_ls)
-
-                rows_models = iter_page_soup.find_all('div')
+                rows_models = iter_page_soup.find_all('div', class_=self.div_row_models_ls)
 
                 if len(rows_models) != 0:
                     print(page, len(rows_models))
@@ -251,11 +255,8 @@ class Parse_links(Yama_parsing_const):
                         break
 
                 time.sleep(2)
-
-
             else:
-                print('облом... ', response.status_code)
-
+                print('облом... ', gr_.doc.code)
 
         return models_list
 
