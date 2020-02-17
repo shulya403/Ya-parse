@@ -280,7 +280,7 @@ class Parse_links(Yama_parsing_const):
 
 class Parse_models(Yama_parsing_const):
     def __init__(self):
-        pass
+        self.gr_ = Grab()
 
     # Считывание цен из предложений
     def offers_prices_harvest(self, offers_href, ref_href):
@@ -288,18 +288,16 @@ class Parse_models(Yama_parsing_const):
         prices_list = list()
 
         page_href = offers_href
-        new_ref_href = ref_href
+        #new_ref_href = ref_href
 
         pages_is_ok = True
         page = 1
 
         while pages_is_ok == True:
             try:
-                offers_response = requests.get(page_href,
-                                               headers=self.header_(new_ref_href),
-                                               cookies=self.ya_cookies)
-                if offers_response.status_code == 200:
-                    offers_page = BeautifulSoup(offers_response.text, 'html.parser')
+                self.gr_.go(page_href, headers=self.header_(), cookies=self.ya_cookies)
+                if self.gr_.doc.code == 200:
+                    offers_page = BeautifulSoup(self.gr_.doc.body, 'html.parser')
                     if offers_page.find('a', class_=self.a_button_eol) is None:
                         pages_is_ok = False
 
@@ -313,13 +311,13 @@ class Parse_models(Yama_parsing_const):
                     prices_list += page_price_list
 
                 else:
-                    print("status code: ", offers_response.status_code)
+                    print("status code: ", self.gr_.doc.code)
 
             except Exception as Err:
                 print(Err)
 
             page += 1
-            new_ref_href = page_href
+            #new_ref_href = page_href
             page_href = offers_href + '&page=' + str(page)
 
             price_dict = dict()
@@ -335,20 +333,21 @@ class Parse_models(Yama_parsing_const):
         ttx_dict = dict()
 
         try:
-            response = requests.get(ttx_href, headers=self.header_(ref_href), cookies=self.ya_cookies)
-            if response.status_code - - 200:
-                page = BeautifulSoup(response.text, 'html.parser')
+            self.gr_.go(ttx_href, headers=self.header_(), cookies=self.ya_cookies)
+            if self.gr_.doc.code == 200:
+                page = BeautifulSoup(self.gr_.doc.body, 'html.parser')
+
             # вся таблица характеристик
-            ttx_table = page.find('div', class_=self.div_ttx_table)
-            ttx_table_rows = ttx_table.find_all('dl', class_='n-product-spec')
+            #ttx_table = page.find('div', class_=self.div_ttx_table)
+            ttx_table_rows = page.find_all('dl')
 
             for dl in ttx_table_rows:
-                dl_name = dl.find('span', class_=self.span_spec_name).text
+                dl_name = dl.find('dt').find('span').text
                 comment_find = dl_name.find('?') #Нет ли тут комментария к полю характеристик
                 if comment_find != -1:
                     dl_name = dl_name[:comment_find]
 
-                spec_value = dl.find('span', class_=self.span_spec_value).text
+                spec_value = dl.find('dd').find('span').text
                 # Забираем только самые полные характеристики в случае дубляжа ТТХ в таблице
                 wth = ttx_dict.setdefault(dl_name, spec_value)
                 if wth != spec_value:
@@ -361,7 +360,7 @@ class Parse_models(Yama_parsing_const):
         return ttx_dict
 
     #средняя цена - либо из блока "средняя цена" либо со страницы предложений модели
-    def avg_price_harvest(self, page, prices_count_cell, model_href, **kwargs):
+    def avg_price_harvest(self, page, prices_count_cell, model_href, ID_Name=""):
         price_dict = dict()
         # а есть ли боттом c ценами?
         teg_h2 = page.find_all('h2')
@@ -393,7 +392,7 @@ class Parse_models(Yama_parsing_const):
 
         return price_dict
 
-    #скачивание всех данных по моделям из файла линков
+    #скачивание данных из файла линков по категории
     def links_df_read_excel(self, links_filename):
 
         links_df = pd.read_excel(links_filename)
@@ -409,18 +408,15 @@ class Parse_models(Yama_parsing_const):
         for i, row_df in links_df.iterrows():
 
             try:
-                response = requests.get(self.host + row_df['Href'],
-                                        headers=self.header_(self.host +
-                                                                   '?text=' +
-                                                                   quote(row_df['Name']) +
-                                                                   self.link_tail),
-                                        cookies=self.ya_cookies)
-                if response.status_code == 200:
+                self.gr_.go(self.host + row_df['Href'],
+                            headers=self.header_(),
+                            cookies=self.ya_cookies)
+                if self.gr_.doc.code == 200:
 
-                    page = BeautifulSoup(response.text, 'html.parser')
+                    page = BeautifulSoup(self.gr_.doc.body, 'html.parser')
                     title = page.find('title')
 
-                    if row_df['Name'] in title.text:
+                    if 'Маркет' in title.text:
 
                         # Табличка верхняя серая
                         table_grey = page.find('ul', class_=self.ul_table_gray)
@@ -441,7 +437,7 @@ class Parse_models(Yama_parsing_const):
 
                         if df.loc[i]['Quantaty'] > 2:
 
-                            price_dict = self.avg_price_harvest(self, page, prices_count_cell, row_df['Href'], )
+                            price_dict = self.avg_price_harvest(page, prices_count_cell, row_df['Href'], row_df['Name'])
 
                             df.loc[i, 'MinPrice'] = price_dict['MinPrice']
                             df.loc[i, 'MaxPrice'] = price_dict['MaxPrice']
@@ -458,23 +454,23 @@ class Parse_models(Yama_parsing_const):
 
 
                         # ТТХ (все)
-                        try:  # на случай если ссылки на характеристики нет
-                            ttx_link = str(spec_cell.find('a').get('href'))
-
-                            ttx_href = self.host + ttx_link
-                            ref_href = self.host + row_df['Href']
-
-                            ttx_dict = self.ttx_harvest(ttx_href, ref_href)
-
-                            new_ttx__set = set(ttx_dict.keys()) - set(df.columns)
-                            for new in new_ttx__set:
-                                df[new] = None
-                            df.loc[i, list(ttx_dict.keys())] = pd.Series(ttx_dict)
-
-                        except AttributeError as Err_ttx:
-                            print(Err_ttx)
-
-                    elif title.text == 'ÐÐ¹!':
+ #                       try:  # на случай если ссылки на характеристики нет
+ #                           ttx_link = str(spec_cell.find('a').get('href'))
+#
+  #                          ttx_href = self.host + ttx_link
+  #                          ref_href = self.host + row_df['Href']
+#
+  #                          ttx_dict = self.ttx_harvest(ttx_href, ref_href)
+#
+   #                         new_ttx__set = set(ttx_dict.keys()) - set(df.columns)
+   #                         for new in new_ttx__set:
+   #                             df[new] = None
+   #                         df.loc[i, list(ttx_dict.keys())] = pd.Series(ttx_dict)
+#
+   #                     except AttributeError as Err_ttx:
+   #                         print(Err_ttx)
+#
+                    elif title.text == 'Ой!':
                         print('Облом: капча. Пропускаем')
 
                     else:
@@ -482,7 +478,9 @@ class Parse_models(Yama_parsing_const):
 
             except Exception as Err:
                 print(Err)
+
             print(df.loc[i])
+
         return df
 
     #Вызывная функция парсинга
