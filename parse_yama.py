@@ -7,10 +7,6 @@
 #       category из dict self.Categories
 # class Parse_models: - класс-наследник Yama_parsing_const
 #
-#
-#
-#
-
 
 
 import requests
@@ -333,9 +329,13 @@ class Parse_models(Yama_parsing_const):
         ttx_dict = dict()
 
         try:
-            self.gr_.go(ttx_href, headers=self.header_(), cookies=self.ya_cookies)
-            if self.gr_.doc.code == 200:
-                page = BeautifulSoup(self.gr_.doc.body, 'html.parser')
+            #self.gr_.go(ttx_href, headers=self.header_(), cookies=self.ya_cookies)
+            #if self.gr_.doc.code == 200:
+            #    page = BeautifulSoup(self.gr_.doc.body, 'html.parser')
+
+            response = requests.get(ttx_href, headers=self.header_(), cookies=self.ya_cookies)
+            if response.status_code == 200:
+                page = BeautifulSoup(response.text, 'html.parser')
 
             # вся таблица характеристик
             #ttx_table = page.find('div', class_=self.div_ttx_table)
@@ -408,12 +408,17 @@ class Parse_models(Yama_parsing_const):
         for i, row_df in links_df.iterrows():
 
             try:
-                self.gr_.go(self.host + row_df['Href'],
-                            headers=self.header_(),
-                            cookies=self.ya_cookies)
-                if self.gr_.doc.code == 200:
+                #self.gr_.go(self.host + row_df['Href'],
+                #            headers=self.header_(),
+                #            cookies=self.ya_cookies)
+                #if self.gr_.doc.code == 200:
 
-                    page = BeautifulSoup(self.gr_.doc.body, 'html.parser')
+                 #   page = BeautifulSoup(self.gr_.doc.body, 'html.parser')
+
+                response = requests.get(self.host + row_df['Href'], headers=self.header_(), cookies=self.ya_cookies)
+                if response.status_code == 200:
+                    page = BeautifulSoup(response.text, 'html.parser')
+
                     title = page.find('title')
 
                     if 'Маркет' in title.text:
