@@ -11,7 +11,7 @@ parse_category = pynd.Parse_models()
 
 #parse_category.prices_to_excel('Cсылки Монитор Feb-20----16--18-37.xlsx')
 #parse_category.prices_to_excel('Cсылки ИБП Feb-20----16--19-02.xlsx')
-#parse_category.prices_to_excel('Cсылки Проектор Feb-20----16--18-41.xlsx')
+parse_category.prices_to_excel('Cсылки Проектор Feb-20----16--18-41.xlsx')
 
 
 

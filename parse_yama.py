@@ -130,32 +130,34 @@ class Yama_parsing_const(object):
     # Значение характеристики (ТТХ) на странице Харктистик модели
     span_spec_value = 'n-product-spec__value-inner'
 
+    Categories = {
+        'Ноутбук': {
+            'url': 'https://market.yandex.ru/catalog--noutbuki/54544/list?hid=91013',
+            'category': ['Ноутбук']
+            'ttx_file': 'Ноутбук--характеристики.xlsx'
+        },
+        'Монитор': {
+            'url': 'https://market.yandex.ru/catalog--monitory/54539/list?hid=91052',
+            'category': ['Монитор']
+        },
+        'Проектор': {
+            'url': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?hid=191219',
+            'category': ['Проектор']
+        },
+        'ИБП': {
+            'url': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/59604/list?hid=91082',
+            'category': ['Интерактивный ИБП',
+                         'Резервный ИБП',
+                         'ИБП с двойным преобразованием'
+                         ]
+        }
+    }
+
+    TTX_files_folder = 'TTX_files'
+
 
 #Скачивание линков на модлеи по категориям
 class Parse_links(Yama_parsing_const):
-
-    def __init__(self):
-        self.Categories = {
-            'Ноутбук': {
-                'url': 'https://market.yandex.ru/catalog--noutbuki/54544/list?hid=91013',
-                'category': ['Ноутбук']
-            },
-            'Монитор': {
-                'url': 'https://market.yandex.ru/catalog--monitory/54539/list?hid=91052',
-                'category': ['Монитор']
-            },
-            'Проектор': {
-                'url': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?hid=191219',
-                'category': ['Проектор']
-            },
-            'ИБП': {
-                'url': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/59604/list?hid=91082',
-                'category': ['Интерактивный ИБП',
-                             'Резервный ИБП',
-                             'ИБП с двойным преобразованием'
-                             ]
-            }
-        }
 
     #скачивание линков на страницы модели по категории
     def parse_links(self, category):
@@ -276,7 +278,8 @@ class Parse_links(Yama_parsing_const):
 
 class Parse_models(Yama_parsing_const):
     def __init__(self):
-        self.gr_ = Grab()
+        #self.gr_ = Grab()
+        pass
 
     # Считывание цен из предложений
     def offers_prices_harvest(self, offers_href, ref_href):
@@ -291,9 +294,9 @@ class Parse_models(Yama_parsing_const):
 
         while pages_is_ok == True:
             try:
-                self.gr_.go(page_href, headers=self.header_(), cookies=self.ya_cookies)
-                if self.gr_.doc.code == 200:
-                    offers_page = BeautifulSoup(self.gr_.doc.body, 'html.parser')
+                response = requests.get(page_href, headers=self.header_(), cookies=self.ya_cookies)
+                if response.status_code == 200:
+                    offers_page = BeautifulSoup(response.text, 'html.parser')
                     if offers_page.find('a', class_=self.a_button_eol) is None:
                         pages_is_ok = False
 
@@ -322,42 +325,6 @@ class Parse_models(Yama_parsing_const):
             price_dict['AvgPrice'] = prices_list.mean()
 
         return price_dict
-
-    # Сбор всех ТТХ
-    def ttx_harvest(self, ttx_href, ref_href):
-
-        ttx_dict = dict()
-
-        try:
-            #self.gr_.go(ttx_href, headers=self.header_(), cookies=self.ya_cookies)
-            #if self.gr_.doc.code == 200:
-            #    page = BeautifulSoup(self.gr_.doc.body, 'html.parser')
-
-            response = requests.get(ttx_href, headers=self.header_(), cookies=self.ya_cookies)
-            if response.status_code == 200:
-                page = BeautifulSoup(response.text, 'html.parser')
-
-            # вся таблица характеристик
-            #ttx_table = page.find('div', class_=self.div_ttx_table)
-            ttx_table_rows = page.find_all('dl')
-
-            for dl in ttx_table_rows:
-                dl_name = dl.find('dt').find('span').text
-                comment_find = dl_name.find('?') #Нет ли тут комментария к полю характеристик
-                if comment_find != -1:
-                    dl_name = dl_name[:comment_find]
-
-                spec_value = dl.find('dd').find('span').text
-                # Забираем только самые полные характеристики в случае дубляжа ТТХ в таблице
-                wth = ttx_dict.setdefault(dl_name, spec_value)
-                if wth != spec_value:
-                    if len(wth) < len(spec_value):
-                        ttx_dict[dl_name] = spec_value
-
-        except Exception as Err_response:
-            print(Err_response)
-
-        return ttx_dict
 
     #средняя цена - либо из блока "средняя цена" либо со страницы предложений модели
     def avg_price_harvest(self, page, prices_count_cell, model_href, ID_Name=""):
@@ -399,21 +366,14 @@ class Parse_models(Yama_parsing_const):
         return links_df
 
     #Основная функция парсинга моделей
-    def parse_prices_with_all_ttx(self, links_df):
+    def parse_models_prices(self, links_df):
 
         df = links_df[['Name', 'Vendor', 'Category']]
         df['Quantaty'] = None
-        #df_no_ttx_columns = {'Name', 'Vendor', 'Category', 'Quantaty', 'MinPrice', 'MaxPrice', 'AvgPrice'}
 
         for i, row_df in links_df.iterrows():
 
             try:
-                #self.gr_.go(self.host + row_df['Href'],
-                #            headers=self.header_(),
-                #            cookies=self.ya_cookies)
-                #if self.gr_.doc.code == 200:
-
-                 #   page = BeautifulSoup(self.gr_.doc.body, 'html.parser')
 
                 response = requests.get(self.host + row_df['Href'], headers=self.header_(), cookies=self.ya_cookies)
                 if response.status_code == 200:
@@ -429,8 +389,147 @@ class Parse_models(Yama_parsing_const):
                         # Плашка `Цены`
                         prices_count_cell = table_grey.find('li', class_=self.li_offers)
 
-                        # Плашка `Характеристики`
-                        spec_cell = table_grey.find('li', class_=self.li_spec)
+                        # Количество цен (предложений)
+                        if prices_count_cell.find('span', class_=self.span_offers) is not None:
+                            df.loc[i, 'Quantaty'] = int(prices_count_cell.find('span', class_=self.span_offers).text)
+                        else:
+                            df.loc[i, 'Quantaty'] = 0
+
+                        # Цены Средняя, минимум, максимум со страницы модели в боттоме или со страницы предложений
+
+                        if df.loc[i]['Quantaty'] > 2:
+
+                            price_dict = self.avg_price_harvest(page, prices_count_cell, row_df['Href'], row_df['Name'])
+
+                            df.loc[i, 'MinPrice'] = price_dict['MinPrice']
+                            df.loc[i, 'MaxPrice'] = price_dict['MaxPrice']
+                            df.loc[i, 'AvgPrice'] = price_dict['AvgPrice']
+
+                        else:
+                            # если одно предложение (цена) только одна или нет предложений
+                            avg_price = page.find('div', class_=self.div_price_alone)
+                            if avg_price is not None:
+                                df.loc[i, 'AvgPrice'] = int(
+                                    avg_price.find('span', class_='price').text.replace(' ', '').replace('₽', ''))
+                            else:
+                                df.loc[i, 'AvgPrice'] = 'na'
+
+                    elif title.text == 'Ой!':
+                        print('Облом: капча. Пропускаем')
+
+                    else:
+                        print('Еще чета не так')
+
+            except Exception as Err:
+                print(Err)
+
+            print(df.loc[i])
+
+        return df
+
+    #Вызывная функция парсинга
+    def prices_to_excel(self, links_filename, links_folder='Price_link_list/', price_folder='Prices/'):
+        df = self.parse_models_prices(self.links_df_read_excel(links_folder + links_filename))
+
+        now = datetime.now().strftime('%b-%y----%d--%H-%M')
+        category = df.iloc[0]['Category']
+
+        exit_filename = price_folder + category + '-Цены-от-' + now + '.xlsx'
+        df.to_excel(exit_filename)
+
+    #заполнение пустых строк в готовом файле прайсов
+    def no_prices_reparse(self, price_filename, links_filename,
+                          price_folder='Prices/', links_folder='Price_link_list/'):
+        df = pd.read_excel(price_folder + price_filename, index_col=0)
+        df_none = df[df['Quantaty'].isna()]
+        empty_id = df_none.index
+
+        print(df_none['Name'])
+
+        df_links = pd.read_excel(links_folder + links_filename)
+        df_links = df_links.merge(df_none.loc[:, 'Name'], on='Name')
+
+        df_filled = self.parse_models_prices(df_links)
+
+        for i in empty_id:
+
+            id_series = df_filled[df_filled['Name'] == df.loc[i]['Name']]
+            for j in id_series.columns:
+                df.loc[i, j] = id_series[j].iloc[0]
+
+        now = datetime.now().strftime('%b-%y----%d--%H-%M')
+        category = df.iloc[0]['Category']
+
+        exit_filename = price_folder + category + '-Цены-от-' + now + '_empfill.xlsx'
+        df.to_excel(exit_filename)
+
+class Parse_models_ttx(Parse_models):
+
+    # TODO: сделать общий файл Excel для характеристик по категории
+    #   сослаться на него из self.Categories
+    #   и считывать его в отдельный self.df
+    #   проверять ясть ли Name в этом df если нет добавлять строчку
+    #   презаписывать этот файл в конце
+
+    # Считывание цен из предложений как в паренте
+
+    # Сбор всех ТТХ
+    def ttx_harvest(self, ttx_href, ref_href):
+
+        ttx_dict = dict()
+
+        try:
+            response = requests.get(ttx_href, headers=self.header_(), cookies=self.ya_cookies)
+            if response.status_code == 200:
+                page = BeautifulSoup(response.text, 'html.parser')
+
+            # вся таблица характеристик
+            #ttx_table = page.find('div', class_=self.div_ttx_table)
+            ttx_table_rows = page.find_all('dl')
+
+            for dl in ttx_table_rows:
+                dl_name = dl.find('dt').find('span').text
+                comment_find = dl_name.find('?') #Нет ли тут комментария к полю характеристик
+                if comment_find != -1:
+                    dl_name = dl_name[:comment_find]
+
+                spec_value = dl.find('dd').find('span').text
+                # Забираем только самые полные характеристики в случае дубляжа ТТХ в таблице
+                wth = ttx_dict.setdefault(dl_name, spec_value)
+                if wth != spec_value:
+                    if len(wth) < len(spec_value):
+                        ttx_dict[dl_name] = spec_value
+
+        except Exception as Err_response:
+            print(Err_response)
+
+        return ttx_dict
+
+    #средняя цена в паренте
+
+    #Основная функция парсинга моделей
+    def parse_models_prices(self, links_df):
+
+        df = links_df[['Name', 'Vendor', 'Category']]
+        df['Quantaty'] = None
+        #df_no_ttx_columns = {'Name', 'Vendor', 'Category', 'Quantaty', 'MinPrice', 'MaxPrice', 'AvgPrice'}
+
+        for i, row_df in links_df.iterrows():
+
+            try:
+                response = requests.get(self.host + row_df['Href'], headers=self.header_(), cookies=self.ya_cookies)
+                if response.status_code == 200:
+                    page = BeautifulSoup(response.text, 'html.parser')
+
+                    title = page.find('title')
+
+                    if 'Маркет' in title.text:
+
+                        # Табличка верхняя серая
+                        table_grey = page.find('ul', class_=self.ul_table_gray)
+
+                        # Плашка `Цены`
+                        prices_count_cell = table_grey.find('li', class_=self.li_offers)
 
                         # Количество цен (предложений)
                         if prices_count_cell.find('span', class_=self.span_offers) is not None:
@@ -458,22 +557,28 @@ class Parse_models(Yama_parsing_const):
                                 df.loc[i, 'AvgPrice'] = 'na'
 
 
-                        # ТТХ (все)
- #                       try:  # на случай если ссылки на характеристики нет
- #                           ttx_link = str(spec_cell.find('a').get('href'))
-#
-  #                          ttx_href = self.host + ttx_link
-  #                          ref_href = self.host + row_df['Href']
-#
-  #                          ttx_dict = self.ttx_harvest(ttx_href, ref_href)
-#
-   #                         new_ttx__set = set(ttx_dict.keys()) - set(df.columns)
-   #                         for new in new_ttx__set:
-   #                             df[new] = None
-   #                         df.loc[i, list(ttx_dict.keys())] = pd.Series(ttx_dict)
-#
-   #                     except AttributeError as Err_ttx:
-   #                         print(Err_ttx)
+                        # ТТХ (все) Если такой модели до сх пор не было
+                        if self.ttx_df[self.ttx_df['Name'] == row_df['Name']].isnull():
+
+                            # Плашка `Характеристики`
+                            spec_cell = table_grey.find('li', class_=self.li_spec)
+
+                            try:  # на случай если ссылки на характеристики нет
+                                ttx_link = str(spec_cell.find('a').get('href'))
+
+                                ttx_href = self.host + ttx_link
+                                ref_href = self.host + row_df['Href']
+
+                                ttx_dict = self.ttx_harvest(ttx_href, ref_href)
+
+                                exist_ttx = set(self.ttx_df.columns) - {'Name'}
+                                new_ttx__set = set(ttx_dict.keys()) - exist_ttx
+                                for new in new_ttx__set:
+                                    self.ttx_df[new] = None
+                                self.ttx_df.loc[row_df['Name'], list(ttx_dict.keys())] = pd.Series(ttx_dict)
+    #
+                            except AttributeError as Err_ttx:
+                                print(Err_ttx)
 #
                     elif title.text == 'Ой!':
                         print('Облом: капча. Пропускаем')
@@ -488,19 +593,42 @@ class Parse_models(Yama_parsing_const):
 
         return df
 
+    #скачивание данных из файла линков по категории
+    def links_df_read_excel(self, links_filename):
+
+        links_df = pd.read_excel(links_filename)
+        return links_df
+
+    # скачивание файла характеристик
+    def TTX_file_df_excel(self, category):
+
+        filename = self.TTX_files_folder + self.Categories[category]['ttx_file']
+        self.ttx_df = pd.read_excel(filename, index_col = 'Name')
+
     #Вызывная функция парсинга
     def prices_to_excel(self, links_filename, links_folder='Price_link_list/', price_folder='Prices/'):
-        df = self.parse_prices_with_all_ttx(self.links_df_read_excel(links_folder + links_filename))
+        df_links = self.links_df_read_excel(links_folder + links_filename) #df линков на категорию
+        ttx_filename = df_links.iloc[0]['Category']
+        self.TTX_file_df_excel(self, ttx_filename) #self.ttx_df TTX из файла по категории. Катеория берется из линков
+
+        df = self.parse_models_prices(df_links) #вызов парсинга
 
         now = datetime.now().strftime('%b-%y----%d--%H-%M')
         category = df.iloc[0]['Category']
 
         exit_filename = price_folder + category + '-Цены-от-' + now + '.xlsx'
-        df.to_excel(exit_filename)
+        df.to_excel(exit_filename) #выходной файл с ценами
+        self.ttx_df.to_excel(ttx_filename) #обновления файла TTX по категории
+
+
+
 
     #заполнение пустых строк в готовом файле прайсов
     def no_prices_reparse(self, price_filename, links_filename,
                           price_folder='Prices/', links_folder='Price_link_list/'):
+
+        # TODO: добавить вызов файла TTX
+
         df = pd.read_excel(price_folder + price_filename, index_col=0)
         df_none = df[df['Quantaty'].isna()]
         empty_id = df_none.index
@@ -510,16 +638,7 @@ class Parse_models(Yama_parsing_const):
         df_links = pd.read_excel(links_folder + links_filename)
         df_links = df_links.merge(df_none.loc[:, 'Name'], on='Name')
 
-        df_filled = self.parse_prices_with_all_ttx(df_links)
-
-        #Если список характеристик расширился
-        df_filled__st = set(df_filled.columns)
-        df__st = set(df.columns)
-
-        if df_filled__st.issubset(df__st) == False:
-            new__ls = list(df_filled__st - df__st)
-            for new in new__ls:
-                df[new] = None
+        df_filled = self.parse_models_prices(df_links)
 
         for i in empty_id:
 
@@ -532,7 +651,6 @@ class Parse_models(Yama_parsing_const):
 
         exit_filename = price_folder + category + '-Цены-от-' + now + '_empfill.xlsx'
         df.to_excel(exit_filename)
-
 
 
 
