@@ -133,7 +133,7 @@ class Yama_parsing_const(object):
     Categories = {
         'Ноутбук': {
             'url': 'https://market.yandex.ru/catalog--noutbuki/54544/list?hid=91013',
-            'category': ['Ноутбук']
+            'category': ['Ноутбук'],
             'ttx_file': 'Ноутбук--характеристики.xlsx'
         },
         'Монитор': {
@@ -432,6 +432,13 @@ class Parse_models(Yama_parsing_const):
         df = self.parse_models_prices(self.links_df_read_excel(links_folder + links_filename))
 
         now = datetime.now().strftime('%b-%y----%d--%H-%M')
+        # TODO: брать надо название скатегрии из Categories[] верхний key находя его по нижнему уровню
+        #   cat_cat = df.iloc[0]['Category']
+        #   for i in Categories:
+        #       if cat_cat in i['category']:
+        #           category = i
+        #           break
+
         category = df.iloc[0]['Category']
 
         exit_filename = price_folder + category + '-Цены-от-' + now + '.xlsx'
@@ -465,21 +472,18 @@ class Parse_models(Yama_parsing_const):
 
 class Parse_models_ttx(Parse_models):
 
-    # TODO: сделать общий файл Excel для характеристик по категории
-    #   сослаться на него из self.Categories
-    #   и считывать его в отдельный self.df
-    #   проверять ясть ли Name в этом df если нет добавлять строчку
-    #   презаписывать этот файл в конце
-
     # Считывание цен из предложений как в паренте
 
     # Сбор всех ТТХ
-    def ttx_harvest(self, ttx_href, ref_href):
+    def ttx_harvest(self, ttx_href, ref_href, name):
 
-        ttx_dict = dict()
+        ttx_line_df = pd.DataFrame({'Name': [name]})
+        #ttx_line_df['Name'] = name
 
         try:
-            response = requests.get(ttx_href, headers=self.header_(), cookies=self.ya_cookies)
+            response = requests.get(ttx_href,
+                                    headers=self.header_(ref_href),
+                                    cookies=self.ya_cookies)
             if response.status_code == 200:
                 page = BeautifulSoup(response.text, 'html.parser')
 
@@ -488,22 +492,33 @@ class Parse_models_ttx(Parse_models):
             ttx_table_rows = page.find_all('dl')
 
             for dl in ttx_table_rows:
-                dl_name = dl.find('dt').find('span').text
-                comment_find = dl_name.find('?') #Нет ли тут комментария к полю характеристик
+                spec_name = dl.find('dt').find('span').text
+                comment_find = spec_name.find('?') #Нет ли тут комментария к полю характеристик
                 if comment_find != -1:
-                    dl_name = dl_name[:comment_find]
+                    spec_name = spec_name[:comment_find]
+                spec_name = spec_name.replace(':', '') #двоеточие и окончательные пробелы
+                for i in range(len(spec_name)-1, 0, -1):
+                    if spec_name[i] == ' ':
+                        spec_name = spec_name[:-1]
+                    else:
+                        break
 
-                spec_value = dl.find('dd').find('span').text
+                spec_value = dl.find('dd').text
                 # Забираем только самые полные характеристики в случае дубляжа ТТХ в таблице
-                wth = ttx_dict.setdefault(dl_name, spec_value)
-                if wth != spec_value:
-                    if len(wth) < len(spec_value):
-                        ttx_dict[dl_name] = spec_value
+                if spec_name in ttx_line_df.columns:
+                    if len(ttx_line_df[spec_name].iloc[0]) < len(spec_value):
+                        ttx_line_df.loc[0, spec_name] = spec_value
+
+                else:
+                    ttx_line_df[spec_name] = spec_value
 
         except Exception as Err_response:
             print(Err_response)
 
-        return ttx_dict
+        #Прибиваем новую строку
+        self.ttx_df__work = pd.concat([self.ttx_df__work, ttx_line_df], ignore_index=True)
+
+
 
     #средняя цена в паренте
 
@@ -512,7 +527,6 @@ class Parse_models_ttx(Parse_models):
 
         df = links_df[['Name', 'Vendor', 'Category']]
         df['Quantaty'] = None
-        #df_no_ttx_columns = {'Name', 'Vendor', 'Category', 'Quantaty', 'MinPrice', 'MaxPrice', 'AvgPrice'}
 
         for i, row_df in links_df.iterrows():
 
@@ -557,8 +571,8 @@ class Parse_models_ttx(Parse_models):
                                 df.loc[i, 'AvgPrice'] = 'na'
 
 
-                        # ТТХ (все) Если такой модели до сх пор не было
-                        if self.ttx_df[self.ttx_df['Name'] == row_df['Name']].isnull():
+                        # ТТХ Если такой модели до сх пор не было
+                        if row_df['Name'] not in self.ttx_names_set:
 
                             # Плашка `Характеристики`
                             spec_cell = table_grey.find('li', class_=self.li_spec)
@@ -569,14 +583,8 @@ class Parse_models_ttx(Parse_models):
                                 ttx_href = self.host + ttx_link
                                 ref_href = self.host + row_df['Href']
 
-                                ttx_dict = self.ttx_harvest(ttx_href, ref_href)
+                                self.ttx_harvest(ttx_href, ref_href, row_df['Name'])
 
-                                exist_ttx = set(self.ttx_df.columns) - {'Name'}
-                                new_ttx__set = set(ttx_dict.keys()) - exist_ttx
-                                for new in new_ttx__set:
-                                    self.ttx_df[new] = None
-                                self.ttx_df.loc[row_df['Name'], list(ttx_dict.keys())] = pd.Series(ttx_dict)
-    #
                             except AttributeError as Err_ttx:
                                 print(Err_ttx)
 #
@@ -593,81 +601,56 @@ class Parse_models_ttx(Parse_models):
 
         return df
 
-    #скачивание данных из файла линков по категории
-    def links_df_read_excel(self, links_filename):
+    def TTX_df_read_excel(self, category, ttx_folder='TTX_files/'):
 
-        links_df = pd.read_excel(links_filename)
-        return links_df
 
-    # скачивание файла характеристик
-    def TTX_file_df_excel(self, category):
+        if 'ttx_file' not in self.Categories[category].keys():
+            raise AttributeError('Нет поля ttx_file в словаре Categories')
 
-        filename = self.TTX_files_folder + self.Categories[category]['ttx_file']
-        self.ttx_df = pd.read_excel(filename, index_col = 'Name')
+        ttx_filename = ttx_folder + self.Categories[category]['ttx_file']
+        ttx_df__temp = pd.read_excel(ttx_filename, index_col=0)
+
+        #множество имеющихся моделей с TTX
+        self.ttx_names_set = frozenset(ttx_df__temp['Name'])
+
+        #Пустой DataFrame для новых ТТХ
+        self.ttx_df__work = pd.DataFrame(columns=ttx_df__temp.columns)
+
+    def TTX_df_append(self, category, new_ttx_df, ttx_folder='TTX_files/'):
+
+        ttx_filename = ttx_folder + self.Categories[category]['ttx_file']
+        old_ttx_df = pd.read_excel(ttx_filename, index_col=0)
+        ttx_df = pd.concat([old_ttx_df, new_ttx_df], ignore_index=True, sort=False)
+
+        ttx_df.to_excel(ttx_filename)
 
     #Вызывная функция парсинга
-    def prices_to_excel(self, links_filename, links_folder='Price_link_list/', price_folder='Prices/'):
-        df_links = self.links_df_read_excel(links_folder + links_filename) #df линков на категорию
-        ttx_filename = df_links.iloc[0]['Category']
-        self.TTX_file_df_excel(self, ttx_filename) #self.ttx_df TTX из файла по категории. Катеория берется из линков
+    def prices_to_excel(self,
+                        category,
+                        links_filename,
+                        links_folder='Price_link_list/',
+                        price_folder='Prices/',
+                        ttx_folder='TTX_files/'):
+
+        if category not in self.Categories.keys():
+            raise AttributeError('Нет такой категории продукта в Categories')
+
+        # df линков
+        df_links = self.links_df_read_excel(links_folder + links_filename)
+
+        # df ttx
+
+        self.TTX_df_read_excel(category, ttx_folder)
 
         df = self.parse_models_prices(df_links) #вызов парсинга
 
         now = datetime.now().strftime('%b-%y----%d--%H-%M')
-        category = df.iloc[0]['Category']
 
+        # выходной файл с ценами
+
+        #category = df.iloc[0]['Category']
         exit_filename = price_folder + category + '-Цены-от-' + now + '.xlsx'
-        df.to_excel(exit_filename) #выходной файл с ценами
-        self.ttx_df.to_excel(ttx_filename) #обновления файла TTX по категории
-
-
-
-
-    #заполнение пустых строк в готовом файле прайсов
-    def no_prices_reparse(self, price_filename, links_filename,
-                          price_folder='Prices/', links_folder='Price_link_list/'):
-
-        # TODO: добавить вызов файла TTX
-
-        df = pd.read_excel(price_folder + price_filename, index_col=0)
-        df_none = df[df['Quantaty'].isna()]
-        empty_id = df_none.index
-
-        print(df_none['Name'])
-
-        df_links = pd.read_excel(links_folder + links_filename)
-        df_links = df_links.merge(df_none.loc[:, 'Name'], on='Name')
-
-        df_filled = self.parse_models_prices(df_links)
-
-        for i in empty_id:
-
-            id_series = df_filled[df_filled['Name'] == df.loc[i]['Name']]
-            for j in id_series.columns:
-                df.loc[i, j] = id_series[j].iloc[0]
-
-        now = datetime.now().strftime('%b-%y----%d--%H-%M')
-        category = df.iloc[0]['Category']
-
-        exit_filename = price_folder + category + '-Цены-от-' + now + '_empfill.xlsx'
         df.to_excel(exit_filename)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        #выходной файл с TTX
+        self.TTX_df_append(category, self.ttx_df__work)
