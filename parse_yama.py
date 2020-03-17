@@ -17,7 +17,7 @@ import pandas as pd
 from datetime import datetime
 from urllib.parse import quote
 #import re
-from grab import Grab
+#from grab import Grab
 
 class Yama_parsing_const(object):
     def header_(self, referer=""):
@@ -138,18 +138,22 @@ class Yama_parsing_const(object):
         },
         'Монитор': {
             'url': 'https://market.yandex.ru/catalog--monitory/54539/list?hid=91052',
-            'category': ['Монитор']
+            'category': ['Монитор'],
+            'ttx_file': 'Монитор--характеристики.xlsx'
         },
         'Проектор': {
             'url': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?hid=191219',
-            'category': ['Проектор']
+            'category': ['Проектор',
+                         'Карманный проектор'],
+            'ttx_file': 'Проектор--характеристики.xlsx'
         },
         'ИБП': {
             'url': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/59604/list?hid=91082',
             'category': ['Интерактивный ИБП',
                          'Резервный ИБП',
                          'ИБП с двойным преобразованием'
-                         ]
+                         ],
+            'ttx_file': 'ИБП--характеристики.xlsx'
         }
     }
 
@@ -164,7 +168,7 @@ class Parse_links(Yama_parsing_const):
 
         url = self.Categories[category]['url']
         category_ls = self.Categories[category]['category']
-        gr_ = Grab() #объект Grab
+        #gr_ = Grab() #объект Grab
 
         models_list = list()  # список словарей с моделями с названиеми и ссылками на модели
 
@@ -184,15 +188,17 @@ class Parse_links(Yama_parsing_const):
                 page_url = url + self.link_tail
                 referer_ = self.link_computers
 
-            #response = requests.get(page_url, headers=self.header_(referer_), cookies=self.ya_cookies)
+            response = requests.get(page_url,
+                                    headers=self.header_(referer_),
+                                    cookies=self.ya_cookies)
 
-            gr_.go(page_url,
-                   headers=self.header_(referer_),
-                   cookies=self.ya_cookies)
+           # gr_.go(page_url,
+           #        headers=self.header_(referer_),
+           #        cookies=self.ya_cookies)
 
-            if gr_.doc.code == 200:
+            if response.status_code == 200:
                 print('поехали ', page_url)
-                iter_page_soup = BeautifulSoup(gr_.doc.body, 'html.parser')
+                iter_page_soup = BeautifulSoup(response.text, 'html.parser')
                 print(iter_page_soup.title)
 
 
@@ -277,9 +283,6 @@ class Parse_links(Yama_parsing_const):
         df.to_excel(excel_file_name)
 
 class Parse_models(Yama_parsing_const):
-    def __init__(self):
-        #self.gr_ = Grab()
-        pass
 
     # Считывание цен из предложений
     def offers_prices_harvest(self, offers_href, ref_href):
@@ -432,16 +435,16 @@ class Parse_models(Yama_parsing_const):
         df = self.parse_models_prices(self.links_df_read_excel(links_folder + links_filename))
 
         now = datetime.now().strftime('%b-%y----%d--%H-%M')
-        # TODO: брать надо название скатегрии из Categories[] верхний key находя его по нижнему уровню
-        #   cat_cat = df.iloc[0]['Category']
-        #   for i in Categories:
-        #       if cat_cat in i['category']:
-        #           category = i
-        #           break
 
         category = df.iloc[0]['Category']
 
-        exit_filename = price_folder + category + '-Цены-от-' + now + '.xlsx'
+        for i in self.Categories:
+            if category in self.Categories[i]['category']:
+                category_ = i
+                break
+
+
+        exit_filename = price_folder + category_ + '-Цены-от-' + now + '.xlsx'
         df.to_excel(exit_filename)
 
     #заполнение пустых строк в готовом файле прайсов
