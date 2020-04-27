@@ -130,6 +130,7 @@ class Yama_parsing_const(object):
     # Значение характеристики (ТТХ) на странице Харктистик модели
     span_spec_value = 'n-product-spec__value-inner'
 
+
     Categories = {
         'Ноутбук': {
             'url': 'https://market.yandex.ru/catalog--noutbuki/54544/list?hid=91013',
@@ -156,7 +157,6 @@ class Yama_parsing_const(object):
             'ttx_file': 'ИБП--характеристики.xlsx'
         }
     }
-
     TTX_files_folder = 'TTX_files'
 
 
