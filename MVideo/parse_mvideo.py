@@ -61,7 +61,7 @@ class parse_mvideo(object):
         self.host_url = 'https://www.mvideo.ru'
         self.now = datetime.now().strftime('%b-%y')
 
-#запрос с использованием Request_html для JavaScript
+#запрос с использованием Selenium для JavaScript
     def Req_JS(self, url_):
 
         options = webdriver.ChromeOptions()

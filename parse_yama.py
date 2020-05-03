@@ -16,7 +16,7 @@ import time
 import pandas as pd
 from datetime import datetime
 from urllib.parse import quote
-#import re
+import re
 #from grab import Grab
 
 class Yama_parsing_const(object):
@@ -98,16 +98,20 @@ class Yama_parsing_const(object):
     h3_model_name = 'n-snippet-card2__title'
 
     # Табличка верхняя серая на странице модели ul class
-    ul_table_gray = 'n-product-tabs__list'
+   # ul_table_gray = 'n-product-tabs__list'
+    ul_table_gray ="_2CAuvczGU0"
 
     # Плашка 'цены' в серой табличке на странице модели li class
-    li_offers = 'n-product-tabs__item n-product-tabs__item_name_offers'
+    #li_offers = 'n-product-tabs__item n-product-tabs__item_name_offers'
+    li_offers = "_1OM4gu7kXK _3Kj2EY9ihg"
 
     # Число на плашке 'цены' (Количество предложений) на странице модели span class
-    span_offers = 'n-product-tabs__count'
+    #span_offers = 'n-product-tabs__count'
+    span_offers = "yVmxx3-ZVv"
 
     # Плашка 'характеристики' в серой табличке на странице модели li class
-    li_spec = 'n-product-tabs__item n-product-tabs__item_name_spec'
+    #li_spec = 'n-product-tabs__item n-product-tabs__item_name_spec'
+    li_spec = "_1OM4gu7kXK _2W_euF-a9B kSWkhB-y4k"
 
     # Максимальная и минимальная цена в нижнем блоке "средняя цена" на странице модели div class
     div_price_minmax = '_1S8ob0AgBK'
@@ -135,7 +139,9 @@ class Yama_parsing_const(object):
         'Ноутбук': {
             'url': 'https://market.yandex.ru/catalog--noutbuki/54544/list?hid=91013',
             'category': ['Ноутбук'],
-            'ttx_file': 'Ноутбук--характеристики.xlsx'
+            'ttx_file': 'Ноутбук--характеристики.xlsx',
+            'ttx_mod_file': 'Ноутбук-Мод-характеристики.xlsx'
+
         },
         'Монитор': {
             'url': 'https://market.yandex.ru/catalog--monitory/54539/list?hid=91052',
@@ -157,7 +163,7 @@ class Yama_parsing_const(object):
             'ttx_file': 'ИБП--характеристики.xlsx'
         }
     }
-    TTX_files_folder = 'TTX_files'
+    TTX_files_folder = 'TTX_files/'
 
 
 #Скачивание линков на модлеи по категориям
@@ -263,7 +269,7 @@ class Parse_links(Yama_parsing_const):
 
                 time.sleep(1)
             else:
-                print('облом... ', gr_.doc.code)
+                print('облом... ', response.status_code)
 
         return models_list
 
@@ -313,7 +319,7 @@ class Parse_models(Yama_parsing_const):
                     prices_list += page_price_list
 
                 else:
-                    print("status code: ", self.gr_.doc.code)
+                    print("status code: ", response.status_code)
 
             except Exception as Err:
                 print(Err)
@@ -322,10 +328,10 @@ class Parse_models(Yama_parsing_const):
             #new_ref_href = page_href
             page_href = offers_href + '&page=' + str(page)
 
-            price_dict = dict()
-            price_dict['MinPrice'] = prices_list.min()
-            price_dict['MaxPrice'] = prices_list.max()
-            price_dict['AvgPrice'] = prices_list.mean()
+        price_dict = dict()
+        price_dict['MinPrice'] = prices_list.min()
+        price_dict['MaxPrice'] = prices_list.max()
+        price_dict['AvgPrice'] = prices_list.mean()
 
         return price_dict
 
@@ -657,3 +663,301 @@ class Parse_models_ttx(Parse_models):
 
         #выходной файл с TTX
         self.TTX_df_append(category, self.ttx_df__work)
+
+class Parse_Modifications_TTX(Yama_parsing_const):
+    def __init__(self,
+                 category,
+                 links_file,
+                 mod=True, # Надо ли считывать модификации
+                 ttx_name=False, # Надо ли считывать TTX Модели
+                 ttx_mod = True # Надо ли считывать TTX Модификаций
+                 ):
+
+        link_filename = 'Price_link_list/' + links_file
+        self.df_links = pd.read_excel(link_filename)
+        print(self.df_links.head(3))
+
+        if category in self.Categories.keys():
+            self.category = category
+        else:
+            raise AttributeError('Нет такой категории продукта в Categories')
+
+        self.df_names = pd.DataFrame(columns=['Name',
+                                              'Category',
+                                              'Vendor',
+                                              'Avg_price',
+                                              'Quantity'])
+
+        self.now = datetime.now().strftime('%b-%y')
+
+        if mod:
+            self.mod = mod
+            self.df_mods = pd.DataFrame(columns=['Name',
+                                                  'Vendor',
+                                                  'Modification_name',
+                                                  'Modification_href',
+                                                  'Quantity',
+                                                  'Avg_price'])
+            if ttx_mod:
+                self.ttx_mod = ttx_mod
+                self.ttx_mod_filename = self.TTX_files_folder + self.Categories[self.category]['ttx_mod_file']
+                self.df_ttx_mod = pd.read_excel(self.ttx_mod_filename, index_col=0)
+
+        if ttx_name:
+            self.ttx_name = ttx_name
+            self.ttx_name_filename = self.TTX_files_folder + self.Categories[self.category]['ttx_file']
+            self.df_tts_name = pd.read_excel(self.ttx_name_filename, index_col=0)
+
+
+    def main(self, step=10, num=""):
+
+        self.num = num
+
+        finish_ = len(self.df_links)
+        begin_ = 0
+        end_ = step
+        while end_ < finish_ - 1:
+            end_ = begin_ + step
+            if end_ > finish_ - 1:
+                end_ = finish_ - 1
+
+            for i, row_df_links in self.df_links.iloc[begin_:end_].iterrows():
+                j = len(self.df_names)
+                self.df_names.loc[j, 'Name'] = row_df_links['Name']
+                self.df_names.loc[j, 'Vendor'] = row_df_links['Vendor']
+                self.df_names.loc[j, 'Category'] = row_df_links['Category']
+
+                url_req = self.URL_Req(row_df_links['Href'])
+                if url_req:
+                    soup_page = BeautifulSoup(url_req, 'html.parser')
+                    soup_table_grey = soup_page.find('ul', class_=self.ul_table_gray)
+
+                    self.df_names.loc[j, ['Quantity', 'Avg_price']] = self.Parse_Model_Page(soup_page,
+                                                                                            soup_table_grey)
+
+                print(self.df_names.iloc[j])
+                if self.mod:
+                    if url_req:
+                        url_block = soup_table_grey.find('a', {"href": re.compile("mods")})
+                        if url_block:
+                            url_ = url_block.get('href')
+                        else:
+                            url_ = None
+                        if url_:
+                            self.Parse_Modifications(url_,
+                                                    row_df_links['Name'],
+                                                    row_df_links['Vendor'],
+                                                    row_df_links['Category'])
+                #if self.ttx_name:
+                #    self.df_tts_name = self.TTX_Handler(self.URL_Spec(soup_table_grey,
+                #                                                      self.df_tts_name))
+
+            self.DF_to_Excel(self.df_names, num=self.num)
+            begin_ = end_
+
+    def URL_Req(self, url_, host=True):
+
+        if host:
+            url_ = self.host + url_
+        try:
+            response = requests.get(url_, headers=self.header_(), cookies=self.ya_cookies, timeout=7)
+            if response.status_code == 200:
+                return response.text
+        except Exception:
+            print("не выходит {}".format(url_))
+            return None
+
+
+    def Parse_Model_Page(self, soup_page, soup_table_grey):
+
+        dict_exit = {}
+
+        # Плашка `Цены`
+        if soup_table_grey:
+            soup_offers_cell = soup_table_grey.find('li', class_=self.li_offers)
+            offers_ = soup_offers_cell.find('span', class_=self.span_offers)
+
+            if offers_ is not None:
+                dict_exit['Quantity'] = int(offers_.text)
+            else:
+                dict_exit['Quantity'] = 0
+
+            if dict_exit['Quantity'] > 2:
+                dict_exit['Avg_price'] = self.AvgPrice_Handler(soup_page, soup_offers_cell)
+
+            else:
+                # если одно предложение (цена) только одна или нет предложений
+                avg_price = soup_page.find('div', class_=self.div_price_alone)
+                if avg_price is not None:
+                    dict_exit['Avg_price'] = int(
+                            avg_price.find('span', class_='price').text.replace(' ', '').replace('₽', ''))
+                else:
+                    dict_exit['Avg_price'] = 'na'
+        else:
+            dict_exit['Avg_price'] = 'na'
+            dict_exit['Quantity'] = None
+
+        return dict_exit
+
+    def Parse_Modifications(self, url_, up_name, up_vendor, up_category):
+
+        page_href = url_
+        pages_is_ok = True
+        page = 1
+
+        while pages_is_ok:
+            print(page, page_href)
+            if self.ttx_mod:
+                ttx_len = len(self.df_ttx_mod)
+            url_req = self.URL_Req(page_href)
+
+            if url_req:
+                soup_page = BeautifulSoup(url_req, 'html.parser')
+
+                if soup_page.find('a', class_=self.a_button_eol) is None:
+                    pages_is_ok = False
+                soup_mods = soup_page.find_all('h3', class_=re.compile("snippet-card"))
+                soup_list_mods = [card.find('a') for card in soup_mods]
+
+                for name in soup_list_mods:
+                    i = len(self.df_mods)
+
+                    self.df_mods.loc[i, 'Name'] = up_name
+                    self.df_mods.loc[i, 'Vendor'] = up_vendor
+                    self.df_mods.loc[i, 'Modification_name'] = name.text.replace(up_category + " ", "")
+                    #TOD Убрать категорию из названия
+                    url_mod = name.get('href')
+                    self.df_mods.loc[i, 'Modification_href'] = url_mod
+                    url_req = self.URL_Req(url_mod)
+                    if url_req:
+                        soup_mod_page = BeautifulSoup(url_req, 'html.parser')
+                        soup_table_grey = soup_mod_page.find('ul', class_=self.ul_table_gray)
+                        self.df_mods.loc[i, ['Quantity', 'Avg_price']] = self.Parse_Model_Page(soup_mod_page,
+                                                                                                soup_table_grey)
+                        print(self.df_mods.loc[i, 'Modification_name'])
+                        if self.ttx_mod:
+                            self.df_ttx_mod = self.TTX_Handler(self.URL_Spec(soup_table_grey),
+                                                               self.df_ttx_mod,
+                                                               self.df_mods.loc[i, 'Modification_name'])
+
+            self.DF_to_Excel(self.df_mods, num=self.num, level="Modifications")
+            if self.ttx_mod and (len(self.df_ttx_mod) > ttx_len):
+                self.df_ttx_mod.to_excel(self.ttx_mod_filename)
+
+            page += 1
+            page_href = url_ + '&page=' + str(page)
+
+
+    def TTX_Handler(self, url_, df_ttx, name):
+
+        if name not in df_ttx['Name']:
+            j = len(df_ttx)
+            df_ttx.loc[j, 'Name'] = name
+            url_req = self.URL_Req(url_)
+            if url_req:
+                soup_ttx_page = BeautifulSoup(url_req, 'html.parser')
+                soup_ttx_table_rows = soup_ttx_page.find_all('dl')
+
+                for dl in soup_ttx_table_rows:
+                    spec_name = dl.find('dt').find('span').text
+                    comment_find = spec_name.find('?')  # Нет ли тут комментария к полю характеристик
+                    if comment_find != -1:
+                        spec_name = spec_name[:comment_find]
+                    spec_name = spec_name.replace(':', '')  # двоеточие и окончательные пробелы
+                    for i in range(len(spec_name) - 1, 0, -1):
+                        if spec_name[i] == ' ':
+                            spec_name = spec_name[:-1]
+                        else:
+                            break
+
+                    spec_value = dl.find('dd').text
+                    # Забираем только самые полные характеристики в случае дубляжа ТТХ в таблице
+                    if spec_name in df_ttx.columns:
+
+                        if len(str(df_ttx.loc[j, spec_name])) < len(str(spec_value)):
+                            df_ttx.loc[j, spec_name] = str(spec_value)
+                    else:
+                        df_ttx.loc[j, spec_name] = str(spec_value)
+
+        return df_ttx
+
+
+    def URL_Spec(self, soup_table_grey):
+        return soup_table_grey.find('a', {"href": re.compile("spec")}).get('href')
+
+
+
+    def AvgPrice_Handler(self, soup_page, soup_offers_cell):
+
+        # а есть ли боттом c ценами?
+        teg_h2 = soup_page.find_all('h2')
+        teg_h2_texts = [i.text for i in teg_h2]
+
+        if 'Средняя цена' in teg_h2_texts:
+                # Если блок средней цены на странице модели есть
+            avg_price = soup_page.find('div', class_=self.div_price_avg)
+            exit_ = int(avg_price.find('span').text.replace(' ', '').replace('₽', ''))
+        else:
+                # тады лезем внутря в список цен, руками:
+            url_ = str(soup_offers_cell.find('a').get('href'))
+            exit_ = self.Offers_Handler(url_)
+
+        return exit_
+
+    def Offers_Handler(self, url_):
+
+            prices_list = list()
+            print("OFFERS HANDLER WORK")
+
+            page_href = url_
+            # new_ref_href = ref_href
+            pages_is_ok = True
+            page = 1
+
+            while pages_is_ok == True:
+                url_req = self.URL_Req(url_)
+                if url_req:
+                    soup_offers_page = BeautifulSoup(url_req, 'html.parser')
+
+                    if soup_offers_page.find('a', class_=self.a_button_eol) is None:
+                        pages_is_ok = False
+
+                    soup_offers_table = soup_offers_page.find('div', class_=self.div_config_prices_table)
+                    page_prices = soup_offers_table.find_all('div', class_='price')
+
+                    page_price_list = [int(i.text.replace(' ', '').replace('₽', '')) for i in page_prices]
+                    prices_list += page_price_list
+
+                    page += 1
+                    # new_ref_href = page_href
+                    page_href = url_ + '&page=' + str(page)
+            try:
+                exit_ = sum(prices_list)/len(prices_list)
+            except ZeroDivisionError:
+                exit_ = 'na'
+
+            return exit_
+
+
+    def DF_to_Excel(self, df_out, num="", level=""):
+
+        filename = "Prices/" + \
+                   self.category + \
+                   "--" + \
+                   level + \
+                   "--" + \
+                   self.now + \
+                   "--" + \
+                   str(num) + \
+                   ".xlsx"
+
+        df_out.to_excel(filename)
+
+
+
+
+
+
+
+
+

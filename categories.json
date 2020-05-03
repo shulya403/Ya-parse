@@ -1,0 +1,115 @@
+{
+    "yama": {
+              "host": "https://market.yandex.ru",
+              "cookies": {
+                "_ym_uid": "1575729574981578479",
+                "mda": "0",
+                "my": "YwA=",
+                "categoryQA": "1",
+                "L": "UWh6d11wUglKWURxVwJKY29/YXNDW2B4IAMqGSkvWi4oDA==.1576330582.14079.396207.a95d6af3485906fe3a5b85ad5e96aae2",
+                "yandex_login": "dmschulgin",
+                "yandexuid": "7149064641575729573",
+                "yuidss": "7149064641575729573",
+                "currentRegionId": "213",
+                "currentRegionName": "%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D1%83",
+                "settings-notifications-popup": "%7B%22showCount%22%3A2%2C%22showDate%22%3A18280%7D",
+                "ymex": "1896226411.yrts.1580866411",
+                "zm": "m-white_bender.webp.css-https%3As3home-static_AcrZ-E5XMfrfMIo1gDHPnVN4AdI%3Al",
+                "i": "f84xXe5i+RDS9ZAAcaeRW6dGVcK3pWOh3j9tHolXBj+4D5wJJOYr2Po2Fq9YoOzQbtqNrKdmeuMJECkYhMP95GcEEWM=",
+                "yandex_gid": "213",
+                "yc": "1581711296.zen.cach%3A1581455687",
+                "_ym_d": "1581452810",
+                "yabs-frequency": "/4/1W0203IoGLu2415U/ht2mSBWv8L21FcsqEITwyZrje3ad/",
+                "skid": "5043396831581538418",
+                "_ym_isad": "2",
+                "cycada": "tSzluWir/d0SzOW2g4oBs3aLNKnxzLvG+Evc76owb0I=",
+                "Session_id": "3:1581643106.5.0.1576330582444:rTr8bQ:86.1|919128238.0.2|212505.744792.ZdacW_cOsLYLzTuP8fcaSDzt8Zs",
+                "sessionid2": "3:1581643106.5.0.1576330582444:rTr8bQ:86.1|919128238.0.2|212505.224397.B1p8konycmHsBJLQ1AWZJJ_Cwkg",
+                "yp": "1612402412.cld.2270452#1612402412.brd.6158003823#1896394830.sad.1581034830:1581034830:1#1584922830.hks.0#1597131741.szm.1_5:1280x720:1166x626#1581968565.zmblt.1505#1581968565.zmbbr.yandexbrowser:20_2_1_248#1584044087.ygu.1#1581696462.gpauto.55_713436:37_730183:200:1:1581689262",
+                "visits": "1575841847-1579550934-1581689499",
+                "uid": "AABcEl5Gqpsw4AC4BLSWAg==",
+                "js": "1",
+                "dcm": "1",
+                "_ym_visorc_160656": "b",
+                "_ym_visorc_45411513": "b",
+                "first_visit_time": "2020-02-14T17%3A11%3A43%2B03%3A00",
+                "yandexmarket": "48",
+                "fonts-loaded": "1",
+                "ugcp": "1",
+                "ys": "def_bro.0#svt.1#wprid.1581682415557470-933073134786648878600067-vla1-1933#ybzcc.ru",
+                "parent_reqid_seq": "4443e96de0ca39b438700c542afbd754%2C9167d730c4966f0d74a8f0e36206d2ac%2C22e8d508c3661ec4b41e9cce6d85bde9"
+              },
+                
+
+              "host_options": [
+                "--headless",
+                "--window-size=1920,1080"
+              ],
+              "host_get_suffics":"&local-offers-first=0&onstock=1",
+              "viewtype": "&viewtype=list",
+              "cards_page_params": {
+                "card_div": {
+                  "teg": "div",
+                  "attributes": {
+                    "class": "n-snippet-card2__part n-snippet-card2__part_type_center"
+                  }
+                },
+                "product_div": {
+                  "teg": "h3",
+                  "attributes": {
+                    "class": "n-snippet-card2__title"
+                  }
+                }
+              },
+
+              "categories": {
+                              "ноутбук": {
+                                          "url": "/catalog--noutbuki/54544/list?hid=91013",
+                                          "ttx_file": "NB-yama-TTX.xlsx",
+                                          "subcategories": [
+                                            "ноутбук"
+                                          ]
+                                          },
+                              "монитор": {
+                                          "url": "/catalog--monitory/54539/list?hid=91052",
+                                          "subcategories": [
+                                            "монитор"
+                                          ],
+                                          "ttx_file": "MNT-yama-TTX.xlsx"
+                                          },
+                              "проектор": {
+                                          "url": "/catalog--multimedia-proektory/60865/list?hid=191219",
+                                          "subcategories": [
+                                            "проектор",
+                                            "карманный проектор"
+                                          ],
+                                          "ttx_file": "PRJ-yama-TTX.xlsx"
+                                          },
+                              "ибп": {
+                                          "url": "/catalog--istochniki-bespereboinogo-pitaniia/59604/list?hid=91082",
+                                          "subcategories": [
+                                            "интерактивный ибп",
+                                            "резервный ИБП",
+                                            "ибп с двойным преобразованием"
+                                          ],
+                                          "ttx_file": "UPS-yama-TTX.xlsx"
+                                      }
+                            }
+          },
+    "mvideo": {
+      "host": "https://www.mvideo.ru",
+      "categories": {
+        "ноутбук": {
+          "url": "/noutbuki-planshety-komputery-8/noutbuki-118",
+          "ttx_file": "NB-mvideo-TTX.xlsx",
+          "subcategories": [
+            "ноутбук",
+            "ноутбук игровой",
+            "ноутбук-трансформер",
+            "ультрабук"
+          ]
+        }
+      }
+    }
+}
+
