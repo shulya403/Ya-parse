@@ -98,9 +98,41 @@
           },
     "mvideo": {
       "host": "https://www.mvideo.ru",
+      "pg_num": "?page=",
+      "host_options": [
+                "--headless",
+                "--window-size=1920,1080"
+              ],
+      "cards_page_params": {
+                "card_div": {
+                  "teg": "div",
+                  "attributes": {
+                    "class": "product-grid-card"
+                  }
+                },
+                "product_div": {
+                  "teg": "a",
+                  "attributes": {
+                    "class": "product-title product-title--clamp"
+                  }
+                },
+                "price_div": {
+                  "teg": "div",
+                  "attributes": {
+                    "class": "price-block__price"
+                  }
+                },
+                "customer_rate_div": {
+                  "teg": "div",
+                  "attributes": {
+                    "class": "stars__star stars__star--active"
+                  }
+                }
+      },
+
       "categories": {
         "ноутбук": {
-          "url": "/noutbuki-planshety-komputery-8/noutbuki-118",
+          "url": "https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118",
           "ttx_file": "NB-mvideo-TTX.xlsx",
           "subcategories": [
             "ноутбук",
@@ -110,6 +142,94 @@
           ]
         }
       }
+    },
+    "citilink": {
+      "host": "https://www.citilink.ru/",
+      "cookies": "",
+      "pg_num": "&p=",
+      "host_get_suffics": "?available=1&status=55395790",
+      "host_options": [
+                "--headless",
+                "--window-size=1920,1080"
+              ],
+      "cards_page_params": {
+                "card_div": {
+                  "teg": "div",
+                  "re": "True",
+                  "attributes": {
+                    "class": "js--subcategory-product-item"
+                  }
+                },
+                "product_div": {
+                  "teg": "span",
+                  "re": "True",
+                  "attributes": {
+                    "class": "h3"
+                  }
+                },
+                "price_div": {
+                  "teg": "ins",
+                  "attributes": {
+                    "class": "subcategory-product-item__price-num"
+                  }
+                }
+       },
+
+      "categories": {
+        "ноутбук": {
+          "url": "/catalog/mobile/notebooks/",
+          "subcategories": [
+            "ноутбук",
+            "ультрабук"
+          ]
+        }
+      }
+    },
+    "dns": {
+      "host": "https://www.dns-shop.ru",
+      "cookies": "",
+      "pg_num": "?p=",
+      "host_get_suffics": "&order=1&groupBy=none&stock=2",
+
+      "cards_page_params": {
+                "card_div": {
+                  "teg": "div",
+                  "attributes": {
+                    "class": "catalog-item"
+                  }
+                },
+                "product_div": {
+                  "teg": "div",
+                  "attributes": {
+                    "class": "product-info__title-link"
+                  }
+                },
+                "price_div": {
+                  "teg": "div",
+                  "attributes": {
+                    "class": "product-price__current"
+                  }
+                },
+                "internal_page_price": {
+                  "teg": "meta",
+                  "attributes": {
+                    "itemprop": "price"
+                  }
+                }
+
+       },
+
+      "categories": {
+        "ноутбук": {
+          "url": "/catalog/17a892f816404e77/noutbuki/",
+          "subcategories": [
+            "ноутбук",
+            "нетбук",
+            "ультрабук"
+                      ]
+        }
+      }
     }
+
 }
 

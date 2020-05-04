@@ -2,4 +2,5 @@ import parse_universal_classes as pa
 
 #main
 
-parse = pa.Parse_YaMa('ноутбук', 'selenium').Pagination()
+#parse = pa.Parse_CL(category='ноутбук', scraper='requests', num_outfile=3, interrupt=15).Pagination(33, 56)
+parse = pa.Parse_DNS(category='ноутбук', scraper='requests', num_outfile=2, interrupt=1).Pagination(start=2)

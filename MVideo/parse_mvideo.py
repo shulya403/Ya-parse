@@ -36,8 +36,10 @@ header_ = {
         }
 
 class parse_mvideo(object):
-    def __init__(self, category_, cat=Categories):
+    def __init__(self, category_, cat=Categories, pg_num=1):
         self.Categories = cat
+        self.pg_num = pg_num
+
         cat_ok = False
         for i in self.Categories:
             if category_.lower() == i.lower():
@@ -80,12 +82,12 @@ class parse_mvideo(object):
             self.Req_JS(url_)
 
         if not exit_:
-            time.sleep(10)
+            time.sleep(3)
             self.Req_JS(url_)
 
         return exit_
 
-    #    Получение номера конечной стpраницы
+    #    Получение номера конечной стpаницы
     def Get_EOF_Page(self):
 
         bs_page = BeautifulSoup(self.Req_JS(self.url_category), 'html.parser')
@@ -113,25 +115,27 @@ class parse_mvideo(object):
     def To_Excel(self):
 
         #now = datetime.now().strftime('%b-%y')
-        exit_filename = self.category_ + '3-МВ-Цены-от-' + self.now + '.xlsx'
+        exit_filename = self.category_ + str(self.pg_num) + '-МВ-Цены-от-' + self.now + '.xlsx'
         self.df.to_excel(exit_filename)
 
-    def Pagination_Unparsed(self):
+    def Pagination_Unparsed(self, filename, new_num, finish):
+
+        self.pg_num = new_num
 
         #  НОВЫЙ ФАЙЛ!!!
-        df_u = pd.read_excel('Ноутбук1-МВ-Цены-от-Apr-20.xlsx')
+        df_u = pd.read_excel(filename)
         list_parsed = list(df_u['Page'].unique())
-        list_unparsed = [i for i in range(1, 69) if i not in list_parsed]
+        list_unparsed = [i for i in range(1, finish) if i not in list_parsed]
         print(len(list_parsed), len(list_unparsed))
         print(list_unparsed)
 
         for page in list_unparsed:
-            if page < 69:
-                url_ = self.url_category + '?page=' + str(page)
-                print(page)
-                self.Parse_Pages(url_, page)
 
-                self.To_Excel()
+            url_ = self.url_category + '?page=' + str(page)
+            print(page)
+            self.Parse_Pages(url_, page)
+
+            self.To_Excel()
 
     def Parse_Pages(self, url_, page_):
 
@@ -139,62 +143,71 @@ class parse_mvideo(object):
 
         #Карточки продуктов
         li_bs_product_cards = bs_page.find_all('div', class_='product-grid-card')
+        if not li_bs_product_cards:
+            li_bs_product_cards = bs_page.find_all('div', class_='product-mobile-card')
         #pprint(li_bs_product_cards)
+        df_ = pd.DataFrame(columns=self.df.columns)
+        Gluk = False  # Ошибка все  99999
 
         for card in li_bs_product_cards:
-            df_ = pd.DataFrame(columns=self.df.columns)
-
         #Цена если есть, если нет - нафик
 
             bs_price_block = card.find('div', class_="price-block__price")
+
             if bs_price_block:
-                df_.loc[0, 'Price'] = re.sub(r'\s+|¤|\\\n', "", bs_price_block.text) #.replace(" ", "").replace("¤", "").replace("\n", "")
+                i = len(df_)
+
+                df_.loc[i, 'Price'] = "".join(re.findall(r'\d', bs_price_block.text))
                 #Поле для категории верхнего уровня
-                df_.loc[0, 'Name'] = None
+                df_.loc[i, 'Name'] = None
 
-                full_prod_name = card.find('a', class_="product-title product-title--clamp")
-                list_prod_name = full_prod_name.text.split()
+                #  Подкатегории
+                soup_longstring = card.find('a', class_="product-title product-title--clamp")
+                if soup_longstring:
+                    longstring = soup_longstring.text
 
-                # Подкатегория из Categories.type
-                subcategory = str()
-                subcategory_num = 0
-                for token in list_prod_name:
-                    if re.match(r'[а-я|\-]+', token.lower()):
-                        subcategory += token.lower() + ' '
-                        subcategory_num += 1
-                    else:
-                        subcategory = subcategory[:-1]
-                        break
+                    list_word = longstring.split()
+                    list_found_cat = list()
 
-                for type_ in self.list_types_category:
-                    if type_ == subcategory:
-                        df_.loc[0, 'Subcategory'] = type_
-                        break
-                if not df_.loc[0, 'Subcategory']:
-                    df_.loc[0, 'Subcategory'] = '? ' + subcategory
+                    for cat in self.list_types_category:
+                        if cat in longstring.lower():
+                            list_found_cat.append((cat, len(cat), len(cat.split())))
 
-                # Имя вендора
-                df_['Vendor'] = list_prod_name[subcategory_num]
+                    list_found_cat.sort(key=lambda x: x[1], reverse=True)
 
-                # Полное название вендор + продукт
-                df_['Modification_name'] = full_prod_name.text.replace('\n', "")[len(subcategory)+3:]
+                    try:
+                        df_.loc[i, 'Subcategory'] = list_found_cat[0][0]
+                    except Exception:
+                        pass
+                    try:
+                        # Имя вендора
+                        df_.loc[i, 'Vendor'] = list_word[list_found_cat[0][2]]
+                        # Полное название вендор + продукт
+                        df_.loc[i, 'Modification_name'] = " ".join(list_word[list_found_cat[0][2]:])
+                    except IndexError:
+                        print('Чет с именем продукта: ', longstring)
 
-                #Ссыль на страницу продукта
-                df_['Href'] = self.host_url + full_prod_name.get('href')
+                    #Ссыль на страницу продукта
+                    df_.loc[i, 'Href'] = self.host_url + soup_longstring.get('href')
 
                 df_['Page'] = page_
 
-                print(df_)
+                if df_['Price'].isna().all():
+                    print("Нет цен на странице, финиш")
+                    raise
 
-                self.df = pd.concat([self.df, df_], ignore_index=True)
+                if (len(df_['Price'].unique()) == 1) and int(df_['Price'].unique()[0]) == 99999:
+                    Gluk = True
 
-
+        print(df_)
+        if not Gluk:
+            self.df = pd.concat([self.df, df_], ignore_index=True)
 
 #   MAIN
-parse = parse_mvideo('Ноутбук')
+parse = parse_mvideo('Ноутбук', pg_num=6)
 #print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118?page=12'))
 #parse.Get_EOF_Page()
-#parse.Pagination(parse.Get_EOF_Page())
-parse.Pagination_Unparsed()
+#parse.Pagination(120)
+parse.Pagination_Unparsed('Ноутбук6-МВ-Цены-от-May-20.xlsx', new_num=9, finish=71)
 
 
