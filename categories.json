@@ -229,7 +229,55 @@
                       ]
         }
       }
-    }
+    },
+    "eldorado": {
+      "host": "https://www.eldorado.ru",
+      "cookies": "",
+      "pg_num": "?p=",
+      "host_get_suffics": "?view=tile",
 
+      "cards_page_params": {
+                "card_div": {
+                  "teg": "li",
+                  "re": "True",
+                  "attributes": {
+                    "class": "sc-1iriqgr-0"
+                  }
+                },
+                "product_div": {
+                  "teg": "div",
+                  "re": "True",
+                  "attributes": {
+                    "class": "sc-1iriqgr-7"
+                  }
+                },
+                "price_div": {
+                  "teg": "span",
+                  "re": "True",
+                  "attributes": {
+                    "class": "sc-1gnxlbs-1"
+                  }
+                },
+                "internal_page_mod_name": {
+                  "teg": "h1",
+                  "attributes": {
+                    "class": "catalogItemDetailHd"
+                  }
+                }
+
+       },
+
+      "categories": {
+        "ноутбук": {
+          "url": "/c/vse-noutbuki/",
+          "subcategories": [
+            "ноутбук",
+            "нутбук-трансформер",
+            "игровой ноутбук",
+            "ультрабук"
+          ]
+        }
+      }
+    }
 }
 

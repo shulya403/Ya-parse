@@ -1,0 +1,16 @@
+{
+  "name": "consixtence",
+  "version": "1.0.0",
+  "parsed": {
+    "yama": ".",
+    "eldorado": "eldorado",
+    "mvideo": "mvideo",
+    "dns": "dns",
+    "citilink": "citilink"
+  },
+
+  "file_works": {
+    "dir"
+    
+  }
+}
