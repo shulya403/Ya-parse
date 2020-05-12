@@ -40,6 +40,7 @@ import parse_yama as pynd
 #           step=100, По сколько моделей вурхнего уровня записывать в файл
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
+
 parse = pynd.Parse_Modifications_TTX('Ноутбук',
                                      'Cсылки Ноутбук May-20--restrict-1.xlsx',
                                      ).main(num=6)

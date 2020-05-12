@@ -1,14 +1,4 @@
-#TODO: разработать общую библеотеку классов для парсинга на уровне модификаций для разных сайтов (Selenium?)
-# ok json Categories
-# json Vendors - double word names, autochnge (Alienware - Dell)
-# ok функция Pagnation
-# ok
-# функция считывания всех днных со стораницы выдачи
-# функция обработки записи на странице выдачи
-# функция проверки, а надо ли считывать опредленную запись
-# функция считывания данных в запись и занесения данных в рабочий df
-# функция считывания ттх по ссылке
-# функция to_excel
+#TODO: Framewor обработки сайтов магазинов по категориям
 # обработка unparsed
 
 import pandas as pd
@@ -88,7 +78,7 @@ class Parse_Common(object):
                             "/" + \
                             self.site + \
                             "--" + \
-                            "category" + \
+                            self.category.title() + \
                             "--" + \
                             self.now + \
                             "--" + \
@@ -254,7 +244,7 @@ class Parse_Common(object):
         if response.status_code == 200:
            return response.text
 
-#   Выбор скрапера
+#   Выбор скрапера Requests или Selenium
     def Page_Scrape(self, url_):
 
         if self.scraper == 'selenium':
@@ -279,7 +269,7 @@ class Parse_Common(object):
 
         return exit_url
 
-#   Формирователь url страницы выдачи (host+ categoru-url + category-suffics + page)
+#   Формирователь url страницы выдачи (host+ categoru-url + page)
     def URL_CardsPage_Make(self, url_="", page=1):
 
         if url_:
@@ -389,7 +379,7 @@ class Parse_Common(object):
     def Product_Record_Handler(self, card):
 
         soup_product = self.Find_Div("product_div", card)
-        self.dict_product_record['Modification_href'] = soup_product.find("a").get("href")
+        self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.find("a").get("href"))
         self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("a").text)
 
     def Longstring_Handeler(self, longstring):
@@ -526,7 +516,7 @@ class Parse_El(Parse_Common_by_Request):
 
         soup_product = self.Find_Div("product_div", card)
         url_ = soup_product.find("a").get("href")
-        self.dict_product_record['Modification_href'] = url_
+        self.dict_product_record['Modification_href'] = self.URL_Base_Make(url_)
         internal_page = self.Page_Scrape(self.URL_Base_Make(url_))
         if internal_page:
             soup_internal_page = BeautifulSoup(internal_page, 'html.parser')

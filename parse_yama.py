@@ -693,11 +693,14 @@ class Parse_Modifications_TTX(Yama_parsing_const):
         if mod:
             self.mod = mod
             self.df_mods = pd.DataFrame(columns=['Name',
+                                                'Ya_UN_Name',
                                                   'Vendor',
                                                   'Modification_name',
                                                   'Modification_href',
                                                   'Quantity',
-                                                  'Avg_price'])
+                                                  'Modification_price',
+                                                'Category',
+                                                 'Subcategory'])
             if ttx_mod:
                 self.ttx_mod = ttx_mod
                 self.ttx_mod_filename = self.TTX_files_folder + self.Categories[self.category]['ttx_mod_file']
@@ -822,18 +825,22 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                 for name in soup_list_mods:
                     i = len(self.df_mods)
 
-                    self.df_mods.loc[i, 'Name'] = up_name
+                    self.df_mods.loc[i, 'Ya_UN_Name'] = up_name
+                    self.df_mods.loc[i, 'Category'] = self.category
+                    self.df_mods.loc[i, 'Subcategory'] = up_category
                     self.df_mods.loc[i, 'Vendor'] = up_vendor
                     self.df_mods.loc[i, 'Modification_name'] = name.text.replace(up_category + " ", "")
                     #TOD Убрать категорию из названия
                     url_mod = name.get('href')
-                    self.df_mods.loc[i, 'Modification_href'] = url_mod
+                    self.df_mods.loc[i, 'Modification_href'] = self.host + url_mod
                     url_req = self.URL_Req(url_mod)
                     if url_req:
                         soup_mod_page = BeautifulSoup(url_req, 'html.parser')
                         soup_table_grey = soup_mod_page.find('ul', class_=self.ul_table_gray)
-                        self.df_mods.loc[i, ['Quantity', 'Avg_price']] = self.Parse_Model_Page(soup_mod_page,
-                                                                                                soup_table_grey)
+                        dict_ = self.Parse_Model_Page(soup_mod_page, soup_table_grey)
+                        self.df_mods.loc[i, 'Quantity'] = dict_['Quantity']
+                        self.df_mods.loc[i, 'Modification_price'] = dict_['Avg_price']
+
                         print(self.df_mods.loc[i, 'Modification_name'])
                         if self.ttx_mod:
                             self.df_ttx_mod = self.TTX_Handler(self.URL_Spec(soup_table_grey),

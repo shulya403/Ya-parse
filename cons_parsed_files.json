@@ -8,9 +8,30 @@
     "dns": "dns",
     "citilink": "citilink"
   },
-
-  "file_works": {
-    "dir"
-    
+  "category": {
+    "ноутбук": {
+      "file_base_name": "Ноутбук_stable.xlsx",
+      "itr_file": {
+        "page": "Models",
+        "model_field": "C",
+        "vendor_field": "B"
+      },
+      "brands": {
+        "honor": "huawei",
+        "alienware": "dell"
+      },
+      "stop_words": [
+        "intel",
+        "amd",
+        "HD",
+        "1920x1080",
+        "Bluetooth",
+        "Win",
+        "Wi-Fi",
+        "15.6",
+        "Graphics"
+        ]
+    }
   }
+
 }
