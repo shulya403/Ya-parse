@@ -117,7 +117,12 @@ class Parse_Common(object):
         except KeyError:
             self.pg_num = "&page="
 
+        try:
+            self.host_get_suffics = self.site_params["host_get_suffics"]
 
+        except KeyError:
+            self.JSON_Content_Warnings_Alarm("no_site_url_suffics")
+            self.host_get_suffics = ""
 
     def Folder_Out_Check(self):
         import os
@@ -285,6 +290,9 @@ class Parse_Common(object):
         if page != 1:
             exit_url += self.pg_num + str(page)
 
+        if self.host_get_suffics:
+            exit_url += self.host_get_suffics
+
         print("Make :", exit_url)
 
         return exit_url
@@ -348,7 +356,6 @@ class Parse_Common(object):
         print(df_)
 
         return df_
-
 
 #   Обработка полей df  со траницы выдачи
     def Fld_Fill(self, fld, card):
@@ -436,6 +443,8 @@ class Parse_Common(object):
         if soup_price:
             price = soup_price.text
             exit_ = "".join(re.findall(r'\d', price))
+        else:
+            exit_ = None
 
         return exit_
 
@@ -449,27 +458,6 @@ class Parse_Common_by_Request(Parse_Common):
     def Page_Scrape(self, url_):
         return self.Page_Requests(url_)
 
-    # с доп хвостом Suffics
-    def URL_CardsPage_Make(self, url_="", page=1):
-
-        if url_:
-            url_this = url_
-        else:
-            try:
-                url_this = self.category_params["url"]
-            except KeyError:
-                self.JSON_Content_Warnings_Alarm("unknown_category_url")
-
-        exit_url = self.URL_Base_Make(url_this)
-
-        exit_url += self.site_params["host_get_suffics"]
-
-        if page != 1:
-            exit_url += self.pg_num + str(page)
-
-        print("Make :", exit_url)
-
-        return exit_url
 
     # с re
     def Find_All_Divs(self, json_div, soup):

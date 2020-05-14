@@ -5,9 +5,10 @@ import re
 
 class stradar(object):
 
-    def __init__(self, data, search, beg_coeff=0.2):
+    def __init__(self, data, search, beg_coeff=0.2, bool_restrict=False):
         self.data = str(data).lower()
         self.data_len = len(self.data)
+        self.bool_restrict = bool_restrict
 
         self.beg_coef = 0.2 #Коэффециент увеличения значимости начала data
 
@@ -90,25 +91,29 @@ class stradar(object):
             else:
                 return 1 + beg_coeff
 
-        def trade_mark(tup_word):
-            #r = re.findall(r'\d', self.data[tup_word[0][0]:tup_word[0][0]+tup_word[2]])
-            #if r:
-            #    return 0
-            #else:
-            return 0
+        def trade_mark(tup_word, bool_restrict):
+            if bool_restrict:
+                r = re.findall(r'\d', self.data[tup_word[0][0]:tup_word[0][0]+tup_word[2]])
+                if r:
+                    return 0
+                else:
+                    return 1
+            else:
+                return 0
 
         #concide_exit = [(x[2] ** math.log(x[2], 3)) / begin_coeff(self.search_len, x[0][0], self.beg_coef) for x in groups_cl if x[2] > 1]
-        concide_exit = [(x[2] ** (2 - trade_mark(x))) / begin_coeff(self.search_len, x[0][0], self.beg_coef) for x in
+        concide_exit = [(x[2] ** (2 - trade_mark(x, self.bool_restrict)))
+                        / begin_coeff(self.search_len, x[0][0], self.beg_coef) for x in
                         groups_cl if x[2] > 1]
 
         #search_ln = [len(y) for y in search_words]
         
         concide_coeff = sum(concide_exit) #/ sum(search_ln)
 
-        #groups_cl_data_protection = list()
+        groups_cl_data_protection = list()
 
-        #groups_cl_data_proection = [self.data[x[0][0]:x[0][0]+x[2]] for x in groups_cl if x[2] > 1]
-        #print(self.search, concide_coeff, groups_cl_data_proection, concide_exit)
+        groups_cl_data_proection = [self.data[x[0][0]:x[0][0]+x[2]] for x in groups_cl if x[2] > 1]
+        #print(self.data[:30], concide_coeff, groups_cl_data_proection, concide_exit)
 
         return concide_coeff
 

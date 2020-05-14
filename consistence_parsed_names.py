@@ -15,6 +15,7 @@ from pprint import pprint
 import numpy as np
 import timeit
 import time
+
 import StRadar
 import math
 
@@ -150,9 +151,7 @@ class Consist_Names(object):
                                                      'Href',
                                                      'Modification_href',
                                                      'Modification_name',
-                                                     'Modification_price',
                                                      'Ya_UN_Name',
-                                                     'Quantity',
                                                      'Site',
                                                      'Subcategory',
                                                      'Vendor'])
@@ -293,13 +292,98 @@ class Consist_Names(object):
                 array_vendors_model = []
 
             if array_vendors_model:
-                list_tup_vendor_model = [(key, StRadar.stradar(mod_name_, key, beg_coeff=0.5).result()) for key in array_vendors_model]
-                list_tup_vendor_model.sort(key=lambda x: x[1], reverse=True)
-
-                self.df_work.loc[id, 'Name'] = list_tup_vendor_model[0][0]
+                self.df_work.loc[id, 'Name'] = self.Search_ITR_Name(mod_name_, array_vendors_model)
                 print(self.df_work.loc[id, 'Name'])
 
         self.Filled_To_Excel()
+
+    def Search_ITR_Name(self, data_, list_search_):
+
+        list_tup_vendor_model = [(key, StRadar.stradar(data_, key, beg_coeff=0.5).result()) for key in
+                                 list_search_]
+        exit_ = self.Max_list_tup_Name(list_tup_vendor_model)
+
+        return exit_
+
+    def Max_list_tup_Name(self, list_tup):
+
+        if list_tup:
+
+            list_tup.sort(key=lambda x: x[1], reverse=True)
+
+            max_STR_coeff = list_tup[0][1]
+            max_count = 0
+            for i in list_tup:
+                if i[1] < max_STR_coeff:
+                    break
+                else:
+                    max_count += 1
+
+            if max_count > 1:
+                list_max_coeff_names = [(m, len(list_tup[m][0])) for m in range(max_count)]
+                list_max_coeff_names.sort(key=lambda x: x[1])
+
+                return list_tup[list_max_coeff_names[0][0]][0]
+
+            return list_tup[0][0]
+
+        else:
+            return None
+
+    def Dict_Yama_Names(self):
+
+        @np.vectorize
+        def Clear_Vendor_Name(str_, ven):
+             return str_.replace(ven+" ", "")
+
+        dict_ = dict()
+
+        array_yama_vendors = self.df_work[self.df_work['Site'] == 'yama']['Vendor'].unique()
+
+        for ven in array_yama_vendors:
+
+            ser_ = self.df_work[(self.df_work['Site'] == 'yama')
+                                               & (self.df_work['Vendor'] == ven)]['Modification_name']
+            #for i, ser in ser_.items():
+            #print(ser_)
+            ser_ = Clear_Vendor_Name(ser_, ven)
+
+            dict_[ven.lower()] = list(ser_)
+
+        self.dict_yama_names = dict_
+
+    def Search_Yama_Name(self, row_):
+
+        if row_['Site'] != 'yama':
+            vendor_ = row_['Vendor']
+            try:
+                list_yama_names = self.dict_yama_names[vendor_.lower()]
+            except KeyError:
+                print("Нет вендора у yama:", vendor_)
+                list_yama_names = []
+
+            search_ = row_['Modification_name'].replace(vendor_, "")
+            print(search_)
+            list_tup_yama = [(key, StRadar.stradar(key, search_, beg_coeff=0.5, bool_restrict=True).result()) for key
+                             in list_yama_names]
+
+            exit_ = self.Max_list_tup_Name(list_tup_yama)
+            print(row_['index'], row_['Site'], vendor_, search_, "--", exit_)
+        else:
+            return row_['Modification_name']
+
+        return exit_
+
+    def Fill_Yama_Name(self):
+
+        for iter, row in self.df_work.iterrows():
+            if row['Ok'] == 0:
+                self.df_work.loc[iter, 'Yama_name'] = self.Search_Yama_Name(row)
+
+        #self.df_work[self.df_work['Ok'] == 0]['Yama_name'] = self.df_work[self.df_work['Ok'] == 0].apply(self.Search_Yama_Name, axis=1)
+
+        self.df_work.to_excel(self.file_work_name.replace('.xlsx', '_yama.xlsx'))
+
 
 
 #записываем обработанный df_work в файл
@@ -315,18 +399,26 @@ class Consist_Names(object):
         cheked_file_name = self.dir_work + cheked_file_name
         df_ = pd.read_excel(cheked_file_name, index_col=0)
         df_ = df_[df_['Known'] == False]
-        df_.drop(columns=['Known'])
+        df_.drop(columns=['Known'], inplace=True)
+        for i in df_.columns:
+            if 'ok' in i.lower():
+                df_ = df_[df_[i] == 1]
 
         #if mth:
         #    df_['Date_add'] = mth
         #else:
         #    df_['Date_add'] = self.mth
 
+        file_backup_name = self.dir_work + 'backup_' + time.strftime('%d-%m-%y--%H-%M', time.gmtime(time.time())) + "_" + self.category + "_Stable.xlsx"
+        self.df_base.to_excel(file_backup_name)
+
         set_col_base_ = set(self.df_base.columns)
         self.df_base = pd.concat([self.df_base, df_], ignore_index=True)
+        self.df_base.drop_duplicates(subset=['Modification_name'], keep='last', inplace=True)
+
         set_col_concat = set(self.df_base.columns)
         set_to_drop = set_col_concat - set_col_base_
-        self.df_base.drop(columns=list(set_to_drop))
+        self.df_base.drop(columns=list(set_to_drop), inplace=True)
 
         self.df_base.to_excel(self.file_base_name)
 

@@ -233,9 +233,7 @@
     "eldorado": {
       "host": "https://www.eldorado.ru",
       "cookies": "",
-      "pg_num": "?p=",
-      "host_get_suffics": "?view=tile",
-
+      "pg_num": "?page=",
       "cards_page_params": {
                 "card_div": {
                   "teg": "li",
@@ -274,6 +272,7 @@
             "ноутбук",
             "нутбук-трансформер",
             "игровой ноутбук",
+            "ноутбук игровой",
             "ультрабук"
           ]
         }
