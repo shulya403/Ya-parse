@@ -111,77 +111,18 @@ class Consist_Names(object):
         with open(JSON_file, encoding='utf-8') as f:
             self.Files = json.load(f)
 
-
-        # Структура директорий
-        self.dict_dir = self.Files['parsed']
-
         # Месяц
         self.mth = M + "-" + str(Y)
+
         self.dir_root = dir_root
         self.dir_work = self.dir_root + dir_work
 
-        if file_work_name:
-            self.file_work_name = self.dir_work + file_work_name
-            self.df_work = pd.read_excel(self.file_work_name, index_col=0)
-            self.df_work.reset_index(inplace=True)
-        else:
-            self.file_work_name = self.Get_File_Work()
-            if self.file_work_name:
-                self.df_work = pd.read_excel(self.file_work_name, index_col=0)
+        self.Get_df_base(file_base_name)
 
-            else:
-                print("Нет рабочиго файла или неверная категория: {}".format(self.category))
-                raise
-        print("work:", self.file_work_name)
+        self.Get_df_work(file_work_name)
 
-        if file_base_name:
-            self.file_base_name = self.dir_work + file_base_name
-            self.df_work = pd.read_excel(self.file_base_name, index_col=0)
+        self.Get_df_itr(file_itr, file_itr_page, itr_model_field, itr_vendor_field)
 
-        else:
-            self.file_base_name = self.Get_File_Base()
-            if self.file_base_name:
-                self.df_base = pd.read_excel(self.file_base_name, index_col=0)
-
-            else:
-                self.df_base = pd.DataFrame(columns=['Name',
-                                                     'Yama_name',
-                                                     'Category',
-                                                     'Date',
-                                                     'Href',
-                                                     'Modification_href',
-                                                     'Modification_name',
-                                                     'Ya_UN_Name',
-                                                     'Site',
-                                                     'Subcategory',
-                                                     'Vendor'])
-                try:
-                    self.file_base_name = self.dir_work + self.Files['category'][self.category]['file_base_name']
-                except Exception:
-                    print('Нет названия фала базы в JSON для категории: {}'.format(self.category))
-                    raise
-        print("base:", self.file_base_name)
-
-
-        file_itr = self.dir_work + file_itr
-
-        if not itr_model_field:
-            itr_model_field = self.Files['category'][self.category]['itr_file']['model_field']
-
-        if not itr_vendor_field:
-            itr_vendor_field = self.Files['category'][self.category]['itr_file']['vendor_field']
-
-        if not file_itr_page:
-            file_itr_page = self.Files['category'][self.category]['itr_file']['page']
-        usecols_ = itr_model_field + "," + itr_vendor_field
-
-        self.df_itr = pd.read_excel(file_itr,
-                                    sheet_name=file_itr_page,
-                                    names=['Vendor','Name'],
-                                    usecols=usecols_)
-
-        self.dict_ven_mod = self.Make_Dict_Vendors_Models()
-        print("models_list:", file_itr)
 
         try:
             if self.Files["category"][category]["brands"]:
@@ -210,11 +151,42 @@ class Consist_Names(object):
         dict_ = dict()
         start_timer = time.time()
         for ven in self.df_itr['Vendor'].unique():
-            dict_[ven.lower()] = list(self.df_itr[self.df_itr['Vendor'].values == ven]['Name'].values)
+            dict_[str(ven).lower()] = list(self.df_itr[self.df_itr['Vendor'].values == ven]['Name'].values)
         end_timer = time.time()
         print(end_timer - start_timer)
 
         return dict_
+
+#   df_base
+    def Get_df_base(self, file_base_name):
+
+        if file_base_name:
+            self.file_base_name = self.dir_work + file_base_name
+            self.df_work = pd.read_excel(self.file_base_name, index_col=0)
+
+        else:
+            self.file_base_name = self.Get_File_Base()
+            if self.file_base_name:
+                self.df_base = pd.read_excel(self.file_base_name, index_col=0)
+
+            else:
+                self.df_base = pd.DataFrame(columns=['Name',
+                                                     'Category',
+                                                     'Date',
+                                                     'Href',
+                                                     'Modification_href',
+                                                     'Modification_name',
+                                                     'Ya_UN_Name',
+                                                     'Site',
+                                                     'Subcategory',
+                                                     'Vendor'])
+                try:
+                    self.file_base_name = self.dir_work + self.Files['category'][self.category]['file_base_name']
+                except Exception:
+                    print('Нет названия фала базы в JSON для категории: {}'.format(self.category))
+                    raise
+        print("base:", self.file_base_name)
+
 
 # Имя файла базы для категории
     def Get_File_Base(self):
@@ -225,15 +197,25 @@ class Consist_Names(object):
         except Exception:
             pass
 
-        #list_files = os.listdir(self.dir_work)
-        #for fl in list_files:
-        #    if ("stable.xls" in fl.lower()) \
-        #            and (self.category in fl.lower()) \
-        #            and ("~" not in fl):
-        #        return self.dir_work + fl
-
         print("Нет базового файла для категории: {}".format(self.category))
         return None
+
+#  df_work
+    def Get_df_work(self, file_work_name):
+        if file_work_name:
+            self.file_work_name = self.dir_work + file_work_name
+            self.df_work = pd.read_excel(self.file_work_name, index_col=0)
+            self.df_work.reset_index(inplace=True)
+        else:
+            self.file_work_name = self.Get_File_Work()
+            if self.file_work_name:
+                self.df_work = pd.read_excel(self.file_work_name, index_col=0)
+                self.df_work.reset_index(inplace=True)
+
+            else:
+                print("Нет рабочиго файла или неверная категория: {}".format(self.category))
+                raise
+        print("work:", self.file_work_name)
 
 # Имя рабочего файла для категории
     def Get_File_Work(self):
@@ -249,12 +231,30 @@ class Consist_Names(object):
         print("Нет базового файла для категории: {}".format(self.category))
         return None
 
-    def Lower_DF(self, df):
+    def Get_df_itr(self, file_itr, file_itr_page, itr_model_field, itr_vendor_field):
 
-        for col in df.columns:
-            df[col] = df[col].str.lower()
+        file_itr = self.dir_work + file_itr
 
-# Отметить уже имеющиеся в базе
+        if not itr_model_field:
+            itr_model_field = self.Files['category'][self.category]['itr_file']['model_field']
+
+        if not itr_vendor_field:
+            itr_vendor_field = self.Files['category'][self.category]['itr_file']['vendor_field']
+
+        if not file_itr_page:
+            file_itr_page = self.Files['category'][self.category]['itr_file']['page']
+
+        usecols_ = itr_model_field + "," + itr_vendor_field
+
+        self.df_itr = pd.read_excel(file_itr,
+                                    sheet_name=file_itr_page,
+                                    names=['Vendor', 'Name'],
+                                    usecols=usecols_)
+
+        self.dict_ven_mod = self.Make_Dict_Vendors_Models()
+        print("models_list:", file_itr)
+
+    # Отметить уже имеющиеся в базе
     def Fill_Work_by_Base(self):
 
         @np.vectorize
@@ -384,37 +384,64 @@ class Consist_Names(object):
 
         self.df_work.to_excel(self.file_work_name.replace('.xlsx', '_yama.xlsx'))
 
-
-
 #записываем обработанный df_work в файл
     def Filled_To_Excel(self):
 
         file_name_ = self.file_work_name.replace('Source', 'Filled')
         self.df_work.to_excel(file_name_)
 
-#Заливка обновленных данных в базу
+#   Заливка обновленных данных в базу
+class Fill_Stable_Base(Consist_Names):
 
-    def Checked_To_Base(self, category, cheked_file_name):
+    def __init__(self,
+                 category,
+                 cheked_file_name,
+                 file_base_name="",
+                 JSON_file="cons_parsed_files.json",
+                 dir_root="Prices/",
+                 dir_work="Handle_base/"
+                 ):
 
-        cheked_file_name = self.dir_work + cheked_file_name
-        df_ = pd.read_excel(cheked_file_name, index_col=0)
+        self.category = category.lower()
+
+        with open(JSON_file, encoding='utf-8') as f:
+            self.Files = json.load(f)
+
+        self.dir_root = dir_root
+        self.dir_work = self.dir_root + dir_work
+
+
+        self.cheked_file_name = self.dir_work + cheked_file_name
+
+        self.Get_df_base(file_base_name)
+
+    def Get_df_Checked(self):
+        df_ = pd.read_excel(self.cheked_file_name, index_col=0)
         df_ = df_[df_['Known'] == False]
-        df_.drop(columns=['Known'], inplace=True)
         for i in df_.columns:
             if 'ok' in i.lower():
                 df_ = df_[df_[i] == 1]
 
-        #if mth:
-        #    df_['Date_add'] = mth
-        #else:
-        #    df_['Date_add'] = self.mth
+        df_.drop_duplicates(subset=['Modification_name', 'Site'], inplace=True)
 
-        file_backup_name = self.dir_work + 'backup_' + time.strftime('%d-%m-%y--%H-%M', time.gmtime(time.time())) + "_" + self.category + "_Stable.xlsx"
+        return df_
+
+    def Make_buckup_Stable_base(self):
+
+        file_backup_name = self.dir_work + 'backup_' + time.strftime('%d-%m-%y--%H-%M', time.gmtime(
+            time.time())) + "_" + self.category + "_Stable.xlsx"
         self.df_base.to_excel(file_backup_name)
+
+
+    def Checked_To_Base(self):
+
+        df_ = self.Get_df_Checked()
+
+        self.Make_buckup_Stable_base()
 
         set_col_base_ = set(self.df_base.columns)
         self.df_base = pd.concat([self.df_base, df_], ignore_index=True)
-        self.df_base.drop_duplicates(subset=['Modification_name'], keep='last', inplace=True)
+        self.df_base.drop_duplicates(subset=['Modification_name', 'Site'], keep='last', inplace=True)
 
         set_col_concat = set(self.df_base.columns)
         set_to_drop = set_col_concat - set_col_base_
