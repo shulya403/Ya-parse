@@ -14,24 +14,31 @@
       "itr_file": {
         "page": "Models",
         "model_field": "C",
-        "vendor_field": "B"
-      },
-      "brands": {
-        "honor": "huawei",
-        "alienware": "dell"
-      },
-      "stop_words": [
-        "intel",
-        "amd",
-        "HD",
-        "1920x1080",
-        "Bluetooth",
-        "Win",
-        "Wi-Fi",
-        "15.6",
-        "Graphics"
-        ]
-    }
-  }
+        "vendor_field": "B",
+        "vendor_model_field": "A"
+      }},
+    "монитор": {
+      "file_base_name": "Монитор_stable.xlsx",
+      "itr_file": {
+        "page": "Sheet1",
+        "vendor_model_field": "E",
+        "vendor_field": "C",
+        "model_field": "D"
+      }
+    }},
+
+  "brands": {
+        "Honor": "Huawei",
+        "Alienware": "Dell",
+        "Hp": "HP",
+        "Msi": "MSI",
+        "Aoc": "AOC",
+        "Lg": "LG",
+        "Aopen": "AOpen",
+        "Viewsonic": "ViewSonic",
+        "BenQ": "BenQ",
+        "Nec": "NEC"
+      }
 
 }
+

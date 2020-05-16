@@ -4,9 +4,7 @@
 # сопоставить сперва с наименованиями ноутбуков из Pivot
 # затем с конфигурациями из ya_ma для соотв модлей
 # TODO:
-#   проверить руками
-#   прибить лист с TTX - Yandex
-#   сделать сводную
+#   Поправить заполнение Ya_UN_Name
 
 import pandas as pd
 import os
@@ -40,6 +38,14 @@ class Concat_Parse_Files(object):
 
     # Месяц
         self.mth = M + "-" + str(Y)
+
+    # Название выходного файла
+        self.outfile_name = self.dir_root + \
+                   self.dir_work + \
+                   self.category + \
+                   "-Concat_Prices--" + \
+                   self.mth + \
+                   "--Source.xlsx"
 
 # Формирователь списка файлов месц.finel.xlsx.category
     def List_Files(self):
@@ -79,14 +85,65 @@ class Concat_Parse_Files(object):
                     df_ = pd.read_excel(fl, index_col=0)
                     df = pd.concat([df, df_], ignore_index=True)
 
-            outfile_name = self.dir_root + \
-                           self.dir_work + \
-                           self.category + \
-                           "-Concat_Prices--" + \
-                           self.mth + \
-                           "--Source.xlsx"
+            df = self.Titled_Vendors(df)
+            df = self.Restrict_Ven_Mod_Name(df)
 
-            df.to_excel(outfile_name)
+            df.to_excel(self.outfile_name)
+
+# Пусковой Добавление колонки модели без названия вендора
+    def Clearing_Mod_Name(self, file_name=""):
+        if not file_name:
+            file_name = self.outfile_name
+        else:
+            file_name = self.dir_root + self.dir_work + file_name
+        df = pd.read_excel(file_name, index_col=0)
+
+        df = self.Restrict_Ven_Mod_Name(df)
+
+        df.to_excel(file_name[:-5] + "-rest.xlsx")
+
+# Добавление колонки модели без названия вендора
+    def Restrict_Ven_Mod_Name(self, df):
+
+        def Restrict_Ven(mod_name):
+
+            list_mod_name = mod_name.split()
+            list_mod_name = list_mod_name[1:]
+
+            exit_ = " ".join(list_mod_name)
+
+            return exit_
+
+        df['Modification_name_restrict'] = df['Modification_name'].apply(Restrict_Ven)
+
+        return df
+
+
+# Пусковой чистка вендоров
+    def Clearing_Vendors(self, file_name=""):
+
+        if not file_name:
+            file_name = self.outfile_name
+        else:
+            file_name = self.dir_root + self.dir_work + file_name
+
+        df = pd.read_excel(file_name, index_col=0)
+        df = self.Titled_Vendors(df)
+        df.to_excel(file_name)
+
+        return df
+
+#   Чистка вендоров
+    def Titled_Vendors(self, df):
+
+        for ven in df['Vendor'].unique():
+            ven_title = ven.title()
+            if ven_title in self.Files["brands"]:
+                ven_title = self.Files["brands"][ven_title]
+
+            df['Vendor'].loc[df['Vendor'] == ven] = ven_title
+
+        return df
 
 class Consist_Names(object):
 
@@ -145,7 +202,7 @@ class Consist_Names(object):
         self.df_work["Vendor"] = Change_by_dict(dict_names, self.df_work["Vendor"])
 
 
-#словарь vendor: модельный ряд
+#   словарь vendor: модельный ряд
     def Make_Dict_Vendors_Models(self):
 
         dict_ = dict()
@@ -176,6 +233,7 @@ class Consist_Names(object):
                                                      'Href',
                                                      'Modification_href',
                                                      'Modification_name',
+                                                     'Modification_name_restrict',
                                                      'Ya_UN_Name',
                                                      'Site',
                                                      'Subcategory',
@@ -205,12 +263,12 @@ class Consist_Names(object):
         if file_work_name:
             self.file_work_name = self.dir_work + file_work_name
             self.df_work = pd.read_excel(self.file_work_name, index_col=0)
-            self.df_work.reset_index(inplace=True)
+            #self.df_work.reset_index(inplace=True)
         else:
             self.file_work_name = self.Get_File_Work()
             if self.file_work_name:
                 self.df_work = pd.read_excel(self.file_work_name, index_col=0)
-                self.df_work.reset_index(inplace=True)
+                #self.df_work.reset_index(inplace=True)
 
             else:
                 print("Нет рабочиго файла или неверная категория: {}".format(self.category))
@@ -257,23 +315,28 @@ class Consist_Names(object):
     # Отметить уже имеющиеся в базе
     def Fill_Work_by_Base(self):
 
-        @np.vectorize
-        def Check_Known(self, mname, site, id):
+        self.df_work = self.df_work.apply(self.Сheck_n_Fill_Base_Satble, axis=1)
 
-            if mname in self.df_base[self.df_base['Site'].values == site]['Modification_name'].values:
+        print(self.df_work[['Name', 'Modification_name']].loc[self.df_work['Known']])
 
-                this_ = self.df_base[self.df_base['Modification_name'] == mname]
-                self.df_work.loc[id, 'Name'] = this_['Name'].values[0]
-                self.df_work.loc[id, 'Yama_name'] = this_['Yama_name'].values[0]
+    def Сheck_n_Fill_Base_Satble(self, row):
 
-                return True
-            else:
-                return False
+        df_work_ = self.df_base[(self.df_base['Site'] == row['Site'])
+                        & (self.df_base['Modification_name'] == row['Modification_name'])]
+        df_work_.reset_index(inplace=True)
 
-        #self.Lower_DF(self.df_base
-        self.df_work['Known'] = Check_Known(self, self.df_work['Modification_name'], self.df_work['Site'], self.df_work.index)
+        if not df_work_.empty:
+            row['Known'] = True
+            row['Name'] = df_work_['Name'].values[0]
+            row['Ya_UN_Name'] = df_work_['Ya_UN_Name'].values[0]
+        else:
+            row['Known'] = False
 
-# Main (заполенение моделей)
+        return row
+
+
+
+# Main (заполенение Name моделей)
     def Fill_Unknown(self):
 
         if not 'Known' in self.df_work.columns:
@@ -282,8 +345,7 @@ class Consist_Names(object):
         id_handle = self.df_work[self.df_work['Known'] == False].index
 
         for id in id_handle:
-            mod_name_ = self.df_work.loc[id, 'Modification_name'].\
-                replace(self.df_work.loc[id, 'Vendor'], "")
+            mod_name_ = self.df_work.loc[id, 'Modification_name_restrict']
             print(mod_name_)
             try:
                 array_vendors_model = self.dict_ven_mod[self.df_work.loc[id, 'Vendor'].lower()]
@@ -293,10 +355,20 @@ class Consist_Names(object):
 
             if array_vendors_model:
                 self.df_work.loc[id, 'Name'] = self.Search_ITR_Name(mod_name_, array_vendors_model)
-                print(self.df_work.loc[id, 'Name'])
+
+
+            if self.df_work.loc[id, 'Site'] != 'yama':
+                this_name = self.df_work.loc[id, 'Name']
+                if this_name:
+                    this_name = self.df_work.loc[id, 'Name']
+                    if __name__ == '__main__':
+                        self.df_work.loc[id, 'Ya_UN_Name'] = self.df_work['Ya_UN_Name'].loc[(self.df_work['Site'] == 'yama')
+                                                                                            & (self.df_work['Name'] == this_name)].values[0]
+            print(self.df_work.loc[id, ['Name', 'Ya_UN_Name']])
 
         self.Filled_To_Excel()
 
+#   Взваращает максимум STR из list_search (array_vendors_models)
     def Search_ITR_Name(self, data_, list_search_):
 
         list_tup_vendor_model = [(key, StRadar.stradar(data_, key, beg_coeff=0.5).result()) for key in
@@ -305,6 +377,7 @@ class Consist_Names(object):
 
         return exit_
 
+# Возвращает model с максимальным значением STR
     def Max_list_tup_Name(self, list_tup):
 
         if list_tup:
@@ -330,6 +403,7 @@ class Consist_Names(object):
         else:
             return None
 
+# Формирует self.dict_yama_names
     def Dict_Yama_Names(self):
 
         @np.vectorize

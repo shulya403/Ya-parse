@@ -11,8 +11,10 @@ import consistence_parsed_names as CPN
 #   ----------
 
 
-May = CPN.Concat_Parse_Files('Монитор')
-May.Concat_files()
+#May = CPN.Concat_Parse_Files('Монитор')
+#May.Concat_files()
+#May.Clearing_Vendors()
+#May.Clearing_Mod_Name()
 
 #class Consist_Names(object):
 
@@ -32,13 +34,13 @@ May.Concat_files()
 #                 ):
 
 
-#FileHandler = CPN.Consist_Names(category="Ноутбук",
-#                                file_itr="NB_Pivot_Mar (Восстановленный).xlsm",
-#                                file_work_name="Ноутбук-Concat_Prices--May-20--Filled3.xlsx")
+FileHandler = CPN.Consist_Names(category="Монитор",
+                                file_itr="Monitors all models drop_duplicates.xlsx",
+                                file_work_name="")
 
 
 #   Заполенение из файла Source
-#FileHandler.Fill_Unknown()
+FileHandler.Fill_Unknown()
 
 #FileHandler.Dict_Yama_Names()
 #FileHandler.Fill_Yama_Name()
