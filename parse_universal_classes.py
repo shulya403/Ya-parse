@@ -225,7 +225,7 @@ class Parse_Common(object):
         header = {
             # 'Referer': referer,
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-            # 'Accept-Encoding': 'gzip, deflate, br',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Accept-Language': 'ru,en;q=0.9',
             'Connection': 'keep-alive',
             # 'Cache-Control': 'max-age=0',
@@ -308,7 +308,7 @@ class Parse_Common(object):
             url_ = self.URL_CardsPage_Make(page=counter_page)
 
             self.page_num = counter_page
-            print(url_)
+            #print(url_)
 
             html_page = self.Page_Scrape(url_)
             if html_page:
@@ -516,12 +516,48 @@ class Parse_El(Parse_Common_by_Request):
 
 # DNS берет цены со втрой страницы выдачи. Оч медленный но работает
 class Parse_DNS(Parse_Common):
+
     site = "dns"
+
+    def Page_Requests(self, url_):
+
+        cookies = self.site_params["cookies"]
+
+        header = {
+            #'Referer': 'https://www.dns-shop.ru/',
+            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+            #'Accept-Encoding': 'gzip, deflate, br',
+            'Accept-Language': 'ru,en;q=0.9',
+            'Connection': 'keep-alive',
+            # 'Cache-Control': 'max-age=0',
+            # 'Host': 'market.yandex.ru',
+            'Sec-Fetch-Mode': 'navigate',
+            'Sec-Fetch-Site': 'none',
+            'Sec-Fetch-User': '?1',
+            'Upgrade-Insecure-Requests': '1',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.136 YaBrowser/20.2.1.248 Yowser/2.5 Safari/537.36',
+        }
+        time.sleep(self.interrupt)
+        session = requests.Session()
+        retry = Retry(connect=3, backoff_factor=1)
+        adapter = HTTPAdapter(max_retries=retry)
+        session.mount('http://', adapter)
+        session.mount('https://', adapter)
+
+        #print(url_)
+        response = session.get(url_, headers=header)
+        #response = requests.get(url_, headers=header)
+        response.encoding = 'UTF-8'
+        print(url_, response.status_code)
+        if response.status_code == 200:
+           #session.close()
+           return response.text
+
 
     def Modification_Price_Handler(self, card):
 
         url_ = self.Modification_Href_Handler(card)
-        page_internal = self.Page_Scrape(self.URL_Base_Make(url_))
+        page_internal = self.Page_Scrape(url_)
         if page_internal:
             soup_page_internal = BeautifulSoup(page_internal, "html.parser")
             soup_price = self.Find_Div("internal_page_price", soup_page_internal)
@@ -549,79 +585,6 @@ class Parse_DNS(Parse_Common):
         print("Make :", exit_url)
 
         return exit_url
-
-
-
-    def Page_Webdriver(self, url_):
-
-        def Err_Webdriver(url_, interrupt):
-            driver.close()
-            print("Страница не скачивается {}\n повтор...".format(url_))
-            time.sleep(interrupt)
-            self.Page_Webdriver(url_)
-
-        # try:
-        #    options = webdriver.ChromeOptions()
-        #    for option in self.site_params["host_options"]:
-        #        options.add_argument(option)
-        # except Exception:
-        #    print("Site Options", Exception)
-
-        driver = webdriver.Chrome("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe")
-
-        try:
-            print(self.driver.current_url)
-            self.driver.get(url_)
-            print(self.driver.current_url)
-
-            exit_ = self.driver.page_source
-
-            # print(exit_)
-            if exit_:
-                print("Where is something in {}".format(url_))
-            else:
-                Err_Webdriver(url_, 1)
-
-            driver.close()
-        except Exception:
-            Err_Webdriver(url_, 1)
-
-        return exit_
-
-        #   Возврат html-страницы on Requests
-
-    def Page_Requests(self, url_):
-
-        cookies = self.site_params["cookies"]
-
-        header = {
-            # 'Referer': referer,
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-            # 'Accept-Encoding': 'gzip, deflate, br',
-            'Accept-Language': 'ru,en;q=0.9',
-            'Connection': 'keep-alive',
-            # 'Cache-Control': 'max-age=0',
-            # 'Host': 'market.yandex.ru',
-            'Sec-Fetch-Mode': 'navigate',
-            'Sec-Fetch-Site': 'none',
-            'Sec-Fetch-User': '?1',
-            'Upgrade-Insecure-Requests': '1',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.136 YaBrowser/20.2.1.248 Yowser/2.5 Safari/537.36',
-        }
-        #time.sleep(self.interrupt)
-        session = requests.Session()
-        retry = Retry(connect=3, backoff_factor=1)
-        adapter = HTTPAdapter(max_retries=retry)
-        session.mount('http://', adapter)
-        session.mount('https://', adapter)
-
-        response = session.get(url_, headers=header, cookies=cookies)
-            #response = requests.get(url_, headers=header, cookies=cookies, retries=retry)
-        print(url_, response.status_code)
-        if response.status_code == 200:
-           return response.text
-
-
 
     def Longstring_Handeler(self, longstring):
 

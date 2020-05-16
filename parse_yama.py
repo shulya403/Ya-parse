@@ -123,7 +123,7 @@ class Yama_parsing_const(object):
     div_price_alone = 'n-product-price-cpa2__price'
 
     # Таблица с ценами на очередной странице выдачи внутри предложений (модификаций) модели div class
-    div_config_prices_table = 'n-snippet-list n-snippet-list_type_vertical island metrika b-zone b-spy-init b-spy-events i-bem'
+    div_config_prices_table = 'layout layout_type_maya'
 
     # Таблица характеристик (ТТХ) на странице Харктистик модели
     div_ttx_table = 'layout__col layout__col_size_p75 n-product-spec-wrap'
@@ -664,6 +664,8 @@ class Parse_models_ttx(Parse_models):
         #выходной файл с TTX
         self.TTX_df_append(category, self.ttx_df__work)
 
+
+#   Последняя версия парсера для yama с учетом модификаций для ноутбуков
 class Parse_Modifications_TTX(Yama_parsing_const):
     def __init__(self,
                  category,
@@ -674,7 +676,7 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                  ):
 
         link_filename = 'Price_link_list/' + links_file
-        self.df_links = pd.read_excel(link_filename)
+        self.df_links = pd.read_excel(link_filename, index_col=0)
         print(self.df_links.head(3))
 
         if category in self.Categories.keys():
@@ -683,15 +685,20 @@ class Parse_Modifications_TTX(Yama_parsing_const):
             raise AttributeError('Нет такой категории продукта в Categories')
 
         self.df_names = pd.DataFrame(columns=['Name',
+                                              'Ya_UN_Name',
                                               'Category',
                                               'Vendor',
-                                              'Avg_price',
-                                              'Quantity'])
+                                              'Modification_name',
+                                              'Modification_href',
+                                              'Modification_price',
+                                              'Quantity',
+                                              'Subcategory',
+                                              'Site'])
 
         self.now = datetime.now().strftime('%b-%y')
 
-        if mod:
-            self.mod = mod
+        self.mod = mod
+        if self.mod:
             self.df_mods = pd.DataFrame(columns=['Name',
                                                 'Ya_UN_Name',
                                                   'Vendor',
@@ -700,7 +707,8 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                                                   'Quantity',
                                                   'Modification_price',
                                                 'Category',
-                                                 'Subcategory'])
+                                                 'Subcategory',
+                                                 'Site'])
             if ttx_mod:
                 self.ttx_mod = ttx_mod
                 self.ttx_mod_filename = self.TTX_files_folder + self.Categories[self.category]['ttx_mod_file']
@@ -709,16 +717,16 @@ class Parse_Modifications_TTX(Yama_parsing_const):
         if ttx_name:
             self.ttx_name = ttx_name
             self.ttx_name_filename = self.TTX_files_folder + self.Categories[self.category]['ttx_file']
-            self.df_tts_name = pd.read_excel(self.ttx_name_filename, index_col=0)
+            self.df_ttx_name = pd.read_excel(self.ttx_name_filename, index_col=0)
 
 
-    def main(self, step=10, num=""):
+    def main(self, step=10, start=0, num=""):
 
         self.num = num
 
         finish_ = len(self.df_links)
-        begin_ = 0
-        end_ = step
+        begin_ = start
+        end_ = begin_ + step
         while end_ < finish_ - 1:
             end_ = begin_ + step
             if end_ > finish_ - 1:
@@ -726,16 +734,22 @@ class Parse_Modifications_TTX(Yama_parsing_const):
 
             for i, row_df_links in self.df_links.iloc[begin_:end_].iterrows():
                 j = len(self.df_names)
-                self.df_names.loc[j, 'Name'] = row_df_links['Name']
+                self.df_names.loc[j, 'Site'] = 'yama'
+                self.df_names.loc[j, 'Name'] = None
+                self.df_names.loc[j, 'Ya_UN_Name'] = row_df_links['Name']
+                self.df_names.loc[j, 'Modification_name'] = self.df_names.loc[j, 'Ya_UN_Name']
+                self.df_names.loc[j, 'Modification_href'] = self.host + row_df_links['Href']
+
                 self.df_names.loc[j, 'Vendor'] = row_df_links['Vendor']
-                self.df_names.loc[j, 'Category'] = row_df_links['Category']
+                self.df_names.loc[j, 'Subcategory'] = row_df_links['Category']
+                self.df_names.loc[j, 'Category'] = self.category
 
                 url_req = self.URL_Req(row_df_links['Href'])
                 if url_req:
                     soup_page = BeautifulSoup(url_req, 'html.parser')
                     soup_table_grey = soup_page.find('ul', class_=self.ul_table_gray)
 
-                    self.df_names.loc[j, ['Quantity', 'Avg_price']] = self.Parse_Model_Page(soup_page,
+                    self.df_names.loc[j, ['Quantity', 'Modification_price']] = self.Parse_Model_Page(soup_page,
                                                                                             soup_table_grey)
 
                 print(self.df_names.iloc[j])
@@ -748,14 +762,19 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                             url_ = None
                         if url_:
                             self.Parse_Modifications(url_,
-                                                    row_df_links['Name'],
+                                                    row_df_links['Ya_UN_Name'],
                                                     row_df_links['Vendor'],
                                                     row_df_links['Category'])
-                #if self.ttx_name:
-                #    self.df_tts_name = self.TTX_Handler(self.URL_Spec(soup_table_grey,
-                #                                                      self.df_tts_name))
+                if self.ttx_name:
+                    ttx_len = len(self.df_ttx_name)
+                    self.df_ttx_name = self.TTX_Handler(self.URL_Spec(soup_table_grey),
+                                                        self.df_ttx_name,
+                                                        self.df_names.loc[j, 'Modification_name'])
 
             self.DF_to_Excel(self.df_names, num=self.num)
+            if self.ttx_name and (len(self.df_ttx_name) > ttx_len):
+                self.df_ttx_name.to_excel(self.ttx_name_filename)
+
             begin_ = end_
 
     def URL_Req(self, url_, host=True):
@@ -786,18 +805,18 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                 dict_exit['Quantity'] = 0
 
             if dict_exit['Quantity'] > 2:
-                dict_exit['Avg_price'] = self.AvgPrice_Handler(soup_page, soup_offers_cell)
+                dict_exit['Modification_price'] = self.AvgPrice_Handler(soup_page, soup_offers_cell)
 
             else:
                 # если одно предложение (цена) только одна или нет предложений
                 avg_price = soup_page.find('div', class_=self.div_price_alone)
                 if avg_price is not None:
-                    dict_exit['Avg_price'] = int(
+                    dict_exit['Modification_price'] = int(
                             avg_price.find('span', class_='price').text.replace(' ', '').replace('₽', ''))
                 else:
-                    dict_exit['Avg_price'] = 'na'
+                    dict_exit['Modification_price'] = 'na'
         else:
-            dict_exit['Avg_price'] = 'na'
+            dict_exit['Modification_price'] = 'na'
             dict_exit['Quantity'] = None
 
         return dict_exit
@@ -824,7 +843,7 @@ class Parse_Modifications_TTX(Yama_parsing_const):
 
                 for name in soup_list_mods:
                     i = len(self.df_mods)
-
+                    self.df_mods.loc[i, 'Site']
                     self.df_mods.loc[i, 'Ya_UN_Name'] = up_name
                     self.df_mods.loc[i, 'Category'] = self.category
                     self.df_mods.loc[i, 'Subcategory'] = up_category
@@ -857,7 +876,7 @@ class Parse_Modifications_TTX(Yama_parsing_const):
 
     def TTX_Handler(self, url_, df_ttx, name):
 
-        if name not in df_ttx['Name']:
+        if name not in df_ttx['Name'].values:
             j = len(df_ttx)
             df_ttx.loc[j, 'Name'] = name
             url_req = self.URL_Req(url_)
@@ -885,6 +904,7 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                             df_ttx.loc[j, spec_name] = str(spec_value)
                     else:
                         df_ttx.loc[j, spec_name] = str(spec_value)
+            df_ttx.loc[j, 'Date'] = self.now
 
         return df_ttx
 
@@ -916,23 +936,25 @@ class Parse_Modifications_TTX(Yama_parsing_const):
             prices_list = list()
             print("OFFERS HANDLER WORK")
 
+
             page_href = url_
             # new_ref_href = ref_href
             pages_is_ok = True
             page = 1
 
             while pages_is_ok == True:
-                url_req = self.URL_Req(url_)
+                print(self.host + page_href)
+                url_req = self.URL_Req(page_href)
                 if url_req:
                     soup_offers_page = BeautifulSoup(url_req, 'html.parser')
 
                     if soup_offers_page.find('a', class_=self.a_button_eol) is None:
                         pages_is_ok = False
 
-                    soup_offers_table = soup_offers_page.find('div', class_=self.div_config_prices_table)
-                    page_prices = soup_offers_table.find_all('div', class_='price')
+                    # = soup_offers_page.find_all('div', class_=self.div_config_prices_table)
+                    list_soup_prices = soup_offers_page.find_all('span', class_='price')
 
-                    page_price_list = [int(i.text.replace(' ', '').replace('₽', '')) for i in page_prices]
+                    page_price_list = [int(i.text.replace(' ', '').replace('₽', '')) for i in list_soup_prices]
                     prices_list += page_price_list
 
                     page += 1

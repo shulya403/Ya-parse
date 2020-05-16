@@ -37,13 +37,17 @@ import parse_yama as pynd
 #                 ):
 
 #def main(self,
-#           step=100, По сколько моделей вурхнего уровня записывать в файл
+#           step=10, По сколько моделей вурхнего уровня записывать в файл
+#           start=0, С какой строчки начинать
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
 
-parse = pynd.Parse_Modifications_TTX('Ноутбук',
-                                     'Cсылки Ноутбук May-20--restrict-1.xlsx',
-                                     ).main(num=6)
+parse = pynd.Parse_Modifications_TTX('Проектор',
+                                     'Cсылки Проектор May-20----15--13-39.xlsx',
+                                     mod=False,
+                                     ttx_name=True,
+                                     ttx_mod=False
+                                     ).main(start=0, num=1)
 
 
 

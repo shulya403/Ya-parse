@@ -1,7 +1,6 @@
 import pandas as pd
 #import requests
 from bs4 import BeautifulSoup
-#from requests_html import HTMLSession, HTML
 from selenium import webdriver
 from pprint import pprint
 import re
@@ -16,7 +15,22 @@ Categories = {
                  'ноутбук игровой',
                  'ноутбук-трансформер',
                  'ультрабук']
+    },
+    'Монитор': {
+        'url': 'https://www.mvideo.ru/komputernaya-tehnika-4107/monitory-101',
+        'type': ['монитор',
+                 'монитор игровой',
+                 ],
+        'nontype':[
+            'подставка под монитор',
+            'аксессуары',
+            'кронштейн для монитора'
+        ]
+
+
+
     }
+
 }
 
 header_ = {
@@ -48,20 +62,26 @@ class parse_mvideo(object):
                 self.category_ = category_
                 self.url_category = self.Categories[self.category_]['url']
                 self.list_types_category = self.Categories[self.category_]['type']
+                self.list_nontypes_category = self.Categories[self.category_]['nontype']
                 break
         if not cat_ok:
             print("неверное имя категории: {}".format(category_))
             raise
 
         self.df = pd.DataFrame(columns=['Name',
+                                        'Ya_UN_Name',
+                                        'Category',
                                         'Modification_name',
+                                        'Modification_href',
+                                        'Modification_price',
+                                        'Quantity'
                                         'Vendor',
-                                        'Href',
                                         'Subcategory',
-                                        'Price',
                                         'Page'])
+
         self.host_url = 'https://www.mvideo.ru'
         self.now = datetime.now().strftime('%b-%y')
+        self.exit_filename = self.category_ + '-МВ-Цены-от-' + self.now + "--" + str(self.pg_num) + '.xlsx'
 
 #запрос с использованием Selenium для JavaScript
     def Req_JS(self, url_):
@@ -103,10 +123,12 @@ class parse_mvideo(object):
     #вызывная функция парсинга
     def Pagination(self, max_page):
 
-        self.Parse_Pages(self.url_category, 1)
+        for page in range(1, max_page + 1):
+            if not page == 1:
+                url_ = self.url_category + '?page=' + str(page)
+            else:
+                url_ = self.url_category
 
-        for page in range(2, max_page + 1):
-            url_ = self.url_category + '?page=' + str(page)
             print(page)
             self.Parse_Pages(url_, page)
 
@@ -114,9 +136,7 @@ class parse_mvideo(object):
 
     def To_Excel(self):
 
-        #now = datetime.now().strftime('%b-%y')
-        exit_filename = self.category_ + str(self.pg_num) + '-МВ-Цены-от-' + self.now + '.xlsx'
-        self.df.to_excel(exit_filename)
+        self.df.to_excel(self.exit_filename)
 
     def Pagination_Unparsed(self, filename, new_num, finish):
 
@@ -150,16 +170,11 @@ class parse_mvideo(object):
         Gluk = False  # Ошибка все  99999
 
         for card in li_bs_product_cards:
-        #Цена если есть, если нет - нафик
 
             bs_price_block = card.find('div', class_="price-block__price")
 
             if bs_price_block:
-                i = len(df_)
-
-                df_.loc[i, 'Price'] = "".join(re.findall(r'\d', bs_price_block.text))
-                #Поле для категории верхнего уровня
-                df_.loc[i, 'Name'] = None
+            # Цена если есть, если нет - нафик
 
                 #  Подкатегории
                 soup_longstring = card.find('a', class_="product-title product-title--clamp")
@@ -167,47 +182,54 @@ class parse_mvideo(object):
                     longstring = soup_longstring.text
 
                     list_word = longstring.split()
-                    list_found_cat = list()
 
-                    for cat in self.list_types_category:
-                        if cat in longstring.lower():
-                            list_found_cat.append((cat, len(cat), len(cat.split())))
+                    noncat = False
+                    for ncat in self.list_nontypes_category:
+                        if ncat in longstring.lower():
+                            noncat = True
+                            break
+                    if not noncat:
+                        list_found_cat = list()
+                        for cat in self.list_types_category:
+                            if cat in longstring.lower():
+                                list_found_cat.append((cat, len(cat), len(cat.split())))
 
-                    list_found_cat.sort(key=lambda x: x[1], reverse=True)
+                        if list_found_cat:
+                            list_found_cat.sort(key=lambda x: x[1], reverse=True)
+                    # Блок заполнения df row
+                            i = len(df_)
+                            df_.loc[i, 'Site'] = "mvideo"
+                            df_.loc[i, 'Subcategory'] = list_found_cat[0][0]
+                            df_.loc[i, 'Modification_price'] = "".join(re.findall(r'\d', bs_price_block.text))
+                            df_.loc[i, 'Name'] = None
+                            df_.loc[i, 'Ya_UN_Name'] = None
+                            df_.loc[i, 'Vendor'] = list_word[list_found_cat[0][2]]
+                            df_.loc[i, 'Modification_name'] = " ".join(list_word[list_found_cat[0][2]:])
+                            df_.loc[i, 'Modification_href'] = self.host_url + soup_longstring.get('href')
+                            df_.loc[i, 'Category'] = self.category_
 
-                    try:
-                        df_.loc[i, 'Subcategory'] = list_found_cat[0][0]
-                    except Exception:
-                        pass
-                    try:
-                        # Имя вендора
-                        df_.loc[i, 'Vendor'] = list_word[list_found_cat[0][2]]
-                        # Полное название вендор + продукт
-                        df_.loc[i, 'Modification_name'] = " ".join(list_word[list_found_cat[0][2]:])
-                    except IndexError:
-                        print('Чет с именем продукта: ', longstring)
+        if len(df_) > 0:
+            df_['Cards_page_num'] = page_
 
-                    #Ссыль на страницу продукта
-                    df_.loc[i, 'Href'] = self.host_url + soup_longstring.get('href')
+            if df_['Modification_price'].isna().all():
+                print("Нет цен на странице, финиш")
+                raise
 
-                df_['Page'] = page_
+            if (len(df_['Modification_price'].unique()) == 1) and int(df_['Modification_price'].unique()[0]) == 99999:
+                Gluk = True
 
-                if df_['Price'].isna().all():
-                    print("Нет цен на странице, финиш")
-                    raise
-
-                if (len(df_['Price'].unique()) == 1) and int(df_['Price'].unique()[0]) == 99999:
-                    Gluk = True
-
-        print(df_)
-        if not Gluk:
-            self.df = pd.concat([self.df, df_], ignore_index=True)
+            print(df_[['Modification_name', 'Modification_price']])
+            if not Gluk:
+                self.df = pd.concat([self.df, df_], ignore_index=True)
+        else:
+            print("пусто...", page_)
 
 #   MAIN
-parse = parse_mvideo('Ноутбук', pg_num=6)
+parse = parse_mvideo('Монитор', pg_num=2)
 #print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118?page=12'))
 #parse.Get_EOF_Page()
-#parse.Pagination(120)
-parse.Pagination_Unparsed('Ноутбук6-МВ-Цены-от-May-20.xlsx', new_num=9, finish=71)
+parse.Pagination(46)
+
+#parse.Pagination_Unparsed('Ноутбук6-МВ-Цены-от-May-20.xlsx', new_num=9, finish=71)
 
 

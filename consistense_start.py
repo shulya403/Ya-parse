@@ -11,8 +11,8 @@ import consistence_parsed_names as CPN
 #   ----------
 
 
-#May = CPN.Concat_Parse_Files('Ноутбук')
-#May.Concat_files()
+May = CPN.Concat_Parse_Files('Монитор')
+May.Concat_files()
 
 #class Consist_Names(object):
 
@@ -36,7 +36,6 @@ import consistence_parsed_names as CPN
 #                                file_itr="NB_Pivot_Mar (Восстановленный).xlsm",
 #                                file_work_name="Ноутбук-Concat_Prices--May-20--Filled3.xlsx")
 
-#FileHandler.Fill_Work_by_Base()
 
 #   Заполенение из файла Source
 #FileHandler.Fill_Unknown()
@@ -44,9 +43,12 @@ import consistence_parsed_names as CPN
 #FileHandler.Dict_Yama_Names()
 #FileHandler.Fill_Yama_Name()
 
+
+
+
 #   Заполенение фала Base Stable проверенными
 
 
-StBase = CPN.Fill_Stable_Base('Ноутбук',
-                              'Ноутбук-Concat_Prices--May-20--Checked2.xlsx')
-StBase.Checked_To_Base()
+#StBase = CPN.Fill_Stable_Base('Ноутбук',
+#                              'Ноутбук-Concat_Prices--May-20--Checked2.xlsx')
+#StBase.Checked_To_Base()
