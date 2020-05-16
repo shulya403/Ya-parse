@@ -74,7 +74,7 @@ class parse_mvideo(object):
                                         'Modification_name',
                                         'Modification_href',
                                         'Modification_price',
-                                        'Quantity'
+                                        'Quantity',
                                         'Vendor',
                                         'Subcategory',
                                         'Page'])
@@ -203,6 +203,7 @@ class parse_mvideo(object):
                             df_.loc[i, 'Modification_price'] = "".join(re.findall(r'\d', bs_price_block.text))
                             df_.loc[i, 'Name'] = None
                             df_.loc[i, 'Ya_UN_Name'] = None
+                            df_.loc[i, 'Quantity'] = None
                             df_.loc[i, 'Vendor'] = list_word[list_found_cat[0][2]]
                             df_.loc[i, 'Modification_name'] = " ".join(list_word[list_found_cat[0][2]:])
                             df_.loc[i, 'Modification_href'] = self.host_url + soup_longstring.get('href')

@@ -858,7 +858,7 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                         soup_table_grey = soup_mod_page.find('ul', class_=self.ul_table_gray)
                         dict_ = self.Parse_Model_Page(soup_mod_page, soup_table_grey)
                         self.df_mods.loc[i, 'Quantity'] = dict_['Quantity']
-                        self.df_mods.loc[i, 'Modification_price'] = dict_['Avg_price']
+                        self.df_mods.loc[i, 'Modification_price'] = dict_['Modification_price']
 
                         print(self.df_mods.loc[i, 'Modification_name'])
                         if self.ttx_mod:
