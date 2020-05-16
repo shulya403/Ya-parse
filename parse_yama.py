@@ -693,7 +693,8 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                                               'Modification_price',
                                               'Quantity',
                                               'Subcategory',
-                                              'Site'])
+                                              'Site',
+                                              'Date'])
 
         self.now = datetime.now().strftime('%b-%y')
 
@@ -708,7 +709,8 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                                                   'Modification_price',
                                                 'Category',
                                                  'Subcategory',
-                                                 'Site'])
+                                                 'Site',
+                                                 'Date'])
             if ttx_mod:
                 self.ttx_mod = ttx_mod
                 self.ttx_mod_filename = self.TTX_files_folder + self.Categories[self.category]['ttx_mod_file']
@@ -743,6 +745,9 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                 self.df_names.loc[j, 'Vendor'] = row_df_links['Vendor']
                 self.df_names.loc[j, 'Subcategory'] = row_df_links['Category']
                 self.df_names.loc[j, 'Category'] = self.category
+                self.df_names.loc[j, 'Date'] = self.now
+
+
 
                 url_req = self.URL_Req(row_df_links['Href'])
                 if url_req:

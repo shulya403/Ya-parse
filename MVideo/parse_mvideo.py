@@ -77,7 +77,8 @@ class parse_mvideo(object):
                                         'Quantity',
                                         'Vendor',
                                         'Subcategory',
-                                        'Page'])
+                                        'Page',
+                                        'Date'])
 
         self.host_url = 'https://www.mvideo.ru'
         self.now = datetime.now().strftime('%b-%y')
@@ -198,19 +199,21 @@ class parse_mvideo(object):
                             list_found_cat.sort(key=lambda x: x[1], reverse=True)
                     # Блок заполнения df row
                             i = len(df_)
-                            df_.loc[i, 'Site'] = "mvideo"
+
                             df_.loc[i, 'Subcategory'] = list_found_cat[0][0]
                             df_.loc[i, 'Modification_price'] = "".join(re.findall(r'\d', bs_price_block.text))
-                            df_.loc[i, 'Name'] = None
-                            df_.loc[i, 'Ya_UN_Name'] = None
-                            df_.loc[i, 'Quantity'] = None
                             df_.loc[i, 'Vendor'] = list_word[list_found_cat[0][2]]
                             df_.loc[i, 'Modification_name'] = " ".join(list_word[list_found_cat[0][2]:])
                             df_.loc[i, 'Modification_href'] = self.host_url + soup_longstring.get('href')
-                            df_.loc[i, 'Category'] = self.category_
 
         if len(df_) > 0:
             df_['Cards_page_num'] = page_
+            df_.loc[i, 'Date'] = self.now
+            df_.loc[i, 'Quantity'] = None
+            df_.loc[i, 'Ya_UN_Name'] = None
+            df_.loc[i, 'Name'] = None
+            df_.loc[i, 'Site'] = "mvideo"
+            df_.loc[i, 'Category'] = self.category_
 
             if df_['Modification_price'].isna().all():
                 print("Нет цен на странице, финиш")
