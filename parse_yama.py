@@ -17,19 +17,19 @@ import pandas as pd
 from datetime import datetime
 from urllib.parse import quote
 import re
-#from grab import Grab
+from grab import Grab
 
 class Yama_parsing_const(object):
     def header_(self, referer=""):
 
         header = {
-            #'Referer': referer,
+            'Referer': referer,
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
-            #'Accept-Encoding': 'gzip, deflate, br',
+            'Accept-Encoding': 'gzip, deflate, br',
             'Accept-Language': 'ru,en;q=0.9',
             'Connection': 'keep-alive',
-            #'Cache-Control': 'max-age=0',
-            #'Host': 'market.yandex.ru',
+            'Cache-Control': 'max-age=0',
+            'Host': 'market.yandex.ru',
             'Sec-Fetch-Mode': 'navigate',
             'Sec-Fetch-Site': 'none',
             'Sec-Fetch-User': '?1',
@@ -78,6 +78,67 @@ class Yama_parsing_const(object):
         'parent_reqid_seq': '4443e96de0ca39b438700c542afbd754%2C9167d730c4966f0d74a8f0e36206d2ac%2C22e8d508c3661ec4b41e9cce6d85bde9',
         'viewtype': 'list'
      }
+
+    ya_cookies2 = { #June 2020
+        'fuid01': '5187dbf37aa46e29.1ea1yXg4LdRzObB-t-8Dp5ZUsvvynIX2NMEmQLT2IN-oQI6OGq1Q1nQsrKPOUPER2HtMsOB-p4AP9QnjF1SvJNe86JHPbTw1UraJwGiQHBkyb1gxs7EDw7LMnv5Ylc1s',
+        'markethistory': '<h><c>6427101</c><c>432460</c><m>11151827</m><m>10630837</m><m>11142972</m><m>10993382</m><m>12174379</m><m>12174345</m><m>12325200</m><m>11874413</m><m>12393964</m><m>10853777</m><m>12408317</m><m>8293471</m><m>10771048</m><m>10771049</m><m>11851436</m><m>10540949</m><m>12221853</m><m>12174590</m><m>12143640</m><m>12253940</m><m>10541564</m><m>12334353</m><m>12254049</m><m>12253336</m><m>12253311</m><m>12285506</m><m>12285898</m><m>10469466</m><m>11007864</m><m>10469292</m><cm>6427101-11131792</cm><cm>6427101-11547576</cm><cm>6427101-10846379</cm><cm>106905-10467479</cm><cm>432460-11151827</cm><cm>432460-10630837</cm><cm>432460-11142972</cm></h>', 
+        'yandexuid': '703207661367760751',
+        'deliveryincluded': '1', 
+        'in-stock': '1', 
+        '_ym_uid': '1471966800285541158', 
+        'my': 'YwA=',
+        'head-banner-sovetnik-info': '%7B%22closingCounter%22%3A0%2C%22showingCounter%22%3A46%2C%22shownAfterClicked%22%3Afalse%2C%22isClicked%22%3Afalse%7D',
+        'head-banner-sovetnik': '%7B%22closingCounter%22%3A0%2C%22showingCounter%22%3A39%2C%22shownAfterClicked%22%3Afalse%2C%22isClicked%22%3Afalse%7D',
+        'yandexmarket': '48%2CRUR%2C1%2C%2C%2C%2C2%2C0%2C0%2C213%2C0%2C0%2C12%2C0',
+        'head-banner': '%7B%22closingCounter%22%3A0%2C%22showingCounter%22%3A3067%2C%22shownAfterClicked%22%3Afalse%2C%22isClicked%22%3Afalse%7D',
+        'onstock': '1',
+        '_ym_uid': '1471966800285541158',
+        '_ym_d': '1564318515',
+        'mda': '0',
+        'novelty-badge-filter-payments': '-1',
+        'yuidss': '703207661367760751',
+        'ymex': '1896274612.yrts.1580914612',
+        'gdpr': '0',
+        'settings-notifications-popup': '%7B%22showCount%22%3A8%2C%22showDate%22%3A18347%7D',
+        'yandex_gid': '213',
+        'Session_id': '3:1592317752.5.0.1592317752935:hL7Q1Q:4.1|919128238.0.2|218587.137711.eI201Q3JDCA7S3vObX-pVuCPJrs',
+        'sessionid2': '3:1592317752.5.0.1592317752935:hL7Q1Q:4.1|919128238.0.2|218587.7201.eUkY7WWVJAgDa81WAyRWnkPswds',
+        'L': 'SVUEeFJIcF1DfXQDXU57e3Z5d0BTV295HTQ5W1ADNTQuNA==.1592317752.14267.358974.04707b2dc1e7cf2f93fce4c6301755d5',
+        'yandex_login': 'dmschulgin',
+        'yp': '1606498676.dswa.0#1606498676.dsws.17#1606498676.dwbrowsers.14#1889454231.multib.1#1603200819.p_cl.1571664819#1617974648.p_sw.1586438647#1892478330.sad.1558446390%3A1577118330%3A7#1597097547.szm.1:1680x1050:1612x947#1606498676.wzrd_sw.1574962675#1896274612.yrts.1580914612#1594889402.ygu.1#1907677752.udn.cDpEZXBlY2hlNDAz',
+        'i': '4Q+gUAiKOpqpQo+9q3Htep8kJLBDcg3p8vG1BkaPw7Gl/nvLmsFQIlp8lr37ANYaXSElkfu9P1sXwZ4V5PZuj97guIc=',
+        'zm': 'm-white_bender-more-js.webp.css-https%3As3home-static_Go1ex5WQ3bRjxW6Ci7rLgizqklc%3Al',
+        '_ym_isad': '2',
+        'yabs-frequency': '/4/1m0w0Rdaw5uuZ7nU/tVfoSBGx8UpvSd2qEo7Wz79mh3idslHoSAmx9_Hoi72qEo1GSB1mj3j03DSlRhGx83dhAswqEo0O8APkj3iWorImSBGx87bAi72qEo07Lh1mj3iWrphqRRGxGBzPi72rEu02xasmSBGx8DPOi72qEq2ouN9mj3j055QmSBGx8BQ5Sd2rEs01rL6mSBGxO07____8LB1mx3LW35ImSEmr81HKi73iDM0CLB3y_ForLB1m-3M0V52mSFWrGBQ4S73uDK01U4YmSEmr81HKi73iDI0NLB1mx3KW622aREmrO07uLB1mx3KW55ImSEmr805_LB1mx3MWmj3WREmrW0DKi73iDO2KIB1mx3KWaKYmSEmr8958i73izJH0xanCi73iD800D82OR-mq03RWN6piDI25rDHi-3LWs3YORFW0/',
+        'yc': '1592744080.zen.cach%3A1592330153', 
+        'cycada': 'AZpzKKoHFG4jzWncWtHALg/4F3IorNFjwqgm/Ez16Ow=',
+        'uid': 'AABixV7rcISEVQB6Bb0hAg==',
+        '_ym_visorc_10630330': 'b',
+        'SL_GWPT_Show_Hide_tmp': '0',
+        'SL_wptGlobTipTmp': '1',
+        'spravka': 'dD0xNTkyNDg4MTAxO2k9MjEzLjIwOC4xOTAuMTMyO3U9MTU5MjQ4ODEwMTcwNzIzOTg4NjtoPWFkMzA0NmIyOWRlNjRmNjEwMTUwMTEzNzQ1OTI0MjVi',
+        'skid': '8584706041592488101',
+        'visits': '1532526818-1585219412-1592488101',
+        'js': '1',
+        'dcm': '1',
+        '_ym_visorc_160656': 'b',
+        '_ym_visorc_45411513': 'b',
+        'currentRegionId': '213',
+        'currentRegionName': '%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D1%83',
+        'mOC': '1',
+        'first_visit_time': '2020-06-18T16%3A48%3A23%2B03%3A00',
+        'fonts-loaded': '1',
+        'ugcp': '1',
+        'oMaSefD': '1',
+        'oMaSofD': '1',
+        'oMaFifD': '1',
+        'lkOb': '1',
+        '_ym_visorc_26812653': 'b',
+        'parent_reqid_seq': '58e752ba79263232137d658a47cb042c%2Cb3dcea808aa59995b9111e2894d4caf2%2Ccdb0b17cc793ec809ed3ddc37007a4fb',
+        '_ym_d': '1592488272',
+        #'HISTORY_AUTH_SESSION': '1f384434'
+
+    }
 
     #host name
     host = 'https://market.yandex.ru'
@@ -165,22 +226,45 @@ class Yama_parsing_const(object):
     }
     TTX_files_folder = 'TTX_files/'
 
+class Req(object):
+    def __init__(self, url, headers='', cookies=''):
 
-#Скачивание линков на модлеи по категориям
+        self.text = ''
+        self.status_code = 400
+
+        self.requests(url, headers, cookies)
+
+    def requests(self, url, headers, cookies):
+
+        if headers and cookies:
+            requests_ = requests.get(url, headers=headers, cookies=cookies)
+        elif headers:
+            requests_ = requests.get(url, headers=headers)
+        elif cookies:
+            requests_ = requests.get(url, cookies=cookies)
+        else:
+            requests_ = requests.get(url)
+
+        self.status_code = requests_.status_code
+        self.text = requests_.text
+
+
+    #Скачивание линков на модлеи по категориям
 class Parse_links(Yama_parsing_const):
+
 
     #скачивание линков на страницы модели по категории
     def parse_links(self, category):
 
         url = self.Categories[category]['url']
         category_ls = self.Categories[category]['category']
-        #gr_ = Grab() #объект Grab
+
 
         models_list = list()  # список словарей с моделями с названиеми и ссылками на модели
 
         page = 1  # номер страницы выдачи
-        pages_full = True  # есть ли целевой контент на очередной странице
 
+        pages_full = True  # есть ли целевой контент на очередной странице
         while pages_full:
             if page > 1:
                 page_url = url + '&page=' + str(page) + self.link_tail
@@ -194,20 +278,13 @@ class Parse_links(Yama_parsing_const):
                 page_url = url + self.link_tail
                 referer_ = self.link_computers
 
-            response = requests.get(page_url,
-                                    headers=self.header_(referer_),
-                                    cookies=self.ya_cookies)
-
-           # gr_.go(page_url,
-           #        headers=self.header_(referer_),
-           #        cookies=self.ya_cookies)
+            response = Req(page_url, headers=self.header_(referer_), cookies=self.ya_cookies2)
 
             if response.status_code == 200:
+            #if gr_.response.code == 200:
                 print('поехали ', page_url)
                 iter_page_soup = BeautifulSoup(response.text, 'html.parser')
                 print(iter_page_soup.title)
-
-
 
                 # Пречень блоков моделей (строк таблицы) на очередной странице выдачи
                 rows_models = iter_page_soup.find_all('div', class_=self.div_row_models_ls)
