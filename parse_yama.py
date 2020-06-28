@@ -17,26 +17,45 @@ import pandas as pd
 from datetime import datetime
 from urllib.parse import quote
 import re
-from grab import Grab
+#from grab import Grab
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 
 class Yama_parsing_const(object):
     def header_(self, referer=""):
 
         header = {
-            'Referer': referer,
+            #'Referer': referer,
+            #'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
+            #'Accept-Encoding': 'gzip, deflate, br',
+            #'Accept-Language': 'ru,en;q=0.9',
+            #'Connection': 'keep-alive',
+            #'Cache-Control': 'max-age=0',
+            #'Host': 'market.yandex.ru',
+            #'Sec-Fetch-Mode': 'navigate',
+            #'Sec-Fetch-Site': 'none',
+            #'Sec-Fetch-User': '?1',
+            #'Upgrade-Insecure-Requests': '1',
+            #'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.136 YaBrowser/20.2.1.248 Yowser/2.5 Safari/537.36',
+
+
+
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
             'Accept-Encoding': 'gzip, deflate, br',
-            'Accept-Language': 'ru,en;q=0.9',
-            'Connection': 'keep-alive',
+            'Accept-Language': 'ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7',
             'Cache-Control': 'max-age=0',
+            'Connection': 'keep-alive',
+            'Cookie': 'yandexuid=7149064641575729573; _ym_uid=1575729574981578479; mda=0; my=YwA=; yuidss=7149064641575729573; ymex=1897042421.yrts.1581682421; gdpr=0; settings-notifications-popup=%7B%22showCount%22%3A3%2C%22showDate%22%3A18335%7D; mOC=1; oMaSefD=1; oMaSpfD=1; oMaRefD=1; oMaPrfD=1; oMaSofD=1; oMaFifD=1; lkOb=1; userAchievements=1; L=aVYCU3BGalJWdHB0TU5IQW1Je1NifFFBIh4kKwU7DjcLFA==.1590424699.14245.371513.b12c4e50cbbe7c513c403938b0780de8; yandex_login=dmschulgin; currentRegionId=213; currentRegionName=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D1%83; utm_campaign=user_achievements; utm_medium=trigger; utm_source=email; yandex_gid=213; Session_id=3:1592420589.5.0.1590424699783:zTv8bQ:85.1|919128238.0.2|218643.696677.ylsT5_nV4vqg5lSfVN325vu8v5o; sessionid2=3:1592420589.5.0.1590424699783:zTv8bQ:85.1|919128238.0.2|218643.303202.0-6EEDutomK6Y3cKB6XwHuSPdkQ; i=3a1PDCS2PLjIhjqs5B/DVWeEqNbQnK+pffovbMdn9Y5tgdBB1s3+yXPN7r2s9Hk37BLTlP9qhJco/62Xwg1MPcvLeR4=; zm=m-white_bender.webp.css-https%3As3home-static_Go1ex5WQ3bRjxW6Ci7rLgizqklc%3Al; yp=1891690763.multib.1#1902540787.sad.1578091434%3A1587180787%3A9#1607588489.szm.1_5%3A1280x720%3A1218x618#1905784699.udn.cDpEZXBlY2hlNDAz#1592427826.zmblt.1629#1592427826.zmbbr.chrome%3A83_0_4103_97#1595010714.ygu.1#1595100415.csc.2; _ym_d=1592637990; _ym_isad=2; yc=1592897192.zen.cach%3A1592641566; yabs-frequency=/5/100X09-jrbvgsCTU/tVfoS000002yEq7i-N9m00000BmxGGZfFMq00000i3j7uFHoS000002mEqVQz79m00000B0xH-jKi7000000l3iW/; _ym_visorc_10630330=w; uid=AABcEl7txFMG6QB6CiRyAg==; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; spravka=dD0xNTkyNjQwNjI0O2k9MTA5LjI1Mi41OS4yMDU7dT0xNTkyNjQwNjI0NjU5MTE0MDMxO2g9MjQzZWViN2ZlMGI3MTM4ZDBlMDIzZDg1ZDIzOTlhMmE=; skid=9925283531592640624; visits=1579356538-1591128012-1592640624; parent_reqid_seq=23a3d15bae7cb97d45c13dd69bed6269; js=1; dcm=1; _ym_visorc_160656=b; _ym_visorc_45411513=b; first_visit_time=2020-06-20T11%3A10%3A30%2B03%3A00; HISTORY_AUTH_SESSION=a4de0c08; yandexmarket=48; fonts-loaded=1; ugcp=1; oCnCPoS=1; ys=wprid.1592425950904923-80431522882309962600251-production-app-host-sas-web-yp-188#ymrefl.085DDB54FF3551ED; _ym_visorc_11859922=b; cycada=7PVD5wgZSTj/kLF/oQzN6FVNugMpxQqr2hJTlPqWlEk=',
             'Host': 'market.yandex.ru',
+            'Referer': referer,
+            'Sec-Fetch-Dest': 'document',
             'Sec-Fetch-Mode': 'navigate',
-            'Sec-Fetch-Site': 'none',
+            'Sec-Fetch-Site': 'same-origin',
             'Sec-Fetch-User': '?1',
             'Upgrade-Insecure-Requests': '1',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.136 YaBrowser/20.2.1.248 Yowser/2.5 Safari/537.36',
-
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.106 Safari/537.36'
         }
+
         return header
 
     ya_cookies = {
@@ -150,13 +169,16 @@ class Yama_parsing_const(object):
     link_computers = 'https://market.yandex.ru/catalog--kompiuternaia-tekhnika/54425'
 
     # кнопка "Вперед" на страницах выдачи списков моделей <a> class
-    a_button_eol = 'button button_size_s button_theme_pseudo n-pager__button-next i-bem n-smart-link'
+    #a_button_eol = 'button button_size_s button_theme_pseudo n-pager__button-next i-bem n-smart-link'
+    a_button_eol = 'button button_size_s button_theme_pseudo n-pager__button-next i-bem n-smart-link button_js_inited n-smart-link_js_inited'
 
     # строки таблицы моделей (по 48 на страницу обычно) Div class
-    div_row_models_ls = 'n-snippet-card2 i-bem b-zone b-spy-visible b-spy-events'
+    #div_row_models_ls = 'n-snippet-card2 i-bem b-zone b-spy-visible b-spy-events'
+    div_row_models_ls = '_1OAvzJPfIW'
 
     # Название модели на страницы выдачи h3 class
-    h3_model_name = 'n-snippet-card2__title'
+    #h3_model_name = 'n-snippet-card2__title'
+    h3_model_name = '_3dCGE8Y9v3 cLo1fZHm2y'
 
     # Табличка верхняя серая на странице модели ul class
    # ul_table_gray = 'n-product-tabs__list'
@@ -227,26 +249,48 @@ class Yama_parsing_const(object):
     TTX_files_folder = 'TTX_files/'
 
 class Req(object):
-    def __init__(self, url, headers='', cookies=''):
+    def __init__(self):
 
         self.text = ''
         self.status_code = 400
 
-        self.requests(url, headers, cookies)
+        #self.requests(url, headers, cookies)
 
-    def requests(self, url, headers, cookies):
+    def requests(self, url, **kwargs):
 
-        if headers and cookies:
-            requests_ = requests.get(url, headers=headers, cookies=cookies)
-        elif headers:
-            requests_ = requests.get(url, headers=headers)
-        elif cookies:
-            requests_ = requests.get(url, cookies=cookies)
+        response = requests.get(url, **kwargs)
+
+        self.status_code = response.status_code
+        self.text = response.text
+
+    def selenium(self, url, **kwargs):
+
+        options = webdriver.ChromeOptions()
+        #options.add_argument('--headless')
+        options.add_argument("--window-size=1920,1080")
+        options.add_argument("user-data-dir=selenium")
+        #"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe"
+
+        driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        try:
+            driver.get(url)
+            cook = driver.get_cookies()
+            print(cook)
+            if "Ой!" in driver.page_source:
+                cap=input()
+            self.text = driver.page_source
+
+            #driver.close()
+        except Exception:
+            #driver.close()
+            time.sleep(1)
+            self.selenium(url)
+
+        if not self.text:
+            time.sleep(3)
+            self.selenium(url)
         else:
-            requests_ = requests.get(url)
-
-        self.status_code = requests_.status_code
-        self.text = requests_.text
+            self.status_code = 200
 
 
     #Скачивание линков на модлеи по категориям
@@ -278,7 +322,9 @@ class Parse_links(Yama_parsing_const):
                 page_url = url + self.link_tail
                 referer_ = self.link_computers
 
-            response = Req(page_url, headers=self.header_(referer_), cookies=self.ya_cookies2)
+            response = Req()
+            #response.requests(page_url, headers=self.header_(referer_))
+            response.selenium(page_url)
 
             if response.status_code == 200:
             #if gr_.response.code == 200:
@@ -295,34 +341,42 @@ class Parse_links(Yama_parsing_const):
                     for row in rows_models:
                         # И рассовыем их по ключам словаря model_dict
                         model_dict = dict()
-                        model_link = row.find('h3', class_=self.h3_model_name).find('a')
-                        # Отсеиваем редирект на внешние сайты или конкретные конфиги нутбуков и останавливаем работу
-                        if ('redir/' in model_link) or \
-                                ((category == 'Ноутбук') and ('/' in model_link.text)):
-                            pages_full = False
-                            break
-
-                        model_dict['Href'] = model_link['href']  # ссылка на страницу модели
-
-                        # Ищем название категории
-                        category_len = 0
-
-                        for cat in category_ls:
-                            if cat in model_link.text:
-                                category_len = len(cat.split())
-                                model_dict['Category'] = cat
+                        try:
+                            model_link = row.find('h3', class_=self.h3_model_name).find('a')
+                            # Отсеиваем редирект на внешние сайты или конкретные конфиги нутбуков и останавливаем работу
+                            if ('redir/' in model_link) or \
+                                    ((category == 'Ноутбук') and ('/' in model_link.text)):
+                                pages_full = False
                                 break
 
-                        name = model_link.text.split()
+                            if model_link:
+                                model_dict['Href'] = model_link['href']  # ссылка на страницу модели
 
-                        # Ищем имя вендора (следующее за категорией)
-                        model_dict['Vendor'] = name[category_len]
+                            # Ищем название категории
+                            category_len = 0
 
-                        #Формируем название модели вместе с имненм вендора через пробел кроме последнего пробела
-                        mod_name = ''
-                        for word in name[category_len:]:
-                            mod_name += word + ' '
-                        model_dict['Name'] = mod_name[:-1]
+                            for cat in category_ls:
+                                if cat in model_link.text:
+                                    category_len = len(cat.split())
+                                    model_dict['Category'] = cat
+                                    break
+
+                            name = model_link.text.split()
+
+                            # Ищем имя вендора (следующее за категорией)
+                            model_dict['Vendor'] = name[category_len]
+
+                            #Формируем название модели вместе с имненм вендора через пробел кроме последнего пробела
+                            mod_name = ''
+                            for word in name[category_len:]:
+                                mod_name += word + ' '
+                            model_dict['Name'] = mod_name[:-1]
+
+                        except AttributeError:
+                            model_dict['Name'] = ""
+                            model_dict['Href'] = ""
+                            model_dict['Vendor'] = ""
+                            model_dict['Category'] = ""
 
                         # Пихаем словарь модели в общий список
                         print(model_dict['Name'])
