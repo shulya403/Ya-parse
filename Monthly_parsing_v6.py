@@ -5,11 +5,11 @@ import parse_yama as pynd
 # Если есть дырки в файле прасов то вызывается перепроход функцией no_prices_reparse
 
 
-parse_link = pynd.Parse_links()
+#parse_link = pynd.Parse_links()
 #parse_link.links_to_excel('Монитор')
 #parse_link.links_to_excel('Монитор')
 #parse_link.links_to_excel('Проектор')
-parse_link.links_to_excel('ИБП')
+#parse_link.links_to_excel('ИБП')
 
 #parse_category = pynd.Parse_models()
 
@@ -42,6 +42,7 @@ parse_link.links_to_excel('ИБП')
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
 
+parse = pynd.Parse_Modifications_TTX('Ноутбук', 'Cсылки Монитор Jun-20----20--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=1)
 #parse = pynd.Parse_Modifications_TTX('Монитор', 'Cсылки Монитор Jun-20----20--12-47.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=1)
 
 

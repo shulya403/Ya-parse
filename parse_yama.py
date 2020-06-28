@@ -888,19 +888,19 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                     self.df_names.loc[j, ['Quantity', 'Modification_price']] = self.Parse_Model_Page(soup_page,
                                                                                             soup_table_grey)
 
-                print(self.df_names.iloc[j])
-                if self.mod:
-                    if url_req:
-                        url_block = soup_table_grey.find('a', {"href": re.compile("mods")})
-                        if url_block:
-                            url_ = url_block.get('href')
-                        else:
-                            url_ = None
-                        if url_:
-                            self.Parse_Modifications(url_,
-                                                    row_df_links['Ya_UN_Name'],
-                                                    row_df_links['Vendor'],
-                                                    row_df_links['Category'])
+                    print(self.df_names.iloc[j])
+                    if self.mod:
+                        if url_req:
+                            url_block = soup_table_grey.find('a', {"href": re.compile("mods")})
+                            if url_block:
+                                url_ = url_block.get('href')
+                            else:
+                                url_ = None
+                            if url_:
+                                self.Parse_Modifications(url_,
+                                                        row_df_links['Ya_UN_Name'],
+                                                        row_df_links['Vendor'],
+                                                        row_df_links['Category'])
                 if self.ttx_name:
                     ttx_len = len(self.df_ttx_name)
                     self.df_ttx_name = self.TTX_Handler(self.URL_Spec(soup_table_grey),
@@ -918,7 +918,9 @@ class Parse_Modifications_TTX(Yama_parsing_const):
         if host:
             url_ = self.host + url_
         try:
-            response = requests.get(url_, headers=self.header_(), cookies=self.ya_cookies, timeout=7)
+            #response = requests.get(url_, headers=self.header_(), cookies=self.ya_cookies, timeout=7)
+            response = Req()
+            response.selenium(url_)
             if response.status_code == 200:
                 return response.text
         except Exception:
@@ -1046,7 +1048,10 @@ class Parse_Modifications_TTX(Yama_parsing_const):
 
 
     def URL_Spec(self, soup_table_grey):
-        return soup_table_grey.find('a', {"href": re.compile("spec")}).get('href')
+        if soup_table_grey:
+            return soup_table_grey.find('a', {"href": re.compile("spec")}).get('href')
+        else:
+            return None
 
 
 
