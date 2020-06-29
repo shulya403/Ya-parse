@@ -2,6 +2,10 @@ import pandas as pd
 #import requests
 from bs4 import BeautifulSoup
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from pprint import pprint
 import re
 from datetime import datetime
@@ -54,6 +58,13 @@ class parse_mvideo(object):
         self.Categories = cat
         self.pg_num = pg_num
 
+        options = webdriver.ChromeOptions()
+        #options.add_argument('--headless')
+        options.add_argument("--window-size=1920,1080")
+
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
+
         cat_ok = False
         for i in self.Categories:
             if category_.lower() == i.lower():
@@ -62,7 +73,10 @@ class parse_mvideo(object):
                 self.category_ = category_
                 self.url_category = self.Categories[self.category_]['url']
                 self.list_types_category = self.Categories[self.category_]['type']
-                self.list_nontypes_category = self.Categories[self.category_]['nontype']
+                if 'nontype' in self.Categories[self.category_]:
+                    self.list_nontypes_category = self.Categories[self.category_]['nontype']
+                else:
+                    self.list_nontypes_category = []
                 break
         if not cat_ok:
             print("неверное имя категории: {}".format(category_))
@@ -87,20 +101,19 @@ class parse_mvideo(object):
 #запрос с использованием Selenium для JavaScript
     def Req_JS(self, url_):
 
-        options = webdriver.ChromeOptions()
-        options.add_argument('--headless')
-        options.add_argument("--window-size=1920,1080")
+        #options = webdriver.ChromeOptions()
+        #options.add_argument('--headless')
+        #options.add_argument("--window-size=1920,1080")
 
-        driver = webdriver.Chrome("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe", options=options)
+        #driver = webdriver.Chrome("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe", options=options)
+            #self.driver.implicitly_wait(3)
+        self.driver.get(url_)
         try:
-            driver.get(url_)
-            exit_ = driver.page_source
-        #print(exit_)
-            driver.close()
+            element = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "button cart-button__button button_white button_rounded")))
         except Exception:
-            driver.close()
-            time.sleep(10)
-            self.Req_JS(url_)
+            pass
+        finally:
+            exit_ = self.driver.page_source
 
         if not exit_:
             time.sleep(3)
@@ -122,9 +135,9 @@ class parse_mvideo(object):
         return max_page
 
     #вызывная функция парсинга
-    def Pagination(self, max_page):
+    def Pagination(self, max_page, begin_page=1):
 
-        for page in range(1, max_page + 1):
+        for page in range(begin_page, max_page + 1):
             if not page == 1:
                 url_ = self.url_category + '?page=' + str(page)
             else:
@@ -185,10 +198,11 @@ class parse_mvideo(object):
                     list_word = longstring.split()
 
                     noncat = False
-                    for ncat in self.list_nontypes_category:
-                        if ncat in longstring.lower():
-                            noncat = True
-                            break
+                    if self.list_nontypes_category:
+                        for ncat in self.list_nontypes_category:
+                            if ncat in longstring.lower():
+                                noncat = True
+                                break
                     if not noncat:
                         list_found_cat = list()
                         for cat in self.list_types_category:
@@ -207,13 +221,13 @@ class parse_mvideo(object):
                             df_.loc[i, 'Modification_href'] = self.host_url + soup_longstring.get('href')
 
         if len(df_) > 0:
-            df_['Cards_page_num'] = page_
-            df_.loc[i, 'Date'] = self.now
-            df_.loc[i, 'Quantity'] = None
-            df_.loc[i, 'Ya_UN_Name'] = None
-            df_.loc[i, 'Name'] = None
-            df_.loc[i, 'Site'] = "mvideo"
-            df_.loc[i, 'Category'] = self.category_
+            df_['Page'] = page_
+            df_['Date'] = self.now
+            df_['Quantity'] = None
+            df_['Ya_UN_Name'] = None
+            df_['Name'] = None
+            df_['Site'] = "mvideo"
+            df_['Category'] = self.category_
 
             if df_['Modification_price'].isna().all():
                 print("Нет цен на странице, финиш")
@@ -229,11 +243,13 @@ class parse_mvideo(object):
             print("пусто...", page_)
 
 #   MAIN
-parse = parse_mvideo('Монитор', pg_num=2)
+parse = parse_mvideo('Монитор', pg_num=1)
 #print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118?page=12'))
 #parse.Get_EOF_Page()
-parse.Pagination(46)
 
-#parse.Pagination_Unparsed('Ноутбук6-МВ-Цены-от-May-20.xlsx', new_num=9, finish=71)
+#   def Pagination(self, max_page, begin_page=1):
+parse.Pagination(max_page=75)
+
+#parse.Pagination_Unparsed('Ноутбук-МВ-Цены-от-Jun-20--1.xlsx', new_num=2, finish=74)
 
 
