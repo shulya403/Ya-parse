@@ -339,6 +339,8 @@ class Parse_Common(object):
         if soup:
             df_ = pd.DataFrame(columns=list(self.df.columns))
 
+        a = soup.find_all("div", class_="sc-1qkffly-6 wqZpL")
+
         cards = self.Find_All_Divs("card_div", soup)
         #'js--subcategory-product-item subcategory-product-item product_data__gtm-js  product_data__pageevents-js ddl_product'
 
@@ -496,7 +498,7 @@ class Parse_Common_by_Request(Parse_Common):
             raise KeyError
 
 
-class Parse_El(Parse_Common_by_Request):
+class Parse_El(Parse_Common):
     site = "eldorado"
 
     # Берет название модели с внутренней страницы: там артикул

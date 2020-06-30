@@ -250,23 +250,20 @@
       "cards_page_params": {
                 "card_div": {
                   "teg": "li",
-                  "re": "True",
                   "attributes": {
-                    "class": "sc-1iriqgr-0"
+                    "class": "sc-1qkffly-0 eRCnUu"
                   }
                 },
                 "product_div": {
                   "teg": "div",
-                  "re": "True",
                   "attributes": {
-                    "class": "sc-1iriqgr-7"
+                    "class": "sc-1qkffly-7 eAuUQT"
                   }
                 },
                 "price_div": {
                   "teg": "span",
-                  "re": "True",
                   "attributes": {
-                    "class": "sc-1gnxlbs-1"
+                    "class": "sc-1gnxlbs-1 lfjzQt"
                   }
                 },
                 "internal_page_mod_name": {
@@ -280,7 +277,7 @@
 
       "categories": {
         "ноутбук": {
-          "url": "/c/vse-noutbuki/",
+          "url": "/c/noutbuki/",
           "subcategories": [
             "ноутбук",
             "нутбук-трансформер",
