@@ -64,9 +64,9 @@ class Concat_Parse_Files(object):
                                 and (self.category.lower()) in fl.lower()]
 
 
-        for i in list_files_to_concat:
-            if ("Prices/Ноутбук" in i) and (not "Mod" in i):
-                list_files_to_concat.remove(i)
+        #for i in list_files_to_concat:
+        #    if ("Prices/Ноутбук" in i) and (not "Mod" in i):
+        #        list_files_to_concat.remove(i)
 
         pprint(list_files_to_concat)
 

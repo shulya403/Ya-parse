@@ -2,7 +2,9 @@ import consistence_parsed_names as CPN
 
 #   ----------
 #   CPN.Concat_Parse_Files соединяет месячные файлы прайсов пробегая по директорям сайтов.
-#Формирует файл ..._Source в Handle/
+# метод Concat_Files() Формирует файл ..._Source в Handle/
+# ищет файлы по указанной категории с приставкой 'final.xlsx' для указанного месяца (M) и года (Y)
+
 #   CPN Consist_Names заполняет поле Name в фале file_work_name (_Source) именами из поля json-cons-parsed-files:"itr-file":"models_field"
 #проверяя на соответсвие STRadar с полем Modification_name
 #Записи Name имеющиеся в Handle_base заливаются из него (Known=True)
@@ -10,11 +12,19 @@ import consistence_parsed_names as CPN
 #Совпадения заменяются новыми из Checked
 #   ----------
 
+#def __init__(self,
+#             category,
+#             M='May',
+#             Y=20,
+#             JSON_file="cons_parsed_files.json",
+#             dir_root="Prices/",
+#             dir_work="Handle_base/"):
 
-#May = CPN.Concat_Parse_Files('Монитор')
-#May.Concat_files()
-#May.Clearing_Vendors()
-#May.Clearing_Mod_Name()
+
+#Jun = CPN.Concat_Parse_Files('Ноутбук', M='Jun', Y=20)
+#Jun.Concat_files()
+#May.Clearing_Vendors() #Унификация имен вендоров в поле Vendor. Вызывается Concat_Files() или отдельно
+#May.Clearing_Mod_Name() #Удаление имни вендора из Midification_name. Вызывается Concat_Files() или отдельно
 
 #class Consist_Names(object):
 
@@ -34,8 +44,10 @@ import consistence_parsed_names as CPN
 #                 ):
 
 
-FileHandler = CPN.Consist_Names(category="Монитор",
-                                file_itr="Monitors all models drop_duplicates.xlsx",
+FileHandler = CPN.Consist_Names(category="Ноутбук",
+                                file_itr="NB_Pivot_May.xlsm",
+                                M='Jun',
+                                Y='20',
                                 file_work_name="")
 
 
@@ -49,7 +61,6 @@ FileHandler.Fill_Unknown()
 
 
 #   Заполенение фала Base Stable проверенными
-
 
 #StBase = CPN.Fill_Stable_Base('Ноутбук',
 #                              'Ноутбук-Concat_Prices--May-20--Checked2.xlsx')
