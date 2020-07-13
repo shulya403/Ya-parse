@@ -21,8 +21,8 @@ import consistence_parsed_names as CPN
 #             dir_work="Handle_base/"):
 
 
-Jun = CPN.Concat_Parse_Files('Монитор', M='Jun', Y=20)
-Jun.Concat_files()
+#Jun = CPN.Concat_Parse_Files('Монитор', M='Jun', Y=20)
+#Jun.Concat_files()
 #May.Clearing_Vendors() #Унификация имен вендоров в поле Vendor. Вызывается Concat_Files() или отдельно
 #May.Clearing_Mod_Name() #Удаление имни вендора из Midification_name. Вызывается Concat_Files() или отдельно
 
@@ -44,15 +44,15 @@ Jun.Concat_files()
 #                 ):
 
 
-#FileHandler = CPN.Consist_Names(category="Ноутбук",
-#                                file_itr="NB_Pivot_May.xlsm",
-#                                M='Jun',
-#                                Y='20',
-#                                file_work_name="")
+FileHandler = CPN.Consist_Names(category="Монитор",
+                                file_itr="Monitors drop_duplicates Jun-20.xlsx",
+                                M='Jun',
+                                Y='20',
+                                file_work_name="")
 
 
 #   Заполенение из файла Source
-#FileHandler.Fill_Unknown()
+FileHandler.Fill_Unknown()
 
 #FileHandler.Dict_Yama_Names()
 #FileHandler.Fill_Yama_Name()
