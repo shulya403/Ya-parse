@@ -371,7 +371,7 @@ class Consist_Names(object):
 #   Взваращает максимум STR из list_search (array_vendors_models)
     def Search_ITR_Name(self, data_, list_search_):
 
-        list_tup_vendor_model = [(key, StRadar.stradar(data_, key, beg_coeff=0.5).result()) for key in
+        list_tup_vendor_model = [(key, StRadar.stradar(data_, key, beg_coeff=0.5, bool_restrict=True).result()) for key in
                                  list_search_]
         exit_ = self.Max_list_tup_Name(list_tup_vendor_model)
 
@@ -523,9 +523,94 @@ class Fill_Stable_Base(Consist_Names):
 
         self.df_base.to_excel(self.file_base_name)
 
+class Consist_Names_for_mth_report(Consist_Names):
+
+    def __init__(self,
+                    file_itr,
+                    file_work_name="",
+                    work_sheet="Source",
+                    dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_06\\",
+                    file_itr_page = "Models",
+                    itr_model_field = "C",
+                    itr_vendor_field = "B",
+                    num=1
+                    ):
+        if not file_work_name:
+            file_work_name = file_itr
+
+        self.dir_work = dir_work
+        self.file_out = self.dir_work + file_work_name.replace(".xls","").replace("--filled", "") + "--filled" + "-" + str(num) + ".xlsx"
+        print(self.file_out)
+
+        self.Get_df_work(file_work_name, work_sheet)
+
+        self.Get_df_itr(file_itr, file_itr_page, itr_model_field, itr_vendor_field)
+
+        print(self.df_work.head())
+        print(self.df_itr.head())
 
 
+        #  df_work
+    def Get_df_work(self, file_work_name, work_sheet):
+            if file_work_name:
+                self.file_work_name = self.dir_work + file_work_name
+                self.df_work = pd.read_excel(self.file_work_name, sheet_name=work_sheet)
 
+            else:
+                print("Неизвестное имя файла file_work_name")
+                raise
+
+            print("work:", self.file_work_name)
+
+#   словарь vendor: модельный ряд
+#     def Make_Dict_Vendors_Models(self):
+#
+#         dict_ = dict()
+#         start_timer = time.time()
+#         for ven in self.df_itr['Vendor'].unique():
+#             dict_[str(ven).lower()] = list(self.df_itr[self.df_itr['Vendor'].values == ven]['Name'].values)
+#         end_timer = time.time()
+#         print(end_timer - start_timer)
+#
+#         return dict_
+
+# Main (заполенение Name моделей)
+    def Fill_Models(self):
+
+        id_handle = self.df_work[self.df_work['Model'].isna()].index
+        self.Corr_Vendor_Name()
+
+        for id in id_handle:
+            mod_name_ = self.df_work.loc[id, 'Source']
+            print(mod_name_)
+            try:
+                array_vendors_model = self.dict_ven_mod[self.df_work.loc[id, 'Brand'].lower()]
+            except KeyError:
+                print("Нет вендора {} в базе".format(self.df_work.loc[id, 'Brand']))
+                array_vendors_model = []
+
+            if array_vendors_model:
+                self.df_work.loc[id, 'Model'] = self.Search_ITR_Name(mod_name_, array_vendors_model)
+
+
+            print(self.df_work.loc[id, ['Source', 'Model']])
+
+        self.Filled_To_Excel()
+
+        #  Коррекция имен вендоров по словарю category:brands
+
+    def Corr_Vendor_Name(self):
+
+            print(self.df_work['Brand'].values)
+            print(self.df_work['Brand'].to_list())
+
+
+            self.df_work['Brand'] = self.df_work['Brand'].apply(lambda x: str(x).title().replace(" ", ""))
+
+
+    def Filled_To_Excel(self):
+
+        self.df_work.to_excel(self.file_out)
 
 
 

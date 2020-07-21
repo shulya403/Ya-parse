@@ -12,6 +12,7 @@ import consistence_parsed_names as CPN
 #Совпадения заменяются новыми из Checked
 #   ----------
 
+#Consist_Names_for_mth_report заполняет модели из месячных Pivot
 #def __init__(self,
 #             category,
 #             M='May',
@@ -44,15 +45,15 @@ import consistence_parsed_names as CPN
 #                 ):
 
 
-FileHandler = CPN.Consist_Names(category="Монитор",
-                                file_itr="Monitors drop_duplicates Jun-20.xlsx",
-                                M='Jun',
-                                Y='20',
-                                file_work_name="")
-
-
-#   Заполенение из файла Source
-FileHandler.Fill_Unknown()
+# FileHandler = CPN.Consist_Names(category="Монитор",
+#                                 file_itr="Monitors drop_duplicates Jun-20.xlsx",
+#                                 M='Jun',
+#                                 Y='20',
+#                                 file_work_name="")
+#
+#
+# #   Заполенение из файла Source
+# FileHandler.Fill_Unknown()
 
 #FileHandler.Dict_Yama_Names()
 #FileHandler.Fill_Yama_Name()
@@ -65,3 +66,24 @@ FileHandler.Fill_Unknown()
 #StBase = CPN.Fill_Stable_Base('Монитор',
 #                              'Монитор-Concat_Prices--May-20--Filled-Vasya.xlsx')
 #StBase.Checked_To_Base()
+
+# class Consist_Names_for_mth_report(Consist_Names):
+#
+#     def __init__(self,
+#                  file_itr,
+#                   file_work_name="NB_Pivot_classes_Junem--filled-1.xlsx"
+#                  work_sheet = "Source"
+#                  dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_06\\",
+#                  file_itr_page="Models",
+#                  itr_model_field="C",
+#                  itr_vendor_field="B",
+#                   num=1
+#                  ):
+
+MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_classes_June.xlsm",
+                                        file_work_name="NB_Pivot_classes_Junem--filled-1.xlsx",
+                                        work_sheet="Sheet1",
+                                        dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_06\\",
+                                         num=2
+                                     )
+MthNB.Fill_Models()

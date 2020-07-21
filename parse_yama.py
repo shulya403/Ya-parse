@@ -256,6 +256,17 @@ class Req(object):
 
         #self.requests(url, headers, cookies)
 
+        # options = webdriver.ChromeOptions()
+        # options.add_argument('user-data-dir=C:\\Users\\User\\AppData\\Local\\Google\\Chrome\\User Data')
+        # #driver = webdriver.Chrome(executable_path='./chromedriver.exe', options=options)
+        # # options.add_argument('--headless')
+        # options.add_argument("--window-size=1920,1080")
+        # options.add_argument("user-data-dir=selenium")
+        #
+        # # "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe"
+        #
+        # self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
     def requests(self, url, **kwargs):
 
         response = requests.get(url, **kwargs)
@@ -263,19 +274,18 @@ class Req(object):
         self.status_code = response.status_code
         self.text = response.text
 
+
     def selenium(self, url, **kwargs):
 
         options = webdriver.ChromeOptions()
         #options.add_argument('--headless')
-        options.add_argument("--window-size=1920,1080")
         options.add_argument("user-data-dir=selenium")
-        #"C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe"
 
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         try:
             driver.get(url)
-            cook = driver.get_cookies()
-            print(cook)
+            # cook = driver.get_cookies()
+            # print(cook)
             if "Ой!" in driver.page_source:
                 cap=input()
             self.text = driver.page_source
@@ -306,6 +316,8 @@ class Parse_links(Yama_parsing_const):
 
         models_list = list()  # список словарей с моделями с названиеми и ссылками на модели
 
+        response = Req()
+
         page = 1  # номер страницы выдачи
 
         pages_full = True  # есть ли целевой контент на очередной странице
@@ -322,7 +334,7 @@ class Parse_links(Yama_parsing_const):
                 page_url = url + self.link_tail
                 referer_ = self.link_computers
 
-            response = Req()
+            #response = Req()
             #response.requests(page_url, headers=self.header_(referer_))
             response.selenium(page_url)
 
