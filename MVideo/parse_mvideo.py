@@ -91,7 +91,7 @@ class parse_mvideo(object):
                                         'Quantity',
                                         'Vendor',
                                         'Subcategory',
-                                        'Page',
+                                        'Cards_page_num',
                                         'Date'])
 
         self.host_url = 'https://www.mvideo.ru'
@@ -145,7 +145,7 @@ class parse_mvideo(object):
 
             print(page)
             self.Parse_Pages(url_, page)
-
+            print(page, self.exit_filename)
             self.To_Excel()
 
     def To_Excel(self):
@@ -221,7 +221,7 @@ class parse_mvideo(object):
                             df_.loc[i, 'Modification_href'] = self.host_url + soup_longstring.get('href')
 
         if len(df_) > 0:
-            df_['Page'] = page_
+            df_['Cards_page_num'] = page_
             df_['Date'] = self.now
             df_['Quantity'] = None
             df_['Ya_UN_Name'] = None
@@ -248,8 +248,8 @@ parse = parse_mvideo('Монитор', pg_num=1)
 #parse.Get_EOF_Page()
 
 #   def Pagination(self, max_page, begin_page=1):
-parse.Pagination(max_page=75)
+parse.Pagination(max_page=76)
 
-#parse.Pagination_Unparsed('Ноутбук-МВ-Цены-от-Jun-20--1.xlsx', new_num=2, finish=74)
+#parse.Pagination_Unparsed('Ноутбук-МВ-Цены-от-Jul-20--1.xlsx', new_num=3, finish=76)
 
 

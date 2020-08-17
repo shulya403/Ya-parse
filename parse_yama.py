@@ -170,7 +170,7 @@ class Yama_parsing_const(object):
 
     # кнопка "Вперед" на страницах выдачи списков моделей <a> class
     #a_button_eol = 'button button_size_s button_theme_pseudo n-pager__button-next i-bem n-smart-link'
-    a_button_eol = 'button button_size_s button_theme_pseudo n-pager__button-next i-bem n-smart-link button_js_inited n-smart-link_js_inited'
+    a_button_eol = '_2prNUdeCKH _3OFYTyXi90'
 
     # строки таблицы моделей (по 48 на страницу обычно) Div class
     #div_row_models_ls = 'n-snippet-card2 i-bem b-zone b-spy-visible b-spy-events'
