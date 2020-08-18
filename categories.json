@@ -214,7 +214,7 @@
                 "price_div": {
                   "teg": "div",
                   "attributes": {
-                    "class": "product-price__current"
+                    "class": "n-catalog-product__price"
                   }
                 },
                 "internal_page_price": {
@@ -251,13 +251,13 @@
                 "card_div": {
                   "teg": "li",
                   "attributes": {
-                    "class": "sc-1qkffly-0 eRCnUu"
+                    "class": "sc-1qkffly-0 itBgGy"
                   }
                 },
                 "product_div": {
                   "teg": "div",
                   "attributes": {
-                    "class": "sc-1qkffly-7 eAuUQT"
+                    "class": "sc-1qkffly-6 ivARVy"
                   }
                 },
                 "price_div": {

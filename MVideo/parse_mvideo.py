@@ -109,7 +109,7 @@ class parse_mvideo(object):
             #self.driver.implicitly_wait(3)
         self.driver.get(url_)
         try:
-            element = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "button cart-button__button button_white button_rounded")))
+            element = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "")))
         except Exception:
             pass
         finally:

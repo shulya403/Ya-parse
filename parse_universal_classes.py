@@ -13,6 +13,10 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 import re
 from urllib.parse import quote, unquote
+from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 #общий принцип парсинга - класс parse_common
 #Скачиваем json файл Categories
@@ -21,6 +25,7 @@ from urllib.parse import quote, unquote
 class Parse_Common(object):
     site = ""
     addition_fields = []
+
     def __init__(self,
                  category, #категория продуктов
                  scraper, # [requests, selenium],
@@ -38,6 +43,8 @@ class Parse_Common(object):
         self.num_outfile = num_outfile
 
         self.scraper = scraper
+
+
 
         self.category = category
 
@@ -123,6 +130,13 @@ class Parse_Common(object):
         except KeyError:
             self.JSON_Content_Warnings_Alarm("no_site_url_suffics")
             self.host_get_suffics = ""
+        if self.scraper == 'selenium':
+
+            options = webdriver.ChromeOptions()
+            # options.add_argument('--headless')
+            options.add_argument("--window-size=1920,1080")
+
+            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     def Folder_Out_Check(self):
         import os
@@ -183,12 +197,6 @@ class Parse_Common(object):
 #   Возврат html-страницы от Selenium
     def Page_Webdriver(self, url_):
 
-        def Err_Webdriver(url_, interrupt):
-            driver.close()
-            print("Страница не скачивается {}\n повтор...".format(url_))
-            time.sleep(interrupt)
-            self.Page_Webdriver(url_)
-
         #try:
         #    options = webdriver.ChromeOptions()
         #    for option in self.site_params["host_options"]:
@@ -196,24 +204,21 @@ class Parse_Common(object):
         #except Exception:
         #    print("Site Options", Exception)
 
-        driver = webdriver.Chrome("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe")
 
+        #driver = webdriver.Chrome("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe")
+
+        self.driver.get(url_)
         try:
-            print(self.driver.current_url)
-            self.driver.get(url_)
-            print(self.driver.current_url)
-
+            element = WebDriverWait(self.driver, 5).\
+                until(EC.presence_of_element_located((By.CLASS_NAME, "product-min-price__current")))
+        except Exception:
+            pass
+        finally:
             exit_ = self.driver.page_source
 
-            # print(exit_)
-            if exit_:
-                print("Where is something in {}".format(url_))
-            else:
-                Err_Webdriver(url_, 1)
-
-            driver.close()
-        except Exception:
-            Err_Webdriver(url_, 1)
+        if not exit_:
+            time.sleep(3)
+            self.Page_webdriver(url_)
 
         return exit_
 
@@ -339,7 +344,7 @@ class Parse_Common(object):
         if soup:
             df_ = pd.DataFrame(columns=list(self.df.columns))
 
-        a = soup.find_all("div", class_="sc-1qkffly-6 wqZpL")
+        #a = soup.find_all("div", class_="sc-1qkffly-6 wqZpL")
 
         cards = self.Find_All_Divs("card_div", soup)
         #'js--subcategory-product-item subcategory-product-item product_data__gtm-js  product_data__pageevents-js ddl_product'
@@ -558,16 +563,31 @@ class Parse_DNS(Parse_Common):
 
     def Modification_Price_Handler(self, card):
 
-        url_ = self.Modification_Href_Handler(card)
-        page_internal = self.Page_Scrape(url_)
-        if page_internal:
-            soup_page_internal = BeautifulSoup(page_internal, "html.parser")
-            soup_price = self.Find_Div("internal_page_price", soup_page_internal)
-            if soup_price:
-                price_ = soup_price.get("content")
-                exit_ = "".join(re.findall(r'\d', price_))
+        # url_ = self.Modification_Href_Handler(card)
+        # page_internal = self.Page_Scrape(url_)
+        # if page_internal:
+        #     soup_page_internal = BeautifulSoup(page_internal, "html.parser")
+        #     soup_price = soup_page_internal.find('span', class_="product-card-price__current product-card-price__current_active")
+        #     if soup_price:
+        #         price_ = soup_price.text
+        #         exit_ = "".join(re.findall(r'\d', price_))
+        #
+        #     return exit_
 
-            return exit_
+        soup_price = self.Find_Div("price_div", card)
+        if soup_price:
+            try:
+                action_price = soup_price.find('div', class_="product-min-price__min")
+                price_ = action_price.find('mark', class_="product-min-price__min-price").text
+            except Exception:
+                price_ = soup_price.find('div', class_="product-min-price__current").text
+
+            exit_ = "".join(re.findall(r'\d', price_))
+
+        else:
+            exit_ = None
+
+        return exit_
 
     def URL_CardsPage_Make(self, url_="", page=1):
 
