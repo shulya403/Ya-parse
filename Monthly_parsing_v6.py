@@ -42,10 +42,10 @@ import parse_yama as pynd
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
 
-parse = pynd.Parse_Modifications_TTX('Ноутбук', 'Cсылки Ноутбук Aug-20----17--fina.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=110, num=2)
-#parse = pynd.Parse_Modifications_TTX('Монитор', 'Cсылки Монитор Jul-20----unparsed.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=2)
-#parse = pynd.Parse_Modifications_TTX('Проектор', 'Cсылки Проектор Jul-20----15--17-18.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=253, num=2)
-#parse = pynd.Parse_Modifications_TTX('ИБП', 'Cсылки ИБП Jul-20----unparsed.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=2)
+#parse = pynd.Parse_Modifications_TTX('Ноутбук', 'Cсылки Ноутбук Aug-20----17--fina.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=110, num=2)
+#parse = pynd.Parse_Modifications_TTX('Монитор', 'Cсылки Монитор Aug-20----17--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=1)
+parse = pynd.Parse_Modifications_TTX('Проектор', 'Cсылки Проектор Aug-20----17--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=253, num=1)
+parse = pynd.Parse_Modifications_TTX('ИБП', 'Cсылки ИБП Aug-20----17--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=1)
 
 
 
