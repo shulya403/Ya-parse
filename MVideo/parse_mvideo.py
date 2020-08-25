@@ -248,7 +248,7 @@ parse = parse_mvideo('Монитор', pg_num=1)
 #parse.Get_EOF_Page()
 
 #   def Pagination(self, max_page, begin_page=1):
-parse.Pagination(max_page=76)
+parse.Pagination(max_page=60)
 
 #parse.Pagination_Unparsed('Ноутбук-МВ-Цены-от-Jul-20--1.xlsx', new_num=3, finish=76)
 

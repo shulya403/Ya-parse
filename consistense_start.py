@@ -46,15 +46,15 @@ import consistence_parsed_names as CPN
 #                 ):
 
 
-FileHandler = CPN.Consist_Names(category="Монитор",
-                                file_itr="Moinitor_Jun_ITR_Models_Src_drop.xlsx",
-                                M='Jul',
-                                Y='20',
-                                file_work_name="")
-
-
-#   Заполенение из файла Source
-FileHandler.Fill_Unknown()
+# FileHandler = CPN.Consist_Names(category="Монитор",
+#                                 file_itr="Moinitor_Jun_ITR_Models_Src_drop.xlsx",
+#                                 M='Jul',
+#                                 Y='20',
+#                                 file_work_name="")
+#
+#
+# #   Заполенение из файла Source
+# FileHandler.Fill_Unknown()
 
 #FileHandler.Dict_Yama_Names()
 #FileHandler.Fill_Yama_Name()
@@ -80,10 +80,10 @@ FileHandler.Fill_Unknown()
 #                   num=1
 #                  ):
 
-# MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_classes_June.xlsm",
-#                                         file_work_name="NB_Pivot_classes_Junem--filled-1.xlsx",
-#                                         work_sheet="Sheet1",
-#                                         dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_06\\",
-#                                          num=2
-#                                      )
-# MthNB.Fill_Models()
+MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_classes_Jul.xlsm",
+                                        file_work_name="Pivot_unknown_07.xlsx",
+                                        work_sheet="",
+                                        dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_07\\",
+                                         num=1
+                                     )
+MthNB.Fill_Models()

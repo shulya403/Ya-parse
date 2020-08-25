@@ -44,8 +44,8 @@ import parse_yama as pynd
 
 #parse = pynd.Parse_Modifications_TTX('Ноутбук', 'Cсылки Ноутбук Aug-20----17--fina.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=110, num=2)
 #parse = pynd.Parse_Modifications_TTX('Монитор', 'Cсылки Монитор Aug-20----17--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=1)
-#parse = pynd.Parse_Modifications_TTX('Проектор', 'Cсылки Проектор Aug-20----17--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=253, num=1)
-parse = pynd.Parse_Modifications_TTX('ИБП', 'Cсылки ИБП Aug-20--dop.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=3)
+parse = pynd.Parse_Modifications_TTX('Проектор', 'Cсылки Проектор Aug-20----17--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=253, num=1)
+parse = pynd.Parse_Modifications_TTX('ИБП', 'Cсылки ИБП Aug-20----17--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=1)
 
 
 

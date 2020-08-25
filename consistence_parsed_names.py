@@ -529,7 +529,7 @@ class Consist_Names_for_mth_report(Consist_Names):
                     file_itr,
                     file_work_name="",
                     work_sheet="Source",
-                    dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_06\\",
+                    dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_07\\",
                     file_itr_page = "Models",
                     itr_model_field = "C",
                     itr_vendor_field = "B",
@@ -554,7 +554,10 @@ class Consist_Names_for_mth_report(Consist_Names):
     def Get_df_work(self, file_work_name, work_sheet):
             if file_work_name:
                 self.file_work_name = self.dir_work + file_work_name
-                self.df_work = pd.read_excel(self.file_work_name, sheet_name=work_sheet)
+                if work_sheet:
+                    self.df_work = pd.read_excel(self.file_work_name, sheet_name=work_sheet)
+                else:
+                    self.df_work = pd.read_excel(self.file_work_name)
 
             else:
                 print("Неизвестное имя файла file_work_name")
