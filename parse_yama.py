@@ -221,7 +221,9 @@ class Yama_parsing_const(object):
     Categories = {
         'Ноутбук': {
             'url': 'https://market.yandex.ru/catalog--noutbuki/54544/list?hid=91013',
-            'category': ['Ноутбук'],
+            'category': ['Ноутбук',
+                         'Ноутбук игровой',
+                         'Ультрабук'],
             'ttx_file': 'Ноутбук--характеристики.xlsx',
             'ttx_mod_file': 'Ноутбук-Мод-характеристики.xlsx'
 
@@ -370,8 +372,16 @@ class Parse_links(Yama_parsing_const):
                             for cat in category_ls:
                                 if cat in model_link.text:
                                     category_len = len(cat.split())
-                                    model_dict['Category'] = cat
-                                    break
+                                    try:
+                                        old_len = len(model_dict['Category'].split())
+                                        if category_len > old_len:
+                                            model_dict['Category'] = cat
+                                    except Exception:
+                                        model_dict['Category'] = cat
+
+
+                                    #break
+
 
                             name = model_link.text.split()
 
@@ -1135,7 +1145,247 @@ class Parse_Modifications_TTX(Yama_parsing_const):
 
         df_out.to_excel(filename)
 
+class Parse_Modifications_TTX_Mod_in_Prices(Yama_parsing_const):
 
+    def __init__(self,
+                 category,
+                 links_file,
+                 ttx_name=False, # Надо ли считывать TTX Модели
+                 #ttx_mod = True # Надо ли считывать TTX Модификаций
+                 ):
+
+        link_filename = 'Price_link_list/' + links_file
+        self.df_links = pd.read_excel(link_filename, index_col=0)
+        print(self.df_links.head(3))
+
+        if category in self.Categories.keys():
+            self.category = category
+        else:
+            raise AttributeError('Нет такой категории продукта в Categories')
+
+        self.df_names = pd.DataFrame(columns=['Name',
+                                              'Ya_UN_Name',
+                                              'Category',
+                                              'Vendor',
+                                              'Modification_name',
+                                              'Modification_href',
+                                              'Modification_price',
+                                              'Quantity',
+                                              'Subcategory',
+                                              'Site',
+                                              'Date'])
+
+        self.now = datetime.now().strftime('%b-%y')
+
+
+
+        self.df_mods = pd.DataFrame(columns=['Name',
+                                              'Ya_UN_Name',
+                                              'Category',
+                                              'Vendor',
+                                              'Modification_name',
+                                              'Modification_href',
+                                              'Modification_price',
+                                              'Quantity',
+                                              'Subcategory',
+                                              'Site',
+                                              'Date'])
+        # if ttx_mod:
+        #         self.ttx_mod = ttx_mod
+        #         self.ttx_mod_filename = self.TTX_files_folder + self.Categories[self.category]['ttx_mod_file']
+        #         self.df_ttx_mod = pd.read_excel(self.ttx_mod_filename, index_col=0)
+
+        if ttx_name:
+            self.ttx_name = ttx_name
+            self.ttx_name_filename = self.TTX_files_folder + self.Categories[self.category]['ttx_file']
+            self.df_ttx_name = pd.read_excel(self.ttx_name_filename, index_col=0)
+
+
+    def main(self, step=10, start=0, num=""):
+
+        self.num = num
+
+        finish_ = len(self.df_links)
+        begin_ = start
+        end_ = begin_ + step
+        while end_ < finish_ - 1:
+            end_ = begin_ + step
+            if end_ > finish_ - 1:
+                end_ = finish_ - 1
+
+            for i, row_df_links in self.df_links.iloc[begin_:end_].iterrows():
+                j = len(self.df_names)
+                self.df_names.loc[j, 'Site'] = 'yama'
+                self.df_names.loc[j, 'Name'] = None
+                self.df_names.loc[j, 'Ya_UN_Name'] = row_df_links['Name']
+                self.df_names.loc[j, 'Modification_name'] = self.df_names.loc[j, 'Ya_UN_Name']
+                self.df_names.loc[j, 'Modification_href'] = self.host + row_df_links['Href']
+
+                self.df_names.loc[j, 'Vendor'] = row_df_links['Vendor']
+                self.df_names.loc[j, 'Subcategory'] = row_df_links['Category']
+                self.df_names.loc[j, 'Category'] = self.category
+                self.df_names.loc[j, 'Date'] = self.now
+
+
+
+                url_req = self.URL_Req(row_df_links['Href'])
+                if url_req:
+                    soup_page = BeautifulSoup(url_req, 'html.parser')
+                    soup_table_grey = soup_page.find('ul', class_=self.ul_table_gray)
+
+                    self.df_names.loc[j, ['Quantity', 'Modification_price']] = self.Parse_Model_Page(soup_page,
+                                                                                            soup_table_grey,
+                                                                                            row_df_links['Name'],
+                                                                                            row_df_links['Vendor'],
+                                                                                            self.category)
+
+                    print(self.df_names.iloc[j])
+                    # if self.mod:
+                    #     if url_req:
+                    #         url_block = soup_table_grey.find('a', {"href": re.compile("mods")})
+                    #         if url_block:
+                    #             url_ = url_block.get('href')
+                    #         else:
+                    #             url_ = None
+                    #         if url_:
+                    #             self.Parse_Modifications(url_,
+                    #                                     row_df_links['Ya_UN_Name'],
+                    #                                     row_df_links['Vendor'],
+                    #                                     row_df_links['Category'])
+                if self.ttx_name:
+                    ttx_len = len(self.df_ttx_name)
+                    self.df_ttx_name = self.TTX_Handler(self.URL_Spec(soup_table_grey),
+                                                        self.df_ttx_name,
+                                                        self.df_names.loc[j, 'Modification_name'])
+
+            self.DF_to_Excel(self.df_names, num=self.num)
+            if self.ttx_name and (len(self.df_ttx_name) > ttx_len):
+                self.df_ttx_name.to_excel(self.ttx_name_filename)
+
+            begin_ = end_
+
+    def Parse_Model_Page(self, soup_page, soup_table_grey, Ya_UN_Name, Vendor, Category):
+
+            dict_exit = {}
+
+            # Плашка `Цены`
+            if soup_table_grey:
+                soup_offers_cell = soup_table_grey.find('li', class_=self.li_offers)
+                offers_ = soup_offers_cell.find('span', class_=self.span_offers)
+
+                if offers_ is not None:
+                    dict_exit['Quantity'] = int(offers_.text)
+                else:
+                    dict_exit['Quantity'] = 0
+
+                if dict_exit['Quantity'] > 2:
+                    dict_exit['Modification_price'] = self.AvgPrice_Handler(soup_offers_cell,
+                                                                            Ya_UN_Name,
+                                                                            Vendor,
+                                                                            Category)
+
+
+                else:
+                    # если одно предложение (цена) только одна или нет предложений
+                    avg_price = soup_page.find('div', class_=self.div_price_alone)
+                    if avg_price is not None:
+                        dict_exit['Modification_price'] = int(
+                            avg_price.find('span', class_='price').text.replace(' ', '').replace('₽', ''))
+                    else:
+                        dict_exit['Modification_price'] = 'na'
+            else:
+                dict_exit['Modification_price'] = 'na'
+                dict_exit['Quantity'] = None
+
+            return dict_exit
+
+
+    def AvgPrice_Handler(self, soup_offers_cell, Ya_UN_Name, Vendor, Category):
+
+            # а есть ли боттом c ценами?
+            # teg_h2 = soup_page.find_all('h2')
+            # teg_h2_texts = [i.text for i in teg_h2]
+
+            # if 'Средняя цена' in teg_h2_texts:
+            #     # Если блок средней цены на странице модели есть
+            #     avg_price = soup_page.find('div', class_=self.div_price_avg)
+            #     exit_ = int(avg_price.find('span').text.replace(' ', '').replace('₽', ''))
+      #лезем внутря в список цен, руками:
+           url_ = str(soup_offers_cell.find('a').get('href'))
+           exit_ = self.Offers_Handler(url_)
+
+           return exit_
+
+    def Offers_Handler(self, url_, Ya_UN_Name, Vendor, Category):
+
+            prices_list = list()
+            print("OFFERS HANDLER WORK")
+
+            page_href = url_
+            # new_ref_href = ref_href
+            pages_is_ok = True
+            page = 1
+            df_pointer = len(self.df_mods)
+
+            while pages_is_ok:
+                print(self.host + page_href)
+                url_req = self.URL_Req(page_href)
+                if url_req:
+                    soup_offers_page = BeautifulSoup(url_req, 'html.parser')
+
+                    if soup_offers_page.find('a', class_=self.a_button_eol) is None:
+                        pages_is_ok = False
+
+                    list_cards = soup_offers_page.find_all('article') #карточка модели
+                    if list_cards:
+                        for crd in list_cards:
+                            self.df_mods.loc[df_pointer, 'Ya_UN_Name'] = Ya_UN_Name
+                            self.df_mods.loc[df_pointer, 'Vendor'] = Vendor
+                            self.df_mods.loc[df_pointer, 'Category'] = Category
+                            self.df_names.loc[df_pointer, 'Site'] = 'yama'
+                            self.df_names.loc[df_pointer, 'Date'] = self.now
+                            try:
+                                name_source_href = crd.find('h3').find('a')
+
+                                self.df_mods.loc[df_pointer, 'Modification_href'] = name_source_href.get('href')
+                                name_ = name_source_href.text
+                                name_spans = name_.find_all('span')
+                                for spn in name_spans:
+                                    if Vendor.lower() in spn.text.lower():
+                                        self.df_mods.loc[df_pointer, 'Modification_name'] = spn.text[len(Vendor)+1:]
+                                    else:
+                                        self.df_mods.loc[df_pointer, 'Subcategory'] = ""
+                                        for cat in self.self.Categories[Category]['category']:
+                                            if cat.lower() in spn.text.lower():
+                                                if len(cat) > len(self.df_mods.loc[df_pointer, 'Subcategory']):
+                                                    self.df_mods.loc[df_pointer, 'Subcategory'] = cat
+
+
+                            except Exception:
+                                self.df_mods.loc[df_pointer, 'Modification_href'] = None
+                                self.df_mods.loc[df_pointer, 'Modification_name'] = None
+                                self.df_mods.loc[df_pointer, 'Subcategory'] = None
+
+                            price_spans = crd.find('div', {"data-zone-name": 'price'}).find_all('span')
+                            for spn in price_spans:
+                                dgt = re.compile(r'\d')
+                                if re.search(dgt, spn.text):
+                                    price_ = spn.text.replace(" ", "")
+                                    self.df_mods.loc[df_pointer, 'Modification_price'] = price_
+                                    prices_list.append(price_ )
+
+                self.DF_to_Excel(self.df_mods, num=self.num, level="Modifications")
+
+                page += 1
+                page_href = url_ + '&page=' + str(page)
+
+
+            try:
+                exit_ = sum(prices_list) / len(prices_list)
+            except ZeroDivisionError:
+                exit_ = 'na'
+
+            return exit_
 
 
 

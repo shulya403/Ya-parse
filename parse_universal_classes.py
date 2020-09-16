@@ -646,6 +646,13 @@ class Parse_DNS(Parse_Common):
 class Parse_CL(Parse_Common):
     site = "citilink"
 
+    def Product_Record_Handler(self, card):
+
+        soup_product = self.Find_Div("product_div", card)
+        self.dict_product_record['Modification_href'] = soup_product.find("a").get("href")
+        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("a").text)
+
+
     def Find_All_Divs(self, json_div, soup):
 
         try:

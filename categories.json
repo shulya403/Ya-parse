@@ -67,7 +67,9 @@
                                           "url": "/catalog--noutbuki/54544/list?hid=91013",
                                           "ttx_file": "NB-yama-TTX.xlsx",
                                           "subcategories": [
-                                            "ноутбук"
+                                            "ноутбук",
+                                            "ноутбук игровой",
+                                            "ультрабук"
                                           ]
                                           },
                               "монитор": {
@@ -180,7 +182,8 @@
           "url": "/catalog/mobile/notebooks/",
           "subcategories": [
             "ноутбук",
-            "ультрабук"
+            "ультрабук",
+            "трансформер"
           ]
         },
         "монитор": {
