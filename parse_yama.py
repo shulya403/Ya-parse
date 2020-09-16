@@ -1298,7 +1298,7 @@ class Parse_Modifications_TTX_Mod_in_Prices(Yama_parsing_const):
                 dict_exit['Quantity'] = None
 
             return dict_exit
-
+#
 
     def AvgPrice_Handler(self, soup_offers_cell, Ya_UN_Name, Vendor, Category):
 
