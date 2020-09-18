@@ -155,10 +155,11 @@ class parse_mvideo(object):
     def Pagination_Unparsed(self, filename, new_num, finish):
 
         self.pg_num = new_num
+        self.exit_filename = self.category_ + '-МВ-Цены-от-' + self.now + "--" + str(self.pg_num) + '.xlsx'
 
         #  НОВЫЙ ФАЙЛ!!!
         df_u = pd.read_excel(filename)
-        list_parsed = list(df_u['Page'].unique())
+        list_parsed = list(df_u['Cards_page_num'].unique())
         list_unparsed = [i for i in range(1, finish) if i not in list_parsed]
         print(len(list_parsed), len(list_unparsed))
         print(list_unparsed)
@@ -248,8 +249,8 @@ parse = parse_mvideo('Монитор', pg_num=1)
 #parse.Get_EOF_Page()
 
 #   def Pagination(self, max_page, begin_page=1):
-parse.Pagination(max_page=60)
+#parse.Pagination(max_page=44)
 
-#parse.Pagination_Unparsed('Ноутбук-МВ-Цены-от-Jul-20--1.xlsx', new_num=3, finish=76)
+parse.Pagination_Unparsed('Монитор-МВ-Цены-от-Sep-20--1.xlsx', new_num=2, finish=25)
 
 

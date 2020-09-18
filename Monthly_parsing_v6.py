@@ -36,16 +36,24 @@ import parse_yama as pynd
 #                 ttx_mod = True # Надо ли считывать TTX Модификаций
 #                 ):
 
+# class Parse_Modifications_TTX_Mod_in_Prices(Yama_parsing_const):
+#
+#     def __init__(self,
+#                  category,
+#                  links_file,
+#                  ttx_name=False, # Надо ли считывать TTX Модели
+#                  ):
+
 #def main(self,
 #           step=10, По сколько моделей вурхнего уровня записывать в файл
 #           start=0, С какой строчки начинать
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
 
-#parse = pynd.Parse_Modifications_TTX('Ноутбук', 'Cсылки Ноутбук Aug-20----17--fina.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=110, num=2)
-#parse = pynd.Parse_Modifications_TTX('Монитор', 'Cсылки Монитор Aug-20----17--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=1)
-parse = pynd.Parse_Modifications_TTX('Проектор', 'Cсылки Проектор Aug-20----17--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=253, num=1)
-parse = pynd.Parse_Modifications_TTX('ИБП', 'Cсылки ИБП Aug-20----17--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=1)
+parse = pynd.Parse_Modifications_TTX_Mod_in_Prices('Ноутбук', 'Cсылки Ноутбук Sep-20----2.xlsx', ttx_name=True).main(start=0, num=2)
+#parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Sep-20----2.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=2)
+#parse = pynd.Parse_Modifications_TTX('Проектор', 'Cсылки Проектор Aug-20----17--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=253, num=1)
+#parse = pynd.Parse_Modifications_TTX('ИБП', 'Cсылки ИБП Aug-20----17--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=1)
 
 
 
