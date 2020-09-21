@@ -23,8 +23,8 @@ import consistence_parsed_names as CPN
 #             dir_work="Handle_base/"):
 
 
-# Jul = CPN.Concat_Parse_Files('Ноутбук', M='Jul', Y=20)
-# Jul.Concat_files()
+#Aug = CPN.Concat_Parse_Files('Монитор', M='Aug', Y=20)
+#Aug.Concat_files()
 #May.Clearing_Vendors() #Унификация имен вендоров в поле Vendor. Вызывается Concat_Files() или отдельно
 #May.Clearing_Mod_Name() #Удаление имни вендора из Midification_name. Вызывается Concat_Files() или отдельно
 
@@ -32,25 +32,26 @@ import consistence_parsed_names as CPN
 
 #    def __init__(self,
 #                 category,
-#                 file_itr,
+#                 file_itr, #Файл с актуальым перечнем названий модлей. Из отчетных файлов
 #                 file_itr_page="",
 #                 itr_model_field="",
 #                 itr_vendor_field="",
 #                 JSON_file="cons_parsed_files.json",
 #                 M='May',
 #                 Y=20,
-#                 file_work_name = "",
-#                 file_base_name = "",
+#                 file_work_name = "", # По умолчанию ищет файл c именем содержащим '_source', месяц (M) и категорию (category)
+#                 file_base_name = "", #Файл Stable по категории
 #                 dir_root="Prices/",
 #                 dir_work="Handle_base/",
 #                 ):
 
 
-# FileHandler = CPN.Consist_Names(category="Монитор",
-#                                 file_itr="Moinitor_Jun_ITR_Models_Src_drop.xlsx",
-#                                 M='Jul',
+# FileHandler = CPN.Consist_Names(category="Ноутбук",
+#                                 file_itr="Reports/NB_Pivot_classes_Aug.xlsm",
+#                                 M='Aug',
 #                                 Y='20',
-#                                 file_work_name="")
+#                                 file_work_name=""
+#                                 )
 #
 #
 # #   Заполенение из файла Source
@@ -62,8 +63,8 @@ import consistence_parsed_names as CPN
 
 #   Заполенение фала Base Stable проверенными
 
-StBase = CPN.Fill_Stable_Base('Ноутбук',
-                             'Ноутбук-Concat_Prices--Jul-20--Filled1.xlsx')
+StBase = CPN.Fill_Stable_Base('Монитор',
+                             'Монитор-Concat_Prices--Aug-20--Filled_Vasya.xlsx')
 StBase.Checked_To_Base()
 
 #Consist_Names_for_mth_report заполняет модели из месячных Pivot

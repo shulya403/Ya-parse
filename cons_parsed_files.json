@@ -21,9 +21,9 @@
       "file_base_name": "Монитор_stable.xlsx",
       "itr_file": {
         "page": "Sheet1",
-        "vendor_model_field": "D",
-        "vendor_field": "B",
-        "model_field": "C"
+        "vendor_model_field": "E",
+        "vendor_field": "C",
+        "model_field": "D"
       }
     }},
 

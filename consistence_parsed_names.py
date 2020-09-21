@@ -219,7 +219,7 @@ class Consist_Names(object):
 
         if file_base_name:
             self.file_base_name = self.dir_work + file_base_name
-            self.df_work = pd.read_excel(self.file_base_name, index_col=0)
+            self.df_base = pd.read_excel(self.file_base_name, index_col=0)
 
         else:
             self.file_base_name = self.Get_File_Base()
