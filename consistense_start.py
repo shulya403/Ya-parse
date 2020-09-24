@@ -63,9 +63,9 @@ import consistence_parsed_names as CPN
 
 #   Заполенение фала Base Stable проверенными
 
-StBase = CPN.Fill_Stable_Base('Монитор',
-                             'Монитор-Concat_Prices--Aug-20--Filled_Vasya.xlsx')
-StBase.Checked_To_Base()
+# StBase = CPN.Fill_Stable_Base('Ноутбук',
+#                              'Ноутбук-Concat_Prices--Aug-20--Filled.xlsx')
+# StBase.Checked_To_Base()
 
 #Consist_Names_for_mth_report заполняет модели из месячных Pivot
 # class Consist_Names_for_mth_report(Consist_Names):
@@ -81,10 +81,10 @@ StBase.Checked_To_Base()
 #                   num=1
 #                  ):
 
-# MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_classes_Jul.xlsm",
-#                                         file_work_name="Pivot_unknown_07.xlsx",
-#                                         work_sheet="",
-#                                         dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_07\\",
-#                                          num=1
-#                                      )
-# MthNB.Fill_Models()
+MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_classes_Aug_Rebase.xlsm",
+                                        file_work_name="Pivot_unknown_08.xlsx",
+                                        work_sheet="",
+                                        dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_08\\",
+                                         num=1
+                                     )
+MthNB.Fill_Models()
