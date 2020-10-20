@@ -507,19 +507,19 @@ class Parse_El(Parse_Common):
     site = "eldorado"
 
     # Берет название модели с внутренней страницы: там артикул
-    def Product_Record_Handler(self, card):
-
-        soup_product = self.Find_Div("product_div", card)
-        url_ = soup_product.find("a").get("href")
-        self.dict_product_record['Modification_href'] = self.URL_Base_Make(url_)
-        internal_page = self.Page_Scrape(self.URL_Base_Make(url_))
-        if internal_page:
-            soup_internal_page = BeautifulSoup(internal_page, 'html.parser')
-            soup_name = self.Find_Div("internal_page_mod_name", soup_internal_page)
-            if soup_name:
-                self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_name.text)
-        else:
-            self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("a").text)
+    # def Product_Record_Handler(self, card):
+    #
+    #     soup_product = self.Find_Div("product_div", card)
+    #     url_ = soup_product.find("a").get("href")
+    #     self.dict_product_record['Modification_href'] = self.URL_Base_Make(url_)
+    #     internal_page = self.Page_Scrape(self.URL_Base_Make(url_))
+    #     if internal_page:
+    #         soup_internal_page = BeautifulSoup(internal_page, 'html.parser')
+    #         soup_name = self.Find_Div("internal_page_mod_name", soup_internal_page)
+    #         if soup_name:
+    #             self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_name.text)
+    #     else:
+    #         self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("a").text)
 
 # DNS берет цены со втрой страницы выдачи. Оч медленный но работает
 class Parse_DNS(Parse_Common):
@@ -576,11 +576,11 @@ class Parse_DNS(Parse_Common):
 
         soup_price = self.Find_Div("price_div", card)
         if soup_price:
-            try:
-                action_price = soup_price.find('div', class_="product-min-price__min")
-                price_ = action_price.find('mark', class_="product-min-price__min-price").text
-            except Exception:
-                price_ = soup_price.find('div', class_="product-min-price__current").text
+            # try:
+            #     action_price = soup_price.find('div', class_="product-min-price__min")
+            #     price_ = action_price.find('mark', class_="product-min-price__min-price").text
+            # except Exception:
+            price_ = soup_price.find('div', class_="product-min-price__current").text
 
             exit_ = "".join(re.findall(r'\d', price_))
 
@@ -743,138 +743,5 @@ class Parse_CL(Parse_Common):
         else:
             return None
 
-# Мвидео Глючит Selenium - то работает то нет. Вместо этого юзать parse_mvideo
-class Parse_MV(Parse_Common):
-    site = "mvideo"
-    addition_fields = [
-        'Customer_rate'
-    ]
-    def URL_Base_Make(self, url_):
-        return url_
-
-    def Addition_Fld_Fill(self, fld, card):
-        return self.Customer_Rate_Handler(fld, card)
-
-    def Customer_Rate_Handler(self, fld, card):
-        soup_rate = self.Find_Div("customer_rate_div", card)
-        if soup_rate:
-            exit_ = float("".join(re.findall(r'\d', soup_rate.get("style"))))/100
-            return exit_
-        else:
-            return None
-
-    def Product_Record_Handler(self, card):
-
-        soup_product = self.Find_Div("product_div", card)
-        self.dict_product_record['Modification_href'] = soup_product.get("href")
-        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.text)
-        #pprint(self.dict_product_record)
-
-#Не работает да и не надо, видимо
-class Parse_YaMa(Parse_Common):
-    site = "yama"
-    addition_fields = [
-        'Name_offers',
-        'Modification_offers'
-    ]
-
-    level = True
-
-    def Modification_Price_Handler(self, card):
-
-        href_ = self.dict_product_record['Modification_href']
-        if 'redir/' not in href_:
-            url_ = self.URL_Base_Make(self.dict_product_record['Modification_href'])
-            html_page = self.Page_Scrape(url_)
-            soup_up_model_page = BeautifulSoup(html_page, "html.parser")
-
-            # Табличка верхня
-            soup_table_grey = soup_up_model_page.find('ul', class_="_2CAuvczGU0")
-            soup_button_offers = soup_table_grey.find('li', class_="_1OM4gu7kXK _3Kj2EY9ihg")
-
-            soup_offers = soup_button_offers.find('span', class_="yVmxx3-ZVv")
-
-            if self.level:
-                self.level = False
-
-                if soup_offers is not None:
-                    self.dict_addition_fld['Name_offers'] = soup_offers.text
-
-                else:
-                    self.dict_addition_fld['Name_offers'] = 0
-                    return 'na'
-
-                url_modifications = soup_table_grey.find('a', {"href": re.compile("mods")}).get('href')
-                self.Pagination(self.URL_CardsPage_Make(url_modifications))
-                self.level = True
-
-            else:
-                url_offers = soup_button_offers.find('a').get('href')
-                exit_ = self.Get_Price(soup_up_model_page, url_offers)
-                if self.ttx:
-                    soup_button_specs = soup_table_grey.find('li', class_="_1OM4gu7kXK _2W_euF-a9B kSWkhB-y4k")
-                    url_specs = soup_button_specs.find('a').get('href')
-                    self.Get_TTX(url_specs)
-                self.dict_addition_fld['Modification_offers'] = soup_offers.text
-                return exit_
-
-        else: return None
-
-    def Get_Price(self, soup_page, url_):
-
-        def offers_prices_harvest(offers_href):
-
-            prices_list = list()
-            pages_is_ok = True
-            page = 1
-
-            url_ = self.URL_Base_Make(offers_href)
-
-            while pages_is_ok == True:
-
-                try:
-
-                    html_page = self.Page_Scrape(url_)
-                    offers_page = BeautifulSoup(html_page, 'html.parser')
-                    if offers_page.find('a',
-                                        class_='button button_size_s button_theme_pseudo n-pager__button-next i-bem n-smart-link') is None:
-                        pages_is_ok = False
-
-                    offers_page_table = offers_page.find('div',
-                                class_="n-snippet-list n-snippet-list_type_vertical island metrika b-zone b-spy-init b-spy-events i-bem")
-                    page_prices = offers_page_table.find_all('div', class_='price')
-                    page_price_list = [int(i.text.replace(' ', '').replace('₽', '')) for i in page_prices]
-                    prices_list += page_price_list
-
-                except Exception as Err:
-                    print(Err)
-
-                page += 1
-                url_ = self.URL_Base_Make(offers_href + '&page=' + str(page))
-
-            AvgPrice = prices_list.mean()
-
-            return AvgPrice
-
-        # средняя цена - либо из блока "средняя цена" либо со страницы предложений модели
-        def avg_price_harvest(page):
-
-            price_dict = dict()
-            # а есть ли боттом c ценами?
-            teg_h2 = page.find_all('h2')
-            teg_h2_texts = [i.text for i in teg_h2]
-
-            if 'Средняя цена' in teg_h2_texts:
-                # Если блок средней цены на странице модели есть
-                soup_avg_price = page.find('div', class_="_3TkwCtZtaF")
-                avg_price = int(soup_avg_price.find('span').text.replace(' ', '').replace('₽', ''))
-            else:
-                # тады лезем внутря в список цен, руками:
-                avg_price = offers_prices_harvest(url_)
-            return avg_price
 
 
-        return avg_price_harvest(soup_page)
-
-    def Get_TTX(self, url_):
-        pass

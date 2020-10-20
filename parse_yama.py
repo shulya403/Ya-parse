@@ -894,8 +894,7 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                 self.df_names.loc[j, 'Name'] = None
                 self.df_names.loc[j, 'Ya_UN_Name'] = row_df_links['Name']
                 self.df_names.loc[j, 'Modification_name'] = self.df_names.loc[j, 'Ya_UN_Name']
-                self.df_names.loc[j, 'Modification_href'] = self.host + row_df_links['Href']
-
+                self.df_names.loc[j, 'Modification_href'] = self.host + str(row_df_links['Href'])
                 self.df_names.loc[j, 'Vendor'] = row_df_links['Vendor']
                 self.df_names.loc[j, 'Subcategory'] = row_df_links['Category']
                 self.df_names.loc[j, 'Category'] = self.category
@@ -1087,7 +1086,10 @@ class Parse_Modifications_TTX(Yama_parsing_const):
         if 'Средняя цена' in teg_h2_texts:
                 # Если блок средней цены на странице модели есть
             avg_price = soup_page.find('div', class_=self.div_price_avg)
-            exit_ = int(avg_price.find('span').text.replace(' ', '').replace('₽', ''))
+            try:
+                exit_ = int(avg_price.find('span').text.replace(' ', '').replace('₽', ''))
+            except AttributeError:
+                exit_ = None
         else:
                 # тады лезем внутря в список цен, руками:
             url_ = str(soup_offers_cell.find('a').get('href'))
@@ -1530,6 +1532,8 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                                     prices_list.append(int(price_))
 
                     page += 1
+                    if page > 10:
+                        break
 
                     page_href = url_ + '&page=' + str(page)
             try:

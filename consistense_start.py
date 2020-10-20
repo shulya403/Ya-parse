@@ -22,9 +22,8 @@ import consistence_parsed_names as CPN
 #             dir_root="Prices/",
 #             dir_work="Handle_base/"):
 
-
-#Aug = CPN.Concat_Parse_Files('Монитор', M='Aug', Y=20)
-#Aug.Concat_files()
+# Sep = CPN.Concat_Parse_Files('Ноутбук', M='Sep', Y=20)
+# Sep.Concat_files()
 #May.Clearing_Vendors() #Унификация имен вендоров в поле Vendor. Вызывается Concat_Files() или отдельно
 #May.Clearing_Mod_Name() #Удаление имни вендора из Midification_name. Вызывается Concat_Files() или отдельно
 
@@ -46,16 +45,16 @@ import consistence_parsed_names as CPN
 #                 ):
 
 
-# FileHandler = CPN.Consist_Names(category="Ноутбук",
-#                                 file_itr="Reports/NB_Pivot_classes_Aug.xlsm",
-#                                 M='Aug',
-#                                 Y='20',
-#                                 file_work_name=""
-#                                 )
-#
-#
-# #   Заполенение из файла Source
-# FileHandler.Fill_Unknown()
+FileHandler = CPN.Consist_Names(category="Ноутбук",
+                                file_itr="Reports/NB_Pivot_classes_Aug_Rebase.xlsx",
+                                M='Sep',
+                                Y='20',
+                                file_work_name=""
+                                )
+
+
+#   Заполенение из файла Source
+FileHandler.Fill_Unknown()
 
 #FileHandler.Dict_Yama_Names()
 #FileHandler.Fill_Yama_Name()
@@ -81,10 +80,10 @@ import consistence_parsed_names as CPN
 #                   num=1
 #                  ):
 
-MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_classes_Aug_Rebase.xlsm",
-                                        file_work_name="Pivot_unknown_08.xlsx",
-                                        work_sheet="",
-                                        dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_08\\",
-                                         num=1
-                                     )
-MthNB.Fill_Models()
+# MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_classes_Aug_Rebase.xlsm",
+#                                         file_work_name="Pivot_unknown_08.xlsx",
+#                                         work_sheet="",
+#                                         dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_08\\",
+#                                          num=1
+#                                      )
+# MthNB.Fill_Models()

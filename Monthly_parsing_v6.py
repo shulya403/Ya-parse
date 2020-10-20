@@ -50,10 +50,10 @@ import parse_yama as pynd
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
 
-#parse = pynd.Parse_Modifications_TTX_Mod_in_Prices('Ноутбук', 'Cсылки Ноутбук Sep-20----2.xlsx', ttx_name=True).main(start=0, num=2)
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Sep-20----2.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=2)
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Sep-20----18--14-35.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=1)
-parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Sep-20----18--14-37.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=1)
+#parse = pynd.Parse_Modifications_TTX_Mod_in_Prices('Ноутбук', 'Cсылки Ноутбук Oct-20----15--18-10.xlsx', ttx_name=True).main(start=0, num=1)
+#parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Oct-20----16--17-07.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=70, num=2)
+#parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Oct-20----16--17-10.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=130, num=2)
+#parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Oct-20----16--17-13.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=1)
 
 
 

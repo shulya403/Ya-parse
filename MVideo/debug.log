@@ -1,1 +1,5 @@
 [0426/233509.139:ERROR:exception_handler_server.cc(527)] ConnectNamedPipe: Идет закрытие канала. (0xE8)
+[1019/170712.922:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)
+[1019/172258.075:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)
+[1019/173332.207:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)
+[1019/183457.219:ERROR:directory_reader_win.cc(43)] FindFirstFile: Системе не удается найти указанный путь. (0x3)

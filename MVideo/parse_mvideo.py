@@ -249,8 +249,9 @@ parse = parse_mvideo('Монитор', pg_num=1)
 #parse.Get_EOF_Page()
 
 #   def Pagination(self, max_page, begin_page=1):
-#parse.Pagination(max_page=44)
+# АККУРАТНО С СВЕРХБОЛЬШИМИ ЦЕНАМИ (ЭТО СКИДКА)
+#parse.Pagination(max_page=133)
 
-parse.Pagination_Unparsed('Монитор-МВ-Цены-от-Sep-20--1.xlsx', new_num=2, finish=25)
+parse.Pagination_Unparsed('Монитор-МВ-Цены-от-Oct-20--final.xlsx', new_num=2, finish=44)
 
 
