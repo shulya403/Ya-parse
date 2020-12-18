@@ -1475,6 +1475,7 @@ class Parse_Modifications_TTX_Mod_in_Prices(Parse_Modifications_TTX):
                     if soup_offers_page.find('a', class_=self.a_button_eol) is None:
                         pages_is_ok = False
                     if page > 10:
+                        print(page)
                         pages_is_ok = False
 
                     #Остальные _1vFSS76Axn
@@ -1528,6 +1529,7 @@ class Parse_Modifications_TTX_Mod_in_Prices(Parse_Modifications_TTX):
                 self.DF_to_Excel(self.df_mods, num=self.num, level="Modifications")
 
                 page += 1
+
                 page_href = url_ + '&page=' + str(page)
 
 
