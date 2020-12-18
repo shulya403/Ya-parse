@@ -6,6 +6,14 @@ import parse_yama as pynd
 
 
 #parse_link = pynd.Parse_links()
+# parse_link.links_to_excel('Ноутбук')
+#parse_link.links_to_excel('Монитор')
+#parse_link.links_to_excel('Проектор')
+#parse_link.links_to_excel('ИБП')
+
+#Проверить какая последняя страница в выдаче (page_max)
+
+#parse_link = pynd.Parse_links_v2(page_max=20)
 #parse_link.links_to_excel('Ноутбук')
 #parse_link.links_to_excel('Монитор')
 #parse_link.links_to_excel('Проектор')
@@ -16,9 +24,6 @@ import parse_yama as pynd
 #parse_category.prices_to_excel('Cсылки Монитор Feb-20----16--18-37.xlsx')
 #parse_category.prices_to_excel('Cсылки ИБП Feb-20----16--19-02.xlsx')
 #parse_category.prices_to_excel('Cсылки Проектор Feb-20----16--18-41.xlsx')
-
-
-
 
 #parse.prices_to_excel('Монитор', 'Cсылки Монитор Apr-20----16--15-00.xlsx')
 #parse.prices_to_excel('Проектор', 'Cсылки Проектор Apr-20----16--15-02.xlsx')
@@ -49,11 +54,11 @@ import parse_yama as pynd
 #           start=0, С какой строчки начинать
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
-
-#parse = pynd.Parse_Modifications_TTX_Mod_in_Prices('Ноутбук', 'Cсылки Ноутбук Oct-20----15--18-10.xlsx', ttx_name=True).main(start=0, num=1)
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Oct-20----16--17-07.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=70, num=2)
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Oct-20----16--17-10.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=130, num=2)
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Oct-20----16--17-13.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=0, num=1)
+#Прерывание (пустые данные). Надо докачивать с позици номер строки последнего по Excel -1
+#parse = pynd.Parse_Modifications_TTX_Mod_in_Prices('Ноутбук', 'Cсылки Ноутбук Dec-20----15--17-34.xlsx', ttx_name=True).main(start=0, num=1)
+#parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Dec-20----15--18-10.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=525, num=4)
+#parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Dec-20----15--18-39.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=427, num=3)
+parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Dec-20----15--18-44.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=613, num=4)
 
 
 

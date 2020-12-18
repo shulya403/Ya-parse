@@ -10,7 +10,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import requests
 from requests.adapters import HTTPAdapter
-from requests.packages.urllib3.util.retry import Retry
+#from requests.packages.urllib3.util.retry import Retry
 import re
 from urllib.parse import quote, unquote
 from webdriver_manager.chrome import ChromeDriverManager
@@ -243,10 +243,10 @@ class Parse_Common(object):
         }
         time.sleep(self.interrupt)
         session = requests.Session()
-        retry = Retry(connect=3, backoff_factor=1)
-        adapter = HTTPAdapter(max_retries=retry)
-        session.mount('http://', adapter)
-        session.mount('https://', adapter)
+        #retry = Retry(connect=3, backoff_factor=1)
+        #adapter = HTTPAdapter(max_retries=retry)
+        #session.mount('http://', adapter)
+        #session.mount('https://', adapter)
 
         response = session.get(url_, headers=header, cookies=cookies)
             #response = requests.get(url_, headers=header, cookies=cookies, retries=retry)
@@ -546,10 +546,10 @@ class Parse_DNS(Parse_Common):
         }
         time.sleep(self.interrupt)
         session = requests.Session()
-        retry = Retry(connect=3, backoff_factor=1)
-        adapter = HTTPAdapter(max_retries=retry)
-        session.mount('http://', adapter)
-        session.mount('https://', adapter)
+        #retry = Retry(connect=3, backoff_factor=1)
+        #adapter = HTTPAdapter(max_retries=retry)
+        #session.mount('http://', adapter)
+        #session.mount('https://', adapter)
 
         #print(url_)
         response = session.get(url_, headers=header)
@@ -649,8 +649,10 @@ class Parse_CL(Parse_Common):
     def Product_Record_Handler(self, card):
 
         soup_product = self.Find_Div("product_div", card)
-        self.dict_product_record['Modification_href'] = soup_product.find("a").get("href")
-        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("a").text)
+        #self.dict_product_record['Modification_href'] = soup_product.find("a").get("href")
+        #self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("a").text)
+        self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.get("href"))
+        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.get('title'))
 
 
     def Find_All_Divs(self, json_div, soup):

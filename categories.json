@@ -159,20 +159,19 @@
                   "teg": "div",
                   "re": "True",
                   "attributes": {
-                    "class": "js--subcategory-product-item"
+                    "class": "product_data__gtm-js"
                   }
                 },
                 "product_div": {
-                  "teg": "span",
-                  "re": "True",
+                  "teg": "a",
                   "attributes": {
-                    "class": "h3"
+                    "class": "ProductCardVertical__link link_gtm-js"
                   }
                 },
                 "price_div": {
-                  "teg": "ins",
+                  "teg": "span",
                   "attributes": {
-                    "class": "subcategory-product-item__price-num"
+                    "class": "ProductCardVertical__price-current_current-price"
                   }
                 }
        },
@@ -266,7 +265,7 @@
                 "price_div": {
                   "teg": "span",
                   "attributes": {
-                    "class": "sc-1xca1up-1 sc-3lsqu-1 kQIWtq"
+                    "class": "wcf6ic-1 sc-1nnsxdl-1 bdrEsU"
                   }
                 },
                 "internal_page_mod_name": {

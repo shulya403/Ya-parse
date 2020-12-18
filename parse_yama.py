@@ -442,6 +442,129 @@ class Parse_links(Yama_parsing_const):
 
         df.to_excel(excel_file_name)
 
+class Parse_links_v2(Parse_links):
+    def __init__(self, page_max=0):
+        self.page_max = page_max
+
+    # скачивание линков на страницы модели по категории
+    def parse_links(self, category):
+
+        url = self.Categories[category]['url']
+        category_ls = self.Categories[category]['category']
+
+        models_list = list()  # список словарей с моделями с названиеми и ссылками на модели
+
+        response = Req()
+
+        page = 1  # номер страницы выдачи
+
+        pages_full = True  # есть ли целевой контент на очередной странице
+        while pages_full:
+            if page > 1:
+                page_url = url + '&page=' + str(page) + self.link_tail
+
+                if page == 2:
+                    referer_ = url + self.link_tail
+
+                else:
+                    referer_ = url + '&page=' + str(page - 1) + self.link_tail
+            else:
+                page_url = url + self.link_tail
+                referer_ = self.link_computers
+
+            # response = Req()
+            # response.requests(page_url, headers=self.header_(referer_))
+            response.selenium(page_url)
+
+            if response.status_code == 200:
+                # if gr_.response.code == 200:
+                print('поехали ', page_url)
+                iter_page_soup = BeautifulSoup(response.text, 'html.parser')
+                print(iter_page_soup.title)
+
+                # Пречень блоков моделей (строк таблицы) на очередной странице выдачи
+                rows_models = iter_page_soup.find_all('div', class_=self.div_row_models_ls)
+
+                if len(rows_models) != 0:
+                    print(page, len(rows_models))
+
+                    for row in rows_models:
+                        # И рассовыем их по ключам словаря model_dict
+                        model_dict = dict()
+                        try:
+                            model_link = row.find('h3', class_=self.h3_model_name).find('a')
+                            # Отсеиваем редирект на внешние сайты или конкретные конфиги нутбуков и останавливаем работу
+                            if ('redir/' in model_link) or \
+                                    ((category == 'Ноутбук') and ('/' in model_link.text)):
+                                pages_full = False
+                                break
+
+                            if model_link:
+                                model_dict['Href'] = model_link['href']  # ссылка на страницу модели
+
+                            # Ищем название категории
+                            category_len = 0
+
+                            for cat in category_ls:
+                                if cat in model_link.text:
+                                    category_len = len(cat.split())
+                                    try:
+                                        old_len = len(model_dict['Category'].split())
+                                        if category_len > old_len:
+                                            model_dict['Category'] = cat
+                                    except Exception:
+                                        model_dict['Category'] = cat
+
+                                    # break
+
+                            name = model_link.text.split()
+
+                            # Ищем имя вендора (следующее за категорией)
+                            model_dict['Vendor'] = name[category_len]
+
+                            # Формируем название модели вместе с имненм вендора через пробел кроме последнего пробела
+                            mod_name = ''
+                            for word in name[category_len:]:
+                                mod_name += word + ' '
+                            model_dict['Name'] = mod_name[:-1]
+
+                        except AttributeError:
+                            model_dict['Name'] = ""
+                            model_dict['Href'] = ""
+                            model_dict['Vendor'] = ""
+                            model_dict['Category'] = ""
+
+                        # Пихаем словарь модели в общий список
+                        print(model_dict['Name'])
+                        models_list.append(model_dict)
+
+                    # Проверяем не последняя ли страница выдачи
+                    if self.page_max == 0:
+                        if iter_page_soup.find('a', class_=self.a_button_eol) is None:
+                            pages_full = False
+                    else:
+                        if page >= self.page_max:
+                            pages_full = False
+
+                    page += 1
+
+                else:
+                    capcha_quest = iter_page_soup.find('title')
+
+                    if capcha_quest.text == 'Ой!':
+                        print(page, 'облом - капча')
+                        time.sleep(1)
+                    else:
+                        print(page, 'фигня какая-то')
+                        break
+
+                time.sleep(1)
+            else:
+                print('облом... ', response.status_code)
+
+        return models_list
+
+
 class Parse_models(Yama_parsing_const):
 
     # Считывание цен из предложений
@@ -928,7 +1051,11 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                     self.df_ttx_name = self.TTX_Handler(self.URL_Spec(soup_table_grey),
                                                         self.df_ttx_name,
                                                         self.df_names.loc[j, 'Modification_name'])
+            print(self.df_names.loc[j - step:j]['Modification_price'].to_list())
 
+
+            if self.df_names.loc[j-step:j]['Modification_price'].isna().all():
+                raise
             self.DF_to_Excel(self.df_names, num=self.num)
             if self.ttx_name and (len(self.df_ttx_name) > ttx_len):
                 self.df_ttx_name.to_excel(self.ttx_name_filename)
@@ -1022,9 +1149,11 @@ class Parse_Modifications_TTX(Yama_parsing_const):
 
                         print(self.df_mods.loc[i, 'Modification_name'])
                         if self.ttx_mod:
-                            self.df_ttx_mod = self.TTX_Handler(self.URL_Spec(soup_table_grey),
-                                                               self.df_ttx_mod,
-                                                               self.df_mods.loc[i, 'Modification_name'])
+                            url_spec = self.URL_Spec(soup_table_grey)
+                            if url_spec:
+                                self.df_ttx_mod = self.TTX_Handler(url_spec,
+                                                                   self.df_ttx_mod,
+                                                                   self.df_mods.loc[i, 'Modification_name'])
 
             self.DF_to_Excel(self.df_mods, num=self.num, level="Modifications")
             if self.ttx_mod and (len(self.df_ttx_mod) > ttx_len):
@@ -1083,7 +1212,7 @@ class Parse_Modifications_TTX(Yama_parsing_const):
         teg_h2 = soup_page.find_all('h2')
         teg_h2_texts = [i.text for i in teg_h2]
 
-        if 'Средняя цена' in teg_h2_texts:
+        if 'Динамика средней цены за полгода' in teg_h2_texts:
                 # Если блок средней цены на странице модели есть
             avg_price = soup_page.find('div', class_=self.div_price_avg)
             try:
@@ -1344,6 +1473,8 @@ class Parse_Modifications_TTX_Mod_in_Prices(Parse_Modifications_TTX):
                     soup_offers_page = BeautifulSoup(url_req, 'html.parser')
 
                     if soup_offers_page.find('a', class_=self.a_button_eol) is None:
+                        pages_is_ok = False
+                    if page > 10:
                         pages_is_ok = False
 
                     #Остальные _1vFSS76Axn
