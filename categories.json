@@ -159,19 +159,20 @@
                   "teg": "div",
                   "re": "True",
                   "attributes": {
-                    "class": "product_data__gtm-js"
-                  }
+                    "class": "ProductCardVertical_separated"
+                                                }
                 },
                 "product_div": {
                   "teg": "a",
+                  "re": "True",
                   "attributes": {
-                    "class": "ProductCardVertical__link link_gtm-js"
+                    "class": "ProductCardVertical__name"
                   }
                 },
                 "price_div": {
                   "teg": "span",
                   "attributes": {
-                    "class": "ProductCardVertical__price-current_current-price"
+                    "class": "ProductPrice__price ProductCardVerticalPrice__price-current__price"
                   }
                 }
        },

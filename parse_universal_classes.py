@@ -452,6 +452,7 @@ class Parse_Common(object):
             exit_ = "".join(re.findall(r'\d', price))
         else:
             exit_ = None
+            print(exit_)
 
         return exit_
 
