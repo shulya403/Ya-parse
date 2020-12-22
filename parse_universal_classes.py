@@ -522,7 +522,8 @@ class Parse_El(Parse_Common):
     #     else:
     #         self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("a").text)
 
-# DNS берет цены со втрой страницы выдачи. Оч медленный но работает
+
+# DNS
 class Parse_DNS(Parse_Common):
 
     site = "dns"
@@ -643,7 +644,7 @@ class Parse_DNS(Parse_Common):
         else:
             return None
 
-# Citilink - качается нормально, но нужно ставить большую задержку. Периодически кидает 479 отлуп
+# Citilink - качается нормально, но нужно ставить большую задержку.
 class Parse_CL(Parse_Common):
     site = "citilink"
 

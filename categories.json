@@ -254,20 +254,20 @@
                 "card_div": {
                   "teg": "li",
                   "attributes": {
-                    "class": "sc-1w9a1pg-0 sc-19ibhqc-0 gUmybO"
+                    "class": "_3uUsGGA"
                   }
                 },
                 "product_div": {
                   "teg": "div",
                   "attributes": {
-                    "class": "sc-1w9a1pg-12 sc-19ibhqc-13 hhdhoM"
+                    "class": "_2fFxlhy"
                   }
                 },
                 "price_div": {
                   "teg": "span",
                   "attributes": {
-                    "class": "wcf6ic-1 sc-1nnsxdl-1 bdrEsU"
-                  }
+                    "class": "wcf6ic-1 sc-1nnsxdl-1 gILnXT"
+                    }
                 },
                 "internal_page_mod_name": {
                   "teg": "h1",

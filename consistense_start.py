@@ -22,8 +22,8 @@ import consistence_parsed_names as CPN
 #             dir_root="Prices/",
 #             dir_work="Handle_base/"):
 
-# Oct = CPN.Concat_Parse_Files('Ноутбук', M='Oct', Y=20)
-# Oct.Concat_files()
+# Nov = CPN.Concat_Parse_Files('Ноутбук', M='Nov', Y=20)
+# Nov.Concat_files()
 #May.Clearing_Vendors() #Унификация имен вендоров в поле Vendor. Вызывается Concat_Files() или отдельно
 #May.Clearing_Mod_Name() #Удаление имни вендора из Midification_name. Вызывается Concat_Files() или отдельно
 
@@ -45,16 +45,16 @@ import consistence_parsed_names as CPN
 #                 ):
 
 
-# FileHandler = CPN.Consist_Names(category="Ноутбук", #для ноутов для yama заменить Mod_Name_restrict на просто Name
-#                                 file_itr="Reports/NB_Pivot_Oct.xlsx",
-#                                 M='Oct',
-#                                 Y='20',
-#                                 file_work_name=""
-#                                 )
-#
-#
-# #   Заполенение из файла Source
-# FileHandler.Fill_Unknown()
+FileHandler = CPN.Consist_Names(category="Ноутбук", #для ноутов для yama заменить Mod_Name_restrict на просто Modification_name
+                                file_itr="Reports/NB_Pivot_models_Oct-20.xlsx",
+                                M='Nov',
+                                Y='20',
+                                file_work_name=""
+                                )
+
+
+#   Заполенение из файла Source
+FileHandler.Fill_Unknown()
 
 #FileHandler.Dict_Yama_Names()
 #FileHandler.Fill_Yama_Name()
@@ -80,10 +80,10 @@ import consistence_parsed_names as CPN
 #                   num=1
 #                  ):
 
-MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_Oct.xlsx",
-                                        file_work_name="NB_Pivot_unknown_10.xlsx",
-                                        work_sheet="",
-                                        dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_10\\",
-                                         num=1
-                                     )
-MthNB.Fill_Models()
+# MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_Oct.xlsx",
+#                                         file_work_name="NB_Pivot_unknown_10.xlsx",
+#                                         work_sheet="",
+#                                         dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_10\\",
+#                                          num=1
+#                                      )
+# MthNB.Fill_Models()
