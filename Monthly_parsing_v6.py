@@ -6,14 +6,14 @@ import parse_yama as pynd
 
 
 #parse_link = pynd.Parse_links()
-# parse_link.links_to_excel('Ноутбук')
+#parse_link.links_to_excel('Ноутбук')
 #parse_link.links_to_excel('Монитор')
 #parse_link.links_to_excel('Проектор')
 #parse_link.links_to_excel('ИБП')
 
 #Проверить какая последняя страница в выдаче (page_max)
 
-#parse_link = pynd.Parse_links_v2(page_max=20)
+parse_link = pynd.Parse_links_v2(page_max=16)
 #parse_link.links_to_excel('Ноутбук')
 #parse_link.links_to_excel('Монитор')
 #parse_link.links_to_excel('Проектор')
@@ -55,10 +55,13 @@ import parse_yama as pynd
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
 #Прерывание (пустые данные). Надо докачивать с позици номер строки последнего по Excel -1
-parse = pynd.Parse_Modifications_TTX_Mod_in_Prices('Ноутбук', 'Cсылки Ноутбук Dec-20----15--17-34.xlsx', ttx_name=True).main(start=706, num=7)
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Dec-20----15--18-10.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=525, num=4)
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Dec-20----15--18-39.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=427, num=3)
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Dec-20----15--18-44.xlsx', mod=False, ttx_name=True, ttx_mod=False).main(start=521, num=4)
+#parse = pynd.Parse_Modifications_TTX_Mod_in_Prices('Ноутбук', 'Cсылки Ноутбук Jan-21----12--18-40.xlsx', ttx_name=True).main(start=630, num=10)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Jan-21----12--19-10.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
+#     main(start=460, num=3)
+parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Jan-21----12--19-18.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
+    main(start=570, num=4)
+#parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Jan-21----12--19-38.xlsx', mod=False, ttx_name=True, ttx_mod=False).
+# main(start=0, num=1)
 
 
 

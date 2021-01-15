@@ -65,6 +65,7 @@ class parse_mvideo(object):
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
 
+
         cat_ok = False
         for i in self.Categories:
             if category_.lower() == i.lower():
@@ -263,7 +264,7 @@ class parse_mvideo_new(parse_mvideo):
 
 
         try:
-            element = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "pagination desktop-listing__pagination")))
+            self.driver.implicitly_wait(10)
         except Exception:
             pass
 
@@ -369,7 +370,7 @@ class parse_mvideo_new(parse_mvideo):
             print("пусто...", page_)
 
 #   MAIN
-parse = parse_mvideo_new('Монитор', pg_num=1)
+parse = parse_mvideo_new('Ноутбук', pg_num=1)
 #print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118?page=12'))
 #parse.Get_EOF_Page()
 

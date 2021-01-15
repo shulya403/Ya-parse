@@ -1529,6 +1529,8 @@ class Parse_Modifications_TTX_Mod_in_Prices(Parse_Modifications_TTX):
                 self.DF_to_Excel(self.df_mods, num=self.num, level="Modifications")
 
                 page += 1
+                if page > 10:
+                    raise
 
                 page_href = url_ + '&page=' + str(page)
 
@@ -1666,7 +1668,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
 
                     page += 1
                     if page > 10:
-                        break
+                        raise
 
                     page_href = url_ + '&page=' + str(page)
             try:
