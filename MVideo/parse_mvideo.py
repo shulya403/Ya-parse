@@ -60,10 +60,9 @@ class parse_mvideo(object):
 
         options = webdriver.ChromeOptions()
         #options.add_argument('--headless')
-        options.add_argument("--window-size=1920,1080")
+        #options.add_argument("--window-size=500,1080")
 
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-
 
 
         cat_ok = False
@@ -104,9 +103,10 @@ class parse_mvideo(object):
 
         #options = webdriver.ChromeOptions()
         #options.add_argument('--headless')
-        #options.add_argument("--window-size=1920,1080")
+        #options.add_argument("--window-size=500,500")
 
-        #driver = webdriver.Chrome("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe", options=options)
+
+        #self.driver = webdriver.Chrome("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe", options=options)
             #self.driver.implicitly_wait(3)
         self.driver.get(url_)
         try:
@@ -273,6 +273,77 @@ class parse_mvideo_new(parse_mvideo):
 
         return exit_
 
+    def Req_JS(self, url_):
+
+        def wait_until_all_expected_elements(driver, number_of_elements):
+            times = 0
+            while True:
+                    xpath = "//div[@class=\"product-card--mobile\"]"
+
+                    condition = EC.presence_of_all_elements_located((By.XPATH, xpath))
+
+                    number_of_cards = len(self.driver.find_elements_by_class_name("product-card--mobile"))
+
+                    try:
+                        wait = WebDriverWait(driver, 10).until(condition)
+                    except Exception:
+                        pass
+                    print(len(wait))
+                    if len(wait) == number_of_elements:
+                        break
+                    times += 1
+
+                    if times == 10:
+                        break
+
+        # def get_elements(driver):
+        #
+        #     xpath = "//div[@class=\"product-card--mobile\"]"
+        #     condition = EC.presence_of_all_elements_located((By.XPATH, xpath))
+        #
+        #     try:
+        #         wait = WebDriverWait(driver, 10).until(condition)
+        #         return wait
+        #     except Exception:
+        #         pass
+        self.driver.get(url_)
+        time.sleep(1)
+        number_of_elements = len(self.driver.find_elements_by_class_name("product-title product-title--grid"))
+
+       # wait_until_all_expected_elements(self.driver, number_of_elements)
+       #  times = 0
+       #  while True:
+       #      xpath = "//div[@class=\"product-card--mobile\"]"
+       #
+       #      condition = EC.presence_of_all_elements_located((By.XPATH, xpath))
+       #
+       #      number_of_cards = len(self.driver.find_elements_by_class_name("product-card--mobile__info"))
+       #
+       #      try:
+       #          wait = WebDriverWait(self.driver, 10).until(condition)
+       #      except Exception:
+       #          pass
+       #          wait=list()
+       #      print(len(wait))
+       #      if len(wait) == number_of_elements:
+       #          break
+       #      # else:
+       #      #     self.driver.refresh()
+       #      #     self.driver.refresh()
+       #      times += 1
+       #      #time.sleep(1)
+       #      if times == 5:
+       #          break
+
+        exit_ = self.driver.page_source
+
+        if not exit_:
+            time.sleep(3)
+            self.Req_JS(url_)
+
+        return exit_
+
+
     def Parse_Pages(self, url_, page_):
 
         bs_page = BeautifulSoup(self.Req_JS(url_), 'html.parser')
@@ -282,17 +353,12 @@ class parse_mvideo_new(parse_mvideo):
         # if not li_bs_product_cards:
         #     li_bs_product_cards = bs_page.find_all('div', class_='product-mobile-card')
         #pprint(li_bs_product_cards)
-        if page_ == 1:
-            li_bs_product_cards = bs_page.find_all('div', class_='product-list-card')
-        else:
-            li_bs_product_cards = bs_page.find_all('div', class_='product-cards-layout__item')
+
+        li_bs_product_cards = bs_page.find_all('div', class_='product-card--mobile')
         if not li_bs_product_cards:
             bs_page = BeautifulSoup(self.Click_list_button(page_), 'html.parser')
+            li_bs_product_cards = bs_page.find_all('div', class_='product-card--mobile')
 
-            if page_ == 1:
-                li_bs_product_cards = bs_page.find_all('div', class_='product-list-card')
-            else:
-                li_bs_product_cards = bs_page.find_all('div', class_='product-cards-layout__item')
 
 
         df_ = pd.DataFrame(columns=self.df.columns)
@@ -300,22 +366,16 @@ class parse_mvideo_new(parse_mvideo):
 
         for card in li_bs_product_cards:
 
-            if page_ == 1:
+            bs_price_block = card.find('span', class_="price__main-value")
+            if not bs_price_block:
                 bs_price_block = card.find('div', class_="price__actual-price")
-            else:
-                bs_price_block = card.find('span', class_="price__main-value")
-                # if not bs_price_block:
-                #     bs_price_block = card.find('div', class_="price__main-value price__main-value--old")
 
             if bs_price_block:
                 #pprint(card)
             # Цена если есть, если нет - нафик
 
                 #  Подкатегории
-                if page_ > 1:
-                    soup_longstring = card.find('a', class_="product-title__text")
-                else:
-                    soup_longstring = card.find('a', class_="product-title product-title--clamp")
+                soup_longstring = card.find('a', class_="product-title__text")
 
                 if soup_longstring:
                     longstring = soup_longstring.text
@@ -370,13 +430,13 @@ class parse_mvideo_new(parse_mvideo):
             print("пусто...", page_)
 
 #   MAIN
-parse = parse_mvideo_new('Ноутбук', pg_num=1)
+parse = parse_mvideo_new('Монитор', pg_num=1)
 #print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118?page=12'))
 #parse.Get_EOF_Page()
 
 #   def Pagination(self, max_page, begin_page=1):
 # АККУРАТНО С СВЕРХБОЛЬШИМИ ЦЕНАМИ (ЭТО СКИДКА)
-parse.Pagination(max_page=53, begin_page=1)
+parse.Pagination(max_page=24, begin_page=1)
 
 #parse.Pagination_Unparsed('Монитор-МВ-Цены-от-Oct-20--final.xlsx', new_num=2, finish=44)
 

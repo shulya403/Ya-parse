@@ -58,10 +58,10 @@ parse_link = pynd.Parse_links_v2(page_max=16)
 #parse = pynd.Parse_Modifications_TTX_Mod_in_Prices('Ноутбук', 'Cсылки Ноутбук Jan-21----12--18-40.xlsx', ttx_name=True).main(start=630, num=10)
 # parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Jan-21----12--19-10.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
 #     main(start=460, num=3)
-parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Jan-21----12--19-18.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
-    main(start=570, num=4)
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Jan-21----12--19-38.xlsx', mod=False, ttx_name=True, ttx_mod=False).
-# main(start=0, num=1)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Jan-21----12--19-18.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
+#     main(start=570, num=4)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Jan-21----12--19-38.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
+#     main(start=0, num=1)
 
 
 

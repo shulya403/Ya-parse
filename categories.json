@@ -253,6 +253,7 @@
       "cards_page_params": {
                 "card_div": {
                   "teg": "li",
+                  "re": "True",
                   "attributes": {
                     "class": "_3uUsGGA"
                   }
@@ -266,7 +267,7 @@
                 "price_div": {
                   "teg": "span",
                   "attributes": {
-                    "class": "wcf6ic-1 sc-1nnsxdl-1 gILnXT"
+                    "class": "Q35hFri hlL-W8I"
                     }
                 },
                 "internal_page_mod_name": {

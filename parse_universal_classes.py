@@ -521,7 +521,39 @@ class Parse_El(Parse_Common):
     #             self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_name.text)
     #     else:
     #         self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("a").text)
+    def Find_All_Divs(self, json_div, soup):
 
+        try:
+            arguments = self.teg_card_params[json_div]["attributes"]
+            if arguments:
+                if "class" in arguments:
+                    arguments["class_"] = arguments.pop("class")
+                if "re" in self.teg_card_params[json_div]:
+                    for i in arguments:
+                        arguments[i] = re.compile(arguments[i])
+                return soup.find_all(self.teg_card_params[json_div]["teg"], **arguments)
+            else:
+                return soup.find_all(self.teg_card_params[json_div]["teg"])
+        except KeyError:
+            print('В JSON нет тега {} для сайта {}'.format(json_div, self.site))
+            raise KeyError
+
+    def Find_Div(self, json_div, soup):
+
+        try:
+            arguments = self.teg_card_params[json_div]["attributes"]
+            if arguments:
+                if "class" in arguments:
+                    arguments["class_"] = arguments.pop("class")
+                if "re" in self.teg_card_params[json_div]:
+                    for i in arguments:
+                        arguments[i] = re.compile(arguments[i])
+                return soup.find(self.teg_card_params[json_div]["teg"], **arguments)
+            else:
+                return soup.find(self.teg_card_params[json_div]["teg"])
+        except KeyError:
+            print('В JSON нет тега {} для сайта {}'.format(json_div, self.site))
+            raise KeyError
 
 # DNS
 class Parse_DNS(Parse_Common):
