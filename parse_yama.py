@@ -20,6 +20,7 @@ import re
 #from grab import Grab
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+import winsound
 
 class Yama_parsing_const(object):
     def header_(self, referer=""):
@@ -226,30 +227,103 @@ class Yama_parsing_const(object):
                          'Игровой ноутбук',
                          'Ультрабук'],
             'ttx_file': 'Ноутбук--характеристики.xlsx',
-            'ttx_mod_file': 'Ноутбук-Мод-характеристики.xlsx'
+            'ttx_mod_file': 'Ноутбук-Мод-характеристики.xlsx',
+            'vendors': {'Acer': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A267101&onstock=1&local-offers-first=0',
+                        'Alienware': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A6146438&onstock=1&local-offers-first=0',
+                        'Apple': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A153043&onstock=1&local-offers-first=0',
+                        'Asus': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152863&onstock=1&local-offers-first=0',
+                        'Dell': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A153080&onstock=1&local-offers-first=0',
+                        'Honor': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A15292504&onstock=1&local-offers-first=0',
+                        'HP': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152722&onstock=1&local-offers-first=0',
+                        'Lenovo': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152981&onstock=1&local-offers-first=0',
+                        'MSI':'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A762076&onstock=1&local-offers-first=0',
+                        'Huawei':'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A762076%2C459710&onstock=1&local-offers-first=0'}
 
         },
         'Монитор': {
             'url': 'https://market.yandex.ru/catalog--monitory/54539/list?hid=91052',
             'category': ['Монитор'],
-            'ttx_file': 'Монитор--характеристики.xlsx'
+            'ttx_file': 'Монитор--характеристики.xlsx',
+            'vendors': {'Acer': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A267101&onstock=1&local-offers-first=0',
+                        'AOC': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A431391&onstock=1&local-offers-first=0',
+                        'Asus': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152863&onstock=1&local-offers-first=0',
+                        'BenQ': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A241228&onstock=1&local-offers-first=0',
+                        'Dell':'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153080&onstock=1&local-offers-first=0',
+                        'HP': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152722&onstock=1&local-offers-first=0',
+                        'Iiyama': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152865&onstock=1&local-offers-first=0',
+                        'LG': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153074&onstock=1&local-offers-first=0',
+                        'Philips': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152870&onstock=1&local-offers-first=0',
+                        'Samsung': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153061&onstock=1&local-offers-first=0',
+                        'Viewsonic': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152807&onstock=1&local-offers-first=0',
+                        'Lenovo': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152981&onstock=1&local-offers-first=0',
+                        'MSI': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A762076&onstock=1&local-offers-first=0',
+                        'NEC': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153117&onstock=1&local-offers-first=0 '}
         },
         'Проектор': {
             'url': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?hid=191219',
             'category': ['Проектор',
-                         'Карманный проектор'],
-            'ttx_file': 'Проектор--характеристики.xlsx'
+                         'Карманный проектор',
+                         'Лазерный проектор'],
+            'ttx_file': 'Проектор--характеристики.xlsx',
+            'vendors': {'Acer': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A267101&onstock=1&local-offers-first=0',
+                        'BenQ': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A241228&onstock=1&local-offers-first=0',
+                        'Epson': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153058&onstock=1&local-offers-first=0',
+                        'Infocus': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A287251&onstock=1&local-offers-first=0',
+                        'LG': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153074&onstock=1&local-offers-first=0',
+                        'NEC': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153117&onstock=1&local-offers-first=0',
+                        'Optoma': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A1598564&onstock=1&local-offers-first=0',
+                        'Sony': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152955&onstock=1&local-offers-first=0',
+                        'Viewsonic': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152807&onstock=1&local-offers-first=0',
+                        'Xiaomi': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A7701962&onstock=1&local-offers-first=0',
+                        'Barco': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152884&onstock=1&local-offers-first=0',
+                        'Canon': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152861&onstock=1&local-offers-first=0',
+                        'Casio': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152967&onstock=1&local-offers-first=0',
+                        'Christie': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A454306&onstock=1&local-offers-first=0',
+                        'Hiper ': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A927650&onstock=1&local-offers-first=0',
+                        'Hitachi': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152885&onstock=1&local-offers-first=0',
+                        'JVC': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152968&onstock=1&local-offers-first=0',
+                        'Panasonic': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153082&onstock=1&local-offers-first=0',
+                        'Ricoh': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153070&onstock=1&local-offers-first=0',
+                        'Smart':'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A10766653&onstock=1&local-offers-first=0',
+                        'Vivitek': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A4878853&onstock=1&local-offers-first=0'}
         },
         'ИБП': {
             'url': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/59604/list?hid=91082',
             'category': ['Интерактивный ИБП',
                          'Резервный ИБП',
-                         'ИБП с двойным преобразованием'
+                         'ИБП с двойным преобразованием',
+                         'ИБП',
+                         ''
                          ],
-            'ttx_file': 'ИБП--характеристики.xlsx'
+            'ttx_file': 'ИБП--характеристики.xlsx',
+            'vendors': {'APC': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A431409&onstock=1&local-offers-first=0',
+                        'Eaton': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A7147751&onstock=1&local-offers-first=0',
+                        'Ippon': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A985314&onstock=1&local-offers-first=0',
+                        'Delta': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A1586731&onstock=1&local-offers-first=0',
+                        'Cyberpower': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990776&onstock=1&local-offers-first=0',
+                        'Powercom': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A985313&onstock=1&local-offers-first=0',
+                        'Vertiv': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A16221867&onstock=1&local-offers-first=0',
+                        'SI':'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A14350762&onstock=1&local-offers-first=0',
+                        'Huawei': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A459710&onstock=1&local-offers-first=0',
+                        'Powerman': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A722955&onstock=1&local-offers-first=0',
+                        'Impuls': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A14983243&onstock=1&local-offers-first=0',
+                        'Eltena-Inelt': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990800&onstock=1&local-offers-first=0',
+                        'Legrand': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A11617058&onstock=1&local-offers-first=0',
+                        'Socomec': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990792&onstock=1&local-offers-first=0',
+                        'Riello':'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A15060130&onstock=1&local-offers-first=0',
+                        'Maklesan': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A10436632&onstock=1&local-offers-first=0',
+                        'GE': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A152998&onstock=1&local-offers-first=0',
+                        'DKC': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A13107145&onstock=1&local-offers-first=0',
+                        'Tripp Lite': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A1019970&onstock=1&local-offers-first=0',
+                        'AEG': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A152789&onstock=1&local-offers-first=0',
+                        'Irbis': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A6151013&onstock=1&local-offers-first=0',
+                        'Sven': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A284761&onstock=1&local-offers-first=0',
+                        'Hiper': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A927650&onstock=1&local-offers-first=0',
+                        }
         }
     }
     TTX_files_folder = 'TTX_files/'
+
 
 class Req(object):
     def __init__(self):
@@ -494,10 +568,10 @@ class Parse_links_v2(Parse_links):
                         try:
                             model_link = row.find('h3', class_=self.h3_model_name).find('a')
                             # Отсеиваем редирект на внешние сайты или конкретные конфиги нутбуков и останавливаем работу
-                            if ('redir/' in model_link) or \
-                                    ((category == 'Ноутбук') and ('/' in model_link.text)):
-                                pages_full = False
-                                break
+                            # if ('redir/' in model_link) or \
+                            #         ((category == 'Ноутбук') and ('/' in model_link.text)):
+                            #     pages_full = False
+                            #     break
 
                             if model_link:
                                 model_dict['Href'] = model_link['href']  # ссылка на страницу модели
@@ -563,6 +637,148 @@ class Parse_links_v2(Parse_links):
                 print('облом... ', response.status_code)
 
         return models_list
+
+#скачивание по вендорам
+class Parse_links_v3(Parse_links):
+    def __init__(self, page_max=0):
+        self.page_max = page_max
+
+        # скачивание линков на страницы модели по категории
+
+    def parse_links(self, category_ls, url_):
+
+            models_list = list()  # список словарей с моделями с названиеми и ссылками на модели
+            set_names_vendor = set()
+
+            response = Req()
+
+            page = 1  # номер страницы выдачи
+
+            pages_full = True  # есть ли целевой контент на очередной странице
+            while pages_full:
+                if page > 1:
+                    page_url = url_ + '&page=' + str(page)
+
+                else:
+                    page_url = url_ + self.link_tail
+
+                response.selenium(page_url)
+
+                if response.status_code == 200:
+                    # if gr_.response.code == 200:
+                    print('поехали ', page_url)
+                    iter_page_soup = BeautifulSoup(response.text, 'html.parser')
+                    print(iter_page_soup.title)
+
+                    set_this_page = set()
+
+                    # Пречень блоков моделей (строк таблицы) на очередной странице выдачи
+                    rows_models = iter_page_soup.find_all('div', class_=self.div_row_models_ls)
+
+                    if len(rows_models) != 0:
+                        print(page, len(rows_models))
+
+                        for row in rows_models:
+                            # И рассовыем их по ключам словаря model_dict
+                            model_dict = dict()
+                            try:
+                                #model_link = row.find('h3', class_=self.h3_model_name).find('a')
+                                model_link = row.find('h3').find('a')
+
+                                if model_link:
+                                    model_dict['Href'] = model_link['href']  # ссылка на страницу модели
+
+                                # Ищем название категории
+                                category_len = 0
+
+                                for cat in category_ls:
+                                    if cat in model_link.text:
+                                        category_len = len(cat.split())
+                                        try:
+                                            old_len = len(model_dict['Category'].split())
+                                            if category_len > old_len:
+                                                model_dict['Category'] = cat
+                                        except Exception:
+                                            model_dict['Category'] = cat
+
+                                        # break
+
+                                name = model_link.text.split()
+
+                                # Ищем имя вендора (следующее за категорией)
+                                model_dict['Vendor'] = name[category_len]
+
+                                # Формируем название модели вместе с имненм вендора через пробел кроме последнего пробела
+                                mod_name = ''
+                                for word in name[category_len:]:
+                                    mod_name += word + ' '
+                                model_dict['Name'] = mod_name[:-1]
+
+                            except AttributeError:
+                                model_dict['Name'] = ""
+                                model_dict['Href'] = ""
+                                model_dict['Vendor'] = ""
+                                model_dict['Category'] = ""
+
+                            # Пихаем словарь модели в общий список
+                            set_this_page.add(model_dict['Name'])
+                            print(model_dict['Name'])
+
+                            models_list.append(model_dict)
+
+                        # Проверяем не последняя ли страница выдачи
+                        if page >= self.page_max:
+                            pages_full = False
+                        if set_this_page <= set_names_vendor:
+                            pages_full = False
+                        else:
+                            set_names_vendor |= set_this_page
+
+                        page += 1
+
+                    else:
+                        capcha_quest = iter_page_soup.find('title')
+
+                        if capcha_quest.text == 'Ой!':
+                            print(page, 'облом - капча')
+                            time.sleep(1)
+                        else:
+                            print(page, 'фигня какая-то')
+                            break
+
+                    time.sleep(1)
+                else:
+                    print('облом... ', response.status_code)
+
+            return models_list
+
+
+
+    #запихиваем линки на модели в эксель. Вызывная функция парсинга
+    def links_to_excel(self, category, folder='Price_link_list/', vendors_list=[]):
+
+        now = datetime.now().strftime('%b-%y----%d--%H-%M')
+        excel_file_name = folder + 'Cсылки ' + category + ' ' + now + '.xlsx'
+        category_ls = self.Categories[category]['category']
+
+        df_ = pd.DataFrame()
+        if not vendors_list:
+            vendors_pages = self.Categories[category]['vendors'].values()
+        else:
+            vendors_pages = [v for k, v in self.Categories[category]['vendors'].items() if k in vendors_list]
+        for i in vendors_pages:
+            url_ = str(i)
+            parsed_links__ls = self.parse_links(category_ls, url_)
+
+            print(len(parsed_links__ls))
+            df = pd.DataFrame(parsed_links__ls)
+            df.drop_duplicates(subset=['Name'], inplace=True)
+            print(len(df))
+            df_ = pd.concat([df_, df], ignore_index=True)
+
+            xl_writer = pd.ExcelWriter(excel_file_name, engine='xlsxwriter', options={'strings_to_urls': False})
+            df_.to_excel(xl_writer)
+            xl_writer.close()
 
 
 class Parse_models(Yama_parsing_const):
@@ -1628,6 +1844,11 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             if self.driver.page_source:
                 if not "Ой" in self.driver.page_source:
                     return self.driver.page_source
+                else:
+                    winsound.Beep(2500, 1000)
+                    print('\a\a\a')
+                    input()
+                    self.URL_Req(url_)
         except Exception:
             print("не выходит {}".format(url_))
             return None
@@ -1678,3 +1899,82 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
 
             return exit_
 
+    def main(self, step=10, start=0, num=""):
+
+        self.num = num
+
+        finish_ = len(self.df_links)
+        begin_ = start
+        end_ = begin_ + step
+        while end_ < finish_ - 1:
+            end_ = begin_ + step
+            if end_ > finish_ - 1:
+                end_ = finish_ - 1
+
+            for i, row_df_links in self.df_links.iloc[begin_:end_].iterrows():
+                j = len(self.df_names)
+                self.df_names.loc[j, 'Site'] = 'yama'
+                self.df_names.loc[j, 'Name'] = None
+                self.df_names.loc[j, 'Ya_UN_Name'] = row_df_links['Name']
+                self.df_names.loc[j, 'Modification_name'] = self.df_names.loc[j, 'Ya_UN_Name']
+                self.df_names.loc[j, 'Modification_href'] = self.host + str(row_df_links['Href'])
+                self.df_names.loc[j, 'Vendor'] = row_df_links['Vendor']
+                self.df_names.loc[j, 'Subcategory'] = row_df_links['Category']
+                self.df_names.loc[j, 'Category'] = self.category
+                self.df_names.loc[j, 'Date'] = self.now
+
+
+
+                url_req = self.URL_Req(row_df_links['Href'])
+                if url_req:
+                    soup_page = BeautifulSoup(url_req, 'html.parser')
+                    soup_table_grey = soup_page.find('ul', class_=self.ul_table_gray)
+
+                    while not soup_table_grey:
+
+                        winsound.Beep(2500, 1000)
+                        input()
+                        url_req = self.URL_Req(row_df_links['Href'])
+                        soup_page = BeautifulSoup(url_req, 'html.parser')
+                        soup_table_grey = soup_page.find('ul', class_=self.ul_table_gray)
+
+
+                    self.df_names.loc[j, ['Quantity', 'Modification_price']] = self.Parse_Model_Page(soup_page,
+                                                                                            soup_table_grey)
+
+                    print(self.df_names.iloc[j])
+                    if self.mod:
+                        if url_req:
+                            url_block = soup_table_grey.find('a', {"href": re.compile("mods")})
+                            if url_block:
+                                url_ = url_block.get('href')
+                            else:
+                                url_ = None
+                            if url_:
+                                self.Parse_Modifications(url_,
+                                                        row_df_links['Ya_UN_Name'],
+                                                        row_df_links['Vendor'],
+                                                        row_df_links['Category'])
+                if self.ttx_name:
+                    ttx_len = len(self.df_ttx_name)
+                    self.df_ttx_name = self.TTX_Handler(self.URL_Spec(soup_table_grey),
+                                                        self.df_ttx_name,
+                                                        self.df_names.loc[j, 'Modification_name'])
+            print(self.df_names.loc[j - step:j]['Modification_price'].to_list())
+
+
+            if self.df_names.loc[j-step:j]['Modification_price'].isna().all():
+                raise
+            self.DF_to_Excel(self.df_names, num=self.num)
+            if self.ttx_name and (len(self.df_ttx_name) > ttx_len):
+                self.df_ttx_name.to_excel(self.ttx_name_filename)
+
+            # WEBDRIVER
+            self.driver.close()
+            options = webdriver.ChromeOptions()
+            # options.add_argument('--headless')
+            options.add_argument("user-data-dir=selenium")
+
+            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
+            begin_ = end_

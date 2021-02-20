@@ -13,7 +13,13 @@ import parse_yama as pynd
 
 #Проверить какая последняя страница в выдаче (page_max)
 
-parse_link = pynd.Parse_links_v2(page_max=16)
+#parse_link = pynd.Parse_links_v2(page_max=25)
+#parse_link.links_to_excel('Ноутбук')
+#parse_link.links_to_excel('Монитор')
+#parse_link.links_to_excel('Проектор')
+#parse_link.links_to_excel('ИБП')
+
+parse_link = pynd.Parse_links_v3(page_max=20)
 #parse_link.links_to_excel('Ноутбук')
 #parse_link.links_to_excel('Монитор')
 #parse_link.links_to_excel('Проектор')
@@ -55,13 +61,13 @@ parse_link = pynd.Parse_links_v2(page_max=16)
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
 #Прерывание (пустые данные). Надо докачивать с позици номер строки последнего по Excel -1
-#parse = pynd.Parse_Modifications_TTX_Mod_in_Prices('Ноутбук', 'Cсылки Ноутбук Jan-21----12--18-40.xlsx', ttx_name=True).main(start=630, num=10)
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Jan-21----12--19-10.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
-#     main(start=460, num=3)
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Jan-21----12--19-18.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
-#     main(start=570, num=4)
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Jan-21----12--19-38.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
+#parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Feb-21----17--15-58.xlsx', ttx_name=True).main(start=0, num=1) #3-426
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Feb-21----18--15-51.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
+#     main(start=1212, num=8, step=20)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Feb-21----18--17-45.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
 #     main(start=0, num=1)
+parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Feb-21----18--18-24.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
+    main(start=0, num=1)
 
 
 
