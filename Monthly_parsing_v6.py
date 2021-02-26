@@ -67,7 +67,7 @@ parse_link = pynd.Parse_links_v3(page_max=20)
 # parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Feb-21----18--17-45.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
 #     main(start=0, num=1)
 parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Feb-21----18--18-24.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
-    main(start=0, num=1)
+    main(start=1183, num=3)
 
 
 

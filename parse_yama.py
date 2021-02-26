@@ -1930,15 +1930,6 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                     soup_page = BeautifulSoup(url_req, 'html.parser')
                     soup_table_grey = soup_page.find('ul', class_=self.ul_table_gray)
 
-                    while not soup_table_grey:
-
-                        winsound.Beep(2500, 1000)
-                        input()
-                        url_req = self.URL_Req(row_df_links['Href'])
-                        soup_page = BeautifulSoup(url_req, 'html.parser')
-                        soup_table_grey = soup_page.find('ul', class_=self.ul_table_gray)
-
-
                     self.df_names.loc[j, ['Quantity', 'Modification_price']] = self.Parse_Model_Page(soup_page,
                                                                                             soup_table_grey)
 

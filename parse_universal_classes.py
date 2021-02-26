@@ -560,6 +560,40 @@ class Parse_DNS(Parse_Common):
 
     site = "dns"
 
+    def Find_All_Divs(self, json_div, soup):
+
+        try:
+            arguments = self.teg_card_params[json_div]["attributes"]
+            if arguments:
+                if "class" in arguments:
+                    arguments["class_"] = arguments.pop("class")
+                if "re" in self.teg_card_params[json_div]:
+                    for i in arguments:
+                        arguments[i] = re.compile(arguments[i])
+                return soup.find_all(self.teg_card_params[json_div]["teg"], **arguments)
+            else:
+                return soup.find_all(self.teg_card_params[json_div]["teg"])
+        except KeyError:
+            print('В JSON нет тега {} для сайта {}'.format(json_div, self.site))
+            raise KeyError
+
+    def Find_Div(self, json_div, soup):
+
+        try:
+            arguments = self.teg_card_params[json_div]["attributes"]
+            if arguments:
+                if "class" in arguments:
+                    arguments["class_"] = arguments.pop("class")
+                if "re" in self.teg_card_params[json_div]:
+                    for i in arguments:
+                        arguments[i] = re.compile(arguments[i])
+                return soup.find(self.teg_card_params[json_div]["teg"], **arguments)
+            else:
+                return soup.find(self.teg_card_params[json_div]["teg"])
+        except KeyError:
+            print('В JSON нет тега {} для сайта {}'.format(json_div, self.site))
+            raise KeyError
+
     def Page_Requests(self, url_):
 
         cookies = self.site_params["cookies"]
@@ -594,6 +628,11 @@ class Parse_DNS(Parse_Common):
            #session.close()
            return response.text
 
+    def Product_Record_Handler(self, card):
+
+        soup_product = self.Find_Div("product_div", card)
+        self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.get("href"))
+        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("span").text)
 
     def Modification_Price_Handler(self, card):
 
@@ -614,7 +653,14 @@ class Parse_DNS(Parse_Common):
             #     action_price = soup_price.find('div', class_="product-min-price__min")
             #     price_ = action_price.find('mark', class_="product-min-price__min-price").text
             # except Exception:
-            price_ = soup_price.find('div', class_="product-min-price__current").text
+            price_prev = None
+            try:
+                price_prev = soup_price.find('span', class_="product-buy__prev").text
+            except Exception:
+                pass
+            price_ = soup_price.text
+            if price_prev:
+                price_ = price_.replace(price_prev, "")
 
             exit_ = "".join(re.findall(r'\d', price_))
 

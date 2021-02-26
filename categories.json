@@ -157,22 +157,21 @@
       "cards_page_params": {
                 "card_div": {
                   "teg": "div",
-                  "re": "True",
                   "attributes": {
-                    "class": "ProductCardVertical_separated"
+                    "class": "product_data__gtm-js product_data__pageevents-js ProductCardHorizontal js--ProductCardInListing js--ProductCardInWishlist"
                                                 }
                 },
                 "product_div": {
                   "teg": "a",
                   "re": "True",
                   "attributes": {
-                    "class": "ProductCardVertical__name"
+                    "class": "ProductCardHorizontal__title"
                   }
                 },
                 "price_div": {
                   "teg": "span",
                   "attributes": {
-                    "class": "ProductPrice__price ProductCardVerticalPrice__price-current__price"
+                    "class": "ProductPrice__price ProductCardHorizontal__price__price"
                   }
                 }
        },
@@ -205,19 +204,20 @@
                 "card_div": {
                   "teg": "div",
                   "attributes": {
-                    "class": "catalog-item"
+                    "class": "catalog-product ui-button-widget"
                   }
                 },
                 "product_div": {
-                  "teg": "div",
+                  "teg": "a",
+                  "re": "True",
                   "attributes": {
-                    "class": "product-info__title-link"
+                    "class": "catalog-product__name"
                   }
                 },
                 "price_div": {
                   "teg": "div",
                   "attributes": {
-                    "class": "n-catalog-product__price"
+                    "class": "product-buy__price"
                   }
                 },
                 "internal_page_price": {

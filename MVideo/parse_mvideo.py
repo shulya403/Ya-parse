@@ -60,7 +60,7 @@ class parse_mvideo(object):
 
         options = webdriver.ChromeOptions()
         #options.add_argument('--headless')
-        #options.add_argument("--window-size=500,1080")
+        options.add_argument("--window-size=500,1080")
 
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
@@ -286,7 +286,9 @@ class parse_mvideo_new(parse_mvideo):
 
                     try:
                         wait = WebDriverWait(driver, 10).until(condition)
-                    except Exception:
+                    except Exception as Err:
+                        print(Err)
+                        wait = list()
                         pass
                     print(len(wait))
                     if len(wait) == number_of_elements:
@@ -308,32 +310,15 @@ class parse_mvideo_new(parse_mvideo):
         #         pass
         self.driver.get(url_)
         time.sleep(1)
-        number_of_elements = len(self.driver.find_elements_by_class_name("product-title product-title--grid"))
+        product_elements = self.driver.find_elements_by_class_name("product-cards-layout__item")
 
-       # wait_until_all_expected_elements(self.driver, number_of_elements)
-       #  times = 0
-       #  while True:
-       #      xpath = "//div[@class=\"product-card--mobile\"]"
-       #
-       #      condition = EC.presence_of_all_elements_located((By.XPATH, xpath))
-       #
-       #      number_of_cards = len(self.driver.find_elements_by_class_name("product-card--mobile__info"))
-       #
-       #      try:
-       #          wait = WebDriverWait(self.driver, 10).until(condition)
-       #      except Exception:
-       #          pass
-       #          wait=list()
-       #      print(len(wait))
-       #      if len(wait) == number_of_elements:
-       #          break
-       #      # else:
-       #      #     self.driver.refresh()
-       #      #     self.driver.refresh()
-       #      times += 1
-       #      #time.sleep(1)
-       #      if times == 5:
-       #          break
+        number_of_elements = len(product_elements)
+
+        for elm in product_elements:
+            elm.location_once_scrolled_into_view
+
+
+        wait_until_all_expected_elements(self.driver, number_of_elements)
 
         exit_ = self.driver.page_source
 
@@ -358,7 +343,6 @@ class parse_mvideo_new(parse_mvideo):
         if not li_bs_product_cards:
             bs_page = BeautifulSoup(self.Click_list_button(page_), 'html.parser')
             li_bs_product_cards = bs_page.find_all('div', class_='product-card--mobile')
-
 
 
         df_ = pd.DataFrame(columns=self.df.columns)
@@ -430,13 +414,13 @@ class parse_mvideo_new(parse_mvideo):
             print("пусто...", page_)
 
 #   MAIN
-parse = parse_mvideo_new('Монитор', pg_num=1)
+parse = parse_mvideo_new('Ноутбук', pg_num=1)
 #print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118?page=12'))
 #parse.Get_EOF_Page()
 
 #   def Pagination(self, max_page, begin_page=1):
 # АККУРАТНО С СВЕРХБОЛЬШИМИ ЦЕНАМИ (ЭТО СКИДКА)
-parse.Pagination(max_page=24, begin_page=1)
+parse.Pagination(max_page=67, begin_page=1)
 
 #parse.Pagination_Unparsed('Монитор-МВ-Цены-от-Oct-20--final.xlsx', new_num=2, finish=44)
 

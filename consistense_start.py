@@ -22,8 +22,8 @@ import consistence_parsed_names as CPN
 #             dir_root="Prices/",
 #             dir_work="Handle_base/"):
 
-# Dec = CPN.Concat_Parse_Files('Монитор', M='Dec', Y=20)
-# Dec.Concat_files()
+# Jan = CPN.Concat_Parse_Files('Монитор', M='Jan', Y=21)
+# Jan.Concat_files()
 #May.Clearing_Vendors() #Унификация имен вендоров в поле Vendor. Вызывается Concat_Files() или отдельно
 #May.Clearing_Mod_Name() #Удаление имни вендора из Midification_name. Вызывается Concat_Files() или отдельно
 
@@ -45,10 +45,10 @@ import consistence_parsed_names as CPN
 #                 ):
 
 
-# FileHandler = CPN.Consist_Names(category="Монитор", #для ноутов для yama заменить Mod_Name_restrict на просто Modification_name
+# FileHandler = CPN.Consist_Names(category="Монитор", #_Source для ноутов для yama заменить Mod_Name_restrict на просто Modification_name
 #                                 file_itr="Reports/Mon models november 2020.xlsx",
-#                                 M='Dec',
-#                                 Y='20',
+#                                 M='Jan',
+#                                 Y='21',
 #                                 file_work_name=""
 #                                 )
 #
@@ -80,10 +80,10 @@ import consistence_parsed_names as CPN
 #                   num=1
 #                  ):
 
-MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_Dec.xlsx",
-                                        file_work_name="NB_Pivot_unknown_12.xlsx",
+MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_Jan.xlsx",
+                                        file_work_name="NB_Pivot_unknown_1.xlsx",
                                         work_sheet="",
-                                        dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_12\\",
+                                        dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_01\\",
                                          num=1
                                      )
 MthNB.Fill_Models()
