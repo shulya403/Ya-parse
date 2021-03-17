@@ -19,24 +19,21 @@ import parse_yama as pynd
 #parse_link.links_to_excel('Проектор')
 #parse_link.links_to_excel('ИБП')
 
-parse_link = pynd.Parse_links_v3(page_max=20)
-#parse_link.links_to_excel('Ноутбук')
-#parse_link.links_to_excel('Монитор')
+# Херачит отдельно по вендорам
+# Убрать из xls - /offer/, //Market-clik
+# 'vendors': ['Acer', 'Alienware','Apple', 'Asus', 'Dell', 'Honor', 'HP','Lenovo', 'MSI', 'Huawei']
+# 'vendors': ['Acer','AOC','Asus','BenQ','Dell','HP', 'Iiyama', 'LG', 'Philips', 'Samsung', 'Viewsonic', 'Lenovo', 'MSI','NEC']
+# 'vendors': ['Acer','BenQ','Epson','Infocus','LG','NEC','Optoma','Sony','Viewsonic','Xiaomi','Barco','Canon','Casio','Christie','Hiper ','Hitachi','JVC','Panasonic',
+#             'Ricoh','Smart','Vivitek']
+# 'vendors': ['APC','Eaton','Ippon','Delta','Cyberpower','Powercom','Vertiv','SI','Huawei','Powerman','Impuls','Eltena-Inelt','Legrand','Socomec','Riello','Maklesan',
+#             'GE','DKC','Tripp Lite','AEG','Irbis','Sven','Hiper']
+
+#parse_link = pynd.Parse_links_v3(page_max=20)
+#parse_link.links_to_excel('Ноутбук', vendors_list=['HP','Lenovo', 'MSI', 'Huawei'])
+#parse_link.links_to_excel('Монитор', vendors_list=['NEC'])
 #parse_link.links_to_excel('Проектор')
 #parse_link.links_to_excel('ИБП')
 
-#parse_category = pynd.Parse_models()
-
-#parse_category.prices_to_excel('Cсылки Монитор Feb-20----16--18-37.xlsx')
-#parse_category.prices_to_excel('Cсылки ИБП Feb-20----16--19-02.xlsx')
-#parse_category.prices_to_excel('Cсылки Проектор Feb-20----16--18-41.xlsx')
-
-#parse.prices_to_excel('Монитор', 'Cсылки Монитор Apr-20----16--15-00.xlsx')
-#parse.prices_to_excel('Проектор', 'Cсылки Проектор Apr-20----16--15-02.xlsx')
-#parse.prices_to_excel('ИБП', 'Cсылки ИБП Apr-20----16--15-05.xlsx')
-
-#parse_category = pynd.Parse_models()
-#parse_category.no_prices_reparse('Ноутбук-Цены-от-Mar-20----17--13-06.xlsx', 'Cсылки Ноутбук Mar-20----16--19-08.xlsx')
 
 #class Parse_Modifications_TTX(Yama_parsing_const):
 #    def __init__(self,
@@ -61,13 +58,13 @@ parse_link = pynd.Parse_links_v3(page_max=20)
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
 #Прерывание (пустые данные). Надо докачивать с позици номер строки последнего по Excel -1
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Feb-21----17--15-58.xlsx', ttx_name=True).main(start=0, num=1) #3-426
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Feb-21----18--15-51.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
-#     main(start=1212, num=8, step=20)
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Feb-21----18--17-45.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
+#parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Mar-21----15--final.xlsx', ttx_name=True).main(start=70, num=3) #3-426
+parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Mar-21----15--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
+     main(start=280, num=3, step=10)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', '', mod=False, ttx_name=True, ttx_mod=False).\
 #     main(start=0, num=1)
-parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Feb-21----18--18-24.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
-    main(start=1183, num=3)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', '', mod=False, ttx_name=True, ttx_mod=False).\
+#     main(start=1183, num=3)
 
 
 

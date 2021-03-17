@@ -1382,7 +1382,9 @@ class Parse_Modifications_TTX(Yama_parsing_const):
     def TTX_Handler(self, url_, df_ttx, name):
 
         if name not in df_ttx['Name'].values:
+
             j = len(df_ttx)
+            print('len-ttx: ', j)
             df_ttx.loc[j, 'Name'] = name
             url_req = self.URL_Req(url_)
             if url_req:
@@ -1612,6 +1614,7 @@ class Parse_Modifications_TTX_Mod_in_Prices(Parse_Modifications_TTX):
                     self.df_ttx_name = self.TTX_Handler(self.URL_Spec(soup_table_grey),
                                                         self.df_ttx_name,
                                                         self.df_names.loc[j, 'Modification_name'])
+                    print('len-ttx after: ', self.df_ttx_name.tail(2))
 
             self.DF_to_Excel(self.df_names, num=self.num)
             if self.ttx_name and (len(self.df_ttx_name) > ttx_len):
@@ -1833,6 +1836,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
         if ttx_name:
             self.ttx_name = ttx_name
             self.ttx_name_filename = self.TTX_files_folder + self.Categories[self.category]['ttx_file']
+            print(self.ttx_name_filename)
             self.df_ttx_name = pd.read_excel(self.ttx_name_filename, index_col=0)
 
     def URL_Req(self, url_, host=True):
@@ -1930,27 +1934,31 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                     soup_page = BeautifulSoup(url_req, 'html.parser')
                     soup_table_grey = soup_page.find('ul', class_=self.ul_table_gray)
 
-                    self.df_names.loc[j, ['Quantity', 'Modification_price']] = self.Parse_Model_Page(soup_page,
-                                                                                            soup_table_grey)
+                    if soup_table_grey:
 
-                    print(self.df_names.iloc[j])
-                    if self.mod:
-                        if url_req:
-                            url_block = soup_table_grey.find('a', {"href": re.compile("mods")})
-                            if url_block:
-                                url_ = url_block.get('href')
-                            else:
-                                url_ = None
-                            if url_:
-                                self.Parse_Modifications(url_,
-                                                        row_df_links['Ya_UN_Name'],
-                                                        row_df_links['Vendor'],
-                                                        row_df_links['Category'])
-                if self.ttx_name:
-                    ttx_len = len(self.df_ttx_name)
-                    self.df_ttx_name = self.TTX_Handler(self.URL_Spec(soup_table_grey),
-                                                        self.df_ttx_name,
-                                                        self.df_names.loc[j, 'Modification_name'])
+                        self.df_names.loc[j, ['Quantity', 'Modification_price']] = self.Parse_Model_Page(soup_page,
+                                                                                                soup_table_grey)
+
+                        print(self.df_names.iloc[j])
+                        if self.mod:
+                            if url_req:
+                                url_block = soup_table_grey.find('a', {"href": re.compile("mods")})
+                                if url_block:
+                                    url_ = url_block.get('href')
+                                else:
+                                    url_ = None
+                                if url_:
+                                    self.Parse_Modifications(url_,
+                                                            row_df_links['Ya_UN_Name'],
+                                                            row_df_links['Vendor'],
+                                                            row_df_links['Category'])
+                        if self.ttx_name:
+                            ttx_len = len(self.df_ttx_name)
+                            self.df_ttx_name = self.TTX_Handler(self.URL_Spec(soup_table_grey),
+                                                                self.df_ttx_name,
+                                                                self.df_names.loc[j, 'Modification_name'])
+                    else:
+                        pass
             print(self.df_names.loc[j - step:j]['Modification_price'].to_list())
 
 
@@ -1959,6 +1967,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             self.DF_to_Excel(self.df_names, num=self.num)
             if self.ttx_name and (len(self.df_ttx_name) > ttx_len):
                 self.df_ttx_name.to_excel(self.ttx_name_filename)
+                print('write: ', self.ttx_name_filename, len(self.df_ttx_name))
 
             # WEBDRIVER
             self.driver.close()
@@ -1969,3 +1978,19 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
             begin_ = end_
+
+    def DF_to_Excel(self, df_out, num="", level=""):
+
+            filename = "Prices/" + \
+                       self.category + \
+                       "--" + \
+                       level + \
+                       "--" + \
+                       self.now + \
+                       "--" + \
+                       str(num) + \
+                       ".xlsx"
+
+            writer = pd.ExcelWriter(filename, engine='xlsxwriter', options={'strings_to_urls': False})
+            df_out.to_excel(writer)
+            writer.close()
