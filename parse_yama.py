@@ -1832,12 +1832,12 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                 self.ttx_mod = ttx_mod
                 self.ttx_mod_filename = self.TTX_files_folder + self.Categories[self.category]['ttx_mod_file']
                 self.df_ttx_mod = pd.read_excel(self.ttx_mod_filename, index_col=0)
-
+        self.ttx_name = ttx_name
         if ttx_name:
-            self.ttx_name = ttx_name
             self.ttx_name_filename = self.TTX_files_folder + self.Categories[self.category]['ttx_file']
             print(self.ttx_name_filename)
             self.df_ttx_name = pd.read_excel(self.ttx_name_filename, index_col=0)
+
 
     def URL_Req(self, url_, host=True):
 

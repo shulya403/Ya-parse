@@ -18,7 +18,9 @@ Categories = {
         'type': ['ноутбук',
                  'ноутбук игровой',
                  'ноутбук-трансформер',
-                 'ультрабук']
+                 'ультрабук',
+                 'ноутбук для бизнеса',
+                 'ноутбук для дизайнеров']
     },
     'Монитор': {
         'url': 'https://www.mvideo.ru/komputernaya-tehnika-4107/monitory-101',
@@ -414,13 +416,15 @@ class parse_mvideo_new(parse_mvideo):
             print("пусто...", page_)
 
 #   MAIN
-parse = parse_mvideo_new('Ноутбук', pg_num=1)
+# Монитор: 23
+# Ноутбук: 66
+parse = parse_mvideo_new('Монитор', pg_num=1)
 #print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118?page=12'))
 #parse.Get_EOF_Page()
 
 #   def Pagination(self, max_page, begin_page=1):
 # АККУРАТНО С СВЕРХБОЛЬШИМИ ЦЕНАМИ (ЭТО СКИДКА)
-parse.Pagination(max_page=67, begin_page=1)
+parse.Pagination(max_page=23, begin_page=1)
 
 #parse.Pagination_Unparsed('Монитор-МВ-Цены-от-Oct-20--final.xlsx', new_num=2, finish=44)
 
