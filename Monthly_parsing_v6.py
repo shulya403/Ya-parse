@@ -60,13 +60,13 @@ import parse_yama as pynd
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
 #Прерывание (пустые данные). Надо докачивать с позици номер строки последнего по Excel -1
-parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Apr-21----15--17-03.xlsx', ttx_name=True).main(start=3173, num=3) #3-426
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Mar-21----15--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
-#      main(start=280, num=3, step=10)
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Mar-21----15--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+#parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Apr-21----15--17-03.xlsx', ttx_name=True).main(start=3173, num=3) #3-426
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Apr-21----15--17-38.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
+#      main(start=0, num=1, step=10)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Apr-21----15--17-52.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
 #     main(start=0, num=1)
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Mar-21----15--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
-#     main(start=0, num=1)
+parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Apr-21----15--18-08.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+    main(start=0, num=1)
 
 
 

@@ -1426,21 +1426,30 @@ class Parse_Modifications_TTX(Yama_parsing_const):
 
     def AvgPrice_Handler(self, soup_page, soup_offers_cell):
 
-        # а есть ли боттом c ценами?
-        teg_h2 = soup_page.find_all('h2')
-        teg_h2_texts = [i.text for i in teg_h2]
+        #цены сверху
 
-        if 'Динамика средней цены за полгода' in teg_h2_texts:
-                # Если блок средней цены на странице модели есть
-            avg_price = soup_page.find('div', class_=self.div_price_avg)
+        teg_price = soup_page.find('div', class_="_3NaXxl-HYN _3kWlKUNlTg")
+
+        if teg_price:
             try:
-                exit_ = int(avg_price.find('span').text.replace(' ', '').replace('₽', ''))
-            except AttributeError:
-                exit_ = None
-        else:
+                exit_ = int(teg_price.find('span').find('span').text.replace(' ', ''))
+                return exit_
+            except Exception:
+                pass
+        # # а есть ли боттом c ценами?
+        # teg_h2 = soup_page.find_all('h2')
+        # teg_h2_texts = [i.text for i in teg_h2]
+        #
+        # if 'Динамика средней цены за полгода' in teg_h2_texts:
+        #         # Если блок средней цены на странице модели есть
+        #     avg_price = soup_page.find('div', class_=self.div_price_avg)
+        #     try:
+        #         exit_ = int(avg_price.find('span').text.replace(' ', '').replace('₽', ''))
+        #     except AttributeError:
+        #         exit_ = None
                 # тады лезем внутря в список цен, руками:
-            url_ = str(soup_offers_cell.find('a').get('href'))
-            exit_ = self.Offers_Handler(url_)
+        url_ = str(soup_offers_cell.find('a').get('href'))
+        exit_ = self.Offers_Handler(url_)
 
         return exit_
 

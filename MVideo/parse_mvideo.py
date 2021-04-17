@@ -111,12 +111,12 @@ class parse_mvideo(object):
         #self.driver = webdriver.Chrome("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe", options=options)
             #self.driver.implicitly_wait(3)
         self.driver.get(url_)
-        try:
-            element = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "")))
-        except Exception:
-            pass
-        finally:
-            exit_ = self.driver.page_source
+        # try:
+        #     element = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "")))
+        # except Exception:
+        #     pass
+        # finally:
+        exit_ = self.driver.page_source
 
         if not exit_:
             time.sleep(3)
@@ -250,10 +250,18 @@ class parse_mvideo_new(parse_mvideo):
 
     def Click_list_button(self, page):
 
-        # element = WebDriverWait(self.driver, 5).\
-        #         until(EC.element_to_be_clickable((By.CSS_SELECTOR, ".listing-view-switcher__button--list")))\
-        #         .click()
-        #if page > 1:
+        def wait_until_all(func, number_):
+            while True:
+                elements = func()
+                if len(elements) == number_:
+                    return elements()
+
+        def get_elements(driver):
+            wait = WebDriverWait(driver, 10).until(EC.presence_of_all_elements_located((By.CSS_SELECTOR, ".product-card--mobile")))
+
+            return wait
+                # wait
+
         button = None
         try:
                 button = self.driver.find_element_by_tag_name("mvid-view-switcher")
@@ -263,7 +271,13 @@ class parse_mvideo_new(parse_mvideo):
 
         if button:
             button.click()
+        # time.sleep(10)
 
+            elements_ = self.driver.find_elements_by_css_selector(".product-cards-layout__item.ng-star-inserted")
+            elements_num = len(elements_)
+            elements = wait_until_all(lambda: get_elements(self.driver), elements_num)
+
+            #element = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "pagination desktop-listing__pagination")))
 
         try:
             self.driver.implicitly_wait(10)
