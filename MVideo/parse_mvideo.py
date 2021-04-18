@@ -403,7 +403,7 @@ class parse_mvideo_new(parse_mvideo):
                             df_.loc[i, 'Modification_price'] = "".join(re.findall(r'\d', bs_price_block.text))
                             df_.loc[i, 'Vendor'] = list_word[list_found_cat[0][2]]
                             df_.loc[i, 'Modification_name'] = " ".join(list_word[list_found_cat[0][2]:])
-                            df_.loc[i, 'Modification_href'] = self.host_url + soup_longstring.get('href')
+                            df_.loc[i, 'Modification_href'] = soup_longstring.get('href')
             else:   #price_block
                 pprint(card)
 
@@ -430,15 +430,15 @@ class parse_mvideo_new(parse_mvideo):
             print("пусто...", page_)
 
 #   MAIN
-# Монитор: 23
-# Ноутбук: 66
-parse = parse_mvideo_new('Монитор', pg_num=1)
+# Монитор: 29
+# Ноутбук: 69
+parse = parse_mvideo_new('Ноутбук', pg_num=1)
 #print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118?page=12'))
 #parse.Get_EOF_Page()
 
 #   def Pagination(self, max_page, begin_page=1):
 # АККУРАТНО С СВЕРХБОЛЬШИМИ ЦЕНАМИ (ЭТО СКИДКА)
-parse.Pagination(max_page=23, begin_page=1)
+parse.Pagination(max_page=69, begin_page=1)
 
 #parse.Pagination_Unparsed('Монитор-МВ-Цены-от-Oct-20--final.xlsx', new_num=2, finish=44)
 
