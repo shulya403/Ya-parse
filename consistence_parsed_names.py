@@ -88,7 +88,10 @@ class Concat_Parse_Files(object):
             df = self.Titled_Vendors(df)
             df = self.Restrict_Ven_Mod_Name(df)
 
-            df.to_excel(self.outfile_name)
+            writer = pd.ExcelWriter(self.outfile_name, engine='xlsxwriter', options={'strings_to_urls': False})
+            df.to_excel(writer)
+            writer.close()
+            # df.to_excel()
 
 # Пусковой Добавление колонки модели без названия вендора
     def Clearing_Mod_Name(self, file_name=""):
@@ -366,6 +369,7 @@ class Consist_Names(object):
                                                                                             & (self.df_work['Name'] == this_name)].values[0]
             print(self.df_work.loc[id, ['Name', 'Ya_UN_Name']])
 
+
         self.Filled_To_Excel()
 
 #   Взваращает максимум STR из list_search (array_vendors_models)
@@ -462,7 +466,11 @@ class Consist_Names(object):
     def Filled_To_Excel(self):
 
         file_name_ = self.file_work_name.replace('Source', 'Filled')
-        self.df_work.to_excel(file_name_)
+
+        writer = pd.ExcelWriter(file_name_, engine='xlsxwriter', options={'strings_to_urls': False})
+        self.df_work.to_excel(writer)
+        writer.close()
+
 
 #   Заливка обновленных данных в базу
 class Fill_Stable_Base(Consist_Names):
