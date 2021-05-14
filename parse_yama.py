@@ -20,6 +20,9 @@ import re
 #from grab import Grab
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import winsound
 
 class Yama_parsing_const(object):
@@ -257,7 +260,9 @@ class Yama_parsing_const(object):
                         'Viewsonic': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152807&onstock=1&local-offers-first=0',
                         'Lenovo': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152981&onstock=1&local-offers-first=0',
                         'MSI': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A762076&onstock=1&local-offers-first=0',
-                        'NEC': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153117&onstock=1&local-offers-first=0 '}
+                        'NEC': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153117&onstock=1&local-offers-first=0 ',
+                        'Xiaomi': 'https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A7701962&local-offers-first=0',
+                        'Gigabyte': 'https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A431404&local-offers-first=0'}
         },
         'Проектор': {
             'url': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?hid=191219',
@@ -357,6 +362,7 @@ class Req(object):
         options = webdriver.ChromeOptions()
         #options.add_argument('--headless')
         options.add_argument("user-data-dir=selenium")
+        options.add_argument("--remote-debugging-port=9222")
 
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         try:
@@ -1428,30 +1434,36 @@ class Parse_Modifications_TTX(Yama_parsing_const):
 
         #цены сверху
 
-        teg_price = soup_page.find('div', class_="_3NaXxl-HYN _3kWlKUNlTg")
-
-        if teg_price:
-            try:
-                exit_ = int(teg_price.find('span').find('span').text.replace(' ', ''))
-                return exit_
-            except Exception:
-                pass
+        # teg_price = soup_page.find('div', class_="_3NaXxl-HYN _3kWlKUNlTg")
+        #
+        # if teg_price:
+        #     try:
+        #         exit_ = int(teg_price.find('span').find('span').text.replace(' ', ''))
+        #         return exit_
+        #     except Exception:
+        #         pass
         # # а есть ли боттом c ценами?
         # teg_h2 = soup_page.find_all('h2')
         # teg_h2_texts = [i.text for i in teg_h2]
         #
         # if 'Динамика средней цены за полгода' in teg_h2_texts:
         #         # Если блок средней цены на странице модели есть
-        #     avg_price = soup_page.find('div', class_=self.div_price_avg)
-        #     try:
-        #         exit_ = int(avg_price.find('span').text.replace(' ', '').replace('₽', ''))
-        #     except AttributeError:
-        #         exit_ = None
-                # тады лезем внутря в список цен, руками:
-        url_ = str(soup_offers_cell.find('a').get('href'))
-        exit_ = self.Offers_Handler(url_)
+
+        # Средняя цена в блоке "средняя цена" на странице модели div class
+        #div_price_avg = '_3TkwCtZtaF'
+
+        #element = WebDriverWait(self.driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "_3TkwCtZtaF")))
+
+        avg_price = soup_page.find('div', class_=self.div_price_avg)
+        try:
+                exit_ = int(avg_price.find('span').text.replace(' ', '').replace('₽', ''))
+        except Exception:
+                url_ = str(soup_offers_cell.find('a').get('href'))
+                exit_ = self.Offers_Handler(url_)
 
         return exit_
+
+
 
     def Offers_Handler(self, url_):
 
@@ -1522,6 +1534,7 @@ class Parse_Modifications_TTX_Mod_in_Prices(Parse_Modifications_TTX):
         options = webdriver.ChromeOptions()
         # options.add_argument('--headless')
         options.add_argument("user-data-dir=selenium")
+
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
         if category in self.Categories.keys():
@@ -1802,7 +1815,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
         options = webdriver.ChromeOptions()
         # options.add_argument('--headless')
         options.add_argument("user-data-dir=selenium")
-
+        options.add_argument("--remote-debugging-port=9222")
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
         if category in self.Categories.keys():
@@ -1848,7 +1861,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             self.df_ttx_name = pd.read_excel(self.ttx_name_filename, index_col=0)
 
 
-    def URL_Req(self, url_, host=True):
+    def URL_Req(self, url_, host=True, model_page=False):
 
         if host:
             url_ = self.host + url_
@@ -1856,6 +1869,15 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             self.driver.get(url_)
             if self.driver.page_source:
                 if not "Ой" in self.driver.page_source:
+                    if model_page:
+                        price_block_elm = self.driver.find_element_by_css_selector(".n-product-top-offers-orderer__price")
+                        if price_block_elm:
+                            price_block_elm.location_once_scrolled_into_view
+                            try:
+                                price = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "_3TkwCtZtaF")))
+                            except Exception:
+                                pass
+
                     return self.driver.page_source
                 else:
                     winsound.Beep(2500, 1000)
@@ -1938,7 +1960,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
 
 
 
-                url_req = self.URL_Req(row_df_links['Href'])
+                url_req = self.URL_Req(row_df_links['Href'], model_page=True)
                 if url_req:
                     soup_page = BeautifulSoup(url_req, 'html.parser')
                     soup_table_grey = soup_page.find('ul', class_=self.ul_table_gray)
@@ -1983,6 +2005,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             options = webdriver.ChromeOptions()
             # options.add_argument('--headless')
             options.add_argument("user-data-dir=selenium")
+            options.add_argument("--remote-debugging-port=9222")
 
             self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
