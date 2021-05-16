@@ -240,7 +240,7 @@ class Yama_parsing_const(object):
                         'HP': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152722&onstock=1&local-offers-first=0',
                         'Lenovo': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152981&onstock=1&local-offers-first=0',
                         'MSI':'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A762076&onstock=1&local-offers-first=0',
-                        'Huawei':'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A762076%2C459710&onstock=1&local-offers-first=0'}
+                        'Huawei':'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A459710&onstock=1&local-offers-first=0'}
 
         },
         'Монитор': {
@@ -268,7 +268,13 @@ class Yama_parsing_const(object):
             'url': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?hid=191219',
             'category': ['Проектор',
                          'Карманный проектор',
-                         'Лазерный проектор'],
+                         'Лазерный проектор',
+                         'Мультимедиа-проектор',
+                         'Видеопроектор',
+                         'Короткофокусные проекторы',
+                         'Проектор для презентаций',
+                         'Инсталляционные проектры',
+                         'Проектор для образования'],
             'ttx_file': 'Проектор--характеристики.xlsx',
             'vendors': {'Acer': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A267101&onstock=1&local-offers-first=0',
                         'BenQ': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A241228&onstock=1&local-offers-first=0',
@@ -297,8 +303,7 @@ class Yama_parsing_const(object):
             'category': ['Интерактивный ИБП',
                          'Резервный ИБП',
                          'ИБП с двойным преобразованием',
-                         'ИБП',
-                         ''
+                         'Источник бесперебойного питания'
                          ],
             'ttx_file': 'ИБП--характеристики.xlsx',
             'vendors': {'APC': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A431409&onstock=1&local-offers-first=0',
@@ -361,16 +366,29 @@ class Req(object):
 
         options = webdriver.ChromeOptions()
         #options.add_argument('--headless')
-        options.add_argument("user-data-dir=selenium")
+        # options.add_argument("user-data-dir=C:\Program Files (x86)\Google\Chrome\Application\selenium")
         options.add_argument("--remote-debugging-port=9222")
 
-        driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        driver = webdriver.Chrome(executable_path=r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
         try:
+
             driver.get(url)
+
+            if "Ой!" in driver.page_source:
+                elem = driver.find_element_by_css_selector('.CheckboxCaptcha-Inner')
+                webdriver.ActionChains(driver).move_to_element(elem).perform()
+                time.sleep(1)
+                webdriver.ActionChains(driver).click(elem).perform()
+
+                #cap=input()
+            time.sleep(3)
+            # for i in driver.find_elements_by_class_name(self.div_row_models_ls):
+            #     i.location_once_scrolled_into_view
+
             # cook = driver.get_cookies()
             # print(cook)
-            if "Ой!" in driver.page_source:
-                cap=input()
+
             self.text = driver.page_source
 
             #driver.close()
@@ -1325,7 +1343,7 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                 else:
                     dict_exit['Modification_price'] = 'na'
         else:
-            dict_exit['Modification_price'] = 'na'
+            dict_exit['Modification_price'] = self.AvgPrice_Handler(soup_page, None)
             dict_exit['Quantity'] = None
 
         return dict_exit
@@ -1392,7 +1410,8 @@ class Parse_Modifications_TTX(Yama_parsing_const):
             j = len(df_ttx)
             print('len-ttx: ', j)
             df_ttx.loc[j, 'Name'] = name
-            url_req = self.URL_Req(url_)
+            url_req = self.URL_Req(url_, host=('http' not in url_))
+
             if url_req:
                 soup_ttx_page = BeautifulSoup(url_req, 'html.parser')
                 soup_ttx_table_rows = soup_ttx_page.find_all('dl')
@@ -1422,9 +1441,14 @@ class Parse_Modifications_TTX(Yama_parsing_const):
         return df_ttx
 
 
-    def URL_Spec(self, soup_table_grey):
+    def URL_Spec(self, soup_table_grey, soup):
         if soup_table_grey:
-            return soup_table_grey.find('a', {"href": re.compile("spec")}).get('href')
+            sp = soup_table_grey
+        else:
+            sp=soup
+        url_ = sp.find('a', {"href": re.compile("spec\?")}).get('href')
+        if url_:
+            return url_
         else:
             return None
 
@@ -1456,10 +1480,17 @@ class Parse_Modifications_TTX(Yama_parsing_const):
 
         avg_price = soup_page.find('div', class_=self.div_price_avg)
         try:
-                exit_ = int(avg_price.find('span').text.replace(' ', '').replace('₽', ''))
+                price_txt = avg_price.find('span').text.replace(' ', '').replace('₽', '')
+                if price_txt:
+                    exit_ = int(price_txt)
+                else:
+                    exit_ = 'na'
         except Exception:
-                url_ = str(soup_offers_cell.find('a').get('href'))
-                exit_ = self.Offers_Handler(url_)
+                if soup_offers_cell:
+                    url_ = str(soup_offers_cell.find('a').get('href'))
+                    exit_ = self.Offers_Handler(url_)
+                else:
+                    exit_ = 'na'
 
         return exit_
 
@@ -1487,11 +1518,13 @@ class Parse_Modifications_TTX(Yama_parsing_const):
 
                     # = soup_offers_page.find_all('div', class_=self.div_config_prices_table)
 
-                    list_soup_prices = soup_offers_page.find_all('span', class_='price')
+                    list_soup_prices = soup_offers_page.find_all('div', class_='_-7NaXxl-HYN _1YKgk_OE5p')
 
-                    page_price_list = [int(i.text.replace(' ', '').replace('₽', '')) for i in list_soup_prices]
-                    prices_list += page_price_list
-
+                    try:
+                        page_price_list = [int(i.find('span').find('span').text.replace(' ', '')) for i in list_soup_prices]
+                        prices_list += page_price_list
+                    except Exception:
+                        pass
                     page += 1
                     # new_ref_href = page_href
                     page_href = url_ + '&page=' + str(page)
@@ -1814,9 +1847,11 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
         # WEBDRIVER
         options = webdriver.ChromeOptions()
         # options.add_argument('--headless')
-        options.add_argument("user-data-dir=selenium")
-        options.add_argument("--remote-debugging-port=9222")
-        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        #options.add_argument("user-data-dir=C:/Program Files (x86)/Google/Chrome/Application/selenium")
+        #options.add_argument("--remote-debugging-port=9222")
+        #self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
+        self.driver = webdriver.Chrome(executable_path = r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
 
         if category in self.Categories.keys():
             self.category = category
@@ -1881,9 +1916,12 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                     return self.driver.page_source
                 else:
                     winsound.Beep(2500, 1000)
-                    print('\a\a\a')
-                    input()
-                    self.URL_Req(url_)
+                    print('Капча')
+                    elem = self.driver.find_element_by_css_selector('.CheckboxCaptcha-Inner')
+                    webdriver.ActionChains(self.driver).move_to_element(elem).perform()
+                    time.sleep(1)
+                    webdriver.ActionChains(self.driver).click(elem).perform()
+                    self.URL_Req(url_, host=False, model_page=model_page)
         except Exception:
             print("не выходит {}".format(url_))
             return None
@@ -1942,11 +1980,14 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
         begin_ = start
         end_ = begin_ + step
         while end_ < finish_ - 1:
+
             end_ = begin_ + step
             if end_ > finish_ - 1:
                 end_ = finish_ - 1
 
+            ten_count = 0
             for i, row_df_links in self.df_links.iloc[begin_:end_].iterrows():
+
                 j = len(self.df_names)
                 self.df_names.loc[j, 'Site'] = 'yama'
                 self.df_names.loc[j, 'Name'] = None
@@ -1958,20 +1999,18 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                 self.df_names.loc[j, 'Category'] = self.category
                 self.df_names.loc[j, 'Date'] = self.now
 
-
-
                 url_req = self.URL_Req(row_df_links['Href'], model_page=True)
                 if url_req:
                     soup_page = BeautifulSoup(url_req, 'html.parser')
                     soup_table_grey = soup_page.find('ul', class_=self.ul_table_gray)
 
-                    if soup_table_grey:
+#                    if soup_table_grey:
 
-                        self.df_names.loc[j, ['Quantity', 'Modification_price']] = self.Parse_Model_Page(soup_page,
-                                                                                                soup_table_grey)
+                    self.df_names.loc[j, ['Quantity', 'Modification_price']] = self.Parse_Model_Page(soup_page,
+                                                                                              soup_table_grey)
 
-                        print(self.df_names.iloc[j])
-                        if self.mod:
+                    print(self.df_names.iloc[j])
+                    if self.mod:
                             if url_req:
                                 url_block = soup_table_grey.find('a', {"href": re.compile("mods")})
                                 if url_block:
@@ -1983,32 +2022,38 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                                                             row_df_links['Ya_UN_Name'],
                                                             row_df_links['Vendor'],
                                                             row_df_links['Category'])
-                        if self.ttx_name:
+                    if self.ttx_name:
                             ttx_len = len(self.df_ttx_name)
-                            self.df_ttx_name = self.TTX_Handler(self.URL_Spec(soup_table_grey),
+                            self.df_ttx_name = self.TTX_Handler(self.URL_Spec(soup_table_grey, soup_page),
                                                                 self.df_ttx_name,
                                                                 self.df_names.loc[j, 'Modification_name'])
-                    else:
-                        pass
-            print(self.df_names.loc[j - step:j]['Modification_price'].to_list())
+                ten_count += 1
+                if ten_count == 10:
+                    self.DF_to_Excel(self.df_names, num=self.num)
+                    if self.ttx_name and (len(self.df_ttx_name) > ttx_len):
+                        self.df_ttx_name.to_excel(self.ttx_name_filename)
+                        print('write: ', self.ttx_name_filename, len(self.df_ttx_name))
+                    print(self.df_names.loc[j - ten_count:j]['Modification_price'].to_list())
+                    ten_count = 0
+
 
 
             if self.df_names.loc[j-step:j]['Modification_price'].isna().all():
                 raise
-            self.DF_to_Excel(self.df_names, num=self.num)
-            if self.ttx_name and (len(self.df_ttx_name) > ttx_len):
-                self.df_ttx_name.to_excel(self.ttx_name_filename)
-                print('write: ', self.ttx_name_filename, len(self.df_ttx_name))
+
+
+
 
             # WEBDRIVER
             self.driver.close()
             options = webdriver.ChromeOptions()
             # options.add_argument('--headless')
-            options.add_argument("user-data-dir=selenium")
+            #options.add_argument("user-data-dir=selenium")
             options.add_argument("--remote-debugging-port=9222")
 
-            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-
+            #self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            self.driver = webdriver.Chrome(
+                executable_path=r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
             begin_ = end_
 
     def DF_to_Excel(self, df_out, num="", level=""):
