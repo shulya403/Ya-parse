@@ -63,6 +63,7 @@ class parse_mvideo(object):
         options = webdriver.ChromeOptions()
         #options.add_argument('--headless')
         options.add_argument("--window-size=500,1080")
+        options.add_argument("--remote-debugging-port=9222")
 
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
@@ -293,26 +294,26 @@ class parse_mvideo_new(parse_mvideo):
 
         def wait_until_all_expected_elements(driver, number_of_elements):
             times = 0
-            while True:
-                    xpath = "//div[@class=\"product-card--mobile\"]"
-
-                    condition = EC.presence_of_all_elements_located((By.XPATH, xpath))
-
-                    number_of_cards = len(self.driver.find_elements_by_class_name("product-card--mobile"))
-
-                    try:
-                        wait = WebDriverWait(driver, 10).until(condition)
-                    except Exception as Err:
-                        print(Err)
-                        wait = list()
-                        pass
-                    print(len(wait))
-                    if len(wait) == number_of_elements:
-                        break
-                    times += 1
-
-                    if times == 10:
-                        break
+            # while True:
+            #         xpath = "//div[@class=\"product-card--mobile\"]"
+            #
+            #         condition = EC.presence_of_all_elements_located((By.XPATH, xpath))
+            #
+            #         number_of_cards = len(self.driver.find_elements_by_class_name("product-card--mobile"))
+            #
+            #         try:
+            #             wait = WebDriverWait(driver, 10).until(condition)
+            #         except Exception as Err:
+            #             print(Err)
+            #             wait = list()
+            #             pass
+            #         print(len(wait))
+            #         if len(wait) == number_of_elements:
+            #             break
+            #         times += 1
+            #
+            #         if times == 10:
+            #             break
 
         # def get_elements(driver):
         #
@@ -329,12 +330,12 @@ class parse_mvideo_new(parse_mvideo):
         product_elements = self.driver.find_elements_by_class_name("product-cards-layout__item")
 
         number_of_elements = len(product_elements)
-
+        print(number_of_elements)
         for elm in product_elements:
             elm.location_once_scrolled_into_view
 
 
-        wait_until_all_expected_elements(self.driver, number_of_elements)
+        #wait_until_all_expected_elements(self.driver, number_of_elements)
 
         exit_ = self.driver.page_source
 
@@ -356,89 +357,98 @@ class parse_mvideo_new(parse_mvideo):
         #pprint(li_bs_product_cards)
 
         li_bs_product_cards = bs_page.find_all('div', class_='product-card--mobile')
-        if not li_bs_product_cards:
-            bs_page = BeautifulSoup(self.Click_list_button(page_), 'html.parser')
-            li_bs_product_cards = bs_page.find_all('div', class_='product-card--mobile')
+
+        if li_bs_product_cards:
 
 
-        df_ = pd.DataFrame(columns=self.df.columns)
-        Gluk = False  # Ошибка все  99999
 
-        for card in li_bs_product_cards:
+            df_ = pd.DataFrame(columns=self.df.columns)
+            Gluk = False  # Ошибка все  99999
 
-            bs_price_block = card.find('span', class_="price__main-value")
-            if not bs_price_block:
-                bs_price_block = card.find('div', class_="price__actual-price")
+            for card in li_bs_product_cards:
 
-            if bs_price_block:
-                #pprint(card)
-            # Цена если есть, если нет - нафик
+                bs_price_block = card.find('p', class_="price__main-value")
+                if not bs_price_block:
+                    bs_price_block = card.find('p', class_="price__actual-price")
 
-                #  Подкатегории
-                soup_longstring = card.find('a', class_="product-title__text")
+                if bs_price_block:
+                    bs_price_sale_ls = bs_price_block.find_all('span')
 
-                if soup_longstring:
-                    longstring = soup_longstring.text
-
-                    list_word = longstring.split()
-
-                    noncat = False
-                    if self.list_nontypes_category:
-                        for ncat in self.list_nontypes_category:
-                            if ncat in longstring.lower():
-                                noncat = True
+                    for i in bs_price_sale_ls:
+                        if not i.find('span', class_="currency"):
+                                bs_price_block = i
                                 break
-                    if not noncat:
-                        list_found_cat = list()
-                        for cat in self.list_types_category:
-                            if cat in longstring.lower():
-                                list_found_cat.append((cat, len(cat), len(cat.split())))
 
-                        if list_found_cat:
-                            list_found_cat.sort(key=lambda x: x[1], reverse=True)
-                    # Блок заполнения df row
-                            i = len(df_)
 
-                            df_.loc[i, 'Subcategory'] = list_found_cat[0][0]
-                            df_.loc[i, 'Modification_price'] = "".join(re.findall(r'\d', bs_price_block.text))
-                            df_.loc[i, 'Vendor'] = list_word[list_found_cat[0][2]]
-                            df_.loc[i, 'Modification_name'] = " ".join(list_word[list_found_cat[0][2]:])
-                            df_.loc[i, 'Modification_href'] = soup_longstring.get('href')
-            else:   #price_block
-                pprint(card)
+                    #pprint(card)
+                # Цена если есть, если нет - нафик
+
+                    #  Подкатегории
+                    soup_longstring = card.find('a', class_="product-title__text")
+
+                    if soup_longstring:
+                        longstring = soup_longstring.text
+
+                        list_word = longstring.split()
+
+                        noncat = False
+                        if self.list_nontypes_category:
+                            for ncat in self.list_nontypes_category:
+                                if ncat in longstring.lower():
+                                    noncat = True
+                                    break
+                        if not noncat:
+                            list_found_cat = list()
+                            for cat in self.list_types_category:
+                                if cat in longstring.lower():
+                                    list_found_cat.append((cat, len(cat), len(cat.split())))
+
+                            if list_found_cat:
+                                list_found_cat.sort(key=lambda x: x[1], reverse=True)
+                        # Блок заполнения df row
+                                i = len(df_)
+
+                                df_.loc[i, 'Subcategory'] = list_found_cat[0][0]
+                                df_.loc[i, 'Modification_price'] = "".join(re.findall(r'\d', bs_price_block.text))
+                                df_.loc[i, 'Vendor'] = list_word[list_found_cat[0][2]]
+                                df_.loc[i, 'Modification_name'] = " ".join(list_word[list_found_cat[0][2]:])
+                                df_.loc[i, 'Modification_href'] = soup_longstring.get('href')
+                else:   #price_block
+                    pprint(card)
 
         if len(df_) > 0:
-            df_['Cards_page_num'] = page_
-            df_['Date'] = self.now
-            df_['Quantity'] = None
-            df_['Ya_UN_Name'] = None
-            df_['Name'] = None
-            df_['Site'] = "mvideo"
-            df_['Category'] = self.category_
+                df_['Cards_page_num'] = page_
+                df_['Date'] = self.now
+                df_['Quantity'] = None
+                df_['Ya_UN_Name'] = None
+                df_['Name'] = None
+                df_['Site'] = "mvideo"
+                df_['Category'] = self.category_
 
-            if df_['Modification_price'].isna().all():
-                print("Нет цен на странице, финиш")
-                raise
+                if df_['Modification_price'].isna().all():
+                    print("Нет цен на странице, финиш")
+                    raise
 
-            if (len(df_['Modification_price'].unique()) == 1) and int(df_['Modification_price'].unique()[0]) == 99999:
-                Gluk = True
+                if (len(df_['Modification_price'].unique()) == 1) and int(df_['Modification_price'].unique()[0]) == 99999:
+                    Gluk = True
 
-            print(df_[['Modification_name', 'Modification_price']])
-            if not Gluk:
-                self.df = pd.concat([self.df, df_], ignore_index=True)
+                print(df_[['Modification_name', 'Modification_price']])
+                if not Gluk:
+                    self.df = pd.concat([self.df, df_], ignore_index=True)
         else:
-            print("пусто...", page_)
+                print("пусто...", page_)
 
 #   MAIN
-# Монитор: 29
-# Ноутбук: 69
-parse = parse_mvideo_new('Ноутбук', pg_num=1)
+# Монитор: 28
+# Ноутбук: 82
+parse = parse_mvideo_new('Монитор', pg_num=2)
 #print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118?page=12'))
+#                              https://www.mvideo.ru/komputernaya-tehnika-4107/monitory-101
 #parse.Get_EOF_Page()
 
 #   def Pagination(self, max_page, begin_page=1):
 # АККУРАТНО С СВЕРХБОЛЬШИМИ ЦЕНАМИ (ЭТО СКИДКА)
-parse.Pagination(max_page=69, begin_page=1)
+parse.Pagination(max_page=28, begin_page=8)
 
 #parse.Pagination_Unparsed('Монитор-МВ-Цены-от-Oct-20--final.xlsx', new_num=2, finish=44)
 

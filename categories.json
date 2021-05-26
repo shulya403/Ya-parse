@@ -253,20 +253,22 @@
       "cards_page_params": {
                 "card_div": {
                   "teg": "li",
+                  "re": "True",
                   "attributes": {
-                    "class": "ListingProductCardList_productCardListingWrapper__3-o9i"
+
+                    "class": "_t"
                   }
                 },
                 "product_div": {
                   "teg": "div",
                   "attributes": {
-                    "class": "ListingProductCardList_productCardListingTitle__1eVYx"
+                    "class": "ku"
                   }
                 },
                 "price_div": {
                   "teg": "span",
                   "attributes": {
-                    "class": "PriceBlock_buyBoxPrice__3QGyj PriceBlock_buyBoxPriceStyled__29J_G"
+                    "class": "RE VE"
                     }
                 },
                 "internal_page_mod_name": {

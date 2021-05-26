@@ -61,12 +61,12 @@ import parse_yama as pynd
 
 #Прерывание (пустые данные). Надо докачивать с позици номер строки последнего по Excel -1
 #parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Apr-21----15--17-03.xlsx', ttx_name=True).main(start=3173, num=3) #3-426
-parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор May-21----tot.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
-     main(start=0, num=1, step=10)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор May-21----tot.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
+#      main(start=0, num=1, step=10)
 # parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Mar-21----15--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
 #     main(start=0, num=1)
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Mar-21----15--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
-#     main(start=0, num=1)
+parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП May-21----16--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+    main(start=290, num=2)
 
 
 

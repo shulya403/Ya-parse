@@ -1847,11 +1847,11 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
         # WEBDRIVER
         options = webdriver.ChromeOptions()
         # options.add_argument('--headless')
-        #options.add_argument("user-data-dir=C:/Program Files (x86)/Google/Chrome/Application/selenium")
-        #options.add_argument("--remote-debugging-port=9222")
-        #self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        options.add_argument("user-data-dir=selenium")
+        options.add_argument("--remote-debugging-port=9222")
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
-        self.driver = webdriver.Chrome(executable_path = r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
+        #self.driver = webdriver.Chrome(executable_path = r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
 
         if category in self.Categories.keys():
             self.category = category
@@ -2036,6 +2036,10 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                     print(self.df_names.loc[j - ten_count:j]['Modification_price'].to_list())
                     ten_count = 0
 
+            self.DF_to_Excel(self.df_names, num=self.num)
+            if self.ttx_name and (len(self.df_ttx_name) > ttx_len):
+                self.df_ttx_name.to_excel(self.ttx_name_filename)
+                print('write: ', self.ttx_name_filename, len(self.df_ttx_name))
 
 
             if self.df_names.loc[j-step:j]['Modification_price'].isna().all():
@@ -2048,12 +2052,12 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             self.driver.close()
             options = webdriver.ChromeOptions()
             # options.add_argument('--headless')
-            #options.add_argument("user-data-dir=selenium")
+            options.add_argument("user-data-dir=selenium")
             options.add_argument("--remote-debugging-port=9222")
 
-            #self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-            self.driver = webdriver.Chrome(
-                executable_path=r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
+            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            # self.driver = webdriver.Chrome(
+            #     executable_path=r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
             begin_ = end_
 
     def DF_to_Excel(self, df_out, num="", level=""):
