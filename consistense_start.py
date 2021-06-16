@@ -22,8 +22,8 @@ import consistence_parsed_names as CPN
 #             dir_root="Prices/",
 #             dir_work="Handle_base/"):
 
-# Mar = CPN.Concat_Parse_Files('Монитор', M='Mar', Y=21)
-# Mar.Concat_files()
+# Apr = CPN.Concat_Parse_Files('Ноутбук', M='Apr', Y=21)
+# Apr.Concat_files()
 # #May.Clearing_Vendors() #Унификация имен вендоров в поле Vendor. Вызывается Concat_Files() или отдельно
 #May.Clearing_Mod_Name() #Удаление имни вендора из Midification_name. Вызывается Concat_Files() или отдельно
 
@@ -45,16 +45,16 @@ import consistence_parsed_names as CPN
 #                 ):
 
 
-# FileHandler = CPN.Consist_Names(category="Монитор", #_Source для ноутов для yama заменить Mod_Name_restrict на просто Modification_name
-#                                 file_itr="Reports/Mon models to-Jan-21.xlsx",
-#                                 M='Mar',
-#                                 Y='21',
-#                                 file_work_name=""
-#                                 )
-#
-#
-# #   Заполенение из файла Source
-# FileHandler.Fill_Unknown()
+FileHandler = CPN.Consist_Names(category="Ноутбук", #_Source для ноутов для yama заменить Mod_Name_restrict на просто Modification_name
+                                file_itr="Reports/NB_Pivot_Mar.xlsx",
+                                M='Apr',
+                                Y='21',
+                                file_work_name=""
+                                )
+
+
+#   Заполенение из файла Source
+FileHandler.Fill_Unknown()
 
 #FileHandler.Dict_Yama_Names()
 #FileHandler.Fill_Yama_Name()
@@ -62,8 +62,8 @@ import consistence_parsed_names as CPN
 
 #   Заполенение фала Base Stable проверенными
 
-# StBase = CPN.Fill_Stable_Base('Ноутбук',
-#                              'Ноутбук-Concat_Prices--Mar-21--Checked.xlsx')
+# StBase = CPN.Fill_Stable_Base('Монитор',
+#                              'Монитор-Concat_Prices--Mar-21--Filled_update.xlsx')
 # StBase.Checked_To_Base()
 
 #Consist_Names_for_mth_report заполняет модели из месячных Pivot
@@ -80,10 +80,10 @@ import consistence_parsed_names as CPN
 #                   num=1
 #                  ):
 
-MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_Mar.xlsx",
-                                        file_work_name="NB_Pivot_unknown_3.xlsx",
-                                        work_sheet="",
-                                        dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_03\\",
-                                         num=1
-                                     )
-MthNB.Fill_Models()
+# MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_Mar.xlsx",
+#                                         file_work_name="NB_Pivot_unknown_3.xlsx",
+#                                         work_sheet="",
+#                                         dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_03\\",
+#                                          num=1
+#                                      )
+# MthNB.Fill_Models()

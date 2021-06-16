@@ -5,6 +5,20 @@ import parse_yama as pynd
 # Если есть дырки в файле прасов то вызывается перепроход функцией no_prices_reparse
 
 
+#parse_link = pynd.Parse_links()
+#parse_link.links_to_excel('Ноутбук')
+#parse_link.links_to_excel('Монитор')
+#parse_link.links_to_excel('Проектор')
+#parse_link.links_to_excel('ИБП')
+
+#Проверить какая последняя страница в выдаче (page_max)
+
+#parse_link = pynd.Parse_links_v2(page_max=25)
+#parse_link.links_to_excel('Ноутбук')
+#parse_link.links_to_excel('Монитор')
+#parse_link.links_to_excel('Проектор')
+#parse_link.links_to_excel('ИБП')
+
 # Херачит отдельно по вендорам
 # Убрать из xls - /offer/, //Market-clik
 # 'vendors': ['Acer', 'Alienware','Apple', 'Asus', 'Dell', 'Honor', 'HP','Lenovo', 'MSI', 'Huawei']
@@ -16,11 +30,11 @@ import parse_yama as pynd
 
 #parse_link.links_to_excel('Ноутбук', vendors_list=['HP','Lenovo', 'MSI', 'Huawei'])
 
-#parse_link = pynd.Parse_links_v3(page_max=20)
-# parse_link.links_to_excel('Ноутбук', vendors_list=['Huawei'])
+# parse_link = pynd.Parse_links_v3(page_max=20)
+# parse_link.links_to_excel('Ноутбук')
 # parse_link.links_to_excel('Монитор', vendors_list=['Xiaomi','Gigabyte'])
-#parse_link.links_to_excel('Проектор', vendors_list=['Smart','Vivitek'])
-#parse_link.links_to_excel('ИБП', vendors_list=['Socomec','Riello','Maklesan','GE','DKC','Tripp Lite','AEG','Irbis','Sven','Hiper'])
+# parse_link.links_to_excel('Проектор')
+# parse_link.links_to_excel('ИБП')
 
 
 #class Parse_Modifications_TTX(Yama_parsing_const):
@@ -46,14 +60,13 @@ import parse_yama as pynd
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
 #Прерывание (пустые данные). Надо докачивать с позици номер строки последнего по Excel -1
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук May-21----15--tot.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
-#     main(step=100, start=490, num=4)
+#parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Apr-21----15--17-03.xlsx', ttx_name=True).main(start=3173, num=3) #3-426
 # parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор May-21----tot.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
 #      main(start=0, num=1, step=10)
-parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор May-21----16--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
-    main(start=739, num=4, step=100)
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Mar-21----15--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Mar-21----15--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
 #     main(start=0, num=1)
+parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП May-21----16--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+    main(start=290, num=2)
 
 
 
