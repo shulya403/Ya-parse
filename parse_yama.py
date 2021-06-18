@@ -366,11 +366,11 @@ class Req(object):
 
         options = webdriver.ChromeOptions()
         #options.add_argument('--headless')
-        # options.add_argument("user-data-dir=C:\Program Files (x86)\Google\Chrome\Application\selenium")
+        options.add_argument("user-data-dir=C:\Program Files (x86)\Google\Chrome\Application\selenium")
         options.add_argument("--remote-debugging-port=9222")
 
-        # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-        driver = webdriver.Chrome(executable_path=r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
+        driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        # driver = webdriver.Chrome(executable_path=r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
         try:
 
             driver.get(url)
