@@ -380,9 +380,9 @@ class Req(object):
                 webdriver.ActionChains(driver).move_to_element(elem).perform()
                 time.sleep(1)
                 webdriver.ActionChains(driver).click(elem).perform()
+                cap=input()
+            time.sleep(1)
 
-                #cap=input()
-            time.sleep(3)
             # for i in driver.find_elements_by_class_name(self.div_row_models_ls):
             #     i.location_once_scrolled_into_view
 
@@ -1896,7 +1896,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             self.df_ttx_name = pd.read_excel(self.ttx_name_filename, index_col=0)
 
 
-    def URL_Req(self, url_, host=True, model_page=False):
+    def URL_Req(self, url_, host=True, model_page=False, try_count=1):
 
         if host:
             url_ = self.host + url_
@@ -1915,13 +1915,17 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
 
                     return self.driver.page_source
                 else:
-                    winsound.Beep(2500, 1000)
-                    print('Капча')
-                    elem = self.driver.find_element_by_css_selector('.CheckboxCaptcha-Inner')
-                    webdriver.ActionChains(self.driver).move_to_element(elem).perform()
-                    time.sleep(1)
-                    webdriver.ActionChains(self.driver).click(elem).perform()
-                    self.URL_Req(url_, host=False, model_page=model_page)
+                    if try_count < 5:
+                        winsound.Beep(2500, 1000)
+                        print('Капча')
+                        elem = self.driver.find_element_by_css_selector('.CheckboxCaptcha-Inner')
+                        webdriver.ActionChains(self.driver).move_to_element(elem).perform()
+                        time.sleep(1)
+                        webdriver.ActionChains(self.driver).click(elem).perform()
+                        self.URL_Req(url_, host=False, model_page=model_page, try_count=try_count+1)
+                    else:
+                        self.driver.close()
+                        raise
         except Exception:
             print("не выходит {}".format(url_))
             return None

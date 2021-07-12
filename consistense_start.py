@@ -22,8 +22,8 @@ import consistence_parsed_names as CPN
 #             dir_root="Prices/",
 #             dir_work="Handle_base/"):
 
-# Apr = CPN.Concat_Parse_Files('Ноутбук', M='Apr', Y=21)
-# Apr.Concat_files()
+June = CPN.Concat_Parse_Files('Ноутбук', M='Jun', Y=21)
+June.Concat_files()
 # #May.Clearing_Vendors() #Унификация имен вендоров в поле Vendor. Вызывается Concat_Files() или отдельно
 #May.Clearing_Mod_Name() #Удаление имни вендора из Midification_name. Вызывается Concat_Files() или отдельно
 
@@ -46,8 +46,8 @@ import consistence_parsed_names as CPN
 
 
 # FileHandler = CPN.Consist_Names(category="Ноутбук", #_Source для ноутов для yama заменить Mod_Name_restrict на просто Modification_name
-#                                 file_itr="Reports/NB_Pivot_Mar.xlsx",
-#                                 M='Apr',
+#                                 file_itr="Reports/NB_Pivot_Apr1.xlsx",
+#                                 M='May',
 #                                 Y='21',
 #                                 file_work_name=""
 #                                 )
@@ -62,9 +62,9 @@ import consistence_parsed_names as CPN
 
 #   Заполенение фала Base Stable проверенными
 
-StBase = CPN.Fill_Stable_Base('Ноутбук',
-                             'Ноутбук-Concat_Prices--Apr-21--Cheked.xlsx')
-StBase.Checked_To_Base()
+# StBase = CPN.Fill_Stable_Base('Ноутбук',
+#                              'Ноутбук-Concat_Prices--May-21--Cheked.xlsx')
+# StBase.Checked_To_Base()
 
 #Consist_Names_for_mth_report заполняет модели из месячных Pivot
 # class Consist_Names_for_mth_report(Consist_Names):
@@ -79,11 +79,11 @@ StBase.Checked_To_Base()
 #                  itr_vendor_field="B",
 #                   num=1
 #                  ):
-
-# MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_Apr.xlsx",
-#                                         file_work_name="NB_Pivot_unknown_4.xlsx",
+#
+# MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_May.xlsx",
+#                                         file_work_name="NB_Pivot_unknown_5.xlsx",
 #                                         work_sheet="",
-#                                         dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_04\\",
+#                                         dir_work="C:\\Users\\User\\Desktop\\Мои документы\\PC\\notebook\\_05\\",
 #                                          num=1
 #                                      )
 # MthNB.Fill_Models()

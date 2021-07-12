@@ -30,10 +30,10 @@ import parse_yama as pynd
 
 #parse_link.links_to_excel('Ноутбук', vendors_list=['HP','Lenovo', 'MSI', 'Huawei'])
 
-# parse_link = pynd.Parse_links_v3(page_max=20)
-# # parse_link.links_to_excel('Ноутбук')
+parse_link = pynd.Parse_links_v3(page_max=20)
+parse_link.links_to_excel('Ноутбук', vendors_list=['Lenovo', 'MSI', 'Huawei'])
 # #parse_link.links_to_excel('Монитор', vendors_list=[])
-# #parse_link.links_to_excel('Проектор')
+# #parse_link.links_to_excel('Проектор')d
 # parse_link.links_to_excel('ИБП')
 
 
@@ -63,10 +63,10 @@ import parse_yama as pynd
 #parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Apr-21----15--17-03.xlsx', ttx_name=True).main(start=3173, num=3) #3-426
 # parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Jun-21----16--16-44.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
 #      main(start=0, num=1, step=300)
-parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Jun-21----16--17-31.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
-    main(start=847, num=2)
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП May-21----16--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
-#     main(start=290, num=2)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Jun-21----16--17-31.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+#     main(start=864, num=3, step=140)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Jun-21----16--18-07.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+#     main(start=752, num=4, step=300)
 
 
 
