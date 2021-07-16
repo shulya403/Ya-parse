@@ -33,8 +33,8 @@ import parse_yama as pynd
 parse_link = pynd.Parse_links_v3(page_max=20)
 #parse_link.links_to_excel('Ноутбук', vendors_list=['Lenovo', 'MSI', 'Huawei'])
 #parse_link.links_to_excel('Монитор', vendors_list=[])
-parse_link.links_to_excel('Проектор', vendors_list=['Canon','Casio','Christie','Hiper ','Hitachi','JVC','Panasonic', 'Ricoh','Smart','Vivitek'])
-#parse_link.links_to_excel('ИБП')
+#parse_link.links_to_excel('Проектор', vendors_list=['Canon','Casio','Christie','Hiper ','Hitachi','JVC','Panasonic', 'Ricoh','Smart','Vivitek'])
+parse_link.links_to_excel('ИБП')
 
 
 #class Parse_Modifications_TTX(Yama_parsing_const):
