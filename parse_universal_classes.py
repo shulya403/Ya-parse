@@ -423,6 +423,7 @@ class Parse_Common(object):
 
             except IndexError:
                 print("что-то с именем моим:", longstring)
+                return longstring
 
             return product_name
 

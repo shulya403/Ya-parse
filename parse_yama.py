@@ -366,11 +366,11 @@ class Req(object):
 
         options = webdriver.ChromeOptions()
         #options.add_argument('--headless')
-        options.add_argument("user-data-dir=C:\Program Files (x86)\Google\Chrome\Application\selenium")
+        # options.add_argument("user-data-dir=C:\Program Files (x86)\Google\Chrome\Application\selenium")
         options.add_argument("--remote-debugging-port=9222")
 
-        driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-        # driver = webdriver.Chrome(executable_path=r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
+        # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        driver = webdriver.Chrome(executable_path=r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
         try:
 
             driver.get(url)
@@ -1847,7 +1847,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
         # WEBDRIVER
         options = webdriver.ChromeOptions()
         # options.add_argument('--headless')
-        options.add_argument("user-data-dir=selenium")
+        #options.add_argument("user-data-dir=selen")
         options.add_argument("--remote-debugging-port=9222")
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
@@ -1896,7 +1896,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             self.df_ttx_name = pd.read_excel(self.ttx_name_filename, index_col=0)
 
 
-    def URL_Req(self, url_, host=True, model_page=False, try_count=1):
+    def URL_Req(self, url_, host=True, model_page=False):
 
         if host:
             url_ = self.host + url_
@@ -1915,17 +1915,14 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
 
                     return self.driver.page_source
                 else:
-                    if try_count < 5:
-                        winsound.Beep(2500, 1000)
-                        print('Капча')
-                        elem = self.driver.find_element_by_css_selector('.CheckboxCaptcha-Inner')
-                        webdriver.ActionChains(self.driver).move_to_element(elem).perform()
-                        time.sleep(1)
-                        webdriver.ActionChains(self.driver).click(elem).perform()
-                        self.URL_Req(url_, host=False, model_page=model_page, try_count=try_count+1)
-                    else:
-                        self.driver.close()
-                        raise
+                    winsound.Beep(2500, 1000)
+                    print('Капча')
+                    elem = self.driver.find_element_by_css_selector('.CheckboxCaptcha-Inner')
+                    webdriver.ActionChains(self.driver).move_to_element(elem).perform()
+                    time.sleep(1)
+                    webdriver.ActionChains(self.driver).click(elem).perform()
+                    cap = input()
+                    self.URL_Req(url_, host=False, model_page=model_page)
         except Exception:
             print("не выходит {}".format(url_))
             return None
@@ -2056,7 +2053,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             self.driver.close()
             options = webdriver.ChromeOptions()
             # options.add_argument('--headless')
-            options.add_argument("user-data-dir=selenium")
+            #options.add_argument("user-data-dir=selenium")
             options.add_argument("--remote-debugging-port=9222")
 
             self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
