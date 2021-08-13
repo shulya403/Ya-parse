@@ -178,7 +178,9 @@ class Yama_parsing_const(object):
 
     # строки таблицы моделей (по 48 на страницу обычно) Div class
     #div_row_models_ls = 'n-snippet-card2 i-bem b-zone b-spy-visible b-spy-events'
-    div_row_models_ls = '_1OAvzJPfIW'
+    #div_row_models_ls = '_1OAvzJPfIW'
+    #div_row_models_ls = '_2vCnw cia-vs cia-cs'
+    div_row_models_ls = "_37suf"
 
     # Название модели на страницы выдачи h3 class
     #h3_model_name = 'n-snippet-card2__title'
@@ -273,7 +275,7 @@ class Yama_parsing_const(object):
                          'Видеопроектор',
                          'Короткофокусные проекторы',
                          'Проектор для презентаций',
-                         'Инсталляционные проектры',
+                         'Инсталляционные проекторы',
                          'Проектор для образования'],
             'ttx_file': 'Проектор--характеристики.xlsx',
             'vendors': {'Acer': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A267101&onstock=1&local-offers-first=0',
@@ -366,11 +368,11 @@ class Req(object):
 
         options = webdriver.ChromeOptions()
         #options.add_argument('--headless')
-        # options.add_argument("user-data-dir=C:\Program Files (x86)\Google\Chrome\Application\selenium")
-        options.add_argument("--remote-debugging-port=9222")
+        options.add_argument("user-data-dir=C:\Program Files (x86)\Google\Chrome\Application\selenium")
+        #options.add_argument("--remote-debugging-port=9222")
 
-        # driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-        driver = webdriver.Chrome(executable_path=r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
+        driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        #driver = webdriver.Chrome(executable_path=r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
         try:
 
             driver.get(url)
@@ -446,7 +448,7 @@ class Parse_links(Yama_parsing_const):
                 print(iter_page_soup.title)
 
                 # Пречень блоков моделей (строк таблицы) на очередной странице выдачи
-                rows_models = iter_page_soup.find_all('div', class_=self.div_row_models_ls)
+                rows_models = iter_page_soup.find_all('article', class_=self.div_row_models_ls)
 
                 if len(rows_models) != 0:
                     print(page, len(rows_models))
