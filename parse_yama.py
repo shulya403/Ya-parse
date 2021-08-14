@@ -206,7 +206,7 @@ class Yama_parsing_const(object):
     div_price_minmax = '_1S8ob0AgBK'
 
     # Средняя цена в блоке "средняя цена" на странице модели div class
-    div_price_avg = '_3TkwCtZtaF'
+    div_price_avg = '_3TkwC'
 
     # Цена из верхного блока если цена только одна на странце модели  div
     div_price_alone = 'n-product-price-cpa2__price'
@@ -1911,7 +1911,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                         if price_block_elm:
                             price_block_elm.location_once_scrolled_into_view
                             try:
-                                price = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "_3TkwCtZtaF")))
+                                price = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "_3TkwC")))
                             except Exception:
                                 pass
 
