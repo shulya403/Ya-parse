@@ -307,7 +307,7 @@ class Yama_parsing_const(object):
                          'ИБП с двойным преобразованием',
                          'Источник бесперебойного питания'
                          ],
-            'ttx_file': 'ИБП--характеристики.xlsx',
+            'ttx_file': 'Электросамокат--характеристики.xlsx',
             'vendors': {'APC': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A431409&onstock=1&local-offers-first=0',
                         'Eaton': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A7147751&onstock=1&local-offers-first=0',
                         'Ippon': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A985314&onstock=1&local-offers-first=0',
@@ -332,6 +332,68 @@ class Yama_parsing_const(object):
                         'Sven': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A284761&onstock=1&local-offers-first=0',
                         'Hiper': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A927650&onstock=1&local-offers-first=0',
                         }
+        },
+        'Электросамокат': {
+            'url': 'https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?glfilter=7081037%3A11854643&hid=7070735',
+            'category': ['Электросамокат',
+                         'Электросамокат взрослый',
+                         'Детский электросамокат',
+                         'Электросамокат трехколесный'
+                         ],
+            'ttx_file': 'ИБП--характеристики.xlsx',
+            'vendors': {
+                "Artway": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=0&hid=7070735&glfilter=7893318%3A13733501&onstock=1&local-offers-first=0&viewtype=list",
+                "Airwheel": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12490204&onstock=1&local-offers-first=0",
+                "AOVO": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17702741&onstock=1&local-offers-first=0",
+                "Carmega": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A10667925&onstock=1&local-offers-first=0",
+                "cactus": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A10713437&onstock=1&local-offers-first=0",
+                "CARCAM": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7156305&onstock=1&local-offers-first=0",
+                "Currus": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17677563&onstock=1&local-offers-first=0",
+                "DIGMA": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A470013&onstock=1&local-offers-first=0",
+                "Dualtron": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16641892&onstock=1&local-offers-first=0",
+                "E-Scooter": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A11055941&onstock=1&local-offers-first=0",
+                "e-TWOW": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12655366&onstock=1&local-offers-first=0",
+                "FORWARD": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A8455957&onstock=1&local-offers-first=0",
+                "GLOBBER": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12499404&onstock=1&local-offers-first=0",
+                "GT": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A1640344&onstock=1&local-offers-first=0",
+                "Halten": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16583715&onstock=1&local-offers-first=0",
+                "HIPER": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A927650&onstock=1&local-offers-first=0",
+                "HEADWAY": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12708936&onstock=1&local-offers-first=0",
+                "HOVERBOT": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A13098052&onstock=1&local-offers-first=0",
+                "iconBIT": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A4850257&onstock=1&local-offers-first=0",
+                "InMotion": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12366819&onstock=1&local-offers-first=0",
+                "Inokim": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A14229159&onstock=1&local-offers-first=0",
+                "Joyor": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A13519851&onstock=1&local-offers-first=0",
+                "Jetson": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17480749&onstock=1&local-offers-first=0",
+                "KUGOO": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16037697&onstock=1&local-offers-first=0",
+                "Lantegra": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17556051&onstock=1&local-offers-first=0",
+                "MIDWAY": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A13519781&onstock=1&local-offers-first=0",
+                "Minipro": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17702990&onstock=1&local-offers-first=0",
+                "Micar": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A14972139&onstock=1&local-offers-first=0",
+                "Minimotors": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16717585&onstock=1&local-offers-first=0",
+                "Mizar": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A14618995&onstock=1&local-offers-first=0",
+                "Ninebot": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12495568&onstock=1&local-offers-first=0",
+                "Neoline": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A2410162&onstock=1&local-offers-first=0",
+                "Next": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A8458333&onstock=1&local-offers-first=0",
+                "Novatrack": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A1613117&onstock=1&local-offers-first=0",
+                "Plank": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17709202&onstock=1&local-offers-first=0",
+                "Polaris": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A288426&onstock=1&local-offers-first=0",
+                "PROFFI": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12874565&onstock=1&local-offers-first=0",
+                "Razor": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7342816&onstock=1&local-offers-first=0",
+                "Re:action": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7156312&onstock=1&local-offers-first=0",
+                "Ridex": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12674525&onstock=1&local-offers-first=0",
+                "Segway": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7084927&onstock=1&local-offers-first=0",
+                "SpeedRoll": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A13995262&onstock=1&local-offers-first=0",
+                "Starway": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A1593495&onstock=1&local-offers-first=0",
+                "Tribe": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A10580866&onstock=1&local-offers-first=0",
+                "Urban Scooter": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16748068&onstock=1&local-offers-first=0",
+                "White Siberia": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A15311051&onstock=1&local-offers-first=0",
+                "Xiaomi": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7701962&onstock=1&local-offers-first=0",
+                "xDevice": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A1576992&onstock=1&local-offers-first=0",
+                "Yamato": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17625656&onstock=1&local-offers-first=0",
+                "Yokamura": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A23926830&onstock=1&local-offers-first=0",
+                "Сима-ленд": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A8454703&onstock=1&local-offers-first=0"
+                }
         }
     }
     TTX_files_folder = 'TTX_files/'
@@ -385,7 +447,7 @@ class Req(object):
                 cap=input()
             time.sleep(1)
 
-            # for i in driver.find_elements_by_class_name(self.div_row_models_ls):
+            # for i in driver.find_elements_by_class_name(kwargs['div_row_models_ls']):
             #     i.location_once_scrolled_into_view
 
             # cook = driver.get_cookies()
