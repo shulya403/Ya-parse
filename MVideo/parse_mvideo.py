@@ -439,16 +439,16 @@ class parse_mvideo_new(parse_mvideo):
                 print("пусто...", page_)
 
 #   MAIN
-# Монитор: 28
-# Ноутбук: 82
-parse = parse_mvideo_new('Монитор', pg_num=1)
+# Монитор: 27
+# Ноутбук: 91
+parse = parse_mvideo_new('Монитор', pg_num=3)
 #print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118?page=12'))
 #                              https://www.mvideo.ru/komputernaya-tehnika-4107/monitory-101
 #parse.Get_EOF_Page()
 
 #   def Pagination(self, max_page, begin_page=1):
 # АККУРАТНО С СВЕРХБОЛЬШИМИ ЦЕНАМИ (ЭТО СКИДКА)
-parse.Pagination(max_page=27, begin_page=0)
+parse.Pagination(max_page=27, begin_page=6)
 
 #parse.Pagination_Unparsed('Монитор-МВ-Цены-от-Oct-20--final.xlsx', new_num=2, finish=44)
 
