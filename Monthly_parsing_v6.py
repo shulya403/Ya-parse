@@ -1,5 +1,5 @@
-import parse_yama_esport as pynd
-#import parse_yama as pynd
+#import parse_yama_esport as pynd
+import parse_yama as pynd
 
 # Сначала скачиваются линки для категории. Class Parce_links
 # Затем качаются прайсы и обновления TTX. Class Parse_models_ttx()
@@ -35,9 +35,9 @@ import parse_yama_esport as pynd
 
 #parse_link.links_to_excel('Ноутбук', vendors_list=['HP','Lenovo', 'MSI', 'Huawei'])
 
-#parse_link = pynd.Parse_links_v3(page_max=20)
-#parse_link.links_to_excel('Ноутбук', vendors_list=['HP', 'Lenovo', 'MSI', 'Huawei'])
-#parse_link.links_to_excel('Монитор', vendors_list=['Dell','HP', 'Iiyama', 'LG', 'Philips', 'Samsung', 'Viewsonic', 'Lenovo', 'MSI','NEC', 'Xiaomi','Gigabyte'])
+parse_link = pynd.Parse_links_v3(page_max=20)
+# parse_link.links_to_excel('Ноутбук', vendors_list=['Honor', 'HP','Lenovo', 'MSI', 'Huawei'])
+parse_link.links_to_excel('Монитор', vendors_list=['Philips', 'Samsung', 'Viewsonic', 'Lenovo', 'MSI','NEC', 'Xiaomi','Gigabyte'])
 #parse_link.links_to_excel('Проектор', vendors_list=[])
 #parse_link.links_to_excel('ИБП', vendors_list=['Impuls','Eltena-Inelt','Legrand','Socomec','Riello','Maklesan','GE','DKC','Tripp Lite','AEG','Irbis','Sven','Hiper'])
 #parse_link.links_to_excel('Электросамокат', vendors_list=["iconBIT", "InMotion", "Inokim", "Joyor","Jetson", "KUGOO", "Lantegra", "MIDWAY", "Minipro","Micar", "Minimotors","Mizar", "Ninebot", "Neoline","Next", "Novatrack", "Plank",  "Polaris", "PROFFI", "Razor", "Re:action",  "Ridex", "Segway", "SpeedRoll","Starway", "Tribe", "Urban Scooter", "White Siberia", "Xiaomi", "xDevice", "Yamato", "Yokamura", "Сима-ленд"])
@@ -74,8 +74,8 @@ import parse_yama_esport as pynd
 # parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Jun-21----16--18-07.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
 #     main(start=752, num=4, step=300)
 
-parse = pynd.Parse_Modifications_TTX_selenium_fix('Электросамокат', 'Cсылки Электросамокат Aug-21----19--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
-    main(start=0, num=1, step=200)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Электросамокат', 'Cсылки Электросамокат Aug-21----19--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
+#     main(start=0, num=1, step=200)
 
 
 
