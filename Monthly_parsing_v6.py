@@ -28,19 +28,15 @@ import parse_yama as pynd
 #             'Ricoh','Smart','Vivitek']
 # 'vendors': ['APC','Eaton','Ippon','Delta','Cyberpower','Powercom','Vertiv','SI','Huawei','Powerman','Impuls','Eltena-Inelt','Legrand','Socomec','Riello','Maklesan',
 #             'GE','DKC','Tripp Lite','AEG','Irbis','Sven','Hiper']
-#электросамокаты: ["Artway", "Airwheel", "AOVO",  "Carmega", "cactus", "CARCAM", "Currus", "DIGMA", "Dualtron", "E-Scooter", "e-TWOW", "FORWARD", "GLOBBER", "GT", "Halten", "HIPER", "HEADWAY", "HOVERBOT",
-                # "iconBIT", "InMotion", "Inokim", "Joyor","Jetson", "KUGOO", "Lantegra", "MIDWAY", "Minipro","Micar", "Minimotors","Mizar", "Ninebot", "Neoline","Next",
-                # "Novatrack", "Plank",  "Polaris", "PROFFI", "Razor", "Re:action",  "Ridex", "Segway", "SpeedRoll","Starway", "Tribe", "Urban Scooter", "White Siberia",
-                # "Xiaomi", "xDevice", "Yamato", "Yokamura", "Сима-ленд"]
 
 #parse_link.links_to_excel('Ноутбук', vendors_list=['HP','Lenovo', 'MSI', 'Huawei'])
 
-parse_link = pynd.Parse_links_v3(page_max=20)
+#parse_link = pynd.Parse_links_v3(page_max=20)
 # parse_link.links_to_excel('Ноутбук', vendors_list=['Honor', 'HP','Lenovo', 'MSI', 'Huawei'])
-parse_link.links_to_excel('Монитор', vendors_list=['Philips', 'Samsung', 'Viewsonic', 'Lenovo', 'MSI','NEC', 'Xiaomi','Gigabyte'])
+#parse_link.links_to_excel('Монитор', vendors_list=['Philips', 'Samsung', 'Viewsonic', 'Lenovo', 'MSI','NEC', 'Xiaomi','Gigabyte'])
 #parse_link.links_to_excel('Проектор', vendors_list=[])
 #parse_link.links_to_excel('ИБП', vendors_list=['Impuls','Eltena-Inelt','Legrand','Socomec','Riello','Maklesan','GE','DKC','Tripp Lite','AEG','Irbis','Sven','Hiper'])
-#parse_link.links_to_excel('Электросамокат', vendors_list=["iconBIT", "InMotion", "Inokim", "Joyor","Jetson", "KUGOO", "Lantegra", "MIDWAY", "Minipro","Micar", "Minimotors","Mizar", "Ninebot", "Neoline","Next", "Novatrack", "Plank",  "Polaris", "PROFFI", "Razor", "Re:action",  "Ridex", "Segway", "SpeedRoll","Starway", "Tribe", "Urban Scooter", "White Siberia", "Xiaomi", "xDevice", "Yamato", "Yokamura", "Сима-ленд"])
+
 
 #class Parse_Modifications_TTX(Yama_parsing_const):
 #    def __init__(self,
@@ -65,12 +61,12 @@ parse_link.links_to_excel('Монитор', vendors_list=['Philips', 'Samsung', 
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
 #Прерывание (пустые данные). Надо докачивать с позици номер строки последнего по Excel -1
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Aug-21----final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
-#     main(start=0, num=0, step=300)
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Jun-21----16--16-44.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
-#      main(start=0, num=1, step=300)
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Jun-21----16--17-31.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
-#     main(start=864, num=3, step=140)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Sep-21----16--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+#      main(start=3070, num=2, step=300)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Sep-21----16--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+#      main(start=1681, num=2, step=200)
+parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Sep-21----17--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+    main(start=0, num=0, step=300)
 # parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Jun-21----16--18-07.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
 #     main(start=752, num=4, step=300)
 

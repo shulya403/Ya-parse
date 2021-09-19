@@ -62,10 +62,13 @@ class parse_mvideo(object):
 
         options = webdriver.ChromeOptions()
         #options.add_argument('--headless')
-        options.add_argument("--window-size=500,1080")
-        options.add_argument("--remote-debugging-port=9222")
+        options.add_argument('--profile-directory=Default')
+        options.add_argument('--user-data-dir=C:/Temp/ChromeProfile')
 
-        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        #options.add_argument("--window-size=500,1080")
+        #options.add_argument("--remote-debugging-port=9222")
+
+        self.driver = webdriver.Chrome(chrome_options=options)
 
 
         cat_ok = False

@@ -1910,12 +1910,20 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
 
         # WEBDRIVER
         options = webdriver.ChromeOptions()
-        # options.add_argument('--headless')
-        #options.add_argument("user-data-dir=selen")
+        # # options.add_argument('--headless')
+        # options.add_argument("user-data-dir=selen")
         options.add_argument("--remote-debugging-port=9222")
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
         #self.driver = webdriver.Chrome(executable_path = r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
+
+        # options = webdriver.ChromeOptions()
+        # options.add_argument('--allow-profiles-outside-user-dir')
+        # options.add_argument('--enable-profile-shortcut-manager')
+        # options.add_argument(r'user-data-dir=selen')
+        # options.add_argument('--profile-directory=Profile 1')
+        #
+        # webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
         if category in self.Categories.keys():
             self.category = category
