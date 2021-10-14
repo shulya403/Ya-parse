@@ -65,10 +65,10 @@ import parse_yama as pynd
 #      main(start=3070, num=2, step=300)
 # parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Sep-21----16--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
 #      main(start=1681, num=2, step=200)
-parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Sep-21----17--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
-    main(start=0, num=0, step=300)
-# parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Jun-21----16--18-07.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
-#     main(start=752, num=4, step=300)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Sep-21----17--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+#     main(start=0, num=0, step=300)
+parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Sep-21----17--19-13.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+    main(start=1120, num=3, step=300)
 
 # parse = pynd.Parse_Modifications_TTX_selenium_fix('Электросамокат', 'Cсылки Электросамокат Aug-21----19--final.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
 #     main(start=0, num=1, step=200)
