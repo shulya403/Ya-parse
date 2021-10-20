@@ -1986,7 +1986,8 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                     webdriver.ActionChains(self.driver).move_to_element(elem).perform()
                     time.sleep(1)
                     webdriver.ActionChains(self.driver).click(elem).perform()
-                    cap = input()
+                    #cap = input()
+                    time.sleep(5)
                     self.URL_Req(url_, host=False, model_page=model_page)
         except Exception:
             print("не выходит {}".format(url_))
