@@ -167,7 +167,7 @@ class Yama_parsing_const(object):
     host = 'https://market.yandex.ru'
 
     #добавка к адресу выдачи списка моделей
-    link_tail = '&onstock=1&local-offers-first=0'
+    link_tail = '&onstock=1&local-offers-first=0&&viewtype=list'
 
     #головная ссылка раздела "Компьютерная техника"
     link_computers = 'https://market.yandex.ru/catalog--kompiuternaia-tekhnika/54425'
@@ -430,8 +430,9 @@ class Req(object):
 
         options = webdriver.ChromeOptions()
         #options.add_argument('--headless')
-        options.add_argument("user-data-dir=C:\Program Files (x86)\Google\Chrome\Application\selenium")
-        #options.add_argument("--remote-debugging-port=9222")
+        #options.add_argument("user-data-dir=C:\Program Files (x86)\Google\Chrome\Application\selenium")
+        options.add_argument("--remote-debugging-port=9222")
+        print('req_v3')
 
         driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         #driver = webdriver.Chrome(executable_path=r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
@@ -1911,8 +1912,12 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
         # WEBDRIVER
         options = webdriver.ChromeOptions()
         # # options.add_argument('--headless')
-        # options.add_argument("user-data-dir=selen")
-        options.add_argument("--remote-debugging-port=9222")
+        #options.add_argument('--allow-profiles-outside-user-dir')
+        #options.add_argument('--enable-profile-shortcut-manager')
+        #options.add_argument('--profile-directory=Default') 
+        #options.add_argument('--profile-directory=Profile 1')
+        #options.add_argument("--user-data-dir=selen")
+        #options.add_argument("--remote-debugging-port=9222")
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
         #self.driver = webdriver.Chrome(executable_path = r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
@@ -1991,9 +1996,10 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                     print('Капча')
                     elem = self.driver.find_element_by_css_selector('.CheckboxCaptcha-Inner')
                     webdriver.ActionChains(self.driver).move_to_element(elem).perform()
-                    time.sleep(1)
+                    time.sleep(5)
                     webdriver.ActionChains(self.driver).click(elem).perform()
-                    cap = input()
+                    time.sleep(15)
+                    #cap = input()
                     self.URL_Req(url_, host=False, model_page=model_page)
         except Exception:
             print("не выходит {}".format(url_))
