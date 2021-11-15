@@ -12,13 +12,6 @@ import parse_yama as pynd
 #parse_link.links_to_excel('Проектор')
 #parse_link.links_to_excel('ИБП')
 
-#Проверить какая последняя страница в выдаче (page_max)
-
-#parse_link = pynd.Parse_links_v2(page_max=25)
-#parse_link.links_to_excel('Ноутбук')
-#parse_link.links_to_excel('Монитор')
-#parse_link.links_to_excel('Проектор')
-#parse_link.links_to_excel('ИБП')
 
 # Херачит отдельно по вендорам
 # Убрать из xls - /offer/, //Market-clik
@@ -32,7 +25,7 @@ import parse_yama as pynd
 #parse_link.links_to_excel('Ноутбук', vendors_list=['HP','Lenovo', 'MSI', 'Huawei'])
 
 parse_link = pynd.Parse_links_v3(page_max=20)
-parse_link.links_to_excel('Ноутбук', vendors_list=[])
+parse_link.links_to_excel('Ноутбук', vendors_list=['MSI'])
 #parse_link.links_to_excel('Монитор', vendors_list=['Philips', 'Samsung', 'Viewsonic', 'Lenovo', 'MSI','NEC', 'Xiaomi','Gigabyte'])
 #parse_link.links_to_excel('Проектор', vendors_list=[])
 #parse_link.links_to_excel('ИБП', vendors_list=['Impuls','Eltena-Inelt','Legrand','Socomec','Riello','Maklesan','GE','DKC','Tripp Lite','AEG','Irbis','Sven','Hiper'])

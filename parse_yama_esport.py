@@ -24,6 +24,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import winsound
+import random
 
 class Yama_parsing_const(object):
     def header_(self, referer=""):
@@ -2142,3 +2143,59 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             writer = pd.ExcelWriter(filename, engine='xlsxwriter', options={'strings_to_urls': False})
             df_out.to_excel(writer)
             writer.close()
+
+class For_allgid(object):
+
+    def __init__(self):
+
+        print('webdriver')
+        # WEBDRIVER
+        options = webdriver.ChromeOptions()
+        # options.add_argument('--headless')
+        # options.add_argument("user-data-dir=selen")
+        #options.add_argument('user-agent="MQQBrowser/26 Mozilla/5.0 (Linux; U; Android 2.3.7; zh-cn; MB200 Build/GRJ22; CyanogenMod-7) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1"')
+        #options.add_argument('user-agent="Mozilla/5.0 (Linux; Android 11; SM-A325F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Mobile Safari/537.36"')
+        #options.add_argument('user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.183 Safari/537.36 Edg/86.0.622.63"')
+        #options.add_argument('user-agent="Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"')
+        #options.add_argument('user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"')
+        #options.add_argument('user-agent="Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"')
+        #options.add_argument('user-agent="Mozilla/5.0 (Windows NT 6.3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"')
+        #options.add_argument('user-agent="Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"')
+        options.add_argument('user-agent="Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"')
+        options.add_argument("--remote-debugging-port=9222")
+        options.add_argument('--window-size=1920,1080')
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
+        random.seed()
+
+
+    def URL_Req(self, url_):
+
+        try:
+            self.driver.get(url_)
+
+        except Exception as Err:
+            print("не выходит {}".format(Err))
+            return None
+
+    def Chrome_Launch(self, url_):
+        self.URL_Req(url_)
+        
+    def Radom_click(self, delay_=10, times_=3):
+
+        for i in range(times_):
+
+            page_links = self.driver.find_elements_by_tag_name("a")
+            link_ = page_links[random.randint(0, len(page_links))]
+            print(link_.get_property("href"))
+            try:
+                if "https://allgid" in link_.get_property("href"):
+                    link_.click()
+            except Exception:
+                pass
+
+
+            time.sleep(random.randint(0, delay_))
+
+        self.driver.close()
+        

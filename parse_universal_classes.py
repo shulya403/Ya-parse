@@ -561,6 +561,34 @@ class Parse_DNS(Parse_Common):
 
     site = "dns"
 
+    def Page_Webdriver(self, url_):
+
+        #try:
+        #    options = webdriver.ChromeOptions()
+        #    for option in self.site_params["host_options"]:
+        #        options.add_argument(option)
+        #except Exception:
+        #    print("Site Options", Exception)
+
+
+        #driver = webdriver.Chrome("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe")
+
+        self.driver.get(url_)
+        # try:
+        #     element = WebDriverWait(self.driver, 5).\
+        #         until(EC.presence_of_element_located((By.CLASS_NAME, "product-min-price__current")))
+        # except Exception:
+        #     pass
+        # finally:
+        time.sleep(self.interrupt)
+        exit_ = self.driver.page_source
+
+        if not exit_:
+            time.sleep(3)
+            self.Page_webdriver(url_)
+
+        return exit_
+
     def Find_All_Divs(self, json_div, soup):
 
         try:

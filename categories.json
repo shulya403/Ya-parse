@@ -256,19 +256,19 @@
                   "re": "True",
                   "attributes": {
 
-                    "class": "tE"
+                    "class": "iD"
                   }
                 },
                 "product_div": {
                   "teg": "div",
                   "attributes": {
-                    "class": "vE"
+                    "class": "kD"
                   }
                 },
                 "price_div": {
                   "teg": "span",
                   "attributes": {
-                    "class": "LP SP"
+                    "class": "JP QP"
                     }
                 },
                 "internal_page_mod_name": {

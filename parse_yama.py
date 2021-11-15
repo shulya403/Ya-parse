@@ -62,46 +62,6 @@ class Yama_parsing_const(object):
 
         return header
 
-    ya_cookies = {
-        '_ym_uid': '1575729574981578479',
-        'mda': '0',
-        'my': 'YwA=',
-        'categoryQA': '1',
-        'L': 'UWh6d11wUglKWURxVwJKY29/YXNDW2B4IAMqGSkvWi4oDA==.1576330582.14079.396207.a95d6af3485906fe3a5b85ad5e96aae2',
-        'yandex_login': 'dmschulgin',
-        'yandexuid': '7149064641575729573',
-        'yuidss': '7149064641575729573',
-        'currentRegionId': '213',
-        'currentRegionName': '%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D1%83',
-        'settings-notifications-popup': '%7B%22showCount%22%3A2%2C%22showDate%22%3A18280%7D',
-        'ymex': '1896226411.yrts.1580866411',
-        'zm': 'm-white_bender.webp.css-https%3As3home-static_AcrZ-E5XMfrfMIo1gDHPnVN4AdI%3Al',
-        'i': 'f84xXe5i+RDS9ZAAcaeRW6dGVcK3pWOh3j9tHolXBj+4D5wJJOYr2Po2Fq9YoOzQbtqNrKdmeuMJECkYhMP95GcEEWM=',
-        'yandex_gid': '213',
-        'yc': '1581711296.zen.cach%3A1581455687',
-        '_ym_d': '1581452810',
-        'yabs-frequency': '/4/1W0203IoGLu2415U/ht2mSBWv8L21FcsqEITwyZrje3ad/',
-        'skid': '5043396831581538418',
-        '_ym_isad': '2',
-        'cycada': 'tSzluWir/d0SzOW2g4oBs3aLNKnxzLvG+Evc76owb0I=',
-        'Session_id': '3:1581643106.5.0.1576330582444:rTr8bQ:86.1|919128238.0.2|212505.744792.ZdacW_cOsLYLzTuP8fcaSDzt8Zs',
-        'sessionid2': '3:1581643106.5.0.1576330582444:rTr8bQ:86.1|919128238.0.2|212505.224397.B1p8konycmHsBJLQ1AWZJJ_Cwkg',
-        'yp': '1612402412.cld.2270452#1612402412.brd.6158003823#1896394830.sad.1581034830:1581034830:1#1584922830.hks.0#1597131741.szm.1_5:1280x720:1166x626#1581968565.zmblt.1505#1581968565.zmbbr.yandexbrowser:20_2_1_248#1584044087.ygu.1#1581696462.gpauto.55_713436:37_730183:200:1:1581689262',
-        'visits': '1575841847-1579550934-1581689499',
-        'uid': 'AABcEl5Gqpsw4AC4BLSWAg==',
-        'js': '1',
-        'dcm': '1',
-        '_ym_visorc_160656': 'b',
-        '_ym_visorc_45411513': 'b',
-        'first_visit_time': '2020-02-14T17%3A11%3A43%2B03%3A00',
-        'yandexmarket': '48',
-        'fonts-loaded': '1',
-        'ugcp': '1',
-        'ys': 'def_bro.0#svt.1#wprid.1581682415557470-933073134786648878600067-vla1-1933#ybzcc.ru',
-        'parent_reqid_seq': '4443e96de0ca39b438700c542afbd754%2C9167d730c4966f0d74a8f0e36206d2ac%2C22e8d508c3661ec4b41e9cce6d85bde9',
-        'viewtype': 'list'
-     }
-
     ya_cookies2 = { #June 2020
         'fuid01': '5187dbf37aa46e29.1ea1yXg4LdRzObB-t-8Dp5ZUsvvynIX2NMEmQLT2IN-oQI6OGq1Q1nQsrKPOUPER2HtMsOB-p4AP9QnjF1SvJNe86JHPbTw1UraJwGiQHBkyb1gxs7EDw7LMnv5Ylc1s',
         'markethistory': '<h><c>6427101</c><c>432460</c><m>11151827</m><m>10630837</m><m>11142972</m><m>10993382</m><m>12174379</m><m>12174345</m><m>12325200</m><m>11874413</m><m>12393964</m><m>10853777</m><m>12408317</m><m>8293471</m><m>10771048</m><m>10771049</m><m>11851436</m><m>10540949</m><m>12221853</m><m>12174590</m><m>12143640</m><m>12253940</m><m>10541564</m><m>12334353</m><m>12254049</m><m>12253336</m><m>12253311</m><m>12285506</m><m>12285898</m><m>10469466</m><m>11007864</m><m>10469292</m><cm>6427101-11131792</cm><cm>6427101-11547576</cm><cm>6427101-10846379</cm><cm>106905-10467479</cm><cm>432460-11151827</cm><cm>432460-10630837</cm><cm>432460-11142972</cm></h>', 
@@ -233,38 +193,38 @@ class Yama_parsing_const(object):
                          'Ультрабук'],
             'ttx_file': 'Ноутбук--характеристики.xlsx',
             'ttx_mod_file': 'Ноутбук-Мод-характеристики.xlsx',
-            'vendors': {'Acer': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A267101&onstock=1&local-offers-first=0',
-                        'Alienware': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A6146438&onstock=1&local-offers-first=0',
-                        'Apple': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A153043&onstock=1&local-offers-first=0',
-                        'Asus': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152863&onstock=1&local-offers-first=0',
-                        'Dell': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A153080&onstock=1&local-offers-first=0',
-                        'Honor': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A15292504&onstock=1&local-offers-first=0',
-                        'HP': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152722&onstock=1&local-offers-first=0',
-                        'Lenovo': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152981&onstock=1&local-offers-first=0',
-                        'MSI':'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A762076&onstock=1&local-offers-first=0',
-                        'Huawei':'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A459710&onstock=1&local-offers-first=0'}
+            'vendors': {'Acer': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A267101&onstock=1&local-offers-first=0&viewtype=list',
+                        'Alienware': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A6146438&onstock=1&local-offers-first=0&viewtype=list',
+                        'Apple': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A153043&onstock=1&local-offers-first=0&viewtype=list',
+                        'Asus': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152863&onstock=1&local-offers-first=0&viewtype=list',
+                        'Dell': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A153080&onstock=1&local-offers-first=0&viewtype=list',
+                        'Honor': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A15292504&onstock=1&local-offers-first=0&viewtype=list',
+                        'HP': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152722&onstock=1&local-offers-first=0&viewtype=list',
+                        'Lenovo': 'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152981&onstock=1&local-offers-first=0&viewtype=list',
+                        'MSI':'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A762076&onstock=1&local-offers-first=0&viewtype=list',
+                        'Huawei':'https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A459710&onstock=1&local-offers-first=0&viewtype=list'}
 
         },
         'Монитор': {
             'url': 'https://market.yandex.ru/catalog--monitory/54539/list?hid=91052',
             'category': ['Монитор'],
             'ttx_file': 'Монитор--характеристики.xlsx',
-            'vendors': {'Acer': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A267101&onstock=1&local-offers-first=0',
-                        'AOC': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A431391&onstock=1&local-offers-first=0',
-                        'Asus': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152863&onstock=1&local-offers-first=0',
-                        'BenQ': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A241228&onstock=1&local-offers-first=0',
-                        'Dell':'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153080&onstock=1&local-offers-first=0',
-                        'HP': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152722&onstock=1&local-offers-first=0',
-                        'Iiyama': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152865&onstock=1&local-offers-first=0',
-                        'LG': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153074&onstock=1&local-offers-first=0',
-                        'Philips': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152870&onstock=1&local-offers-first=0',
-                        'Samsung': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153061&onstock=1&local-offers-first=0',
-                        'Viewsonic': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152807&onstock=1&local-offers-first=0',
-                        'Lenovo': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152981&onstock=1&local-offers-first=0',
-                        'MSI': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A762076&onstock=1&local-offers-first=0',
-                        'NEC': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153117&onstock=1&local-offers-first=0 ',
-                        'Xiaomi': 'https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A7701962&local-offers-first=0',
-                        'Gigabyte': 'https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A431404&local-offers-first=0'}
+            'vendors': {'Acer': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A267101&onstock=1&local-offers-first=0&viewtype=list',
+                        'AOC': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A431391&onstock=1&local-offers-first=0&viewtype=list',
+                        'Asus': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152863&onstock=1&local-offers-first=0&viewtype=list',
+                        'BenQ': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A241228&onstock=1&local-offers-first=0&viewtype=list',
+                        'Dell':'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153080&onstock=1&local-offers-first=0&viewtype=list',
+                        'HP': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152722&onstock=1&local-offers-first=0&viewtype=list',
+                        'Iiyama': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152865&onstock=1&local-offers-first=0&viewtype=list',
+                        'LG': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153074&onstock=1&local-offers-first=0&viewtype=list',
+                        'Philips': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152870&onstock=1&local-offers-first=0&viewtype=list',
+                        'Samsung': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153061&onstock=1&local-offers-first=0&viewtype=list',
+                        'Viewsonic': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152807&onstock=1&local-offers-first=0&viewtype=list',
+                        'Lenovo': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152981&onstock=1&local-offers-first=0&viewtype=list',
+                        'MSI': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A762076&onstock=1&local-offers-first=0&viewtype=list',
+                        'NEC': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153117&onstock=1&local-offers-first=0&viewtype=list',
+                        'Xiaomi': 'https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A7701962&local-offers-first=0&viewtype=list',
+                        'Gigabyte': 'https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A431404&local-offers-first=0&viewtype=list'}
         },
         'Проектор': {
             'url': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?hid=191219',
@@ -278,27 +238,27 @@ class Yama_parsing_const(object):
                          'Инсталляционные проекторы',
                          'Проектор для образования'],
             'ttx_file': 'Проектор--характеристики.xlsx',
-            'vendors': {'Acer': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A267101&onstock=1&local-offers-first=0',
-                        'BenQ': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A241228&onstock=1&local-offers-first=0',
-                        'Epson': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153058&onstock=1&local-offers-first=0',
-                        'Infocus': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A287251&onstock=1&local-offers-first=0',
-                        'LG': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153074&onstock=1&local-offers-first=0',
-                        'NEC': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153117&onstock=1&local-offers-first=0',
-                        'Optoma': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A1598564&onstock=1&local-offers-first=0',
-                        'Sony': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152955&onstock=1&local-offers-first=0',
-                        'Viewsonic': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152807&onstock=1&local-offers-first=0',
-                        'Xiaomi': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A7701962&onstock=1&local-offers-first=0',
-                        'Barco': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152884&onstock=1&local-offers-first=0',
-                        'Canon': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152861&onstock=1&local-offers-first=0',
-                        'Casio': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152967&onstock=1&local-offers-first=0',
-                        'Christie': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A454306&onstock=1&local-offers-first=0',
-                        'Hiper ': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A927650&onstock=1&local-offers-first=0',
-                        'Hitachi': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152885&onstock=1&local-offers-first=0',
-                        'JVC': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152968&onstock=1&local-offers-first=0',
-                        'Panasonic': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153082&onstock=1&local-offers-first=0',
-                        'Ricoh': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153070&onstock=1&local-offers-first=0',
-                        'Smart':'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A10766653&onstock=1&local-offers-first=0',
-                        'Vivitek': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A4878853&onstock=1&local-offers-first=0'}
+            'vendors': {'Acer': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A267101&onstock=1&local-offers-first=0&viewtype=list',
+                        'BenQ': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A241228&onstock=1&local-offers-first=0&viewtype=list',
+                        'Epson': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153058&onstock=1&local-offers-first=0&viewtype=list',
+                        'Infocus': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A287251&onstock=1&local-offers-first=0&viewtype=list',
+                        'LG': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153074&onstock=1&local-offers-first=0&viewtype=list',
+                        'NEC': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153117&onstock=1&local-offers-first=0&viewtype=list',
+                        'Optoma': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A1598564&onstock=1&local-offers-first=0&viewtype=list',
+                        'Sony': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152955&onstock=1&local-offers-first=0&viewtype=list',
+                        'Viewsonic': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152807&onstock=1&local-offers-first=0&viewtype=list',
+                        'Xiaomi': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A7701962&onstock=1&local-offers-first=0&viewtype=list',
+                        'Barco': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152884&onstock=1&local-offers-first=0&viewtype=list',
+                        'Canon': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152861&onstock=1&local-offers-first=0&viewtype=list',
+                        'Casio': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152967&onstock=1&local-offers-first=0&viewtype=list',
+                        'Christie': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A454306&onstock=1&local-offers-first=0&viewtype=list',
+                        'Hiper ': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A927650&onstock=1&local-offers-first=0&viewtype=list',
+                        'Hitachi': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152885&onstock=1&local-offers-first=0&viewtype=list',
+                        'JVC': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152968&onstock=1&local-offers-first=0&viewtype=list',
+                        'Panasonic': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153082&onstock=1&local-offers-first=0&viewtype=list',
+                        'Ricoh': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153070&onstock=1&local-offers-first=0&viewtype=list',
+                        'Smart':'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A10766653&onstock=1&local-offers-first=0&viewtype=list',
+                        'Vivitek': 'https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A4878853&onstock=1&local-offers-first=0&viewtype=list'}
         },
         'ИБП': {
             'url': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/59604/list?hid=91082',
@@ -308,29 +268,29 @@ class Yama_parsing_const(object):
                          'Источник бесперебойного питания'
                          ],
             'ttx_file': 'Электросамокат--характеристики.xlsx',
-            'vendors': {'APC': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A431409&onstock=1&local-offers-first=0',
-                        'Eaton': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A7147751&onstock=1&local-offers-first=0',
-                        'Ippon': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A985314&onstock=1&local-offers-first=0',
-                        'Delta': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A1586731&onstock=1&local-offers-first=0',
-                        'Cyberpower': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990776&onstock=1&local-offers-first=0',
-                        'Powercom': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A985313&onstock=1&local-offers-first=0',
-                        'Vertiv': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A16221867&onstock=1&local-offers-first=0',
-                        'SI':'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A14350762&onstock=1&local-offers-first=0',
-                        'Huawei': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A459710&onstock=1&local-offers-first=0',
-                        'Powerman': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A722955&onstock=1&local-offers-first=0',
-                        'Impuls': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A14983243&onstock=1&local-offers-first=0',
-                        'Eltena-Inelt': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990800&onstock=1&local-offers-first=0',
-                        'Legrand': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A11617058&onstock=1&local-offers-first=0',
-                        'Socomec': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990792&onstock=1&local-offers-first=0',
-                        'Riello':'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A15060130&onstock=1&local-offers-first=0',
-                        'Maklesan': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A10436632&onstock=1&local-offers-first=0',
-                        'GE': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A152998&onstock=1&local-offers-first=0',
-                        'DKC': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A13107145&onstock=1&local-offers-first=0',
-                        'Tripp Lite': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A1019970&onstock=1&local-offers-first=0',
-                        'AEG': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A152789&onstock=1&local-offers-first=0',
-                        'Irbis': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A6151013&onstock=1&local-offers-first=0',
-                        'Sven': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A284761&onstock=1&local-offers-first=0',
-                        'Hiper': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A927650&onstock=1&local-offers-first=0',
+            'vendors': {'APC': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A431409&onstock=1&local-offers-first=0&viewtype=list',
+                        'Eaton': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A7147751&onstock=1&local-offers-first=0&viewtype=list',
+                        'Ippon': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A985314&onstock=1&local-offers-first=0&viewtype=list',
+                        'Delta': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A1586731&onstock=1&local-offers-first=0&viewtype=list',
+                        'Cyberpower': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990776&onstock=1&local-offers-first=0&viewtype=list',
+                        'Powercom': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A985313&onstock=1&local-offers-first=0&viewtype=list',
+                        'Vertiv': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A16221867&onstock=1&local-offers-first=0&viewtype=list',
+                        'SI':'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A14350762&onstock=1&local-offers-first=0&viewtype=list',
+                        'Huawei': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A459710&onstock=1&local-offers-first=0&viewtype=list',
+                        'Powerman': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A722955&onstock=1&local-offers-first=0&viewtype=list',
+                        'Impuls': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A14983243&onstock=1&local-offers-first=0&viewtype=list',
+                        'Eltena-Inelt': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990800&onstock=1&local-offers-first=0&viewtype=list',
+                        'Legrand': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A11617058&onstock=1&local-offers-first=0&viewtype=list',
+                        'Socomec': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990792&onstock=1&local-offers-first=0&viewtype=list',
+                        'Riello':'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A15060130&onstock=1&local-offers-first=0&viewtype=list',
+                        'Maklesan': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A10436632&onstock=1&local-offers-first=0&viewtype=list',
+                        'GE': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A152998&onstock=1&local-offers-first=0&viewtype=list',
+                        'DKC': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A13107145&onstock=1&local-offers-first=0&viewtype=list',
+                        'Tripp Lite': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A1019970&onstock=1&local-offers-first=0&viewtype=list',
+                        'AEG': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A152789&onstock=1&local-offers-first=0&viewtype=list',
+                        'Irbis': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A6151013&onstock=1&local-offers-first=0&viewtype=list',
+                        'Sven': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A284761&onstock=1&local-offers-first=0&viewtype=list',
+                        'Hiper': 'https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A927650&onstock=1&local-offers-first=0&viewtype=list',
                         }
         },
         'Электросамокат': {
@@ -343,56 +303,56 @@ class Yama_parsing_const(object):
             'ttx_file': 'ИБП--характеристики.xlsx',
             'vendors': {
                 "Artway": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=0&hid=7070735&glfilter=7893318%3A13733501&onstock=1&local-offers-first=0&viewtype=list",
-                "Airwheel": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12490204&onstock=1&local-offers-first=0",
-                "AOVO": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17702741&onstock=1&local-offers-first=0",
-                "Carmega": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A10667925&onstock=1&local-offers-first=0",
-                "cactus": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A10713437&onstock=1&local-offers-first=0",
-                "CARCAM": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7156305&onstock=1&local-offers-first=0",
-                "Currus": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17677563&onstock=1&local-offers-first=0",
-                "DIGMA": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A470013&onstock=1&local-offers-first=0",
-                "Dualtron": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16641892&onstock=1&local-offers-first=0",
-                "E-Scooter": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A11055941&onstock=1&local-offers-first=0",
-                "e-TWOW": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12655366&onstock=1&local-offers-first=0",
-                "FORWARD": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A8455957&onstock=1&local-offers-first=0",
-                "GLOBBER": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12499404&onstock=1&local-offers-first=0",
-                "GT": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A1640344&onstock=1&local-offers-first=0",
-                "Halten": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16583715&onstock=1&local-offers-first=0",
-                "HIPER": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A927650&onstock=1&local-offers-first=0",
-                "HEADWAY": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12708936&onstock=1&local-offers-first=0",
-                "HOVERBOT": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A13098052&onstock=1&local-offers-first=0",
-                "iconBIT": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A4850257&onstock=1&local-offers-first=0",
-                "InMotion": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12366819&onstock=1&local-offers-first=0",
-                "Inokim": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A14229159&onstock=1&local-offers-first=0",
-                "Joyor": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A13519851&onstock=1&local-offers-first=0",
-                "Jetson": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17480749&onstock=1&local-offers-first=0",
-                "KUGOO": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16037697&onstock=1&local-offers-first=0",
-                "Lantegra": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17556051&onstock=1&local-offers-first=0",
-                "MIDWAY": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A13519781&onstock=1&local-offers-first=0",
-                "Minipro": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17702990&onstock=1&local-offers-first=0",
-                "Micar": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A14972139&onstock=1&local-offers-first=0",
-                "Minimotors": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16717585&onstock=1&local-offers-first=0",
-                "Mizar": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A14618995&onstock=1&local-offers-first=0",
-                "Ninebot": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12495568&onstock=1&local-offers-first=0",
-                "Neoline": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A2410162&onstock=1&local-offers-first=0",
-                "Next": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A8458333&onstock=1&local-offers-first=0",
-                "Novatrack": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A1613117&onstock=1&local-offers-first=0",
-                "Plank": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17709202&onstock=1&local-offers-first=0",
-                "Polaris": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A288426&onstock=1&local-offers-first=0",
-                "PROFFI": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12874565&onstock=1&local-offers-first=0",
-                "Razor": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7342816&onstock=1&local-offers-first=0",
-                "Re:action": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7156312&onstock=1&local-offers-first=0",
-                "Ridex": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12674525&onstock=1&local-offers-first=0",
-                "Segway": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7084927&onstock=1&local-offers-first=0",
-                "SpeedRoll": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A13995262&onstock=1&local-offers-first=0",
-                "Starway": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A1593495&onstock=1&local-offers-first=0",
-                "Tribe": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A10580866&onstock=1&local-offers-first=0",
-                "Urban Scooter": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16748068&onstock=1&local-offers-first=0",
-                "White Siberia": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A15311051&onstock=1&local-offers-first=0",
-                "Xiaomi": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7701962&onstock=1&local-offers-first=0",
-                "xDevice": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A1576992&onstock=1&local-offers-first=0",
-                "Yamato": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17625656&onstock=1&local-offers-first=0",
-                "Yokamura": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A23926830&onstock=1&local-offers-first=0",
-                "Сима-ленд": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A8454703&onstock=1&local-offers-first=0"
+                "Airwheel": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12490204&onstock=1&local-offers-first=0&viewtype=list",
+                "AOVO": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17702741&onstock=1&local-offers-first=0&viewtype=list",
+                "Carmega": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A10667925&onstock=1&local-offers-first=0&viewtype=list",
+                "cactus": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A10713437&onstock=1&local-offers-first=0&viewtype=list",
+                "CARCAM": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7156305&onstock=1&local-offers-first=0&viewtype=list",
+                "Currus": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17677563&onstock=1&local-offers-first=0&viewtype=list",
+                "DIGMA": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A470013&onstock=1&local-offers-first=0&viewtype=list",
+                "Dualtron": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16641892&onstock=1&local-offers-first=0&viewtype=list",
+                "E-Scooter": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A11055941&onstock=1&local-offers-first=0&viewtype=list",
+                "e-TWOW": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12655366&onstock=1&local-offers-first=0&viewtype=list",
+                "FORWARD": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A8455957&onstock=1&local-offers-first=0&viewtype=list",
+                "GLOBBER": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12499404&onstock=1&local-offers-first=0&viewtype=list",
+                "GT": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A1640344&onstock=1&local-offers-first=0&viewtype=list",
+                "Halten": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16583715&onstock=1&local-offers-first=0&viewtype=list",
+                "HIPER": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A927650&onstock=1&local-offers-first=0&viewtype=list",
+                "HEADWAY": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12708936&onstock=1&local-offers-first=0&viewtype=list",
+                "HOVERBOT": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A13098052&onstock=1&local-offers-first=0&viewtype=list",
+                "iconBIT": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A4850257&onstock=1&local-offers-first=0&viewtype=list",
+                "InMotion": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12366819&onstock=1&local-offers-first=0&viewtype=list",
+                "Inokim": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A14229159&onstock=1&local-offers-first=0&viewtype=list",
+                "Joyor": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A13519851&onstock=1&local-offers-first=0&viewtype=list",
+                "Jetson": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17480749&onstock=1&local-offers-first=0&viewtype=list",
+                "KUGOO": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16037697&onstock=1&local-offers-first=0&viewtype=list",
+                "Lantegra": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17556051&onstock=1&local-offers-first=0&viewtype=list",
+                "MIDWAY": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A13519781&onstock=1&local-offers-first=0&viewtype=list",
+                "Minipro": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17702990&onstock=1&local-offers-first=0&viewtype=list",
+                "Micar": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A14972139&onstock=1&local-offers-first=0&viewtype=list",
+                "Minimotors": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16717585&onstock=1&local-offers-first=0&viewtype=list",
+                "Mizar": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A14618995&onstock=1&local-offers-first=0&viewtype=list",
+                "Ninebot": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12495568&onstock=1&local-offers-first=0&viewtype=list",
+                "Neoline": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A2410162&onstock=1&local-offers-first=0&viewtype=list",
+                "Next": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A8458333&onstock=1&local-offers-first=0&viewtype=list",
+                "Novatrack": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A1613117&onstock=1&local-offers-first=0&viewtype=list",
+                "Plank": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17709202&onstock=1&local-offers-first=0&viewtype=list",
+                "Polaris": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A288426&onstock=1&local-offers-first=0&viewtype=list",
+                "PROFFI": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12874565&onstock=1&local-offers-first=0&viewtype=list",
+                "Razor": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7342816&onstock=1&local-offers-first=0&viewtype=list",
+                "Re:action": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7156312&onstock=1&local-offers-first=0&viewtype=list",
+                "Ridex": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A12674525&onstock=1&local-offers-first=0&viewtype=list",
+                "Segway": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7084927&onstock=1&local-offers-first=0&viewtype=list",
+                "SpeedRoll": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A13995262&onstock=1&local-offers-first=0&viewtype=list",
+                "Starway": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A1593495&onstock=1&local-offers-first=0&viewtype=list",
+                "Tribe": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A10580866&onstock=1&local-offers-first=0&viewtype=list",
+                "Urban Scooter": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A16748068&onstock=1&local-offers-first=0&viewtype=list",
+                "White Siberia": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A15311051&onstock=1&local-offers-first=0&viewtype=list",
+                "Xiaomi": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A7701962&onstock=1&local-offers-first=0&viewtype=list",
+                "xDevice": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A1576992&onstock=1&local-offers-first=0&viewtype=list",
+                "Yamato": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A17625656&onstock=1&local-offers-first=0&viewtype=list",
+                "Yokamura": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A23926830&onstock=1&local-offers-first=0&viewtype=list",
+                "Сима-ленд": "https://market.yandex.ru/catalog--elektrosamokaty/18071958/list?cpa=1&hid=7070735&glfilter=7893318%3A8454703&onstock=1&local-offers-first=0&viewtype=list"
                 }
         }
     }
@@ -404,6 +364,17 @@ class Req(object):
 
         self.text = ''
         self.status_code = 400
+
+        options = webdriver.ChromeOptions()
+        # options.add_argument('--headless')
+        # options.add_argument("user-data-dir=C:\Program Files (x86)\Google\Chrome\Application\selenium")
+        # options.add_argument("--remote-debugging-port=9222")
+        #options.add_argument("--windows-size=1920,1080")
+
+        print('req_v3')
+
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        self.driver.set_window_size(1920, 1080)
 
         #self.requests(url, headers, cookies)
 
@@ -428,25 +399,18 @@ class Req(object):
 
     def selenium(self, url, **kwargs):
 
-        options = webdriver.ChromeOptions()
-        #options.add_argument('--headless')
-        #options.add_argument("user-data-dir=C:\Program Files (x86)\Google\Chrome\Application\selenium")
-        #options.add_argument("--remote-debugging-port=9222")
-        
-        print('req_v3')
 
-        driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
         #driver = webdriver.Chrome(executable_path=r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
         try:
 
-            driver.get(url)
+            self.driver.get(url)
 
-            if "Ой!" in driver.page_source:
-                elem = driver.find_element_by_css_selector('.CheckboxCaptcha-Inner')
-                webdriver.ActionChains(driver).move_to_element(elem).perform()
+            if "Ой!" in self.driver.page_source:
+                elem = self.driver.find_element_by_css_selector('.CheckboxCaptcha-Inner')
+                webdriver.ActionChains(self.driver).move_to_element(elem).perform()
                 time.sleep(1)
-                webdriver.ActionChains(driver).click(elem).perform()
-                cap=input()
+                webdriver.ActionChains(self.driver).click(elem).perform()
+
             time.sleep(1)
 
             # for i in driver.find_elements_by_class_name(kwargs['div_row_models_ls']):
@@ -455,7 +419,7 @@ class Req(object):
             # cook = driver.get_cookies()
             # print(cook)
 
-            self.text = driver.page_source
+            self.text = self.driver.page_source
 
             #driver.close()
         except Exception:
@@ -605,128 +569,6 @@ class Parse_links(Yama_parsing_const):
         excel_file_name = folder + 'Cсылки ' + category + ' ' + now + '.xlsx'
 
         df.to_excel(excel_file_name)
-
-class Parse_links_v2(Parse_links):
-    def __init__(self, page_max=0):
-        self.page_max = page_max
-
-    # скачивание линков на страницы модели по категории
-    def parse_links(self, category):
-
-        url = self.Categories[category]['url']
-        category_ls = self.Categories[category]['category']
-
-        models_list = list()  # список словарей с моделями с названиеми и ссылками на модели
-
-        response = Req()
-
-        page = 1  # номер страницы выдачи
-
-        pages_full = True  # есть ли целевой контент на очередной странице
-        while pages_full:
-            if page > 1:
-                page_url = url + '&page=' + str(page) + self.link_tail
-
-                if page == 2:
-                    referer_ = url + self.link_tail
-
-                else:
-                    referer_ = url + '&page=' + str(page - 1) + self.link_tail
-            else:
-                page_url = url + self.link_tail
-                referer_ = self.link_computers
-
-            # response = Req()
-            # response.requests(page_url, headers=self.header_(referer_))
-            response.selenium(page_url)
-
-            if response.status_code == 200:
-                # if gr_.response.code == 200:
-                print('поехали ', page_url)
-                iter_page_soup = BeautifulSoup(response.text, 'html.parser')
-                print(iter_page_soup.title)
-
-                # Пречень блоков моделей (строк таблицы) на очередной странице выдачи
-                rows_models = iter_page_soup.find_all('div', class_=self.div_row_models_ls)
-
-                if len(rows_models) != 0:
-                    print(page, len(rows_models))
-
-                    for row in rows_models:
-                        # И рассовыем их по ключам словаря model_dict
-                        model_dict = dict()
-                        try:
-                            model_link = row.find('h3', class_=self.h3_model_name).find('a')
-                            # Отсеиваем редирект на внешние сайты или конкретные конфиги нутбуков и останавливаем работу
-                            # if ('redir/' in model_link) or \
-                            #         ((category == 'Ноутбук') and ('/' in model_link.text)):
-                            #     pages_full = False
-                            #     break
-
-                            if model_link:
-                                model_dict['Href'] = model_link['href']  # ссылка на страницу модели
-
-                            # Ищем название категории
-                            category_len = 0
-
-                            for cat in category_ls:
-                                if cat in model_link.text:
-                                    category_len = len(cat.split())
-                                    try:
-                                        old_len = len(model_dict['Category'].split())
-                                        if category_len > old_len:
-                                            model_dict['Category'] = cat
-                                    except Exception:
-                                        model_dict['Category'] = cat
-
-                                    # break
-
-                            name = model_link.text.split()
-
-                            # Ищем имя вендора (следующее за категорией)
-                            model_dict['Vendor'] = name[category_len]
-
-                            # Формируем название модели вместе с имненм вендора через пробел кроме последнего пробела
-                            mod_name = ''
-                            for word in name[category_len:]:
-                                mod_name += word + ' '
-                            model_dict['Name'] = mod_name[:-1]
-
-                        except AttributeError:
-                            model_dict['Name'] = ""
-                            model_dict['Href'] = ""
-                            model_dict['Vendor'] = ""
-                            model_dict['Category'] = ""
-
-                        # Пихаем словарь модели в общий список
-                        print(model_dict['Name'])
-                        models_list.append(model_dict)
-
-                    # Проверяем не последняя ли страница выдачи
-                    if self.page_max == 0:
-                        if iter_page_soup.find('a', class_=self.a_button_eol) is None:
-                            pages_full = False
-                    else:
-                        if page >= self.page_max:
-                            pages_full = False
-
-                    page += 1
-
-                else:
-                    capcha_quest = iter_page_soup.find('title')
-
-                    if capcha_quest.text == 'Ой!':
-                        print(page, 'облом - капча')
-                        time.sleep(1)
-                    else:
-                        print(page, 'фигня какая-то')
-                        break
-
-                time.sleep(1)
-            else:
-                print('облом... ', response.status_code)
-
-        return models_list
 
 #скачивание по вендорам
 class Parse_links_v3(Parse_links):

@@ -62,13 +62,10 @@ class parse_mvideo(object):
 
         options = webdriver.ChromeOptions()
         #options.add_argument('--headless')
-        options.add_argument('--profile-directory=Default')
-        options.add_argument('--user-data-dir=C:/Temp/ChromeProfile')
+        options.add_argument("--window-size=500,1080")
+        options.add_argument("--remote-debugging-port=9222")
 
-        #options.add_argument("--window-size=500,1080")
-        #options.add_argument("--remote-debugging-port=9222")
-
-        self.driver = webdriver.Chrome(chrome_options=options)
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
 
         cat_ok = False
@@ -329,14 +326,16 @@ class parse_mvideo_new(parse_mvideo):
         #     except Exception:
         #         pass
         self.driver.get(url_)
-        time.sleep(1)
+        time.sleep(5)
         product_elements = self.driver.find_elements_by_class_name("product-cards-layout__item")
 
         number_of_elements = len(product_elements)
         print(number_of_elements)
         for elm in product_elements:
-            elm.location_once_scrolled_into_view
-
+            try:
+                elm.location_once_scrolled_into_view
+            except Exception:
+                pass
 
         #wait_until_all_expected_elements(self.driver, number_of_elements)
 
@@ -444,15 +443,15 @@ class parse_mvideo_new(parse_mvideo):
 #   MAIN
 # Монитор: 27
 # Ноутбук: 91
-parse = parse_mvideo_new('Монитор', pg_num=3)
+parse = parse_mvideo_new('Монитор', pg_num=1)
 #print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118?page=12'))
 #                              https://www.mvideo.ru/komputernaya-tehnika-4107/monitory-101
 #parse.Get_EOF_Page()
 
 #   def Pagination(self, max_page, begin_page=1):
 # АККУРАТНО С СВЕРХБОЛЬШИМИ ЦЕНАМИ (ЭТО СКИДКА)
-parse.Pagination(max_page=27, begin_page=6)
+parse.Pagination(max_page=32, begin_page=0)
 
-#parse.Pagination_Unparsed('Монитор-МВ-Цены-от-Oct-20--final.xlsx', new_num=2, finish=44)
+#parse.Pagination_Unparsed('Монитор-МВ-Цены-от-Oct-20--final.xlsx',  new_num=2, finish=44)
 
 
