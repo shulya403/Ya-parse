@@ -24,8 +24,8 @@ import parse_yama as pynd
 
 #parse_link.links_to_excel('Ноутбук', vendors_list=['HP','Lenovo', 'MSI', 'Huawei'])
 
-parse_link = pynd.Parse_links_v3(page_max=20)
-parse_link.links_to_excel('Ноутбук', vendors_list=['MSI'])
+# parse_link = pynd.Parse_links_v3(page_max=20)
+# parse_link.links_to_excel('Ноутбук', vendors_list=['MSI'])
 #parse_link.links_to_excel('Монитор', vendors_list=['Philips', 'Samsung', 'Viewsonic', 'Lenovo', 'MSI','NEC', 'Xiaomi','Gigabyte'])
 #parse_link.links_to_excel('Проектор', vendors_list=[])
 #parse_link.links_to_excel('ИБП', vendors_list=['Impuls','Eltena-Inelt','Legrand','Socomec','Riello','Maklesan','GE','DKC','Tripp Lite','AEG','Irbis','Sven','Hiper'])
@@ -54,8 +54,8 @@ parse_link.links_to_excel('Ноутбук', vendors_list=['MSI'])
 #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
 
 #Прерывание (пустые данные). Надо докачивать с позици номер строки последнего по Excel -1
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Oct-21----14--18-12.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
-#     main(start=473, num=2, step=300)
+parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Nov-21----15----1.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+    main(start=0, num=0, step=300)
 #parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Oct-21----14--19-37.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
 #      main(start=0, num=10, step=300)
 #parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Oct-21----14--21-30.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
