@@ -1763,6 +1763,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
         #options.add_argument("--user-data-dir=selen")
         #options.add_argument("--remote-debugging-port=9222")
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        self.driver.set_window_size(1920, 1080)
 
         #self.driver = webdriver.Chrome(executable_path = r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
 
@@ -1840,10 +1841,10 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                     print('Капча')
                     elem = self.driver.find_element_by_css_selector('.CheckboxCaptcha-Inner')
                     webdriver.ActionChains(self.driver).move_to_element(elem).perform()
-                    time.sleep(5)
+                    time.sleep(1)
                     webdriver.ActionChains(self.driver).click(elem).perform()
-                    time.sleep(15)
-                    #cap = input()
+                    time.sleep(2)
+                    cap = input()
                     self.URL_Req(url_, host=False, model_page=model_page)
         except Exception:
             print("не выходит {}".format(url_))
@@ -1947,9 +1948,12 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                                                             row_df_links['Category'])
                     if self.ttx_name:
                             ttx_len = len(self.df_ttx_name)
-                            self.df_ttx_name = self.TTX_Handler(self.URL_Spec(soup_table_grey, soup_page),
-                                                                self.df_ttx_name,
-                                                                self.df_names.loc[j, 'Modification_name'])
+                            try:
+                                self.df_ttx_name = self.TTX_Handler(self.URL_Spec(soup_table_grey, soup_page),
+                                                                    self.df_ttx_name,
+                                                                    self.df_names.loc[j, 'Modification_name'])
+                            except Exception:
+                               pass
                 ten_count += 1
                 if ten_count == 10:
                     self.DF_to_Excel(self.df_names, num=self.num)

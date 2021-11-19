@@ -1916,6 +1916,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
         #options.add_argument("user-data-dir=selen")
         options.add_argument("--remote-debugging-port=9222")
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        self.driver.set_window_size(1920, 1080)
 
         #self.driver = webdriver.Chrome(executable_path = r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
 
@@ -1987,8 +1988,8 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                     webdriver.ActionChains(self.driver).move_to_element(elem).perform()
                     time.sleep(1)
                     webdriver.ActionChains(self.driver).click(elem).perform()
-                    #cap = input()
-                    time.sleep(5)
+                    cap = input()
+                    time.sleep(2)
                     self.URL_Req(url_, host=False, model_page=model_page)
         except Exception:
             print("не выходит {}".format(url_))
