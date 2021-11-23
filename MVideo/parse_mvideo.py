@@ -369,17 +369,17 @@ class parse_mvideo_new(parse_mvideo):
 
             for card in li_bs_product_cards:
 
-                bs_price_block = card.find('p', class_="price__main-value")
-                if not bs_price_block:
-                    bs_price_block = card.find('p', class_="price__actual-price")
+                bs_price_block = card.find('span', class_="price__main-value")
+                # if not bs_price_block:
+                #     bs_price_block = card.find('p', class_="price__actual-price")
 
                 if bs_price_block:
-                    bs_price_sale_ls = bs_price_block.find_all('span')
-
-                    for i in bs_price_sale_ls:
-                        if not i.find('span', class_="currency"):
-                                bs_price_block = i
-                                break
+                    # bs_price_sale_ls = bs_price_block.find_all('span')
+                    #
+                    # for i in bs_price_sale_ls:
+                    #     if not i.find('span', class_="currency"):
+                    #             bs_price_block = i
+                    #             break
 
 
                     #pprint(card)
@@ -450,7 +450,9 @@ parse = parse_mvideo_new('Монитор', pg_num=1)
 
 #   def Pagination(self, max_page, begin_page=1):
 # АККУРАТНО С СВЕРХБОЛЬШИМИ ЦЕНАМИ (ЭТО СКИДКА)
-parse.Pagination(max_page=32, begin_page=0)
+parse.Pagination(max_page=21, begin_page=0)
+
+#   Убрать нулевой пейдж из excel - это аналог 1 страницы
 
 #parse.Pagination_Unparsed('Монитор-МВ-Цены-от-Oct-20--final.xlsx',  new_num=2, finish=44)
 
