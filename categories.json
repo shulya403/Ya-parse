@@ -249,26 +249,26 @@
     "eldorado": {
       "host": "https://www.eldorado.ru",
       "cookies": "",
-      "pg_num": "?page=",
+      "pg_num": "&page=",
       "cards_page_params": {
                 "card_div": {
                   "teg": "li",
                   "re": "True",
                   "attributes": {
 
-                    "class": "hE"
+                    "class": "jG"
                   }
                 },
                 "product_div": {
                   "teg": "div",
                   "attributes": {
-                    "class": "jE"
+                    "class": "kG mG"
                   }
                 },
                 "price_div": {
                   "teg": "span",
                   "attributes": {
-                    "class": "eQ lQ"
+                    "class": "IR PR"
                     }
                 },
                 "internal_page_mod_name": {
@@ -282,7 +282,7 @@
 
       "categories": {
         "ноутбук": {
-          "url": "/c/noutbuki/",
+          "url": "/c/noutbuki/?sort=-date_create",
           "subcategories": [
             "ноутбук",
             "нутбук-трансформер",
@@ -292,7 +292,7 @@
           ]
         },
         "монитор": {
-          "url": "/c/monitory/",
+          "url": "/c/monitory/?sort=-date_create",
           "subcategories": [
             "монитор",
             "игровой монитор"

@@ -24,11 +24,11 @@ import parse_yama as pynd
 
 #parse_link.links_to_excel('Ноутбук', vendors_list=['HP','Lenovo', 'MSI', 'Huawei'])
 
-parse_link = pynd.Parse_links_v3(page_max=20)
-parse_link.links_to_excel('Ноутбук', vendors_list=['Dell', 'Honor', 'HP','Lenovo', 'MSI', 'Huawei'])
-#parse_link.links_to_excel('Монитор', vendors_list=['Xiaomi','Gigabyte'])
+#parse_link = pynd.Parse_links_v3(page_max=20)
+#parse_link.links_to_excel('Ноутбук', vendors_list=['Dell', 'Honor', 'HP','Lenovo', 'MSI', 'Huawei'])
+#parse_link.links_to_excel('Монитор', vendors_list=[])
 #parse_link.links_to_excel('Проектор', vendors_list=[])
-#parse_link.links_to_excel('ИБП', vendors_list=['Impuls','Eltena-Inelt','Legrand','Socomec','Riello','Maklesan','GE','DKC','Tripp Lite','AEG','Irbis','Sven','Hiper'])
+#parse_link.links_to_excel('ИБП', vendors_list=[])
 
 
 #class Parse_Modifications_TTX(Yama_parsing_const):
@@ -56,12 +56,12 @@ parse_link.links_to_excel('Ноутбук', vendors_list=['Dell', 'Honor', 'HP',
 #Прерывание (пустые данные). Надо докачивать с позици номер строки последнего по Excel -1
 #parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Nov-21----15----1.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
 #    main(start=0, num=0, step=300)
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Nov-21----1.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
-#      main(start=2580, num=4, step=70)
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Nov-21----16--18-19.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
-#     main(start=0, num=0, step=500)
-#parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Nov-21----1.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
-#    main(start=80, num=1, step=500)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Dec-21----17--19-29.xlsx', mod=False, ttx_name=False, ttx_mod=False, capcha_loc=False).\
+#       main(start=330, num=1, step=500)
+# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Dec-21----28--19-18.xlsx', mod=False, ttx_name=False, ttx_mod=False, capcha_loc=False).\
+#      main(start=0, num=0, step=500)
+parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Dec-21----28--19-40.xlsx', mod=False, ttx_name=False, ttx_mod=False, capcha_loc=False).\
+   main(start=0, num=0, step=500)
 
 #parse = pynd.Parse_Modifications_TTX_selenium_fix('Электросамокат', '', mod=False, ttx_name=True, ttx_mod=False).\
 #     main(start=0, num=1, step=500)

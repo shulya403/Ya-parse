@@ -218,7 +218,7 @@ class Yama_parsing_const(object):
                         'Iiyama': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152865&onstock=1&local-offers-first=0&viewtype=list',
                         'LG': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153074&onstock=1&local-offers-first=0&viewtype=list',
                         'Philips': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152870&onstock=1&local-offers-first=0&viewtype=list',
-                        'Samsung': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153061&onstock=1&local-offers-first=0&viewtype=list',
+                        'Samsung': 'https://market.yandex.ru/catalog--monitory/18072760/list?glfilter=7893318%3A13478584&cvredirect=3&hid=91052&onstock=0&local-offers-first=0&viewtype=list',
                         'Viewsonic': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152807&onstock=1&local-offers-first=0&viewtype=list',
                         'Lenovo': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152981&onstock=1&local-offers-first=0&viewtype=list',
                         'MSI': 'https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A762076&onstock=1&local-offers-first=0&viewtype=list',
@@ -410,7 +410,7 @@ class Req(object):
                 webdriver.ActionChains(self.driver).move_to_element(elem).perform()
                 time.sleep(1)
                 webdriver.ActionChains(self.driver).click(elem).perform()
-                input()
+                #input()
 
             time.sleep(1)
 
@@ -1395,9 +1395,15 @@ class Parse_Modifications_TTX(Yama_parsing_const):
                 else:
                     exit_ = 'na'
         except Exception:
-                if soup_offers_cell:
-                    url_ = str(soup_offers_cell.find('a').get('href'))
-                    exit_ = self.Offers_Handler(url_)
+                top_price = soup_page.find('div', class_="_3NaXx _3kWlK")
+                if top_price:
+                    top_price_spans = top_price.find('span').find_all('span')
+                    if top_price_spans:
+                        for i in top_price_spans:
+                            i_ = i.text.replace(" ", "")
+                            if re.match(r"\d+$", i_):
+
+                                exit_ = i_
                 else:
                     exit_ = 'na'
 
@@ -1746,7 +1752,8 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                  links_file,
                  mod=True,  # Надо ли считывать модификации
                  ttx_name=False,  # Надо ли считывать TTX Модели
-                 ttx_mod=True  # Надо ли считывать TTX Модификаций
+                 ttx_mod=True,  # Надо ли считывать TTX Модификаций
+                capcha_loc=True #Надо ли ставить input после Ой!
                  ):
 
         link_filename = 'Price_link_list/' + links_file
@@ -1817,6 +1824,8 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             print(self.ttx_name_filename)
             self.df_ttx_name = pd.read_excel(self.ttx_name_filename, index_col=0)
 
+        self.capcha_loc = capcha_loc
+
 
     def URL_Req(self, url_, host=True, model_page=False):
 
@@ -1844,7 +1853,8 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                     time.sleep(1)
                     webdriver.ActionChains(self.driver).click(elem).perform()
                     time.sleep(2)
-                    cap = input()
+                    if self.capcha_loc:
+                        cap = input()
                     self.URL_Req(url_, host=False, model_page=model_page)
         except Exception:
             print("не выходит {}".format(url_))
