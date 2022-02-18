@@ -443,14 +443,14 @@ class parse_mvideo_new(parse_mvideo):
 #   MAIN
 # Монитор: 27
 # Ноутбук: 91
-parse = parse_mvideo_new('Монитор', pg_num=0)
-#print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118?page=12')) 75
-#                              https://www.mvideo.ru/komputernaya-tehnika-4107/monitory-101 37
+parse = parse_mvideo_new('Монитор', pg_num=1)
+#print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118?page=12')) 76
+#                              https://www.mvideo.ru/komputernaya-tehnika-4107/monitory-101 34
 #parse.Get_EOF_Page()
 
 #   def Pagination(self, max_page, begin_page=1):
 # АККУРАТНО С СВЕРХБОЛЬШИМИ ЦЕНАМИ (ЭТО СКИДКА)
-parse.Pagination(max_page=37, begin_page=1)
+parse.Pagination(max_page=34, begin_page=20)
 
 #   Убрать нулевой пейдж из excel - это аналог 1 страницы
 
