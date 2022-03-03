@@ -1836,14 +1836,15 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             if self.driver.page_source:
                 if not "Ой" in self.driver.page_source:
                     if model_page:
-                        price_block_elm = self.driver.find_element_by_css_selector(".n-product-top-offers-orderer__price")
-                        if price_block_elm:
+                        try:
+                            price_block_elm = self.driver.find_element_by_css_selector(".n-product-top-offers-orderer__price")
                             price_block_elm.location_once_scrolled_into_view
                             try:
                                 price = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "_3TkwC")))
                             except Exception:
                                 pass
-
+                        except Exception:
+                            pass
                     return self.driver.page_source
                 else:
                     winsound.Beep(2500, 1000)
@@ -1856,8 +1857,8 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
                     if self.capcha_loc:
                         cap = input()
                     self.URL_Req(url_, host=False, model_page=model_page)
-        except Exception:
-            print("не выходит {}".format(url_))
+        except Exception as Err:
+            print("не выходит {}".format(url_), Err)
             return None
 
     def Offers_Handler(self, url_):
