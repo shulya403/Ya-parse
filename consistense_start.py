@@ -22,8 +22,8 @@ import consistence_parsed_names as CPN
 #             dir_root="Prices/",
 #             dir_work="Handle_base/"):
 
-# Jan = CPN.Concat_Parse_Files('Монитор', M='Jan', Y=22)
-# Jan.Concat_files()
+# Feb = CPN.Concat_Parse_Files('Ноутбук', M='Mar', Y=22)
+# Feb.Concat_files()
 # #May.Clearing_Vendors() #Унификация имен вендоров в поле Vendor. Вызывается Concat_Files() или отдельно
 #May.Clearing_Mod_Name() #Удаление имни вендора из Midification_name. Вызывается Concat_Files() или отдельно
 
@@ -47,9 +47,9 @@ import consistence_parsed_names as CPN
 
 FileHandler = CPN.Consist_Names(category="Ноутбук", #_Source для ноутов для yama заменить Mod_Name_restrict на просто Modification_name
                                 file_itr="Reports/NB_Pivot_Jan-22_1.xlsx",
-                                M='Jan',
+                                M='Mar',
                                 Y='22',
-                                file_work_name="Ноутбук-Concat_Prices--Jan-22--Source.xlsx")
+                                file_work_name="Ноутбук-Concat_Prices--Mar-22--Source.xlsx")
 
 
 #   Заполенение из файла Source
@@ -62,7 +62,7 @@ FileHandler.Fill_Unknown()
 #  Заполенение фала Base Stable проверенными
 
 # StBase = CPN.Fill_Stable_Base('Ноутбук',
-#                              'Ноутбук-Concat_Prices--Nov-21--Filled.xlsx')
+#                              'Ноутбук-Concat_Prices--Jan-22--Filled-correct.xlsx')
 # StBase.Checked_To_Base()
 
 #Consist_Names_for_mth_report заполняет модели из месячных Pivot

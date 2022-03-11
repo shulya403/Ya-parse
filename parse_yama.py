@@ -410,7 +410,7 @@ class Req(object):
                 webdriver.ActionChains(self.driver).move_to_element(elem).perform()
                 time.sleep(1)
                 webdriver.ActionChains(self.driver).click(elem).perform()
-                #input()
+                input()
 
             time.sleep(1)
 
