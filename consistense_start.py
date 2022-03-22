@@ -22,8 +22,8 @@ import consistence_parsed_names as CPN
 #             dir_root="Prices/",
 #             dir_work="Handle_base/"):
 
-# Feb = CPN.Concat_Parse_Files('Ноутбук', M='Mar', Y=22)
-# Feb.Concat_files()
+Feb = CPN.Concat_Parse_Files('Монитор', M='Feb', Y=22)
+Feb.Concat_files()
 # #May.Clearing_Vendors() #Унификация имен вендоров в поле Vendor. Вызывается Concat_Files() или отдельно
 #May.Clearing_Mod_Name() #Удаление имни вендора из Midification_name. Вызывается Concat_Files() или отдельно
 
@@ -49,7 +49,7 @@ FileHandler = CPN.Consist_Names(category="Ноутбук", #_Source для но�
                                 file_itr="Reports/NB_Pivot_Jan-22_1.xlsx",
                                 M='Mar',
                                 Y='22',
-                                file_work_name="Ноутбук-Concat_Prices--Mar-22--Source.xlsx")
+                                file_work_name="Монитор-Concat_Prices--Feb-22--Source.xlsx")
 
 
 #   Заполенение из файла Source
