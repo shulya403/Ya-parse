@@ -22,8 +22,8 @@ import consistence_parsed_names as CPN
 #             dir_root="Prices/",
 #             dir_work="Handle_base/"):
 
-Feb = CPN.Concat_Parse_Files('Монитор', M='Feb', Y=22)
-Feb.Concat_files()
+# Feb = CPN.Concat_Parse_Files('Монитор', M='Feb', Y=22)
+# Feb.Concat_files()
 # #May.Clearing_Vendors() #Унификация имен вендоров в поле Vendor. Вызывается Concat_Files() или отдельно
 #May.Clearing_Mod_Name() #Удаление имни вендора из Midification_name. Вызывается Concat_Files() или отдельно
 
@@ -45,15 +45,15 @@ Feb.Concat_files()
 #                 ):
 
 
-FileHandler = CPN.Consist_Names(category="Ноутбук", #_Source для ноутов для yama заменить Mod_Name_restrict на просто Modification_name
-                                file_itr="Reports/NB_Pivot_Jan-22_1.xlsx",
-                                M='Mar',
-                                Y='22',
-                                file_work_name="Монитор-Concat_Prices--Feb-22--Source.xlsx")
-
-
-#   Заполенение из файла Source
-FileHandler.Fill_Unknown()
+# FileHandler = CPN.Consist_Names(category="Монитор", #_Source для ноутов для yama заменить Mod_Name_restrict на просто Modification_name
+#                                 file_itr="Reports/Monitors_Model_Base_2022_01-1.xlsx",
+#                                 M='Feb',
+#                                 Y='22',
+#                                 file_work_name="Монитор-Concat_Prices--Feb-22--Source.xlsx")
+#
+#
+# #   Заполенение из файла Source
+# FileHandler.Fill_Unknown()
 
 #FileHandler.Dict_Yama_Names()
 #FileHandler.Fill_Yama_Name()
@@ -61,9 +61,9 @@ FileHandler.Fill_Unknown()
 
 #  Заполенение фала Base Stable проверенными
 
-# StBase = CPN.Fill_Stable_Base('Ноутбук',
-#                              'Ноутбук-Concat_Prices--Jan-22--Filled-correct.xlsx')
-# StBase.Checked_To_Base()
+StBase = CPN.Fill_Stable_Base('Ноутбук',
+                             'Ноутбук-Concat_Prices--Feb+Mar-22--Checked_Prav1.xlsx')
+StBase.Checked_To_Base()
 
 #Consist_Names_for_mth_report заполняет модели из месячных Pivot
 # class Consist_Names_for_mth_report(Consist_Names):
