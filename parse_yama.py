@@ -1405,6 +1405,7 @@ class Parse_Modifications_TTX(Yama_parsing_const):
 
                                 exit_ = i_
                 else:
+
                     exit_ = 'na'
 
         return exit_
@@ -1833,6 +1834,10 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
             url_ = self.host + url_
         try:
             self.driver.get(url_)
+            elem_scroll = self.driver.find_elements_by_css_selector("img")
+            if elem_scroll:
+                for i in elem_scroll[len(elem_scroll)-7:len(elem_scroll)-5]:
+                    i.location_once_scrolled_into_view
             if self.driver.page_source:
                 if not "Ой" in self.driver.page_source:
                     if model_page:

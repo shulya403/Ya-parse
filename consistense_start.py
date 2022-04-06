@@ -61,9 +61,7 @@ import consistence_parsed_names as CPN
 
 #  Заполенение фала Base Stable проверенными
 
-StBase = CPN.Fill_Stable_Base('Ноутбук',
-                             'Ноутбук-Concat_Prices--Feb+Mar-22--Checked_Prav1.xlsx')
-StBase.Checked_To_Base()
+#
 
 #Consist_Names_for_mth_report заполняет модели из месячных Pivot
 # class Consist_Names_for_mth_report(Consist_Names):
