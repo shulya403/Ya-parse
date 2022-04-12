@@ -42,30 +42,46 @@
                 
 
               "host_options": [
-                "--headless",
                 "--window-size=1920,1080"
               ],
-              "host_get_suffics":"&local-offers-first=0&onstock=1",
-              "viewtype": "&viewtype=list",
+              "host_get_suffics":"",
               "cards_page_params": {
                 "card_div": {
-                  "teg": "div",
+                  "teg": "article",
                   "attributes": {
-                    "class": "n-snippet-card2__part n-snippet-card2__part_type_center"
+                    "class": "_2vCnw cia-vs cia-cs"
                   }
                 },
                 "product_div": {
                   "teg": "h3",
                   "attributes": {
-                    "class": "n-snippet-card2__title"
+                    "class": "_2UHry _2vVOc"
                   }
+                },
+                "price_div": {
+                  "teg": "div",
+                  "re": "True",
+                  "attributes": {
+                    "class": "_3NaXx"
+                    }
                 }
               },
+              "pg_num": "&page=",
 
               "categories": {
                               "ноутбук": {
-                                          "url": "/catalog--noutbuki/54544/list?hid=91013",
-                                          "ttx_file": "NB-yama-TTX.xlsx",
+                                          "url": {
+                                            "Acer": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A267101&onstock=0&local-offers-first=0&viewtype=list",
+                                            "Alienware": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A6146438&onstock=1&local-offers-first=0&viewtype=list",
+                        "Apple": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A153043&onstock=1&local-offers-first=0&viewtype=list",
+                        "Asus": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152863&onstock=1&local-offers-first=0&viewtype=list",
+                        "Dell": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A153080&onstock=1&local-offers-first=0&viewtype=list",
+                        "Honor": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A15292504&onstock=1&local-offers-first=0&viewtype=list",
+                        "HP": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152722&onstock=1&local-offers-first=0&viewtype=list",
+                        "Lenovo": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152981&onstock=1&local-offers-first=0&viewtype=list",
+                        "MSI":"https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A762076&onstock=1&local-offers-first=0&viewtype=list",
+                        "Huawei":"https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A459710&onstock=1&local-offers-first=0&viewtype=list"
+                                          },
                                           "subcategories": [
                                             "ноутбук",
                                             "ноутбук игровой",
@@ -73,14 +89,51 @@
                                           ]
                                           },
                               "монитор": {
-                                          "url": "/catalog--monitory/54539/list?hid=91052",
+                                          "url": {
+                                            "Acer": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A267101&onstock=1&local-offers-first=0&viewtype=list",
+                                            "AOC": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A431391&onstock=1&local-offers-first=0&viewtype=list",
+                                            "Asus": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152863&onstock=1&local-offers-first=0&viewtype=list",
+                                            "BenQ": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A241228&onstock=1&local-offers-first=0&viewtype=list",
+                                            "Dell":"https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153080&onstock=1&local-offers-first=0&viewtype=list",
+                                            "HP": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152722&onstock=1&local-offers-first=0&viewtype=list",
+                                            "Iiyama": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152865&onstock=1&local-offers-first=0&viewtype=list",
+                                            "LG": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153074&onstock=1&local-offers-first=0&viewtype=list",
+                                            "Philips": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152870&onstock=1&local-offers-first=0&viewtype=list",
+                                            "Samsung": "https://market.yandex.ru/catalog--monitory/18072760/list?glfilter=7893318%3A13478584&cvredirect=3&hid=91052&onstock=0&local-offers-first=0&viewtype=list",
+                                            "Viewsonic": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152807&onstock=1&local-offers-first=0&viewtype=list",
+                                            "Lenovo": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152981&onstock=1&local-offers-first=0&viewtype=list",
+                                            "MSI": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A762076&onstock=1&local-offers-first=0&viewtype=list",
+                                            "NEC": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153117&onstock=1&local-offers-first=0&viewtype=list",
+                                            "Xiaomi": "https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A7701962&local-offers-first=0&viewtype=list",
+                                            "Gigabyte": "https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A431404&local-offers-first=0&viewtype=list"},
                                           "subcategories": [
                                             "монитор"
                                           ],
                                           "ttx_file": "MNT-yama-TTX.xlsx"
                                           },
                               "проектор": {
-                                          "url": "/catalog--multimedia-proektory/60865/list?hid=191219",
+                                          "url": {
+                                            "Acer": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A267101&onstock=1&local-offers-first=0&viewtype=list",
+                                            "BenQ": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A241228&onstock=1&local-offers-first=0&viewtype=list",
+                        "Epson": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153058&onstock=1&local-offers-first=0&viewtype=list",
+                        "Infocus": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A287251&onstock=1&local-offers-first=0&viewtype=list",
+                        "LG": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153074&onstock=1&local-offers-first=0&viewtype=list",
+                        "NEC": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153117&onstock=1&local-offers-first=0&viewtype=list",
+                        "Optoma": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A1598564&onstock=1&local-offers-first=0&viewtype=list",
+                        "Sony": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152955&onstock=1&local-offers-first=0&viewtype=list",
+                        "Viewsonic": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152807&onstock=1&local-offers-first=0&viewtype=list",
+                        "Xiaomi": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A7701962&onstock=1&local-offers-first=0&viewtype=list",
+                        "Barco": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152884&onstock=1&local-offers-first=0&viewtype=list",
+                        "Canon": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152861&onstock=1&local-offers-first=0&viewtype=list",
+                        "Casio": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152967&onstock=1&local-offers-first=0&viewtype=list",
+                        "Christie": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A454306&onstock=1&local-offers-first=0&viewtype=list",
+                        "Hiper ": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A927650&onstock=1&local-offers-first=0&viewtype=list",
+                        "Hitachi": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152885&onstock=1&local-offers-first=0&viewtype=list",
+                        "JVC": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152968&onstock=1&local-offers-first=0&viewtype=list",
+                        "Panasonic": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153082&onstock=1&local-offers-first=0&viewtype=list",
+                        "Ricoh": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153070&onstock=1&local-offers-first=0&viewtype=list",
+                        "Smart":"https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A10766653&onstock=1&local-offers-first=0&viewtype=list",
+                        "Vivitek": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A4878853&onstock=1&local-offers-first=0&viewtype=list"},
                                           "subcategories": [
                                             "проектор",
                                             "карманный проектор"
@@ -88,7 +141,31 @@
                                           "ttx_file": "PRJ-yama-TTX.xlsx"
                                           },
                               "ибп": {
-                                          "url": "/catalog--istochniki-bespereboinogo-pitaniia/59604/list?hid=91082",
+                                          "url": {
+                                            "APC": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A431409&onstock=1&local-offers-first=0&viewtype=list",
+                        "Eaton": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A7147751&onstock=1&local-offers-first=0&viewtype=list",
+                        "Ippon": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A985314&onstock=1&local-offers-first=0&viewtype=list",
+                        "Delta": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A1586731&onstock=1&local-offers-first=0&viewtype=list",
+                        "Cyberpower": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990776&onstock=1&local-offers-first=0&viewtype=list",
+                        "Powercom": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A985313&onstock=1&local-offers-first=0&viewtype=list",
+                        "Vertiv": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A16221867&onstock=1&local-offers-first=0&viewtype=list",
+                        "SI":"https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A14350762&onstock=1&local-offers-first=0&viewtype=list",
+                        "Huawei": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A459710&onstock=1&local-offers-first=0&viewtype=list",
+                        "Powerman": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A722955&onstock=1&local-offers-first=0&viewtype=list",
+                        "Impuls": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A14983243&onstock=1&local-offers-first=0&viewtype=list",
+                        "Eltena-Inelt": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990800&onstock=1&local-offers-first=0&viewtype=list",
+                        "Legrand": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A11617058&onstock=1&local-offers-first=0&viewtype=list",
+                        "Socomec": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990792&onstock=1&local-offers-first=0&viewtype=list",
+                        "Riello":"https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A15060130&onstock=1&local-offers-first=0&viewtype=list",
+                        "Maklesan": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A10436632&onstock=1&local-offers-first=0&viewtype=list",
+                        "GE": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A152998&onstock=1&local-offers-first=0&viewtype=list",
+                        "DKC": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A13107145&onstock=1&local-offers-first=0&viewtype=list",
+                        "Tripp Lite": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A1019970&onstock=1&local-offers-first=0&viewtype=list",
+                        "AEG": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A152789&onstock=1&local-offers-first=0&viewtype=list",
+                        "Irbis": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A6151013&onstock=1&local-offers-first=0&viewtype=list",
+                        "Sven": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A284761&onstock=1&local-offers-first=0&viewtype=list",
+                        "Hiper": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A927650&onstock=1&local-offers-first=0&viewtype=list"
+                                          },
                                           "subcategories": [
                                             "интерактивный ибп",
                                             "резервный ИБП",

@@ -1771,7 +1771,7 @@ class Parse_Modifications_TTX_selenium_fix(Parse_Modifications_TTX):
         #options.add_argument("--user-data-dir=selen")
         #options.add_argument("--remote-debugging-port=9222")
         self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-        self.driver.set_window_size(1920, 1080)
+        self.driver.set_window_size(920, 1080)
 
         #self.driver = webdriver.Chrome(executable_path = r'C:\Users\shulya403\Shulya403_works\Ya-parse\selen\chromedriver.exe', options=options)
 
