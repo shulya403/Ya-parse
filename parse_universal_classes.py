@@ -17,6 +17,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import pickle
+import random
 
 #общий принцип парсинга - класс parse_common
 #Скачиваем json файл Categories
@@ -865,7 +867,9 @@ class Parse_Ya(Parse_Common):
                  pagination_start=1,
                  pagination_finish=-1,
                  interrupt=5,
-                 num_outfile=1 #Дополнительный номер версии выходного файла
+                 num_outfile=1, #Дополнительный номер версии выходного файла
+                 user_id=0,
+                 user_id_rewrite=False
                  ):
 
         self.interrupt = interrupt
@@ -960,16 +964,92 @@ class Parse_Ya(Parse_Common):
         except KeyError:
             self.JSON_Content_Warnings_Alarm("no_site_url_suffics")
             self.host_get_suffics = ""
+
+        self.user_id = user_id
+
         if self.scraper == 'selenium':
 
             options = webdriver.ChromeOptions()
             # options.add_argument('--headless')
-            options.add_argument("--window-size=1324,1080")
+            if self.user_id == 0:
+                pass
+            else:
+                options.add_argument("--window-size=1324,1080")
+                options_dict = self.Make_user(user_id_rewrite)
+                try:
+                    str_user_agent = '--user-agent="' + options_dict['user_agent'] + '"'
+                    options.add_argument(str_user_agent)
+                except Exception:
+                    pass
+                try:
+                    print(options_dict['cookies'])
+                    cookies = pickle.load(open(options_dict['cookies'], "rb"))
+                    for cookie in cookies:
+                        print(cookie)
+                        self.driver.add_cookie(cookie)
+
+                except Exception:
+                    pass
+
             #options.add_argument('--user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.99 Safari/533.4 ChromePlus/1.4.1.0alpha1"')
             #options.add_argument('--user-agent="Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.1 (KHTML, like Gecko) Chrome/5.0.336.0 Safari/533.1 ChromePlus/1.3.8.1"')
             #options.add_argument('--user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Comodo_Dragon/12.1.0.0 Chrome/12.0.742.91 Safari/534.30"')
 
             self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
+    def Make_user(self, user_id_rewrite):
+
+
+        if self.user_id == 0:
+            pass
+        else:
+            users_df = pd.read_excel('Users_id/users_id.xlsx', index_col='ID')
+            if self.user_id in users_df.index:
+
+                user_agent = users_df.loc[self.user_id]['User_agent']
+
+                print(user_agent)
+            else:
+                user_agent = self.Get_user_agent_file()
+                new_row = pd.Series({'User_agent': user_agent}, name=self.user_id)
+                print(new_row)
+                users_df = users_df.append(new_row, ignore_index=False)
+                print(users_df)
+                #users_df.loc[self.user_id]['User_agent'] = user_agent
+                users_df.to_excel('Users_id/users_id.xlsx')
+                input()
+
+            #cookie = self.Make_cookie_file(id=self.user_id, ua=user_agent, rewrite=user_id_rewrite)
+
+        return {
+            'user_agent': user_agent,
+            'cookies': None
+        }
+    def Get_user_agent_file(self):
+        df_ = pd.read_excel('Users_id/user_agents.xlsx')
+        df_chrome = df_[(df_['Ok'] == 1) & (df_['User-Agents'].str.contains('Chrome', regex=False))]
+
+        random.seed()
+
+        return df_chrome.iloc[random.randint(0, len(df_chrome)-1)]['User-Agents']
+
+
+    def Make_cookie_file(self, id, ua, rewrite):
+
+        str_filename = 'Users_id/cookies_' + str(id) + '.pkl'
+
+        if rewrite:
+            options = webdriver.ChromeOptions()
+            driver = webdriver.Chrome(ChromeDriverManager().install())
+            driver.get('https://yandex.ru')
+            str_user_agent = '--user-agent="' + ua + '"'
+            options.add_argument(str_user_agent)
+            print('>>>')
+            input()
+            pickle.dump(driver.get_cookies(), open(str_filename, "wb"))
+
+        return str_filename
+
 
     def Page_Webdriver(self, url_):
 
@@ -1049,15 +1129,19 @@ class Parse_Ya(Parse_Common):
 
             while bl_full_page:
 
+
                 url_ = self.URL_CardsPage_Make(url_=self.this_url, page=counter_page)
 
                 self.page_num = self.this_vendor + "_" + str(counter_page)
                 #print(url_)
 
                 html_page = self.Page_Scrape(url_)
+                self.Page_Into_View_Run()
+                html_page = self.driver.page_source
+
                 if html_page:
                     soup_page = BeautifulSoup(html_page, "html.parser")
-                    elem_button_forward = soup_page.find("a", class_="_2prNU _3OFYT")
+                    elem_button_forward = soup_page.find("span", class_="_3e9Bd")
                     if not elem_button_forward:
                         bl_full_page = False
 
@@ -1083,6 +1167,19 @@ class Parse_Ya(Parse_Common):
                             counter_page += 1
                     if not bl_full_page:
                         print("финиш ", self.this_vendor)
+
+    def Page_Into_View_Run(self):
+
+        count_divs = 0
+        while True:
+            #count_divs < 48:
+            elem_card = self.driver.find_elements_by_tag_name("article")
+            if count_divs == len(elem_card):
+                break
+            count_divs = len(elem_card)
+            elem_card[count_divs - 1].location_once_scrolled_into_view
+            print(count_divs)
+            time.sleep(5)
 
     def URL_CardsPage_Make(self, url_="", page=1):
 
@@ -1123,16 +1220,17 @@ class Parse_Ya(Parse_Common):
                 df_ = pd.DataFrame(columns=list(self.df.columns))
 
             # a = soup.find_all("div", class_="sc-1qkffly-6 wqZpL")
+            #time.sleep(5)
 
             cards = self.Find_All_Divs("card_div", soup)
             # 'js--subcategory-product-item subcategory-product-item product_data__gtm-js  product_data__pageevents-js ddl_product'
-
+            print(len(cards))
             # pprint(cards[0])
             if cards:
-                elem_card = self.driver.find_elements_by_tag_name("article")
-
-                for i, card, in enumerate(cards):
-                    elem_card[i].location_once_scrolled_into_view
+                #elem_card = self.driver.find_elements_by_tag_name("article")
+                #print(len(elem_card))
+                for i, card in enumerate(cards):
+                    #elem_card[i].location_once_scrolled_into_view
                     #time.sleep(1)
                     self.Product_Record_Handler(card)
                     for col in self.out_columns:

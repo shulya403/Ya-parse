@@ -55,7 +55,7 @@ import parse_yama as pynd
 
 #Прерывание (пустые данные). Надо докачивать с позици номер строки последнего по Excel -1
 parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Apr-22----04--17-12.xlsx', mod=False, ttx_name=False, ttx_mod=False, capcha_loc=True).\
-    main(start=2650, num=5, step=1000)
+    main(start=3230, num=6, step=500)
 # parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Mar-22----11--final.xlsx', mod=False, ttx_name=False, ttx_mod=False, capcha_loc=True).\
 #        main(start=464, num=1 , step=500)
 # parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Mar-22----16--final.xlsx', mod=False, ttx_name=False, ttx_mod=False, capcha_loc=True).\

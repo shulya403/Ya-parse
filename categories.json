@@ -226,7 +226,7 @@
       "host": "https://www.citilink.ru/",
       "cookies": "",
       "pg_num": "&p=",
-      "host_get_suffics": "?available=1&status=55395790",
+      "host_get_suffics": "?available=1&status=55395790&view_type=list",
       "host_options": [
                 "--headless",
                 "--window-size=1920,1080"

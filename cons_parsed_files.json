@@ -2,7 +2,7 @@
   "name": "consixtence",
   "version": "1.0.0",
   "parsed": {
-    "yama": ".",
+    "yama": "yama",
     "eldorado": "eldorado",
     "mvideo": "mvideo",
     "dns": "dns",
