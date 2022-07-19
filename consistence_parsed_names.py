@@ -397,11 +397,14 @@ class Consist_Names(object):
                     max_count += 1
 
             if max_count > 1:
-                list_max_coeff_names = [(m, len(list_tup[m][0])) for m in range(max_count)]
-                list_max_coeff_names.sort(key=lambda x: x[1])
+                try:
+                    list_max_coeff_names = [(m, len(list_tup[m][0])) for m in range(max_count)]
+                    list_max_coeff_names.sort(key=lambda x: x[1])
 
-                return list_tup[list_max_coeff_names[0][0]][0]
-
+                    return list_tup[list_max_coeff_names[0][0]][0]
+                except TypeError:
+                    print("Глюк object of type 'int' has no len()")
+                    pass
             return list_tup[0][0]
 
         else:

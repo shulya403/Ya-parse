@@ -17,6 +17,8 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import pickle
+import random
 
 #общий принцип парсинга - класс parse_common
 #Скачиваем json файл Categories
@@ -451,6 +453,7 @@ class Parse_Common(object):
         if soup_price:
             price = soup_price.text
             exit_ = "".join(re.findall(r'\d', price))
+            print(exit_)
         else:
             exit_ = None
             print(exit_)
@@ -854,5 +857,387 @@ class Parse_CL(Parse_Common):
         else:
             return None
 
+class Parse_Ya(Parse_Common):
+    site = "yama"
+
+    def __init__(self,
+                 category, #категория продуктов
+                 scraper, # [requests, selenium],
+                 ttx=False, #надо ли скачивать характеристики
+                 pagination_start=1,
+                 pagination_finish=-1,
+                 interrupt=5,
+                 num_outfile=1, #Дополнительный номер версии выходного файла
+                 user_id=0,
+                 user_id_rewrite=False
+                 ):
+
+        self.interrupt = interrupt
+
+        self.bl_ttx = ttx
+
+        self.num_outfile = num_outfile
+
+        self.scraper = scraper
+
+        self.category = category
+
+        self.ttx = ttx
+        #скачиваем json
+        with open('categories.json', encoding='utf-8') as f:
+            self.Categories = json.load(f)
+
+    #   Словарь пар-в для сайта
+        self.site_params = self.Categories[self.site]
+        #pprint(self.category_site)
+
+    #   Словарь пар-в для категории продукта
+        self.category_params = self.site_params["categories"][self.category]
+        pprint(self.category_params)
+
+        self.out_columns = [
+            'Name',
+            'Vendor',
+            'Modification_name',
+            'Modification_href',
+            'Category',
+            'Subcategory',
+            'Date',
+            'Modification_price',
+            'Cards_page_num',
+            'Site'
+        ]
+
+        self.df = pd.DataFrame(columns=self.out_columns + self.addition_fields)
+
+        self.now = datetime.now().strftime('%b-%y')
+
+        self.Folder_Out_Check()
+
+        self.outfile_name = "Prices/" + \
+                            self.site + \
+                            "/" + \
+                            self.site + \
+                            "--" + \
+                            self.category.title() + \
+                            "--" + \
+                            self.now + \
+                            "--" + \
+                            str(self.num_outfile) + \
+                            '.xlsx'
+
+        self.warnings = {
+            "unknown_host": {"print": "Нет названия хоста {}".format(self.site),
+                             "show": True,
+                             "raise": False},
+            "unknown_category_url": {"print": "Нет URL категории {}:{}".format(self.site, self.category),
+                                     "show": True,
+                                     "raise": True},
+            "no_site_url_suffics": {"print": "Нет Get-добавкий опций страницы для сайта {}".format(self.site),
+                                     "show": True,
+                                     "raise": False},
+            "no_site_viewtype": {"print": "Нет обозначения viewtype для сайта {}".format(self.site),
+                                    "show": True,
+                                    "raise": False},
+            "no_cards_page_params": {"print": "Нет параметров для парсинга страницы выдачи для сайта {}".format(self.site),
+                                 "show": True,
+                                 "raise": True},
+            "no_cookies": {
+                "print": "Нет cookies для сайта {}".format(self.site),
+                "show": True,
+                "raise": False}
+        }
+        try:
+            self.teg_card_params = self.site_params["cards_page_params"]
+
+        except KeyError:
+            self.JSON_Content_Warnings_Alarm("no_cards_page_params")
+
+        try:
+            self.pg_num = self.site_params["pg_num"]
+        except KeyError:
+            self.pg_num = "&page="
+
+        try:
+            self.host_get_suffics = self.site_params["host_get_suffics"]
+
+        except KeyError:
+            self.JSON_Content_Warnings_Alarm("no_site_url_suffics")
+            self.host_get_suffics = ""
+
+        self.user_id = user_id
+
+        if self.scraper == 'selenium':
+
+            options = webdriver.ChromeOptions()
+            # options.add_argument('--headless')
+            if self.user_id == 0:
+                pass
+            else:
+                options.add_argument("--window-size=1324,1080")
+                options_dict = self.Make_user(user_id_rewrite)
+                try:
+                    str_user_agent = '--user-agent="' + options_dict['user_agent'] + '"'
+                    options.add_argument(str_user_agent)
+                except Exception:
+                    pass
+                try:
+                    print(options_dict['cookies'])
+                    cookies = pickle.load(open(options_dict['cookies'], "rb"))
+                    for cookie in cookies:
+                        print(cookie)
+                        self.driver.add_cookie(cookie)
+
+                except Exception:
+                    pass
+
+            #options.add_argument('--user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.99 Safari/533.4 ChromePlus/1.4.1.0alpha1"')
+            #options.add_argument('--user-agent="Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.1 (KHTML, like Gecko) Chrome/5.0.336.0 Safari/533.1 ChromePlus/1.3.8.1"')
+            #options.add_argument('--user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Comodo_Dragon/12.1.0.0 Chrome/12.0.742.91 Safari/534.30"')
+
+            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+
+    def Make_user(self, user_id_rewrite):
 
 
+        if self.user_id == 0:
+            pass
+        else:
+            users_df = pd.read_excel('Users_id/users_id.xlsx', index_col='ID')
+            if self.user_id in users_df.index:
+
+                user_agent = users_df.loc[self.user_id]['User_agent']
+
+                print(user_agent)
+            else:
+                user_agent = self.Get_user_agent_file()
+                new_row = pd.Series({'User_agent': user_agent}, name=self.user_id)
+                print(new_row)
+                users_df = users_df.append(new_row, ignore_index=False)
+                print(users_df)
+                #users_df.loc[self.user_id]['User_agent'] = user_agent
+                users_df.to_excel('Users_id/users_id.xlsx')
+                input()
+
+            #cookie = self.Make_cookie_file(id=self.user_id, ua=user_agent, rewrite=user_id_rewrite)
+
+        return {
+            'user_agent': user_agent,
+            'cookies': None
+        }
+    def Get_user_agent_file(self):
+        df_ = pd.read_excel('Users_id/user_agents.xlsx')
+        df_chrome = df_[(df_['Ok'] == 1) & (df_['User-Agents'].str.contains('Chrome', regex=False))]
+
+        random.seed()
+
+        return df_chrome.iloc[random.randint(0, len(df_chrome)-1)]['User-Agents']
+
+
+    def Make_cookie_file(self, id, ua, rewrite):
+
+        str_filename = 'Users_id/cookies_' + str(id) + '.pkl'
+
+        if rewrite:
+            options = webdriver.ChromeOptions()
+            driver = webdriver.Chrome(ChromeDriverManager().install())
+            driver.get('https://yandex.ru')
+            str_user_agent = '--user-agent="' + ua + '"'
+            options.add_argument(str_user_agent)
+            print('>>>')
+            input()
+            pickle.dump(driver.get_cookies(), open(str_filename, "wb"))
+
+        return str_filename
+
+
+    def Page_Webdriver(self, url_):
+
+        #try:
+        #    options = webdriver.ChromeOptions()
+        #    for option in self.site_params["host_options"]:
+        #        options.add_argument(option)
+        #except Exception:
+        #    print("Site Options", Exception)
+
+
+        #driver = webdriver.Chrome("C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe")
+
+        self.driver.get(url_)
+        exit_ = self.driver.page_source
+        if not exit_:
+            time.sleep(3)
+            self.Page_webdriver(url_)
+        try:
+            elem_title = self.driver.find_element_by_tag_name("title")
+            if "Ой!" in elem_title._parent.title:
+                input()
+                exit_ = self.driver.page_source
+        except Exception:
+            pass
+        return exit_
+
+    def Find_All_Divs(self, json_div, soup):
+
+        try:
+            arguments = self.teg_card_params[json_div]["attributes"]
+            if arguments:
+                if "class" in arguments:
+                    arguments["class_"] = arguments.pop("class")
+                if "re" in self.teg_card_params[json_div]:
+                    for i in arguments:
+                        arguments[i] = re.compile(arguments[i])
+                return soup.find_all(self.teg_card_params[json_div]["teg"], **arguments)
+            else:
+                return soup.find_all(self.teg_card_params[json_div]["teg"])
+        except KeyError:
+            print('В JSON нет тега {} для сайта {}'.format(json_div, self.site))
+            raise KeyError
+
+    def Find_Div(self, json_div, soup):
+
+        try:
+            arguments = self.teg_card_params[json_div]["attributes"]
+            if arguments:
+                if "class" in arguments:
+                    arguments["class_"] = arguments.pop("class")
+                if "re" in self.teg_card_params[json_div]:
+                    for i in arguments:
+                        arguments[i] = re.compile(arguments[i])
+                return soup.find(self.teg_card_params[json_div]["teg"], **arguments)
+            else:
+                return soup.find(self.teg_card_params[json_div]["teg"])
+        except KeyError:
+            print('В JSON нет тега {} для сайта {}'.format(json_div, self.site))
+            raise KeyError
+
+    def Pagination(self, start=1, finish=-1, vendors=[]):
+#TODO: vendors_list
+        if vendors:
+            dict_vendors = dict()
+            for ven_ in vendors:
+                dict_vendors[ven_] = self.category_params["url"][ven_]
+        else:
+            dict_vendors = self.category_params["url"]
+        for ven in dict_vendors:
+            self.this_vendor = str(ven)
+            self.this_url = dict_vendors[ven]
+
+            counter_page = start
+
+            bl_full_page = True
+
+            while bl_full_page:
+
+
+                url_ = self.URL_CardsPage_Make(url_=self.this_url, page=counter_page)
+
+                self.page_num = self.this_vendor + "_" + str(counter_page)
+                #print(url_)
+
+                html_page = self.Page_Scrape(url_)
+                self.Page_Into_View_Run()
+                html_page = self.driver.page_source
+
+                if html_page:
+                    soup_page = BeautifulSoup(html_page, "html.parser")
+                    elem_button_forward = soup_page.find("span", class_="_3e9Bd")
+                    if not elem_button_forward:
+                        bl_full_page = False
+
+                    df_cards_page = self.Parse_Cards_Page(soup_page)
+                    #print(self.df)
+
+                    if (not df_cards_page.empty) and (not df_cards_page["Modification_price"].isna().all()):
+                    #if df_cards_page:
+                        self.df = pd.concat([self.df, df_cards_page], ignore_index=True)
+                        xl_writer = pd.ExcelWriter(self.outfile_name, engine='xlsxwriter', options={'strings_to_urls': False})
+                        self.df.to_excel(xl_writer)
+                        xl_writer.close()
+
+                    else:
+                        bl_full_page = False
+
+                    if finish < 0:
+                        counter_page += 1
+                    else:
+                        if counter_page >= finish:
+                            bl_full_page = False
+                        else:
+                            counter_page += 1
+                    if not bl_full_page:
+                        print("финиш ", self.this_vendor)
+
+    def Page_Into_View_Run(self):
+
+        count_divs = 0
+        while True:
+            #count_divs < 48:
+            elem_card = self.driver.find_elements_by_tag_name("article")
+            if count_divs == len(elem_card):
+                break
+            count_divs = len(elem_card)
+            elem_card[count_divs - 1].location_once_scrolled_into_view
+            print(count_divs)
+            time.sleep(5)
+
+    def URL_CardsPage_Make(self, url_="", page=1):
+
+        if url_:
+            exit_url = url_
+        else:
+            return None
+        # else:
+        #     try:
+        #         url_this = self.category_params["url"]
+        #     except KeyError:
+        #         self.JSON_Content_Warnings_Alarm("unknown_category_url")
+        if page != 1:
+            exit_url += self.pg_num + str(page)
+
+        if self.host_get_suffics:
+            exit_url += self.host_get_suffics
+
+        print("Make :", exit_url)
+
+        return exit_url
+    def Longstring_Handeler(self, longstring):
+
+        #Категория
+        self.dict_product_record["Vendor"] = self.this_vendor
+        self.dict_product_record["Subcategory"] = ""
+        if longstring:
+
+            return longstring
+        else:
+            return None
+
+        #   Обработка очередной страницы выдачи
+
+    def Parse_Cards_Page(self, soup):
+
+            if soup:
+                df_ = pd.DataFrame(columns=list(self.df.columns))
+
+            # a = soup.find_all("div", class_="sc-1qkffly-6 wqZpL")
+            #time.sleep(5)
+
+            cards = self.Find_All_Divs("card_div", soup)
+            # 'js--subcategory-product-item subcategory-product-item product_data__gtm-js  product_data__pageevents-js ddl_product'
+            print(len(cards))
+            # pprint(cards[0])
+            if cards:
+                #elem_card = self.driver.find_elements_by_tag_name("article")
+                #print(len(elem_card))
+                for i, card in enumerate(cards):
+                    #elem_card[i].location_once_scrolled_into_view
+                    #time.sleep(1)
+                    self.Product_Record_Handler(card)
+                    for col in self.out_columns:
+                        df_.loc[i, col] = self.Fld_Fill(col, card)
+                    if self.bl_ttx:
+                        self.TTX_Handler(df_.loc[i, 'Modification_href'])
+
+            print(df_)
+
+            return df_
