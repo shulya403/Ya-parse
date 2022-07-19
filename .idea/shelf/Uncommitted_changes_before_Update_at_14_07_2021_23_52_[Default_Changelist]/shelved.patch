@@ -1,0 +1,47 @@
+Index: Monthly_parsing_v6.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import parse_yama as pynd\r\n\r\n# Сначала скачиваются линки для категории. Class Parce_links\r\n# Затем качаются прайсы и обновления TTX. Class Parse_models_ttx()\r\n# Если есть дырки в файле прасов то вызывается перепроход функцией no_prices_reparse\r\n\r\n\r\n#parse_link = pynd.Parse_links()\r\n#parse_link.links_to_excel('Ноутбук')\r\n#parse_link.links_to_excel('Монитор')\r\n#parse_link.links_to_excel('Проектор')\r\n#parse_link.links_to_excel('ИБП')\r\n\r\n#Проверить какая последняя страница в выдаче (page_max)\r\n\r\n#parse_link = pynd.Parse_links_v2(page_max=25)\r\n#parse_link.links_to_excel('Ноутбук')\r\n#parse_link.links_to_excel('Монитор')\r\n#parse_link.links_to_excel('Проектор')\r\n#parse_link.links_to_excel('ИБП')\r\n\r\n# Херачит отдельно по вендорам\r\n# Убрать из xls - /offer/, //Market-clik\r\n# 'vendors': ['Acer', 'Alienware','Apple', 'Asus', 'Dell', 'Honor', 'HP','Lenovo', 'MSI', 'Huawei']\r\n# 'vendors': ['Acer','AOC','Asus','BenQ','Dell','HP', 'Iiyama', 'LG', 'Philips', 'Samsung', 'Viewsonic', 'Lenovo', 'MSI','NEC', 'Xiaomi','Gigabyte']\r\n# 'vendors': ['Acer','BenQ','Epson','Infocus','LG','NEC','Optoma','Sony','Viewsonic','Xiaomi','Barco','Canon','Casio','Christie','Hiper ','Hitachi','JVC','Panasonic',\r\n#             'Ricoh','Smart','Vivitek']\r\n# 'vendors': ['APC','Eaton','Ippon','Delta','Cyberpower','Powercom','Vertiv','SI','Huawei','Powerman','Impuls','Eltena-Inelt','Legrand','Socomec','Riello','Maklesan',\r\n#             'GE','DKC','Tripp Lite','AEG','Irbis','Sven','Hiper']\r\n\r\n#parse_link.links_to_excel('Ноутбук', vendors_list=['HP','Lenovo', 'MSI', 'Huawei'])\r\n\r\nparse_link = pynd.Parse_links_v3(page_max=20)\r\nparse_link.links_to_excel('Ноутбук', vendors_list=['Lenovo', 'MSI', 'Huawei'])\r\n# #parse_link.links_to_excel('Монитор', vendors_list=[])\r\n# #parse_link.links_to_excel('Проектор')d\r\n# parse_link.links_to_excel('ИБП')\r\n\r\n\r\n#class Parse_Modifications_TTX(Yama_parsing_const):\r\n#    def __init__(self,\r\n#                 category,\r\n#                 links_file,\r\n#                 mod=True, # Надо ли считывать модификации\r\n#                 ttx_name=False, # Надо ли считывать TTX Модели\r\n#                 ttx_mod = True # Надо ли считывать TTX Модификаций\r\n#                 ):\r\n\r\n# class Parse_Modifications_TTX_Mod_in_Prices(Yama_parsing_const):\r\n#\r\n#     def __init__(self,\r\n#                  category,\r\n#                  links_file,\r\n#                  ttx_name=False, # Надо ли считывать TTX Модели\r\n#                  ):\r\n\r\n#def main(self,\r\n#           step=10, По сколько моделей вурхнего уровня записывать в файл\r\n#           start=0, С какой строчки начинать\r\n#           num=\"\"):, Номер в имени выходного файла прайсов и прайсов модификаций\r\n\r\n#Прерывание (пустые данные). Надо докачивать с позици номер строки последнего по Excel -1\r\n#parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Apr-21----15--17-03.xlsx', ttx_name=True).main(start=3173, num=3) #3-426\r\n# parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Jun-21----16--16-44.xlsx', mod=False, ttx_name=True, ttx_mod=False).\\\r\n#      main(start=0, num=1, step=300)\r\n# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Jun-21----16--17-31.xlsx', mod=False, ttx_name=False, ttx_mod=False).\\\r\n#     main(start=864, num=3, step=140)\r\n# parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Jun-21----16--18-07.xlsx', mod=False, ttx_name=False, ttx_mod=False).\\\r\n#     main(start=752, num=4, step=300)\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Monthly_parsing_v6.py b/Monthly_parsing_v6.py
+--- a/Monthly_parsing_v6.py	
++++ b/Monthly_parsing_v6.py	
+@@ -30,10 +30,10 @@
+ 
+ #parse_link.links_to_excel('Ноутбук', vendors_list=['HP','Lenovo', 'MSI', 'Huawei'])
+ 
+-parse_link = pynd.Parse_links_v3(page_max=20)
+-parse_link.links_to_excel('Ноутбук', vendors_list=['Lenovo', 'MSI', 'Huawei'])
+-# #parse_link.links_to_excel('Монитор', vendors_list=[])
+-# #parse_link.links_to_excel('Проектор')d
++# parse_link = pynd.Parse_links_v3(page_max=20)
++# parse_link.links_to_excel('Ноутбук')
++# parse_link.links_to_excel('Монитор', vendors_list=['Xiaomi','Gigabyte'])
++# parse_link.links_to_excel('Проектор')
+ # parse_link.links_to_excel('ИБП')
+ 
+ 
+@@ -60,13 +60,14 @@
+ #           num=""):, Номер в имени выходного файла прайсов и прайсов модификаций
+ 
+ #Прерывание (пустые данные). Надо докачивать с позици номер строки последнего по Excel -1
+-#parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Apr-21----15--17-03.xlsx', ttx_name=True).main(start=3173, num=3) #3-426
+-# parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор Jun-21----16--16-44.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
+-#      main(start=0, num=1, step=300)
+-# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Jun-21----16--17-31.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+-#     main(start=864, num=3, step=140)
+-# parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП Jun-21----16--18-07.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
+-#     main(start=752, num=4, step=300)
++parse = pynd.Parse_Modifications_TTX_selenium_fix('Ноутбук', 'Cсылки Ноутбук Jul-21----final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
++    main(start=3130, num=5, step=300)
++# parse = pynd.Parse_Modifications_TTX_selenium_fix('Монитор', 'Cсылки Монитор May-21----tot.xlsx', mod=False, ttx_name=True, ttx_mod=False).\
++#      main(start=0, num=1, step=10)
++# parse = pynd.Parse_Modifications_TTX_selenium_fix('Проектор', 'Cсылки Проектор Mar-21----15--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
++#     main(start=0, num=1)
++# parse = pynd.Parse_Modifications_TTX_selenium_fix('ИБП', 'Cсылки ИБП May-21----16--final.xlsx', mod=False, ttx_name=False, ttx_mod=False).\
++#     main(start=290, num=2)
+ 
+ 
+ 
