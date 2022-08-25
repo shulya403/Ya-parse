@@ -351,6 +351,7 @@ class Consist_Names(object):
             mod_name_ = self.df_work.loc[id, 'Modification_name_restrict']
             print(mod_name_)
             try:
+                #print(self.dict_ven_mod[self.df_work.loc[id, 'Vendor']])
                 array_vendors_model = self.dict_ven_mod[self.df_work.loc[id, 'Vendor'].lower()]
             except KeyError:
                 print("Нет вендора {} в базе".format(self.df_work.loc[id, 'Vendor']))
