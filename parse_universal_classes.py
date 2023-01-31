@@ -763,8 +763,8 @@ class Parse_CL(Parse_Common):
         soup_product = self.Find_Div("product_div", card)
         #self.dict_product_record['Modification_href'] = soup_product.find("a").get("href")
         #self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("a").text)
-        self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.get("href"))
-        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.get('title'))
+        self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.find("a").get("href"))
+        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("a").get('title'))
 
 
     def Find_All_Divs(self, json_div, soup):
