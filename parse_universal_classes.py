@@ -139,7 +139,7 @@ class Parse_Common(object):
             options.add_argument("--window-size=1920,1080")
 
             self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-
+            #version="108.0.5359.71"
     def Folder_Out_Check(self):
         import os
 
@@ -763,8 +763,8 @@ class Parse_CL(Parse_Common):
         soup_product = self.Find_Div("product_div", card)
         #self.dict_product_record['Modification_href'] = soup_product.find("a").get("href")
         #self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("a").text)
-        self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.get("href"))
-        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.get('title'))
+        self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.find("a").get("href"))
+        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("a").get('title'))
 
 
     def Find_All_Divs(self, json_div, soup):
@@ -975,18 +975,20 @@ class Parse_Ya(Parse_Common):
                 pass
             else:
                 options.add_argument("--window-size=1324,1080")
-                options_dict = self.Make_user(user_id_rewrite)
+                #options_dict = self.Make_user(user_id_rewrite)
                 try:
-                    str_user_agent = '--user-agent="' + options_dict['user_agent'] + '"'
-                    options.add_argument(str_user_agent)
+                    #str_user_agent = '--user-agent="' + options_dict['user_agent'] + '"'
+                    #options.add_argument(str_user_agent)
+                    options.add_argument(r"--user_data_dir=C:\Users\DSH\AppData\Local\Google\Chrome\User Data")
+                    options.add_argument(r"--profile-directory=Default")
                 except Exception:
                     pass
                 try:
-                    print(options_dict['cookies'])
-                    cookies = pickle.load(open(options_dict['cookies'], "rb"))
-                    for cookie in cookies:
-                        print(cookie)
-                        self.driver.add_cookie(cookie)
+                    #print(options_dict['cookies'])
+                    #cookies = pickle.load(open(options_dict['cookies'], "rb"))
+                    f#or cookie in cookies:
+                        #print(cookie)
+                        #self.driver.add_cookie(cookie)
 
                 except Exception:
                     pass
@@ -995,7 +997,7 @@ class Parse_Ya(Parse_Common):
             #options.add_argument('--user-agent="Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.1 (KHTML, like Gecko) Chrome/5.0.336.0 Safari/533.1 ChromePlus/1.3.8.1"')
             #options.add_argument('--user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Comodo_Dragon/12.1.0.0 Chrome/12.0.742.91 Safari/534.30"')
 
-            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            self.driver = webdriver.Chrome(ChromeDriverManager(version="109.0.5414.74").install(), options=options)
 
     def Make_user(self, user_id_rewrite):
 

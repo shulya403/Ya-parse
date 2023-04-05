@@ -65,7 +65,7 @@ class parse_mvideo(object):
         options.add_argument("--window-size=500,1080")
         options.add_argument("--remote-debugging-port=9222")
 
-        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+        self.driver = webdriver.Chrome(ChromeDriverManager(version="108.0.5359.71").install(), options=options)
 
 
         cat_ok = False
@@ -444,13 +444,13 @@ class parse_mvideo_new(parse_mvideo):
 # Монитор: 27
 # Ноутбук: 91
 parse = parse_mvideo_new('Монитор', pg_num=0)
-#print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118')) 20
-#                              https://www.mvideo.ru/komputernaya-tehnika-4107/monitory-101 20
+#print(parse.Parse_Pages(url_='https://www.mvideo.ru/noutbuki-planshety-komputery-8/noutbuki-118')) 30
+#                              https://www.mvideo.ru/komputernaya-tehnika-4107/monitory-101 11
 #parse.Get_EOF_Page()
 
 #   def Pagination(self, max_page, begin_page=1):
 # АККУРАТНО С СВЕРХБОЛЬШИМИ ЦЕНАМИ (ЭТО СКИДКА)
-parse.Pagination(max_page=8, begin_page=1)
+parse.Pagination(max_page=14, begin_page=1)
 
 #   Убрать нулевой пейдж из excel - это аналог 1 страницы
 

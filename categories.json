@@ -80,7 +80,23 @@
                         "HP": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152722&onstock=1&local-offers-first=0&viewtype=list",
                         "Lenovo": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152981&onstock=1&local-offers-first=0&viewtype=list",
                         "MSI":"https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A762076&onstock=1&local-offers-first=0&viewtype=list",
-                        "Huawei":"https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A459710&onstock=1&local-offers-first=0&viewtype=list"
+                        "Huawei":"https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A459710&onstock=1&local-offers-first=0&viewtype=list",
+                        "Gigabyte":"https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A431404&viewtype=list",
+                        "Haier": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A240936&viewtype=list",
+                        "Hiper": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A927650&viewtype=list",
+                        "Chuwi": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A9259487&viewtype=list",
+                        "Гравитон": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A42682110&viewtype=list",
+                        "Adata": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A467872&viewtype=list",
+                        "Aquarius": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A3987770&viewtype=list",
+                        "Digma": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A470013&viewtype=list",
+                        "F+": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A17496570&viewtype=list",
+                        "GigaByte": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A431404&viewtype=list",
+                        "Irbis": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A6151013&viewtype=list",
+                        "iRu": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A432790&viewtype=list",
+                        "Itel": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A15968424&viewtype=list",
+                        "Machenike": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A15346034&viewtype=list",
+                        "Maibanen": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A13406734&viewtype=list",
+                        "ThundeRobot": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A15346047&viewtype=list"
                                           },
                                           "subcategories": [
                                             "ноутбук",
@@ -105,7 +121,8 @@
                                             "MSI": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A762076&onstock=1&local-offers-first=0&viewtype=list",
                                             "NEC": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153117&onstock=1&local-offers-first=0&viewtype=list",
                                             "Xiaomi": "https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A7701962&local-offers-first=0&viewtype=list",
-                                            "Gigabyte": "https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A431404&local-offers-first=0&viewtype=list"},
+                                            "Gigabyte": "https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A431404&local-offers-first=0&viewtype=list",
+                                            "Huawei": "https://market.yandex.ru/catalog--monitory/26910011/list?hid=91052&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A459710&viewtype=list"},
                                           "subcategories": [
                                             "монитор"
                                           ],
@@ -172,8 +189,16 @@
                                             "ибп с двойным преобразованием"
                                           ],
                                           "ttx_file": "UPS-yama-TTX.xlsx"
-                                      }
-                            }
+                                      },
+                "logitech": {
+                  "url": {
+                     "Logitech": "https://market.yandex.ru/catalog--kompiutery/54425/list?was_redir=1&rt=10&rs=eJwz4g1gnMXIkZOfnlmSmpwBAB3MBIM%2C&suggest=1&suggest_type=search&suggest_text=logitech&hid=91009&local-offers-first=0&glfilter=7893318%3A444293"
+                  }
+                },
+                 "subcategories": [
+                                          ]
+              },
+      "ttx_file": "Logitech-yama-TTX.xlsx"
           },
     "mvideo": {
       "host": "https://www.mvideo.ru",
@@ -235,20 +260,19 @@
                 "card_div": {
                   "teg": "div",
                   "attributes": {
-                    "class": "product_data__gtm-js product_data__pageevents-js ProductCardHorizontal js--ProductCardInListing js--ProductCardInWishlist"
-                                                }
+                    "class": "e12wdlvo0 app-catalog-1bogmvw e1loosed0"
+                  }
                 },
                 "product_div": {
-                  "teg": "a",
-                  "re": "True",
+                  "teg": "div",
                   "attributes": {
-                    "class": "ProductCardHorizontal__title"
+                    "class": "app-catalog-1tp0ino e1an64qs0"
                   }
                 },
                 "price_div": {
                   "teg": "span",
                   "attributes": {
-                    "class": "ProductPrice__price ProductCardHorizontal__price__price"
+                    "class": "e1j9birj0 e106ikdt0 app-catalog-j8h82j e1gjr6xo0"
                   }
                 }
        },
