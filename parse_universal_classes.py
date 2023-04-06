@@ -997,7 +997,7 @@ class Parse_Ya(Parse_Common):
             #options.add_argument('--user-agent="Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.1 (KHTML, like Gecko) Chrome/5.0.336.0 Safari/533.1 ChromePlus/1.3.8.1"')
             #options.add_argument('--user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Comodo_Dragon/12.1.0.0 Chrome/12.0.742.91 Safari/534.30"')
 
-            self.driver = webdriver.Chrome(ChromeDriverManager(version="109.0.5414.74").install(), options=options)
+            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
 
     def Make_user(self, user_id_rewrite):
 
@@ -1123,7 +1123,8 @@ class Parse_Ya(Parse_Common):
             dict_vendors = self.category_params["url"]
         for ven in dict_vendors:
             self.this_vendor = str(ven)
-            self.this_url = dict_vendors[ven]
+            print(str(ven))
+            self.this_url = dict_vendors[str(ven)]
 
             counter_page = start
 

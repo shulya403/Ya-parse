@@ -5,16 +5,16 @@ import parse_universal_classes as pa
 #def Pagination(self, start=1, finish=-1)
 
 # ok parse = pa.Parse_CL(category='ноутбук', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли (для rquest); selenium подрубается со второго запуска
-#parse = pa.Parse_DNS(category='ноутбук', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли
+# ok parse = pa.Parse_DNS(category='ноутбук', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли
 #parse = pa.Parse_El(category='ноутбук', scraper='selenium', num_outfile=2 , interrupt=8).Pagination(start=2, finish=101) #Не останавливаться, ставить стопы NB 35 https://www.eldorado.ru/c/noutbuki/
 parse = pa.Parse_Ya(category='ноутбук', scraper='selenium', num_outfile=1, interrupt=10, user_id=1).Pagination(vendors=["Asus", "Lenovo"])
 
 # Nb ["Acer", "Alienware", "Apple", "Asus", "Dell", "Honor", "HP", "Lenovo", "MSI", "Huawei", "Haier", "Hiper", "Gigabyte", "Chuwi", "Гравитон", "Adata", "Aquarius", "Digma", "F+", "GigaByte", "Irbis", "iRu", "Itel", "Machenike", "Maibanen", "ThundeRobot"]
 
-# parse = pa.Parse_CL(category='монитор', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли
-# parse = pa.Parse_DNS(category='монитор', scraper='selenium', num_outfile=0, interrupt=10).Pagination()
+# ok parse = pa.Parse_CL(category='монитор', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли
+# ok parse = pa.Parse_DNS(category='монитор', scraper='selenium', num_outfile=0, interrupt=10).Pagination()
 #parse = pa.Parse_El(category='монитор', scraper='selenium', num_outfile=1, interrupt=1).Pagination(finish=26) # мониторы 17 https://www.eldorado.ru/c/monitory/
-#Parse = pa.Parse_Ya(category='монитор', scraper='selenium', num_outfile=0, interrupt=2, user_id=1).Pagination(vendors=[])
+# ok parse = pa.Parse_Ya(category='монитор', scraper='selenium', num_outfile=4, interrupt=2, user_id=1).Pagination(vendors=["LG", "Philips", "Samsung", "Viewsonic", "Lenovo", "MSI", "NEC", "Xiaomi", "Gigabyte", "Huawei"])
 
 # Mnt ["Acer","AOC", "Asus", "BenQ", "Dell", "HP", "Iiyama", "LG", "Philips", "Samsung", "Viewsonic", "Lenovo", "MSI", "NEC", "Xiaomi", "Gigabyte", "Huawei"]
 
