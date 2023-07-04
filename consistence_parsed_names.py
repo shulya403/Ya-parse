@@ -110,7 +110,7 @@ class Concat_Parse_Files(object):
 
         def Restrict_Ven(mod_name):
 
-            list_mod_name = mod_name.split()
+            list_mod_name = str(mod_name).split()
             list_mod_name = list_mod_name[1:]
 
             exit_ = " ".join(list_mod_name)
