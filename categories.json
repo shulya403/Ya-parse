@@ -49,20 +49,19 @@
                 "card_div": {
                   "teg": "article",
                   "attributes": {
-                    "class": "_2vCnw cia-vs cia-cs"
+                    "class": "_3yjG2 _1ItK0 cia-vs cia-cs"
                   }
                 },
                 "product_div": {
                   "teg": "h3",
                   "attributes": {
-                    "class": "_2UHry _2vVOc"
+                    "data-auto": "snippet-title-header"
                   }
                 },
                 "price_div": {
-                  "teg": "div",
-                  "re": "True",
+                  "teg": "span",
                   "attributes": {
-                    "class": "_3NaXx"
+                    "data-auto": "price-value"
                     }
                 }
               },
@@ -90,7 +89,6 @@
                         "Aquarius": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A3987770&viewtype=list",
                         "Digma": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A470013&viewtype=list",
                         "F+": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A17496570&viewtype=list",
-                        "GigaByte": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A431404&viewtype=list",
                         "Irbis": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A6151013&viewtype=list",
                         "iRu": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A432790&viewtype=list",
                         "Itel": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A15968424&viewtype=list",
@@ -115,7 +113,7 @@
                                             "Iiyama": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152865&onstock=1&local-offers-first=0&viewtype=list",
                                             "LG": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153074&onstock=1&local-offers-first=0&viewtype=list",
                                             "Philips": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152870&onstock=1&local-offers-first=0&viewtype=list",
-                                            "Samsung": "https://market.yandex.ru/catalog--monitory/18072760/list?glfilter=7893318%3A13478584&cvredirect=3&hid=91052&onstock=0&local-offers-first=0&viewtype=list",
+                                            "Samsung": "https://market.yandex.ru/catalog--monitory/18072760/list?hid=91052&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A153061&viewtype=list",
                                             "Viewsonic": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152807&onstock=1&local-offers-first=0&viewtype=list",
                                             "Lenovo": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152981&onstock=1&local-offers-first=0&viewtype=list",
                                             "MSI": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A762076&onstock=1&local-offers-first=0&viewtype=list",
@@ -144,7 +142,7 @@
                         "Canon": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152861&onstock=1&local-offers-first=0&viewtype=list",
                         "Casio": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152967&onstock=1&local-offers-first=0&viewtype=list",
                         "Christie": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A454306&onstock=1&local-offers-first=0&viewtype=list",
-                        "Hiper ": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A927650&onstock=1&local-offers-first=0&viewtype=list",
+                        "Hiper": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A927650&onstock=1&local-offers-first=0&viewtype=list",
                         "Hitachi": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152885&onstock=1&local-offers-first=0&viewtype=list",
                         "JVC": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152968&onstock=1&local-offers-first=0&viewtype=list",
                         "Panasonic": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153082&onstock=1&local-offers-first=0&viewtype=list",
@@ -279,7 +277,7 @@
 
       "categories": {
         "ноутбук": {
-          "url": "/catalog/mobile/notebooks/",
+          "url": "/catalog/noutbuki/",
           "subcategories": [
             "ноутбук",
             "ультрабук",
@@ -287,7 +285,7 @@
           ]
         },
         "монитор": {
-          "url": "/catalog/computers_and_notebooks/monitors/",
+          "url": "/catalog/monitory/",
           "subcategories": [
             "монитор",
             "монитор игровой"
