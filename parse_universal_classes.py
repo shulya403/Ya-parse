@@ -974,24 +974,24 @@ class Parse_Ya(Parse_Common):
             if self.user_id == 0:
                 pass
             else:
-                options.add_argument("--window-size=1324,1080")
+                options.add_argument("--window-size=1820,1080")
                 #options_dict = self.Make_user(user_id_rewrite)
                 try:
                     #str_user_agent = '--user-agent="' + options_dict['user_agent'] + '"'
                     #options.add_argument(str_user_agent)
-                    options.add_argument(r"--user_data_dir=C:\Users\DSH\AppData\Local\Google\Chrome\User Data")
+                    options.add_argument(r"--user_data_dir=C:\Users\shulya403\AppData\Local\Google\Chrome\User Data")
                     options.add_argument(r"--profile-directory=Default")
                 except Exception:
                     pass
-                try:
-                    #print(options_dict['cookies'])
-                    #cookies = pickle.load(open(options_dict['cookies'], "rb"))
-                    f#or cookie in cookies:
-                        #print(cookie)
-                        #self.driver.add_cookie(cookie)
-
-                except Exception:
-                    pass
+                # try:
+                #     #print(options_dict['cookies'])
+                #     #cookies = pickle.load(open(options_dict['cookies'], "rb"))
+                #     #for cookie in cookies:
+                #         #print(cookie)
+                #         #self.driver.add_cookie(cookie)
+                #
+                # except Exception:
+                #     pass
 
             #options.add_argument('--user-agent="Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/533.4 (KHTML, like Gecko) Chrome/5.0.375.99 Safari/533.4 ChromePlus/1.4.1.0alpha1"')
             #options.add_argument('--user-agent="Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.1 (KHTML, like Gecko) Chrome/5.0.336.0 Safari/533.1 ChromePlus/1.3.8.1"')
@@ -1227,7 +1227,7 @@ class Parse_Ya(Parse_Common):
 
             cards = self.Find_All_Divs("card_div", soup)
             # 'js--subcategory-product-item subcategory-product-item product_data__gtm-js  product_data__pageevents-js ddl_product'
-            print(len(cards))
+            print("len cards -> ", len(cards))
             # pprint(cards[0])
             if cards:
                 #elem_card = self.driver.find_elements_by_tag_name("article")
