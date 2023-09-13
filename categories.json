@@ -49,7 +49,7 @@
                 "card_div": {
                   "teg": "article",
                   "attributes": {
-                    "class": "_3yjG2 _1ItK0 cia-vs cia-cs"
+                    "data-autotest-id": "product-snippet"
                   }
                 },
                 "product_div": {
@@ -281,7 +281,8 @@
           "subcategories": [
             "ноутбук",
             "ультрабук",
-            "трансформер"
+            "трансформер",
+            "игровой"
           ]
         },
         "монитор": {
