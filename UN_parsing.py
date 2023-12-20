@@ -13,11 +13,11 @@ import parse_universal_classes as pa
 # "data-auto": "price-value"
 # Nb ["Acer", ]
 
-parse = pa.Parse_CL(category='монитор', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли
+#parse = pa.Parse_CL(category='монитор', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли
 #parse = pa.Parse_DNS(category='монитор', scraper='selenium', num_outfile=0, interrupt=10).Pagination()
 #parse = pa.Parse_El(category='монитор', scraper='selenium', num_outfile=1, interrupt=1).Pagination(finish=26) # мониторы 17 https://www.eldorado.ru/c/monitory/
-# 11ok parse = pa.Parse_Ya(category='монитор', scraper='selenium', num_outfile=1, interrupt=2, user_id=1).\
-#    Pagination(vendors=[])
+parse = pa.Parse_Ya(category='монитор', scraper='selenium', num_outfile=0, interrupt=2, user_id=1).\
+    Pagination(vendors=[])
 
 # Mnt ["Acer","AOC", "Asus", "BenQ", "Dell", "HP", "Iiyama", "LG", "Philips", "Samsung", "Viewsonic", "Lenovo", "MSI", "NEC", "Xiaomi", "Gigabyte", "Huawei"]
 
