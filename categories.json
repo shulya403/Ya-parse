@@ -61,7 +61,7 @@
                 "price_div": {
                   "teg": "span",
                   "attributes": {
-                    "data-auto": "price-value"
+                    "data-auto": "snippet-price-old"
                     }
                 }
               },
