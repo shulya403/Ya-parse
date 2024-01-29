@@ -1182,7 +1182,7 @@ class Parse_Ya(Parse_Common):
             count_divs = len(elem_card)
             elem_card[count_divs - 1].location_once_scrolled_into_view
             print(count_divs)
-            time.sleep(5)
+            time.sleep(1)
 
     def URL_CardsPage_Make(self, url_="", page=1):
 
