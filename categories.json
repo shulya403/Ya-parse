@@ -49,19 +49,19 @@
                 "card_div": {
                   "teg": "article",
                   "attributes": {
-                    "data-autotest-id": "product-snippet"
+                    "data-auto": "searchOrganic"
                   }
                 },
                 "product_div": {
-                  "teg": "h3",
+                  "teg": "a",
                   "attributes": {
-                    "data-auto": "snippet-title-header"
+                    "data-auto": "snippet-link"
                   }
                 },
                 "price_div": {
                   "teg": "span",
                   "attributes": {
-                    "data-auto": "snippet-price-old"
+                    "data-auto": "snippet-price-current"
                     }
                 }
               },
@@ -263,14 +263,15 @@
                 },
                 "product_div": {
                   "teg": "div",
+                  "re": "True",
                   "attributes": {
-                    "class": "app-catalog-1tp0ino e1an64qs0"
+                    "class": "app-catalog-1tp0ino"
                   }
                 },
                 "price_div": {
                   "teg": "span",
                   "attributes": {
-                    "class": "e1j9birj0 e106ikdt0 app-catalog-j8h82j e1gjr6xo0"
+                    "class": "e1j9birj0 e106ikdt0 app-catalog-p2oaao e1gjr6xo0"
                   }
                 }
        },

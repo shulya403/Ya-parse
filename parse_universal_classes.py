@@ -1216,6 +1216,12 @@ class Parse_Ya(Parse_Common):
             return None
 
         #   Обработка очередной страницы выдачи
+    def Product_Record_Handler(self, card):
+
+        soup_product = self.Find_Div("product_div", card)
+        print(soup_product)
+        self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.get("href"))
+        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("h3").text)
 
     def Parse_Cards_Page(self, soup):
 
