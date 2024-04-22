@@ -974,7 +974,7 @@ class Parse_Ya(Parse_Common):
             if self.user_id == 0:
                 pass
             else:
-                options.add_argument("--window-size=1820,1080")
+                options.add_argument("--window-size=1520,1080")
                 #options_dict = self.Make_user(user_id_rewrite)
                 try:
                     #str_user_agent = '--user-agent="' + options_dict['user_agent'] + '"'
@@ -1114,7 +1114,7 @@ class Parse_Ya(Parse_Common):
             raise KeyError
 
     def Pagination(self, start=1, finish=-1, vendors=[]):
-#TODO: vendors_list
+
         if vendors:
             dict_vendors = dict()
             for ven_ in vendors:
@@ -1139,12 +1139,13 @@ class Parse_Ya(Parse_Common):
                 #print(url_)
 
                 html_page = self.Page_Scrape(url_)
-                self.Page_Into_View_Run()
+                elem_button_forward = self.Page_Into_View_Run()
                 html_page = self.driver.page_source
 
                 if html_page:
                     soup_page = BeautifulSoup(html_page, "html.parser")
-                    elem_button_forward = soup_page.find("span", class_="_3e9Bd")
+                    #elem_button_forward = soup_page.find("span", class_="Ohm2_")
+
                     if not elem_button_forward:
                         bl_full_page = False
 
@@ -1183,6 +1184,13 @@ class Parse_Ya(Parse_Common):
             elem_card[count_divs - 1].location_once_scrolled_into_view
             print(count_divs)
             time.sleep(1)
+            try:
+                forward = self.driver.find_element_by_css_selector("span.Ohm2_")
+                return forward
+            except Exception:
+                return None
+
+
 
     def URL_CardsPage_Make(self, url_="", page=1):
 
@@ -1219,7 +1227,6 @@ class Parse_Ya(Parse_Common):
     def Product_Record_Handler(self, card):
 
         soup_product = self.Find_Div("product_div", card)
-        print(soup_product)
         self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.get("href"))
         self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("h3").text)
 
@@ -1236,11 +1243,11 @@ class Parse_Ya(Parse_Common):
             print("len cards -> ", len(cards))
             # pprint(cards[0])
             if cards:
-                #elem_card = self.driver.find_elements_by_tag_name("article")
-                #print(len(elem_card))
+                elem_card = self.driver.find_elements_by_tag_name("article")
+                print(len(elem_card))
                 for i, card in enumerate(cards):
-                    #elem_card[i].location_once_scrolled_into_view
-                    #time.sleep(1)
+                    elem_card[i].location_once_scrolled_into_view
+                    time.sleep(1)
                     self.Product_Record_Handler(card)
                     for col in self.out_columns:
                         df_.loc[i, col] = self.Fld_Fill(col, card)
