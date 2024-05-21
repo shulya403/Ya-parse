@@ -851,6 +851,7 @@ class Parse_CL(Parse_Common):
 
             except IndexError:
                 print("что-то с именем моим:", longstring)
+                product_name = longstring
 
             return product_name
 
@@ -1113,6 +1114,7 @@ class Parse_Ya(Parse_Common):
             print('В JSON нет тега {} для сайта {}'.format(json_div, self.site))
             raise KeyError
 
+
     def Pagination(self, start=1, finish=-1, vendors=[]):
 
         if vendors:
@@ -1127,30 +1129,78 @@ class Parse_Ya(Parse_Common):
             self.this_url = dict_vendors[str(ven)]
 
             counter_page = start
+            count_=0
 
             bl_full_page = True
+            counter_cards = 0
+
+            html_page = self.Page_Scrape (self.this_url)
 
             while bl_full_page:
 
+                #url_ = self.URL_CardsPage_Make(url_=self.this_url, page=counter_page)
 
-                url_ = self.URL_CardsPage_Make(url_=self.this_url, page=counter_page)
-
-                self.page_num = self.this_vendor + "_" + str(counter_page)
+                #self.page_num = self.this_vendor + "_" + str(counter_page)
                 #print(url_)
 
-                html_page = self.Page_Scrape(url_)
-                elem_button_forward = self.Page_Into_View_Run()
+
+                #elem_button_forward = self.Page_Into_View_Run()
                 html_page = self.driver.page_source
 
                 if html_page:
-                    soup_page = BeautifulSoup(html_page, "html.parser")
+                    self.page_num = counter_page
+
+                    df_cards_page = pd.DataFrame (columns=list (self.df.columns))
+
+                    page_end = False
+                    old_len = 0
+                    while not page_end:
+                        elem_card = self.driver.find_elements_by_css_selector('article[data-auto="searchOrganic"]')
+                        if len(elem_card) != old_len:
+                            old_len = len(elem_card)
+                        else:
+                            break
+                        elem_card[old_len-1].location_once_scrolled_into_view
+                        time.sleep(3)
+
+                        print("->", old_len)
+
+                        #button_more = soup_page.find("button", {"data-auto":"page-more"})
+                        try:
+                            time.sleep(5)
+                            element_button_more = self.driver.find_element_by_css_selector('button[data-auto="pager-more"]')
+                            #element_button_more = self.driver.find_element_by_css_selector ('div[data-auto="infifinityButton"]')
+                            element_button_more.location_once_scrolled_into_view
+                            element_button_more.click()
+                            time.sleep (5)
+                        except Exception:
+                            print("button не найден")
+                            pass
+
+                    #element_button_more = self.driver.find_element_by_css_selector ('button[data-auto="page-more]')
                     #elem_button_forward = soup_page.find("span", class_="Ohm2_")
 
-                    if not elem_button_forward:
-                        bl_full_page = False
+                    #if not elem_button_forward:
+                    #    bl_full_page = False
+                    self.driver.page_source
+                    soup_page = BeautifulSoup (self.driver.page_source, "html.parser")
+                    cards = self.Find_All_Divs ("card_div", soup_page)
+                    #cards = self.driver.find_elements_by_tag_name ("article")
+                    len_cards = len(cards)
+                    print (str (ven), len_cards)
 
-                    df_cards_page = self.Parse_Cards_Page(soup_page)
+                    #df_cards_page = self.Parse_Cards_Page(soup_page)
                     #print(self.df)
+
+                    if cards:
+                        elem_card = self.driver.find_elements_by_css_selector('article[data-auto="searchOrganic"]')
+                        #print (len (elem_card))
+                        for i, card in enumerate(cards):
+                            elem_card[i].location_once_scrolled_into_view
+                            self.Product_Record_Handler (card)
+                            for col in self.out_columns:
+                                df_cards_page.loc[i, col] = self.Fld_Fill (col, card)
+
 
                     if (not df_cards_page.empty) and (not df_cards_page["Modification_price"].isna().all()):
                     #if df_cards_page:
@@ -1158,19 +1208,11 @@ class Parse_Ya(Parse_Common):
                         xl_writer = pd.ExcelWriter(self.outfile_name, engine='xlsxwriter', options={'strings_to_urls': False})
                         self.df.to_excel(xl_writer)
                         xl_writer.close()
+                        break
 
                     else:
-                        bl_full_page = False
-
-                    if finish < 0:
-                        counter_page += 1
-                    else:
-                        if counter_page >= finish:
-                            bl_full_page = False
-                        else:
-                            counter_page += 1
-                    if not bl_full_page:
-                        print("финиш ", self.this_vendor)
+                       print("финиш ", self.this_vendor)
+                       break
 
     def Page_Into_View_Run(self):
 
@@ -1230,7 +1272,7 @@ class Parse_Ya(Parse_Common):
         self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.get("href"))
         self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("h3").text)
 
-    def Parse_Cards_Page(self, soup):
+    def Parse_Cards_Page(self, soup, count=0):
 
             if soup:
                 df_ = pd.DataFrame(columns=list(self.df.columns))
