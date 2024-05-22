@@ -563,6 +563,122 @@ class Parse_El(Parse_Common):
 class Parse_DNS(Parse_Common):
 
     site = "dns"
+    def __init__(self,
+                 category, #категория продуктов
+                 scraper, # [requests, selenium],
+                 ttx=False, #надо ли скачивать характеристики
+                 pagination_start=1,
+                 pagination_finish=-1,
+                 interrupt=5,
+                 num_outfile=1 #Дополнительный номер версии выходного файла
+                 ):
+
+        self.interrupt = interrupt
+
+        self.bl_ttx = ttx
+
+        self.num_outfile = num_outfile
+
+        self.scraper = scraper
+
+
+
+        self.category = category
+
+        self.ttx = ttx
+        #скачиваем json
+        with open('categories.json', encoding='utf-8') as f:
+            self.Categories = json.load(f)
+
+    #   Словарь пар-в для сайта
+        self.site_params = self.Categories[self.site]
+        #pprint(self.category_site)
+
+    #   Словарь пар-в для категории продукта
+        self.category_params = self.site_params["categories"][self.category]
+        pprint(self.category_params)
+
+        self.out_columns = [
+            'Name',
+            'Vendor',
+            'Modification_name',
+            'Modification_href',
+            'Category',
+            'Subcategory',
+            'Date',
+            'Modification_price',
+            'Cards_page_num',
+            'Site'
+        ]
+
+        self.df = pd.DataFrame(columns=self.out_columns + self.addition_fields)
+
+        self.now = datetime.now().strftime('%b-%y')
+
+        self.Folder_Out_Check()
+
+        self.outfile_name = "Prices/" + \
+                            self.site + \
+                            "/" + \
+                            self.site + \
+                            "--" + \
+                            self.category.title() + \
+                            "--" + \
+                            self.now + \
+                            "--" + \
+                            str(self.num_outfile) + \
+                            '.xlsx'
+
+        self.warnings = {
+            "unknown_host": {"print": "Нет названия хоста {}".format(self.site),
+                             "show": True,
+                             "raise": False},
+            "unknown_category_url": {"print": "Нет URL категории {}:{}".format(self.site, self.category),
+                                     "show": True,
+                                     "raise": True},
+            "no_site_url_suffics": {"print": "Нет Get-добавкий опций страницы для сайта {}".format(self.site),
+                                     "show": True,
+                                     "raise": False},
+            "no_site_viewtype": {"print": "Нет обозначения viewtype для сайта {}".format(self.site),
+                                    "show": True,
+                                    "raise": False},
+            "no_cards_page_params": {"print": "Нет параметров для парсинга страницы выдачи для сайта {}".format(self.site),
+                                 "show": True,
+                                 "raise": True},
+            "no_cookies": {
+                "print": "Нет cookies для сайта {}".format(self.site),
+                "show": True,
+                "raise": False}
+        }
+        try:
+            self.teg_card_params = self.site_params["cards_page_params"]
+
+        except KeyError:
+            self.JSON_Content_Warnings_Alarm("no_cards_page_params")
+
+        try:
+            self.pg_num = self.site_params["pg_num"]
+        except KeyError:
+            self.pg_num = "&page="
+
+        try:
+            self.host_get_suffics = self.site_params["host_get_suffics"]
+
+        except KeyError:
+            self.JSON_Content_Warnings_Alarm("no_site_url_suffics")
+            self.host_get_suffics = ""
+        if self.scraper == 'selenium':
+
+            options = webdriver.ChromeOptions()
+            # options.add_argument('--headless')
+            options.add_argument("--window-size=1920,1080")
+            options.add_argument ("--user-data-dir=C:/Users/shulya403/AppData/Local/Google/Chrome/User Data")
+            options.add_argument ("--profile-directory=Default")
+            options.add_argument ("--remote-debugging-port=9222")
+
+            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            #self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\125.0.6422.60\\chromedriver-win32\\chromedriver.exe", options=options)
+            #version="108.0.5359.71"
 
     def Page_Webdriver(self, url_):
 
