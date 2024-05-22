@@ -5,7 +5,7 @@ import parse_universal_classes as pa
 #def Pagination(self, start=1, finish=-1)
 
 # may-24 parse = pa.Parse_CL(category='ноутбук', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли (для rquest); selenium подрубается со второго запуска
-# may-24 parse = pa.Parse_DNS(category='ноутбук', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли
+# may-24 parse = pa.Parse_DNS(category='ноутбук', scraper='selenium', num_outfile=0, interrupt=5).Pagination() #Следить - все ли
 #parse = pa.Parse_El(category='ноутбук', scraper='selenium', num_outfile=2 , interrupt=8).Pagination(start=2, finish=101) #Не останавливаться, ставить стопы NB 35 https://www.eldorado.ru/c/noutbuki/
 # may-24 parse = pa.Parse_Ya(category='ноутбук', scraper='selenium', num_outfile=2, interrupt=2, user_id=1).\
 #   Pagination(vendors=["Asus", "Dell", "Honor", "HP", "Huawei", "Lenovo", "MSI"])

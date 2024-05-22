@@ -326,7 +326,14 @@
                   "attributes": {
                     "itemprop": "price"
                   }
+                },
+                "offers_div": {
+                  "teg": "a",
+                  "attributes": {
+                    "class": "order-avail-wrap__link ui-link ui-link_blue"
+                  }
                 }
+
 
        },
 

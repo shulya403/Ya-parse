@@ -581,8 +581,6 @@ class Parse_DNS(Parse_Common):
 
         self.scraper = scraper
 
-
-
         self.category = category
 
         self.ttx = ttx
@@ -609,6 +607,10 @@ class Parse_DNS(Parse_Common):
             'Modification_price',
             'Cards_page_num',
             'Site'
+        ]
+
+        self.addition_fields = [
+            'Offers'
         ]
 
         self.df = pd.DataFrame(columns=self.out_columns + self.addition_fields)
@@ -776,6 +778,47 @@ class Parse_DNS(Parse_Common):
            #session.close()
            return response.text
 
+        #   Обработка очередной страницы выдачи
+    def Parse_Cards_Page(self, soup):
+
+            if soup:
+                df_ = pd.DataFrame (columns=list (self.df.columns))
+
+            # a = soup.find_all("div", class_="sc-1qkffly-6 wqZpL")
+
+            cards = self.Find_All_Divs ("card_div", soup)
+
+            # pprint(cards[0])
+            if cards:
+                for i, card, in enumerate (cards):
+                    self.Product_Record_Handler (card)
+                    for col in self.out_columns:
+                        df_.loc[i, col] = self.Fld_Fill (col, card)
+                    for col in self.addition_fields:
+                        df_.loc[i, col] = self.Addition_Fld_Fill (col, card)
+                    if self.bl_ttx:
+                        self.TTX_Handler (df_.loc[i, 'Modification_href'])
+
+            print (df_)
+
+            return df_
+    def Addition_Fld_Fill(self, fld, card):
+        if fld == 'Offers':
+            return self.Product_Offers_Handler(card)
+
+    def Product_Offers_Handler(self, card):
+
+        soup_offers = self.Find_Div ("offers_div", card)
+        try:
+            re.compile('')
+            offers = soup_offers.find('span').text
+            exit_ = "".join(re.findall(r'\d', offers))
+
+        except Exception:
+            exit_ = None
+
+        return exit_
+
     def Product_Record_Handler(self, card):
 
         soup_product = self.Find_Div("product_div", card)
@@ -783,17 +826,6 @@ class Parse_DNS(Parse_Common):
         self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("span").text)
 
     def Modification_Price_Handler(self, card):
-
-        # url_ = self.Modification_Href_Handler(card)
-        # page_internal = self.Page_Scrape(url_)
-        # if page_internal:
-        #     soup_page_internal = BeautifulSoup(page_internal, "html.parser")
-        #     soup_price = soup_page_internal.find('span', class_="product-card-price__current product-card-price__current_active")
-        #     if soup_price:
-        #         price_ = soup_price.text
-        #         exit_ = "".join(re.findall(r'\d', price_))
-        #
-        #     return exit_
 
         soup_price = self.Find_Div("price_div", card)
         if soup_price:
