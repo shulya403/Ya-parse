@@ -563,6 +563,124 @@ class Parse_El(Parse_Common):
 class Parse_DNS(Parse_Common):
 
     site = "dns"
+    def __init__(self,
+                 category, #категория продуктов
+                 scraper, # [requests, selenium],
+                 ttx=False, #надо ли скачивать характеристики
+                 pagination_start=1,
+                 pagination_finish=-1,
+                 interrupt=5,
+                 num_outfile=1 #Дополнительный номер версии выходного файла
+                 ):
+
+        self.interrupt = interrupt
+
+        self.bl_ttx = ttx
+
+        self.num_outfile = num_outfile
+
+        self.scraper = scraper
+
+        self.category = category
+
+        self.ttx = ttx
+        #скачиваем json
+        with open('categories.json', encoding='utf-8') as f:
+            self.Categories = json.load(f)
+
+    #   Словарь пар-в для сайта
+        self.site_params = self.Categories[self.site]
+        #pprint(self.category_site)
+
+    #   Словарь пар-в для категории продукта
+        self.category_params = self.site_params["categories"][self.category]
+        pprint(self.category_params)
+
+        self.out_columns = [
+            'Name',
+            'Vendor',
+            'Modification_name',
+            'Modification_href',
+            'Category',
+            'Subcategory',
+            'Date',
+            'Modification_price',
+            'Cards_page_num',
+            'Site'
+        ]
+
+        self.addition_fields = [
+            'Offers'
+        ]
+
+        self.df = pd.DataFrame(columns=self.out_columns + self.addition_fields)
+
+        self.now = datetime.now().strftime('%b-%y')
+
+        self.Folder_Out_Check()
+
+        self.outfile_name = "Prices/" + \
+                            self.site + \
+                            "/" + \
+                            self.site + \
+                            "--" + \
+                            self.category.title() + \
+                            "--" + \
+                            self.now + \
+                            "--" + \
+                            str(self.num_outfile) + \
+                            '.xlsx'
+
+        self.warnings = {
+            "unknown_host": {"print": "Нет названия хоста {}".format(self.site),
+                             "show": True,
+                             "raise": False},
+            "unknown_category_url": {"print": "Нет URL категории {}:{}".format(self.site, self.category),
+                                     "show": True,
+                                     "raise": True},
+            "no_site_url_suffics": {"print": "Нет Get-добавкий опций страницы для сайта {}".format(self.site),
+                                     "show": True,
+                                     "raise": False},
+            "no_site_viewtype": {"print": "Нет обозначения viewtype для сайта {}".format(self.site),
+                                    "show": True,
+                                    "raise": False},
+            "no_cards_page_params": {"print": "Нет параметров для парсинга страницы выдачи для сайта {}".format(self.site),
+                                 "show": True,
+                                 "raise": True},
+            "no_cookies": {
+                "print": "Нет cookies для сайта {}".format(self.site),
+                "show": True,
+                "raise": False}
+        }
+        try:
+            self.teg_card_params = self.site_params["cards_page_params"]
+
+        except KeyError:
+            self.JSON_Content_Warnings_Alarm("no_cards_page_params")
+
+        try:
+            self.pg_num = self.site_params["pg_num"]
+        except KeyError:
+            self.pg_num = "&page="
+
+        try:
+            self.host_get_suffics = self.site_params["host_get_suffics"]
+
+        except KeyError:
+            self.JSON_Content_Warnings_Alarm("no_site_url_suffics")
+            self.host_get_suffics = ""
+        if self.scraper == 'selenium':
+
+            options = webdriver.ChromeOptions()
+            # options.add_argument('--headless')
+            options.add_argument("--window-size=1920,1080")
+            options.add_argument ("--user-data-dir=C:/Users/shulya403/AppData/Local/Google/Chrome/User Data")
+            options.add_argument ("--profile-directory=Default")
+            options.add_argument ("--remote-debugging-port=9222")
+
+            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            #self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\125.0.6422.60\\chromedriver-win32\\chromedriver.exe", options=options)
+            #version="108.0.5359.71"
 
     def Page_Webdriver(self, url_):
 
@@ -660,6 +778,47 @@ class Parse_DNS(Parse_Common):
            #session.close()
            return response.text
 
+        #   Обработка очередной страницы выдачи
+    def Parse_Cards_Page(self, soup):
+
+            if soup:
+                df_ = pd.DataFrame (columns=list (self.df.columns))
+
+            # a = soup.find_all("div", class_="sc-1qkffly-6 wqZpL")
+
+            cards = self.Find_All_Divs ("card_div", soup)
+
+            # pprint(cards[0])
+            if cards:
+                for i, card, in enumerate (cards):
+                    self.Product_Record_Handler (card)
+                    for col in self.out_columns:
+                        df_.loc[i, col] = self.Fld_Fill (col, card)
+                    for col in self.addition_fields:
+                        df_.loc[i, col] = self.Addition_Fld_Fill (col, card)
+                    if self.bl_ttx:
+                        self.TTX_Handler (df_.loc[i, 'Modification_href'])
+
+            print (df_)
+
+            return df_
+    def Addition_Fld_Fill(self, fld, card):
+        if fld == 'Offers':
+            return self.Product_Offers_Handler(card)
+
+    def Product_Offers_Handler(self, card):
+
+        soup_offers = self.Find_Div ("offers_div", card)
+        try:
+            re.compile('')
+            offers = soup_offers.find('span').text
+            exit_ = "".join(re.findall(r'\d', offers))
+
+        except Exception:
+            exit_ = None
+
+        return exit_
+
     def Product_Record_Handler(self, card):
 
         soup_product = self.Find_Div("product_div", card)
@@ -667,17 +826,6 @@ class Parse_DNS(Parse_Common):
         self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("span").text)
 
     def Modification_Price_Handler(self, card):
-
-        # url_ = self.Modification_Href_Handler(card)
-        # page_internal = self.Page_Scrape(url_)
-        # if page_internal:
-        #     soup_page_internal = BeautifulSoup(page_internal, "html.parser")
-        #     soup_price = soup_page_internal.find('span', class_="product-card-price__current product-card-price__current_active")
-        #     if soup_price:
-        #         price_ = soup_price.text
-        #         exit_ = "".join(re.findall(r'\d', price_))
-        #
-        #     return exit_
 
         soup_price = self.Find_Div("price_div", card)
         if soup_price:
@@ -851,6 +999,7 @@ class Parse_CL(Parse_Common):
 
             except IndexError:
                 print("что-то с именем моим:", longstring)
+                product_name = longstring
 
             return product_name
 
@@ -1113,6 +1262,7 @@ class Parse_Ya(Parse_Common):
             print('В JSON нет тега {} для сайта {}'.format(json_div, self.site))
             raise KeyError
 
+
     def Pagination(self, start=1, finish=-1, vendors=[]):
 
         if vendors:
@@ -1127,30 +1277,78 @@ class Parse_Ya(Parse_Common):
             self.this_url = dict_vendors[str(ven)]
 
             counter_page = start
+            count_=0
 
             bl_full_page = True
+            counter_cards = 0
+
+            html_page = self.Page_Scrape (self.this_url)
 
             while bl_full_page:
 
+                #url_ = self.URL_CardsPage_Make(url_=self.this_url, page=counter_page)
 
-                url_ = self.URL_CardsPage_Make(url_=self.this_url, page=counter_page)
-
-                self.page_num = self.this_vendor + "_" + str(counter_page)
+                #self.page_num = self.this_vendor + "_" + str(counter_page)
                 #print(url_)
 
-                html_page = self.Page_Scrape(url_)
-                elem_button_forward = self.Page_Into_View_Run()
+
+                #elem_button_forward = self.Page_Into_View_Run()
                 html_page = self.driver.page_source
 
                 if html_page:
-                    soup_page = BeautifulSoup(html_page, "html.parser")
+                    self.page_num = counter_page
+
+                    df_cards_page = pd.DataFrame (columns=list (self.df.columns))
+
+                    page_end = False
+                    old_len = 0
+                    while not page_end:
+                        elem_card = self.driver.find_elements_by_css_selector('article[data-auto="searchOrganic"]')
+                        if len(elem_card) != old_len:
+                            old_len = len(elem_card)
+                        else:
+                            break
+                        elem_card[old_len-1].location_once_scrolled_into_view
+                        time.sleep(3)
+
+                        print("->", old_len)
+
+                        #button_more = soup_page.find("button", {"data-auto":"page-more"})
+                        try:
+                            time.sleep(5)
+                            element_button_more = self.driver.find_element_by_css_selector('button[data-auto="pager-more"]')
+                            #element_button_more = self.driver.find_element_by_css_selector ('div[data-auto="infifinityButton"]')
+                            element_button_more.location_once_scrolled_into_view
+                            element_button_more.click()
+                            time.sleep (5)
+                        except Exception:
+                            print("button не найден")
+                            pass
+
+                    #element_button_more = self.driver.find_element_by_css_selector ('button[data-auto="page-more]')
                     #elem_button_forward = soup_page.find("span", class_="Ohm2_")
 
-                    if not elem_button_forward:
-                        bl_full_page = False
+                    #if not elem_button_forward:
+                    #    bl_full_page = False
+                    self.driver.page_source
+                    soup_page = BeautifulSoup (self.driver.page_source, "html.parser")
+                    cards = self.Find_All_Divs ("card_div", soup_page)
+                    #cards = self.driver.find_elements_by_tag_name ("article")
+                    len_cards = len(cards)
+                    print (str (ven), len_cards)
 
-                    df_cards_page = self.Parse_Cards_Page(soup_page)
+                    #df_cards_page = self.Parse_Cards_Page(soup_page)
                     #print(self.df)
+
+                    if cards:
+                        elem_card = self.driver.find_elements_by_css_selector('article[data-auto="searchOrganic"]')
+                        #print (len (elem_card))
+                        for i, card in enumerate(cards):
+                            elem_card[i].location_once_scrolled_into_view
+                            self.Product_Record_Handler (card)
+                            for col in self.out_columns:
+                                df_cards_page.loc[i, col] = self.Fld_Fill (col, card)
+
 
                     if (not df_cards_page.empty) and (not df_cards_page["Modification_price"].isna().all()):
                     #if df_cards_page:
@@ -1158,19 +1356,11 @@ class Parse_Ya(Parse_Common):
                         xl_writer = pd.ExcelWriter(self.outfile_name, engine='xlsxwriter', options={'strings_to_urls': False})
                         self.df.to_excel(xl_writer)
                         xl_writer.close()
+                        break
 
                     else:
-                        bl_full_page = False
-
-                    if finish < 0:
-                        counter_page += 1
-                    else:
-                        if counter_page >= finish:
-                            bl_full_page = False
-                        else:
-                            counter_page += 1
-                    if not bl_full_page:
-                        print("финиш ", self.this_vendor)
+                       print("финиш ", self.this_vendor)
+                       break
 
     def Page_Into_View_Run(self):
 
@@ -1230,7 +1420,7 @@ class Parse_Ya(Parse_Common):
         self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.get("href"))
         self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("h3").text)
 
-    def Parse_Cards_Page(self, soup):
+    def Parse_Cards_Page(self, soup, count=0):
 
             if soup:
                 df_ = pd.DataFrame(columns=list(self.df.columns))
