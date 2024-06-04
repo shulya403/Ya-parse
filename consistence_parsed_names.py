@@ -507,6 +507,7 @@ class Fill_Stable_Base(Consist_Names):
         for i in df_.columns:
             if 'ok' in i.lower():
                 df_ = df_[df_[i] == 1]
+                break
 
         df_.drop_duplicates(subset=['Modification_name', 'Site'], inplace=True)
 

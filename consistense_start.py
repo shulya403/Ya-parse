@@ -22,7 +22,11 @@ import consistence_parsed_names as CPN
 #             dir_root="Prices/",
 #             dir_work="Handle_base/"):
 
-# May = CPN.Concat_Parse_Files('ноутбук', M='May', Y=23)
+# May = CPN.Concat_Parse_Files('ноутбук', M='May', Y=24)
+# May.Concat_files()
+
+
+# May = CPN.Concat_Parse_Files('монитор', M='May', Y=24)
 # May.Concat_files()
 
 # #May.Clearing_Vendors() #Унификация имен вендоров в поле Vendor. Вызывается Concat_Files() или отдельно
@@ -47,19 +51,19 @@ import consistence_parsed_names as CPN
 
 # FileHandler = CPN.Consist_Names(category="Монитор", #_Source для ноутов для yama заменить Mod_Name_restrict на просто Modification_name
 #                                 file_itr="Reports/Monitors_Model_Base_2023_03-1.xlsx",
-#                                 M='Mar',
-#                                 Y='23',
-#                                 file_work_name="монитор-Concat_Prices--May-23--Source.xlsx")
+#                                 M='May',
+#                                 Y='24',
+#                                 file_work_name="монитор-Concat_Prices--May-24--Source.xlsx")
 #
 #
 # #   Заполенение из файла Source
 # FileHandler.Fill_Unknown()
 
 # FileHandler = CPN.Consist_Names(category="Ноутбук", #_Source для ноутов для yama заменить Mod_Name_restrict на просто Modification_name
-#                                 file_itr="Reports/NB_Pivot_Apr23-final.xlsx",
+#                                 file_itr="Reports/NB_Pivot_May-24-1.xlsx",
 #                                 M='May',
-#                                 Y='23',
-#                                 file_work_name="ноутбук-Concat_Prices--May-23--Source.xlsx")
+#                                 Y='24',
+#                                 file_work_name="ноутбук-Concat_Prices--May-24--Source.xlsx")
 #
 #
 # #   Заполенение из файла Source
@@ -70,9 +74,10 @@ import consistence_parsed_names as CPN
 
 
 # Заполенение фала Base Stable проверенными
-# StBase = CPN.Fill_Stable_Base('Ноутбук',
-#                              'Ноутбук-Concat_Prices--Feb-23--Filled.xlsx')
-# StBase.Checked_To_Base()
+StBase = CPN.Fill_Stable_Base('Ноутбук',
+                             'ноутбук-Concat_Prices--May-24--Filled1.xlsx')
+StBase.Checked_To_Base()
+
 # # #
 # # Заполенение фала Base Stable проверенными
 # StBase = CPN.Fill_Stable_Base('Монитор',
@@ -93,10 +98,10 @@ import consistence_parsed_names as CPN
 #                   num=1
 #                  ):
 # #
-MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_May-23.xlsx",
-                                        file_work_name="NB_Pivot_unknown_5x-23.xlsx",
-                                        work_sheet="",
-                                        dir_work="C:\\Users\\DSH\\Desktop\\Мои документы\\PC\\notebook\\_05\\",
-                                         num=1
-                                     )
-MthNB.Fill_Models()
+# MthNB = CPN.Consist_Names_for_mth_report(file_itr="NB_Pivot_Apr-24.xlsx",
+#                                         file_work_name="NB_Pivot_unknown_4x-24.xlsx",
+#                                         work_sheet="",
+#                                         dir_work="C:\\Users\\DSH\\Desktop\\Мои документы\\PC\\notebook\\_04\\",
+#                                          num=1
+#                                      )
+# MthNB.Fill_Models()
