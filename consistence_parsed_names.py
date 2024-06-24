@@ -110,7 +110,7 @@ class Concat_Parse_Files(object):
 
         def Restrict_Ven(mod_name):
 
-            list_mod_name = mod_name.split()
+            list_mod_name = str(mod_name).split()
             list_mod_name = list_mod_name[1:]
 
             exit_ = " ".join(list_mod_name)
@@ -507,6 +507,7 @@ class Fill_Stable_Base(Consist_Names):
         for i in df_.columns:
             if 'ok' in i.lower():
                 df_ = df_[df_[i] == 1]
+                break
 
         df_.drop_duplicates(subset=['Modification_name', 'Site'], inplace=True)
 
