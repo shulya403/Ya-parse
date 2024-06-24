@@ -23,6 +23,7 @@ import parse_universal_classes as pa
 
 #parse = pa.Parse_Ya(category='проектор', scraper='selenium', num_outfile=0, interrupt=5, user_id=1).\
 #   Pagination(vendors=[])
+parse = pa.Parse_DNS(category='проектор', scraper='selenium', num_outfile=0, interrupt=10).Pagination()
 # Prj ['Acer', 'BenQ', 'Epson', 'Infocus', 'LG', 'NEC', 'Optoma', 'Sony', 'Viewsonic', 'Xiaomi', 'Barco', 'Canon', 'Casio', 'Christie', 'Hiper', 'Hitachi', 'JVC', 'Panasonic', 'Ricoh', 'Smart', 'Vivitek']
 
 # parse = pa.Parse_Ya(category='ибп', scraper='selenium', num_outfile=1, interrupt=1).Pagination(vendors=['APC'])
