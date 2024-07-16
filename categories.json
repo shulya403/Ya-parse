@@ -59,144 +59,169 @@
                   }
                 },
                 "price_div": {
-                  "teg": "span",
+                  "teg": "div",
                   "attributes": {
-                    "data-auto": "snippet-price-current"
+                    "class": "_24Evj"
                     }
                 }
               },
               "pg_num": "&page=",
 
               "categories": {
-                              "ноутбук": {
-                                          "url": {
-                                            "Acer": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A267101&onstock=0&local-offers-first=0&viewtype=list",
-                                            "Alienware": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A6146438&onstock=1&local-offers-first=0&viewtype=list",
-                        "Apple": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A153043&onstock=1&local-offers-first=0&viewtype=list",
-                        "Asus": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152863&onstock=1&local-offers-first=0&viewtype=list",
-                        "Dell": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A153080&onstock=1&local-offers-first=0&viewtype=list",
-                        "Honor": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A15292504&onstock=1&local-offers-first=0&viewtype=list",
-                        "HP": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152722&onstock=1&local-offers-first=0&viewtype=list",
-                        "Lenovo": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152981&onstock=1&local-offers-first=0&viewtype=list",
-                        "MSI":"https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A762076&onstock=1&local-offers-first=0&viewtype=list",
-                        "Huawei":"https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A459710&onstock=1&local-offers-first=0&viewtype=list",
-                        "Gigabyte":"https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A431404&viewtype=list",
-                        "Haier": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A240936&viewtype=list",
-                        "Hiper": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A927650&viewtype=list",
-                        "Chuwi": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A9259487&viewtype=list",
-                        "Гравитон": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A42682110&viewtype=list",
-                        "Adata": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A467872&viewtype=list",
-                        "Aquarius": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A3987770&viewtype=list",
-                        "Digma": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A470013&viewtype=list",
-                        "F+": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A17496570&viewtype=list",
-                        "Irbis": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A6151013&viewtype=list",
-                        "iRu": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A432790&viewtype=list",
-                        "Itel": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A15968424&viewtype=list",
-                        "Machenike": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A15346034&viewtype=list",
-                        "Maibanen": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A13406734&viewtype=list",
-                        "ThundeRobot": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A15346047&viewtype=list"
-                                          },
-                                          "subcategories": [
-                                            "ноутбук",
-                                            "ноутбук игровой",
-                                            "ультрабук"
-                                          ]
-                                          },
-                              "монитор": {
-                                          "url": {
-                                            "Acer": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A267101&onstock=1&local-offers-first=0&viewtype=list",
-                                            "AOC": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A431391&onstock=1&local-offers-first=0&viewtype=list",
-                                            "Asus": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152863&onstock=1&local-offers-first=0&viewtype=list",
-                                            "BenQ": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A241228&onstock=1&local-offers-first=0&viewtype=list",
-                                            "Dell":"https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153080&onstock=1&local-offers-first=0&viewtype=list",
-                                            "HP": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152722&onstock=1&local-offers-first=0&viewtype=list",
-                                            "Iiyama": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152865&onstock=1&local-offers-first=0&viewtype=list",
-                                            "LG": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153074&onstock=1&local-offers-first=0&viewtype=list",
-                                            "Philips": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152870&onstock=1&local-offers-first=0&viewtype=list",
-                                            "Samsung": "https://market.yandex.ru/catalog--monitory/18072760/list?hid=91052&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A153061&viewtype=list",
-                                            "Viewsonic": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152807&onstock=1&local-offers-first=0&viewtype=list",
-                                            "Lenovo": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152981&onstock=1&local-offers-first=0&viewtype=list",
-                                            "MSI": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A762076&onstock=1&local-offers-first=0&viewtype=list",
-                                            "NEC": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153117&onstock=1&local-offers-first=0&viewtype=list",
-                                            "Xiaomi": "https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A7701962&local-offers-first=0&viewtype=list",
-                                            "Gigabyte": "https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A431404&local-offers-first=0&viewtype=list",
-                                            "Huawei": "https://market.yandex.ru/catalog--monitory/26910011/list?hid=91052&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A459710&viewtype=list"},
-                                          "subcategories": [
-                                            "монитор"
-                                          ],
-                                          "ttx_file": "MNT-yama-TTX.xlsx"
-                                          },
-                              "проектор": {
-                                          "url": {
-                                            "Acer": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A267101&onstock=1&local-offers-first=0&viewtype=list",
-                                            "BenQ": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A241228&onstock=1&local-offers-first=0&viewtype=list",
-                        "Epson": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153058&onstock=1&local-offers-first=0&viewtype=list",
-                        "Infocus": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A287251&onstock=1&local-offers-first=0&viewtype=list",
-                        "LG": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153074&onstock=1&local-offers-first=0&viewtype=list",
-                        "NEC": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153117&onstock=1&local-offers-first=0&viewtype=list",
-                        "Optoma": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A1598564&onstock=1&local-offers-first=0&viewtype=list",
-                        "Sony": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152955&onstock=1&local-offers-first=0&viewtype=list",
-                        "Viewsonic": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152807&onstock=1&local-offers-first=0&viewtype=list",
-                        "Xiaomi": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A7701962&onstock=1&local-offers-first=0&viewtype=list",
-                        "Barco": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152884&onstock=1&local-offers-first=0&viewtype=list",
-                        "Canon": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152861&onstock=1&local-offers-first=0&viewtype=list",
-                        "Casio": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152967&onstock=1&local-offers-first=0&viewtype=list",
-                        "Christie": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A454306&onstock=1&local-offers-first=0&viewtype=list",
-                        "Hiper": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A927650&onstock=1&local-offers-first=0&viewtype=list",
-                        "Hitachi": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152885&onstock=1&local-offers-first=0&viewtype=list",
-                        "JVC": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152968&onstock=1&local-offers-first=0&viewtype=list",
-                        "Panasonic": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153082&onstock=1&local-offers-first=0&viewtype=list",
-                        "Ricoh": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153070&onstock=1&local-offers-first=0&viewtype=list",
-                        "Smart":"https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A10766653&onstock=1&local-offers-first=0&viewtype=list",
-                        "Vivitek": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A4878853&onstock=1&local-offers-first=0&viewtype=list"},
-                                          "subcategories": [
-                                            "проектор",
-                                            "карманный проектор"
-                                          ],
-                                          "ttx_file": "PRJ-yama-TTX.xlsx"
-                                          },
-                              "ибп": {
-                                          "url": {
-                                            "APC": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A431409&onstock=1&local-offers-first=0&viewtype=list",
-                        "Eaton": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A7147751&onstock=1&local-offers-first=0&viewtype=list",
-                        "Ippon": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A985314&onstock=1&local-offers-first=0&viewtype=list",
-                        "Delta": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A1586731&onstock=1&local-offers-first=0&viewtype=list",
-                        "Cyberpower": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990776&onstock=1&local-offers-first=0&viewtype=list",
-                        "Powercom": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A985313&onstock=1&local-offers-first=0&viewtype=list",
-                        "Vertiv": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A16221867&onstock=1&local-offers-first=0&viewtype=list",
-                        "SI":"https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A14350762&onstock=1&local-offers-first=0&viewtype=list",
-                        "Huawei": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A459710&onstock=1&local-offers-first=0&viewtype=list",
-                        "Powerman": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A722955&onstock=1&local-offers-first=0&viewtype=list",
-                        "Impuls": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A14983243&onstock=1&local-offers-first=0&viewtype=list",
-                        "Eltena-Inelt": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990800&onstock=1&local-offers-first=0&viewtype=list",
-                        "Legrand": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A11617058&onstock=1&local-offers-first=0&viewtype=list",
-                        "Socomec": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990792&onstock=1&local-offers-first=0&viewtype=list",
-                        "Riello":"https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A15060130&onstock=1&local-offers-first=0&viewtype=list",
-                        "Maklesan": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A10436632&onstock=1&local-offers-first=0&viewtype=list",
-                        "GE": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A152998&onstock=1&local-offers-first=0&viewtype=list",
-                        "DKC": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A13107145&onstock=1&local-offers-first=0&viewtype=list",
-                        "Tripp Lite": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A1019970&onstock=1&local-offers-first=0&viewtype=list",
-                        "AEG": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A152789&onstock=1&local-offers-first=0&viewtype=list",
-                        "Irbis": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A6151013&onstock=1&local-offers-first=0&viewtype=list",
-                        "Sven": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A284761&onstock=1&local-offers-first=0&viewtype=list",
-                        "Hiper": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A927650&onstock=1&local-offers-first=0&viewtype=list"
-                                          },
-                                          "subcategories": [
-                                            "интерактивный ибп",
-                                            "резервный ИБП",
-                                            "ибп с двойным преобразованием"
-                                          ],
-                                          "ttx_file": "UPS-yama-TTX.xlsx"
-                                      },
-                "logitech": {
+                "ноутбук": {
                   "url": {
-                     "Logitech": "https://market.yandex.ru/catalog--kompiutery/54425/list?was_redir=1&rt=10&rs=eJwz4g1gnMXIkZOfnlmSmpwBAB3MBIM%2C&suggest=1&suggest_type=search&suggest_text=logitech&hid=91009&local-offers-first=0&glfilter=7893318%3A444293"
-                  }
+                    "Acer": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A267101&onstock=0&local-offers-first=0&viewtype=list",
+                    "Alienware": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A6146438&onstock=1&local-offers-first=0&viewtype=list",
+                    "Apple": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A153043&onstock=1&local-offers-first=0&viewtype=list",
+                    "Asus": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152863&onstock=1&local-offers-first=0&viewtype=list",
+                    "Dell": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A153080&onstock=1&local-offers-first=0&viewtype=list",
+                    "Honor": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A15292504&onstock=1&local-offers-first=0&viewtype=list",
+                    "HP": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152722&onstock=1&local-offers-first=0&viewtype=list",
+                    "Lenovo": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A152981&onstock=1&local-offers-first=0&viewtype=list",
+                    "MSI": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A762076&onstock=1&local-offers-first=0&viewtype=list",
+                    "Huawei": "https://market.yandex.ru/catalog--noutbuki/54544/list?cpa=0&hid=91013&glfilter=7893318%3A459710&onstock=1&local-offers-first=0&viewtype=list",
+                    "Gigabyte": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A431404&viewtype=list",
+                    "Haier": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A240936&viewtype=list",
+                    "Hiper": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A927650&viewtype=list",
+                    "Chuwi": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A9259487&viewtype=list",
+                    "Гравитон": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A42682110&viewtype=list",
+                    "Adata": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A467872&viewtype=list",
+                    "Aquarius": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A3987770&viewtype=list",
+                    "Digma": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A470013&viewtype=list",
+                    "F+": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A17496570&viewtype=list",
+                    "Irbis": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A6151013&viewtype=list",
+                    "iRu": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A432790&viewtype=list",
+                    "Itel": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A15968424&viewtype=list",
+                    "Machenike": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A15346034&viewtype=list",
+                    "Maibanen": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A13406734&viewtype=list",
+                    "ThundeRobot": "https://market.yandex.ru/catalog--noutbuki/26895412/list?hid=91013&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A15346047&viewtype=list"
+                  },
+                  "subcategories": [
+                    "ноутбук",
+                    "ноутбук игровой",
+                    "ультрабук"
+                  ]
                 },
-                 "subcategories": [
-                                          ]
-              },
-      "ttx_file": "Logitech-yama-TTX.xlsx"
+                "монитор": {
+                  "url": {
+                    "Acer": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A267101&onstock=1&local-offers-first=0&viewtype=list",
+                    "AOC": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A431391&onstock=1&local-offers-first=0&viewtype=list",
+                    "Asus": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152863&onstock=1&local-offers-first=0&viewtype=list",
+                    "BenQ": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A241228&onstock=1&local-offers-first=0&viewtype=list",
+                    "Dell": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153080&onstock=1&local-offers-first=0&viewtype=list",
+                    "HP": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152722&onstock=1&local-offers-first=0&viewtype=list",
+                    "Iiyama": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152865&onstock=1&local-offers-first=0&viewtype=list",
+                    "LG": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A153074&onstock=1&local-offers-first=0&viewtype=list",
+                    "Philips": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152870&onstock=1&local-offers-first=0&viewtype=list",
+                    "Samsung": "https://market.yandex.ru/catalog--monitory/18072760/list?hid=91052&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A153061&viewtype=list",
+                    "Viewsonic": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152807&onstock=1&local-offers-first=0&viewtype=list",
+                    "Lenovo": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A152981&onstock=1&local-offers-first=0&viewtype=list",
+                    "MSI": "https://market.yandex.ru/catalog--monitory/18072760/list?cpa=0&hid=91052&glfilter=7893318%3A762076&onstock=1&local-offers-first=0&viewtype=list",
+                    "Xiaomi": "https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A7701962&local-offers-first=0&viewtype=list",
+                    "Gigabyte": "https://market.yandex.ru/catalog--monitory/54539/list?hid=91052&shopId=1071192&glfilter=7893318%3A431404&local-offers-first=0&viewtype=list",
+                    "Huawei": "https://market.yandex.ru/catalog--monitory/26910011/list?hid=91052&allowCollapsing=1&local-offers-first=0&glfilter=7893318%3A459710&viewtype=list",
+                    "DEXP": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJxdy79KxDAAgPELVMnFpTiVEyS3dbJJmppmdbxJvAcIaS7BQr2WpnVw8BlcBcHVQZz0GXyCToLPogT_4fz7PgZPwVUEH193Tt4AOkAQghgnCKN4dzHfWKfHZlA5nqWzHwQY_EUa8CggDBgvkkr72iij-3b0tlFdo-utGtoO37xfp9PTiETo95MIR5_90mg_6uZ36K3v2q2vL63yVvfmHE_TPH15XiMexr2v8fD_mKt6sBf--7p7QOntvYvBClaUCkclOWNUMEqKQpa8KEmmXSmo4aVlwuoi564SpZSScU035JiQjGb0A-GJTcs%2C&rt=9&glfilter=7893318%3A11042954",
+                    "Ardor Gaming": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1WkDE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECypB5bkAEsKSEkkJRZnJscnJxbllxan5sQX5CRm5sWX5BcoLFmhoLHyXyGXOVi9ENgZAlKKyYnFpYk5CA1FqcUF-XnFmWWp8cWpiUXJGQpXr3JqbN0SzGUC1sgN1SiHrtE4PrMkNbcYpmvOCi6NmfPTuMxQdCng1wUMjOnbJDXmLogTYPTiSDI0NE8ztDQIMjI0NzI0MDW1tDAxtTDQT0yzMDdMNrFINTJPTTQ1NklLMrewtLQ0Mkk0TDEwMzDQN9Q3BACMR2Lw&rt=9&glfilter=7893318%3A52323018",
+                    "Titan Army": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1WkDE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECypB5bkAEsKSEkkJRZnJscnJxbllxan5sQX5CRm5sWX5BcoTLhXp3F1XSmXOVi9ENgZAlKKyYnFpYk5CA1FqcUF-XnFmWWp8cWpiUXJGQpXr3JqbN0SzGUC1sgN1SiHrtE4PrMkNbcYpmvOCi6NmfPTuMxQdCng1wUMjOnbJDXmLogTYPTiSDI0NE8ztDQIMjI0NzI0MDW1tDAxtTDQT0yzMDdMNrFINTJPTTQ1NklLMrewtLQ0Mkk0TDEwMzDQN9Q3BADlXWNQ&rt=9&glfilter=7893318%3A53205433",
+                    "Digma": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1WkDE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECypB5bkAEsKSEkkJRZnJscnJxbllxan5sQX5CRm5sWX5BcoLFmhoLHyXyGXOVi9ENgZAlKKyYnFpYk5CA1FqcUF-XnFmWWp8cWpiUXJGQpXr3JqbN0SzGUC1sgN1SiHrtE4PrMkNbcYpmvOCi6NmfPTuMxQdCng1wUMjOnbJDXmLogTYPTiSDI0NE8ztDQIMjI0NzI0MDW1tDAxtTDQT0yzMDdMNrFINTJPTTQ1NklLMrewtLQ0Mkk0TDEwMzDQN9Q3BACMR2Lw&rt=9&glfilter=7893318%3A470013",
+                    "SunWind": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1WkDE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECypB5bkAEsKSEkkJRZnJscnJxbllxan5sQX5CRm5sWX5BcoTLhXp3F1XSmXOVi9ENgZAlKKyYnFpYk5CA1FqcUF-XnFmWWp8cWpiUXJGQpXr3JqbN0SzGUC1sgN1SiHrtE4PrMkNbcYpmvOCi6NmfPTuMxQdCng1wUMjOnbJDXmLogTYPTiSDI0NE8ztDQIMjI0NzI0MDW1tDAxtTDQT0yzMDdMNrFINTJPTTQ1NklLMrewtLQ0Mkk0TDEwMzDQN9Q3BADlXWNQ&rt=9&glfilter=7893318%3A16639047",
+                    "Thunderobot": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcoTLhXp3F1XSmXHlgLB1SLRFJicWYyQkdBTmJmHlj9khUKGiv_FXKZg9ULgV0uIKWIbkVRanFBfl5xZllqfHFqYlFyhsLVq5waW7cEc5lA3QbRKIfLbVBdc1Zwacycn8ZlhqJLAb8uYPhN3yapMXdBnACjF0eSoaF5mqGlQZCRobmRoYGpqaWFiamFgX5imoW5YbKJRaqReWqiqbFJWpK5haWlpZFJomGKgZmBgb6hviEAJE5zSg%2C%2C&rt=9&glfilter=7893318%3A15346047",
+                    "NPC": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-yQoFjZX_CrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAGodzQA%2C%2C&rt=9&glfilter=7893318%3A14732718",
+                    "Chiq": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-wr06javrSrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAc51zoA%2C%2C&rt=9&glfilter=7893318%3A41659530",
+                    "Exegate": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-yQoFjZX_CrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAGodzQA%2C%2C&rt=9&glfilter=7893318%3A4917635",
+                    "Sanc": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-wr06javrSrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAc51zoA%2C%2C&rt=9&glfilter=7893318%3A51483807",
+                    "Lime": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-yQoFjZX_CrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAGodzQA%2C%2C&rt=9&glfilter=7893318%3A19019410",
+                    "Valday": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-wr06javrSrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAc51zoA%2C%2C&rt=9&glfilter=7893318%3A13617785",
+                    "Hiper": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-yQoFjZX_CrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAGodzQA%2C%2C&rt=9&glfilter=7893318%3A927650",
+                    "Raskat": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-wr06javrSrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAc51zoA%2C%2C&rt=9&glfilter=7893318%3A23048290",
+                    "Irbis": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-yQoFjZX_CrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAGodzQA%2C%2C&rt=9&glfilter=7893318%3A6151013",
+                    "Cooler Master": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-wr06javrSrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAc51zoA%2C%2C&rt=9&glfilter=7893318%3A761985",
+                    "Pinebro": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-yQoFjZX_CrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAGodzQA%2C%2C&rt=9&glfilter=7893318%3A51853259",
+                    "Cbr": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-wr06javrSrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAc51zoA%2C%2C&rt=9&glfilter=7893318%3A998934",
+                    "Hisense": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-yQoFjZX_CrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAGodzQA%2C%2C&rt=9&glfilter=7893318%3A1622561",
+                    "Mucai": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-wr06javrSrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAc51zoA%2C%2C&rt=9&glfilter=7893318%3A54153004",
+                    "GMNG": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-yQoFjZX_CrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAGodzQA%2C%2C&rt=9&glfilter=7893318%3A43958490",
+                    "HKC": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-wr06javrSrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAc51zoA%2C%2C&rt=9&glfilter=7893318%3A3815524",
+                    "RDW": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-yQoFjZX_CrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAGodzQA%2C%2C&rt=9&glfilter=7893318%3A23535890",
+                    "Classic Solution": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-wr06javrSrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAc51zoA%2C%2C&rt=9&glfilter=7893318%3A10713461",
+                    "Leff": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-wr06javrSrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAc51zoA%2C%2C&rt=9&glfilter=7893318%3A16714321",
+                    "Machenke": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-yQoFjZX_CrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAGodzQA%2C%2C&rt=9&glfilter=7893318%3A15346034",
+                    "Eizo": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-wr06javrSrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAc51zoA%2C%2C&rt=9&glfilter=7893318%3A288910",
+                    "ACD": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-yQoFjZX_CrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAGodzQA%2C%2C&rt=9&glfilter=24896250%3A41822521&glfilter=7893318%3A16217908",
+                    "Dahua": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-yQoFjZX_CrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAGodzQA%2C%2C&rt=9&glfilter=24896250%3A41822521&glfilter=7893318%3A10714892",
+                    "Tesla": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJwz4ghgrGLhWHOc1ekxE5c0FwcHo4CCBIsCiwCbFGdKalpiaU5JvJECgwYDXJJLgQtZ0hhFklGBEVnSECxpCJbkBksKSEknJxaXJubEJycW5ZcWp-bEG8dnlqTmFseX5BcofNhaq3G0I5tLD6yFA6pFIimxODMZoaMgJzEzD6x-yQoFjZX_CrnMweqFwC4XkFJEt6IotbggP684syw1vjg1sSg5Q-HqVU6NrVuCuUygboNolMPlNqiuOSu4NGbOT-MyQ9GlgF8XMPymb5PUmLsgToDRiyPJ0NA8zdDSIMjI0NzI0MDU1NLCxNTCQD8xzcLcMNnEItXIPDXR1NgkLcncwtLS0sgk0TDFwMzAQN9Q3xAAGodzQA%2C%2C&rt=9&glfilter=24896250%3A41822521&glfilter=7893318%3A50055743",
+                    "Azerty": "https://market.yandex.ru/catalog--monitory/26910011/list?suggest_text=%D0%BC%D0%BE%D0%BD%D0%B8%D1%82%D0%BE%D1%80&hid=91052&rs=eJx90LFOg0AcBvAS0dBzkJoOlSbmujEJd0CB1dHJ6C456KFELMhRhybuvoEx0ejgUBNH6xsYF9e-h09gxAtEMOr8fb98__yxtCtMRenxdXn7bQn0gSQJMuyJUJRXlPaIhmQS5x6GLbUFBmWoQKUI16rQ8FJySJuVDuzUK6hWqSYABPUJo-G7sFv3-BcvQKHuEQ8RD1d5KCv9gLAJib2AZMmE0bg4NcrpCfPyJIXv83P15eIYbHEilaTnExYF3yKNSTTm_fsZVB8-TsGwnPh6kazAvyYYJVlwVHzu8nlDvbk7AGbDbf7v4PUMqFe3IbC5Wi_V4KfKKEuTMYvOaAUXi7Y6f9qXhR3JR8gOkavvYWRjpFuW65iWo2skdGwUmA7FNiWWYYa-7biui02CRvpQ1zWkoU-gg4gz&rt=9&glfilter=24896250%3A41822521&glfilter=7893318%3A13365813"
+                  },
+                  "subcategories": [
+                    "монитор"
+                  ],
+                  "ttx_file": "MNT-yama-TTX.xlsx"
+                },
+                "проектор": {
+                  "url": {
+                    "Acer": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A267101&onstock=1&local-offers-first=0&viewtype=list",
+                    "BenQ": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A241228&onstock=1&local-offers-first=0&viewtype=list",
+                    "Epson": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153058&onstock=1&local-offers-first=0&viewtype=list",
+                    "Infocus": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A287251&onstock=1&local-offers-first=0&viewtype=list",
+                    "LG": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153074&onstock=1&local-offers-first=0&viewtype=list",
+                    "NEC": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153117&onstock=1&local-offers-first=0&viewtype=list",
+                    "Optoma": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A1598564&onstock=1&local-offers-first=0&viewtype=list",
+                    "Sony": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152955&onstock=1&local-offers-first=0&viewtype=list",
+                    "Viewsonic": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152807&onstock=1&local-offers-first=0&viewtype=list",
+                    "Xiaomi": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A7701962&onstock=1&local-offers-first=0&viewtype=list",
+                    "Barco": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152884&onstock=1&local-offers-first=0&viewtype=list",
+                    "Canon": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152861&onstock=1&local-offers-first=0&viewtype=list",
+                    "Casio": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152967&onstock=1&local-offers-first=0&viewtype=list",
+                    "Christie": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A454306&onstock=1&local-offers-first=0&viewtype=list",
+                    "Hiper": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A927650&onstock=1&local-offers-first=0&viewtype=list",
+                    "Hitachi": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152885&onstock=1&local-offers-first=0&viewtype=list",
+                    "JVC": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A152968&onstock=1&local-offers-first=0&viewtype=list",
+                    "Panasonic": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153082&onstock=1&local-offers-first=0&viewtype=list",
+                    "Ricoh": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A153070&onstock=1&local-offers-first=0&viewtype=list",
+                    "Smart": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A10766653&onstock=1&local-offers-first=0&viewtype=list",
+                    "Vivitek": "https://market.yandex.ru/catalog--multimedia-proektory/60865/list?cpa=0&hid=191219&glfilter=7893318%3A4878853&onstock=1&local-offers-first=0&viewtype=list"
+                  },
+                  "subcategories": [
+                    "проектор",
+                    "карманный проектор"
+                  ],
+                  "ttx_file": "PRJ-yama-TTX.xlsx"
+                },
+                "ибп": {
+                  "url": {
+                    "APC": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A431409&onstock=1&local-offers-first=0&viewtype=list",
+                    "Eaton": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A7147751&onstock=1&local-offers-first=0&viewtype=list",
+                    "Ippon": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A985314&onstock=1&local-offers-first=0&viewtype=list",
+                    "Delta": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A1586731&onstock=1&local-offers-first=0&viewtype=list",
+                    "Cyberpower": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990776&onstock=1&local-offers-first=0&viewtype=list",
+                    "Powercom": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A985313&onstock=1&local-offers-first=0&viewtype=list",
+                    "Vertiv": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A16221867&onstock=1&local-offers-first=0&viewtype=list",
+                    "SI": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A14350762&onstock=1&local-offers-first=0&viewtype=list",
+                    "Huawei": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A459710&onstock=1&local-offers-first=0&viewtype=list",
+                    "Powerman": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A722955&onstock=1&local-offers-first=0&viewtype=list",
+                    "Impuls": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A14983243&onstock=1&local-offers-first=0&viewtype=list",
+                    "Eltena-Inelt": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990800&onstock=1&local-offers-first=0&viewtype=list",
+                    "Legrand": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A11617058&onstock=1&local-offers-first=0&viewtype=list",
+                    "Socomec": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A990792&onstock=1&local-offers-first=0&viewtype=list",
+                    "Riello": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A15060130&onstock=1&local-offers-first=0&viewtype=list",
+                    "Maklesan": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A10436632&onstock=1&local-offers-first=0&viewtype=list",
+                    "GE": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A152998&onstock=1&local-offers-first=0&viewtype=list",
+                    "DKC": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A13107145&onstock=1&local-offers-first=0&viewtype=list",
+                    "Tripp Lite": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A1019970&onstock=1&local-offers-first=0&viewtype=list",
+                    "AEG": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A152789&onstock=1&local-offers-first=0&viewtype=list",
+                    "Irbis": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A6151013&onstock=1&local-offers-first=0&viewtype=list",
+                    "Sven": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A284761&onstock=1&local-offers-first=0&viewtype=list",
+                    "Hiper": "https://market.yandex.ru/catalog--istochniki-bespereboinogo-pitaniia/18072849/list?cpa=0&hid=91082&glfilter=7893318%3A927650&onstock=1&local-offers-first=0&viewtype=list"
+                  },
+                  "subcategories": [
+                    "интерактивный ибп",
+                    "резервный ИБП",
+                    "ибп с двойным преобразованием"
+                  ],
+                  "ttx_file": "UPS-yama-TTX.xlsx"
+                }
+              }
+
           },
     "mvideo": {
       "host": "https://www.mvideo.ru",
@@ -415,4 +440,3 @@
       }
     }
 }
-

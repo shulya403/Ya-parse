@@ -877,7 +877,11 @@ class Parse_DNS(Parse_Common):
 
             for cat in self.category_params["subcategories"]:
                 if cat in longstring.lower():
-                    list_found_cat.append((cat, len(cat), len(cat.split())))
+                    if self.category != "проектор":  # проектор не имеет первого слова диагонали
+                        list_found_cat.append((cat, len(cat), len(cat.split())))
+                    else:
+                        list_found_cat.append ((cat, len (cat), 0))
+
 
             list_found_cat.sort(key=lambda x: x[1], reverse=True)
 
