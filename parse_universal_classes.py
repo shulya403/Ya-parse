@@ -1451,3 +1451,295 @@ class Parse_Ya(Parse_Common):
             print(df_)
 
             return df_
+
+class Parse_OZ(Parse_Common):
+    site = "ozon"
+
+    def __init__(self,
+                 category, #категория продуктов
+                 scraper, # [requests, selenium],
+                 ttx=False, #надо ли скачивать характеристики
+                 pagination_start=1,
+                 pagination_finish=-1,
+                 interrupt=5,
+                 num_outfile=1 #Дополнительный номер версии выходного файла
+                 ):
+
+        self.interrupt = interrupt
+
+        self.bl_ttx = ttx
+
+        self.num_outfile = num_outfile
+
+        self.scraper = scraper
+
+        self.category = category
+
+        self.ttx = ttx
+        #скачиваем json
+        with open('categories.json', encoding='utf-8') as f:
+            self.Categories = json.load(f)
+
+    #   Словарь пар-в для сайта
+        self.site_params = self.Categories[self.site]
+        #pprint(self.category_site)
+
+    #   Словарь пар-в для категории продукта
+        self.category_params = self.site_params["categories"][self.category]
+        pprint(self.category_params)
+
+        self.out_columns = [
+            'Name',
+            'Vendor',
+            'Modification_name',
+            'Category',
+            'Date',
+            'Modification_price',
+            'Cards_page_num',
+            'Site'
+        ]
+
+        self.addition_fields = [
+            'Reviews'
+        ]
+
+        self.df = pd.DataFrame(columns=self.out_columns + self.addition_fields)
+
+        self.now = datetime.now().strftime('%b-%y')
+
+        self.Folder_Out_Check()
+
+        self.outfile_name = "Prices/" + \
+                            self.site + \
+                            "/" + \
+                            self.site + \
+                            "--" + \
+                            self.category.title() + \
+                            "--" + \
+                            self.now + \
+                            "--" + \
+                            str(self.num_outfile) + \
+                            '.xlsx'
+
+        self.warnings = {
+            "unknown_host": {"print": "Нет названия хоста {}".format(self.site),
+                             "show": True,
+                             "raise": False},
+            "unknown_category_url": {"print": "Нет URL категории {}:{}".format(self.site, self.category),
+                                     "show": True,
+                                     "raise": True},
+            "no_site_url_suffics": {"print": "Нет Get-добавкий опций страницы для сайта {}".format(self.site),
+                                     "show": True,
+                                     "raise": False},
+            "no_site_viewtype": {"print": "Нет обозначения viewtype для сайта {}".format(self.site),
+                                    "show": True,
+                                    "raise": False},
+            "no_cards_page_params": {"print": "Нет параметров для парсинга страницы выдачи для сайта {}".format(self.site),
+                                 "show": True,
+                                 "raise": True},
+            "no_cookies": {
+                "print": "Нет cookies для сайта {}".format(self.site),
+                "show": True,
+                "raise": False}
+        }
+        try:
+            self.teg_card_params = self.site_params["cards_page_params"]
+
+        except KeyError:
+            self.JSON_Content_Warnings_Alarm("no_cards_page_params")
+
+        try:
+            self.pg_num = self.site_params["pg_num"]
+        except KeyError:
+            self.pg_num = "&page="
+
+        try:
+            self.host_get_suffics = self.site_params["host_get_suffics"]
+
+        except KeyError:
+            self.JSON_Content_Warnings_Alarm("no_site_url_suffics")
+            self.host_get_suffics = ""
+        if self.scraper == 'selenium':
+
+            options = webdriver.ChromeOptions()
+            # options.add_argument('--headless')
+            options.add_argument("--window-size=1920,1080")
+            options.add_argument ("--user-data-dir=C:/Users/shulya403/AppData/Local/Google/Chrome/User Data")
+            options.add_argument ("--profile-directory=Default")
+            options.add_argument ("--remote-debugging-port=9222")
+
+            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            #self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\125.0.6422.60\\chromedriver-win32\\chromedriver.exe", options=options)
+            #version="108.0.5359.71"
+
+    def Page_Webdriver(self, url_):
+
+
+        self.driver.get(url_)
+        # try:
+        #     element = WebDriverWait(self.driver, 5).\
+        #         until(EC.presence_of_element_located((By.CLASS_NAME, "product-min-price__current")))
+        # except Exception:
+        #     pass
+        # finally:
+        time.sleep(self.interrupt)
+        exit_ = self.driver.page_source
+
+        if not exit_:
+            time.sleep(3)
+            self.Page_webdriver(url_)
+
+        return exit_
+
+    def Find_All_Divs(self, json_div, soup):
+
+        try:
+            arguments = self.teg_card_params[json_div]["attributes"]
+            if arguments:
+                if "class" in arguments:
+                    arguments["class_"] = arguments.pop("class")
+                if "re" in self.teg_card_params[json_div]:
+                    for i in arguments:
+                        arguments[i] = re.compile(arguments[i])
+                return soup.find_all(self.teg_card_params[json_div]["teg"], **arguments)
+            else:
+                return soup.find_all(self.teg_card_params[json_div]["teg"])
+        except KeyError:
+            print('В JSON нет тега {} для сайта {}'.format(json_div, self.site))
+            raise KeyError
+
+    def Find_Div(self, json_div, soup):
+
+        try:
+            arguments = self.teg_card_params[json_div]["attributes"]
+            if arguments:
+                if "class" in arguments:
+                    arguments["class_"] = arguments.pop("class")
+                if "re" in self.teg_card_params[json_div]:
+                    for i in arguments:
+                        arguments[i] = re.compile(arguments[i])
+                return soup.find(self.teg_card_params[json_div]["teg"], **arguments)
+            else:
+                return soup.find(self.teg_card_params[json_div]["teg"])
+        except KeyError:
+            print('В JSON нет тега {} для сайта {}'.format(json_div, self.site))
+            raise KeyError
+
+    def Parse_Cards_Page(self, soup):
+
+            if soup:
+                df_ = pd.DataFrame (columns=list (self.df.columns))
+
+            cards = self.Find_All_Divs ("card_div", soup)
+
+            # pprint(cards[0])
+            if cards:
+                for i, card, in enumerate (cards):
+                    self.Product_Record_Handler (card)
+                    for col in self.out_columns:
+                        df_.loc[i, col] = self.Fld_Fill (col, card)
+                    for col in self.addition_fields:
+                        df_.loc[i, col] = self.Addition_Fld_Fill (col, card)
+                    #if self.bl_ttx:
+                     #   self.TTX_Handler (df_.loc[i, 'Modification_href'])
+
+            print (df_)
+
+            return df_
+    def Addition_Fld_Fill(self, fld, card):
+        if fld == 'Reviews':
+            return self.Product_Reviews_Handler(card)
+
+    def Product_Reviews_Handler(self, card):
+
+        soup_offers = self.Find_Div("reviews_div", card)
+        try:
+            re.compile('')
+            reviews = soup_offers.find_all('span', class_="u1")
+            for i in reviews:
+                if "отзыв" in i.text:
+                       exit_ = "".join(re.findall(r'\d', i.text))
+                       break
+                else:
+                       exit_ = None
+        except Exception:
+            exit_ = None
+
+        return exit_
+
+    def Product_Record_Handler(self, card):
+
+        soup_product = self.Find_Div("product_div", card)
+        #self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.get("href"))
+        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("span").text)
+
+    def Modification_Price_Handler(self, card):
+
+        soup_price = self.Find_Div("price_div", card)
+        if soup_price:
+
+            price_ = soup_price.text
+            exit_ = "".join(re.findall(r'\d', price_))
+
+        else:
+            exit_ = None
+
+        return exit_
+
+    def URL_CardsPage_Make(self, url_="", page=1):
+
+        if url_:
+            url_this = url_
+        else:
+            try:
+                url_this = self.category_params["url"]
+            except KeyError:
+                self.JSON_Content_Warnings_Alarm("unknown_category_url")
+
+        exit_url = self.URL_Base_Make(url_this)
+
+        if page != 1:
+            exit_url += self.pg_num + unquote(str(page))
+
+        print("Make :", exit_url)
+
+        return exit_url
+
+    def Longstring_Handeler(self, longstring):
+
+        #Категория
+        if longstring:
+            list_word = longstring.split()
+            list_found_cat = list()
+
+            # for cat in self.category_params["subcategories"]:
+            #     if cat in longstring.lower():
+            #         if self.category != "проектор":  # проектор не имеет первого слова диагонали
+            #             list_found_cat.append((cat, len(cat), len(cat.split())))
+            #         else:
+            #             list_found_cat.append ((cat, len (cat), 0))
+
+
+            # list_found_cat.sort(key=lambda x: x[1], reverse=True)
+
+            # try:
+            #     self.dict_product_record["Subcategory"] = list_found_cat[0][0]
+            # except Exception:
+            #     pass
+            try:
+                self.dict_product_record["Vendor"] = list_word[0]
+
+                # product_name = ""
+                # for word in list_word[list_found_cat[0][2]+1:]:
+                #     product_name += word + " "
+                #
+                # product_name += list_word[0]
+
+            except IndexError:
+                print("что-то с именем моим:", longstring)
+
+            return longstring
+
+        else:
+            return None
+

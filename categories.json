@@ -385,6 +385,58 @@
         }
       }
     },
+     "ozon": {
+      "host": "https://www.ozon.ru",
+      "cookies": "",
+      "pg_num": "?page=",
+      "host_get_suffics": "",
+
+      "cards_page_params": {
+                "card_div": {
+                  "teg": "div",
+                  "attributes": {
+                    "class": "k8j_23 jk9_23"
+                  }
+                },
+                "product_div": {
+                  "teg": "div",
+                  "re": "True",
+                  "attributes": {
+                    "class": "a9b ac0 ca0"
+                  }
+                },
+                "price_div": {
+                  "teg": "span",
+                  "re": "True",
+                  "attributes": {
+                    "class": "-c0"
+                  }
+                },
+              "reviews_div": {
+                "teg": "div",
+                "re": "True",
+                "attributes": {
+                    "class": "iy5_23 iy7_23 t7 t8 t9 tsBodyMBold"
+                  }
+
+              }
+       },
+
+      "categories": {
+        "ноутбук": {
+          "url": "/category/noutbuki-15692/",
+          "subcategories": []
+        },
+        "монитор": {
+          "url": "/category/monitory-15738/",
+          "subcategories": []
+        },
+        "проектор": {
+          "url": "",
+          "subcategories": []
+        }
+      }
+    },
     "eldorado": {
       "host": "https://www.eldorado.ru",
       "cookies": "",
