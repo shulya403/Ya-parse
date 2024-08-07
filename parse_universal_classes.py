@@ -678,8 +678,9 @@ class Parse_DNS(Parse_Common):
             options.add_argument ("--profile-directory=Default")
             options.add_argument ("--remote-debugging-port=9222")
 
-            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-            #self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\125.0.6422.60\\chromedriver-win32\\chromedriver.exe", options=options)
+            #self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\127.0.6533.100\\chromedriver-win32\\chromedriver.exe", options=options)
+            #C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\126.0.6478.127\\chromedriver-win32\\hromedriver.exe
             #version="108.0.5359.71"
 
     def Page_Webdriver(self, url_):
@@ -877,7 +878,7 @@ class Parse_DNS(Parse_Common):
 
             for cat in self.category_params["subcategories"]:
                 if cat in longstring.lower():
-                    if self.category != "проектор":  # проектор не имеет первого слова диагонали
+                    if self.category not in ["проектор", "ибп"]:  # проектор и ибп не имеет первого слова диагонали
                         list_found_cat.append((cat, len(cat), len(cat.split())))
                     else:
                         list_found_cat.append ((cat, len (cat), 0))
@@ -900,6 +901,7 @@ class Parse_DNS(Parse_Common):
 
             except IndexError:
                 print("что-то с именем моим:", longstring)
+                product_name = longstring
 
             return product_name
 

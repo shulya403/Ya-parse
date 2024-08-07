@@ -7,7 +7,7 @@ import parse_universal_classes as pa
 # jul-24 parse = pa.Parse_CL(category='ноутбук', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли (для rquest); selenium подрубается со второго запуска
 # jul-24 parse = pa.Parse_DNS(category='ноутбук', scraper='selenium', num_outfile=0, interrupt=5).Pagination() #Следить - все ли
 #parse = pa.Parse_El(category='ноутбук', scraper='selenium', num_outfile=2 , interrupt=8).Pagination(start=2, finish=101) #Не останавливаться, ставить стопы NB 35 https://www.eldorado.ru/c/noutbuki/
-parse = pa.Parse_OZ(category='ноутбук', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
+#parse = pa.Parse_OZ(category='ноутбук', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
 # jul-24 parse = pa.Parse_Ya(category='ноутбук', scraper='selenium', num_outfile=2, interrupt=2, user_id=1).\
 #Pagination(vendors=["Acer", "Apple", "Asus", "Dell", "Honor", "HP", "Huawei", "Lenovo", "MSI"])
 # "data-auto": "snippet-price-old"
@@ -37,3 +37,4 @@ parse = pa.Parse_OZ(category='ноутбук', scraper='selenium', num_outfile=0
 #             'GE','DKC','Tripp Lite','AEG','Irbis','Sven','Hiper']
 
 #parse = pa.Parse_Ya(category='logitech', scraper='selenium', num_outfile=0, interrupt=1).Pagination(vendors=[])
+parse = pa.Parse_DNS(category='ибп', scraper='selenium', num_outfile=1, interrupt=5).Pagination()
