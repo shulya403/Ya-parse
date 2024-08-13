@@ -61,7 +61,7 @@
                 "price_div": {
                   "teg": "div",
                   "attributes": {
-                    "class": "_24Evj"
+                    "class": "_1ArMm"
                     }
                 }
               },
@@ -401,14 +401,14 @@
                 "card_div": {
                   "teg": "div",
                   "attributes": {
-                    "class": "k8j_23 jk9_23"
+                    "class": "jm7_23 j7m_23"
                   }
                 },
                 "product_div": {
-                  "teg": "div",
+                  "teg": "span",
                   "re": "True",
                   "attributes": {
-                    "class": "a9b ac0 ca0"
+                    "class": "tsBody500Medium"
                   }
                 },
                 "price_div": {
@@ -422,7 +422,7 @@
                 "teg": "div",
                 "re": "True",
                 "attributes": {
-                    "class": "iy5_23 iy7_23 t7 t8 t9 tsBodyMBold"
+                    "class": "j2k_23 j4k_23 p7 p8 p9 tsBodyMBold"
                   }
 
               }

@@ -40,6 +40,8 @@ class Parse_Common(object):
 
         self.interrupt = interrupt
 
+        self.pagination_start = pagination_start
+
         self.bl_ttx = ttx
 
         self.num_outfile = num_outfile
@@ -138,7 +140,8 @@ class Parse_Common(object):
             # options.add_argument('--headless')
             options.add_argument("--window-size=1920,1080")
 
-            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            #self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\127.0.6533.100\\chromedriver-win32\\chromedriver.exe", options=options)
             #version="108.0.5359.71"
     def Folder_Out_Check(self):
         import os
@@ -574,6 +577,8 @@ class Parse_DNS(Parse_Common):
                  ):
 
         self.interrupt = interrupt
+
+        self.pagination_start = pagination_start
 
         self.bl_ttx = ttx
 
@@ -1152,7 +1157,8 @@ class Parse_Ya(Parse_Common):
             #options.add_argument('--user-agent="Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US) AppleWebKit/533.1 (KHTML, like Gecko) Chrome/5.0.336.0 Safari/533.1 ChromePlus/1.3.8.1"')
             #options.add_argument('--user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Comodo_Dragon/12.1.0.0 Chrome/12.0.742.91 Safari/534.30"')
 
-            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            #self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            self.driver = webdriver.Chrome ("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\127.0.6533.100\\chromedriver-win32\\chromedriver.exe", options=options)
 
     def Make_user(self, user_id_rewrite):
 
@@ -1423,8 +1429,8 @@ class Parse_Ya(Parse_Common):
     def Product_Record_Handler(self, card):
 
         soup_product = self.Find_Div("product_div", card)
-        self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.get("href"))
-        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("h3").text)
+        self.dict_product_record['Modification_href'] = "" #self.URL_Base_Make(soup_product.get("href"))
+        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("span").text)
 
     def Parse_Cards_Page(self, soup, count=0):
 
@@ -1570,7 +1576,8 @@ class Parse_OZ(Parse_Common):
             options.add_argument ("--profile-directory=Default")
             options.add_argument ("--remote-debugging-port=9222")
 
-            self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            #self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+            self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\127.0.6533.100\\chromedriver-win32\\chromedriver.exe", options=options)
             #self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\125.0.6422.60\\chromedriver-win32\\chromedriver.exe", options=options)
             #version="108.0.5359.71"
 
@@ -1657,7 +1664,7 @@ class Parse_OZ(Parse_Common):
         soup_offers = self.Find_Div("reviews_div", card)
         try:
             re.compile('')
-            reviews = soup_offers.find_all('span', class_="u1")
+            reviews = soup_offers.find_all('span', class_="q1")
             for i in reviews:
                 if "отзыв" in i.text:
                        exit_ = "".join(re.findall(r'\d', i.text))
@@ -1673,7 +1680,7 @@ class Parse_OZ(Parse_Common):
 
         soup_product = self.Find_Div("product_div", card)
         #self.dict_product_record['Modification_href'] = self.URL_Base_Make(soup_product.get("href"))
-        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.find("span").text)
+        self.dict_product_record['Modification_name'] = self.Longstring_Handeler(soup_product.text)
 
     def Modification_Price_Handler(self, card):
 
