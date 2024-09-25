@@ -15,10 +15,10 @@ import parse_universal_classes as pa
 # Nb ["Acer", "Alienware", "Apple", "Acer", "Apple", "Asus", "Dell", "Honor", "HP", "Huawei", "Lenovo", "MSI"]
 #"class": "_24Evj"
 
-# Aug-24 parse = pa.Parse_CL(category='монитор', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли
-# Aug-24 parse = pa.Parse_DNS(category='монитор', scraper='selenium', num_outfile=1, interrupt=5).Pagination(start=23)
+# Sep-24 parse = pa.Parse_CL(category='монитор', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли
+# Sep-24 parse = pa.Parse_DNS(category='монитор', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
 #parse = pa.Parse_El(category='монитор', scraper='selenium', num_outfile=1, interrupt=1).Pagination(finish=26) # мониторы 17 https://www.eldorado.ru/c/monitory/
-# Aug-24 parse = pa.Parse_OZ(category='монитор', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
+parse = pa.Parse_OZ(category='монитор', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
 # Aug-24 parse = pa.Parse_Ya(category='монитор', scraper='selenium', num_outfile=0, interrupt=2, user_id=1).\
 #     Pagination(vendors=[])
 
