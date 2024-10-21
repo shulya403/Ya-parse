@@ -1158,7 +1158,7 @@ class Parse_Ya(Parse_Common):
             #options.add_argument('--user-agent="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/534.30 (KHTML, like Gecko) Comodo_Dragon/12.1.0.0 Chrome/12.0.742.91 Safari/534.30"')
 
             #self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-            self.driver = webdriver.Chrome ("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\127.0.6533.100\\chromedriver-win32\\chromedriver.exe", options=options)
+            self.driver = webdriver.Chrome ("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\129.0.6668.71\\chromedriver-win32\\chromedriver.exe", options=options)
 
     def Make_user(self, user_id_rewrite):
 
