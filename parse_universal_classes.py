@@ -141,7 +141,7 @@ class Parse_Common(object):
             options.add_argument("--window-size=1920,1080")
 
             #self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-            self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\129.0.6668.71\\chromedriver-win32\\chromedriver.exe", options=options)
+            self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\131.0.6778.86\\chromedriver-win32\\chromedriver.exe", options=options)
             #version="108.0.5359.71"
     def Folder_Out_Check(self):
         import os
