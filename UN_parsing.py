@@ -16,7 +16,7 @@ import parse_universal_classes as pa
 #"class": "_24Evj"
 
 # Oct-24 parse = pa.Parse_CL(category='монитор', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли
-# Oct-24 parse = pa.Parse_DNS(category='монитор', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
+# Nov-24 parse = pa.Parse_DNS(category='монитор', scraper='selenium', num_outfile=1, interrupt=5).Pagination(start=18)
 #parse = pa.Parse_El(category='монитор', scraper='selenium', num_outfile=1, interrupt=1).Pagination(finish=26) # мониторы 17 https://www.eldorado.ru/c/monitory/
 # parse = pa.Parse_OZ(category='монитор', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
 # Aug-24 parse = pa.Parse_Ya(category='монитор', scraper='selenium', num_outfile=0, interrupt=2, user_id=1).\
@@ -30,7 +30,7 @@ import parse_universal_classes as pa
 
 #parse = pa.Parse_Ya(category='проектор', scraper='selenium', num_outfile=0, interrupt=5, user_id=1).\
 #   Pagination(vendors=[])
-# Oct-24 parse = pa.Parse_DNS(category='проектор', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
+#parse = pa.Parse_DNS(category='проектор', scraper='selenium', num_outfile=1, interrupt=5).Pagination(start=4)
 # Prj ['Acer', 'BenQ', 'Epson', 'Infocus', 'LG', 'NEC', 'Optoma', 'Sony', 'Viewsonic', 'Xiaomi', 'Barco', 'Canon', 'Casio', 'Christie', 'Hiper', 'Hitachi', 'JVC', 'Panasonic', 'Ricoh', 'Smart', 'Vivitek']
 
 # parse = pa.Parse_Ya(category='ибп', scraper='selenium', num_outfile=1, interrupt=1).Pagination(vendors=['APC'])
@@ -38,4 +38,4 @@ import parse_universal_classes as pa
 #             'GE','DKC','Tripp Lite','AEG','Irbis','Sven','Hiper']
 
 #parse = pa.Parse_Ya(category='logitech', scraper='selenium', num_outfile=0, interrupt=1).Pagination(vendors=[])
-# oct-24 parse = pa.Parse_DNS(category='ибп', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
+parse = pa.Parse_DNS(category='ибп', scraper='selenium', num_outfile=0, interrupt=5).Pagination()

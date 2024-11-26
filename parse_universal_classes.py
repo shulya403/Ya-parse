@@ -684,7 +684,7 @@ class Parse_DNS(Parse_Common):
             options.add_argument ("--remote-debugging-port=9222")
 
             #self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-            self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\129.0.6668.71\\chromedriver-win32\\chromedriver.exe", options=options)
+            self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\131.0.6778.86\\chromedriver-win32\\chromedriver.exe", options=options)
             #C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\126.0.6478.127\\chromedriver-win32\\hromedriver.exe
             #version="108.0.5359.71"
 
