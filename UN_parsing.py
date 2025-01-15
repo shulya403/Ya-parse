@@ -4,8 +4,8 @@ import parse_universal_classes as pa
 
 #def Pagination(self, start=1, finish=-1)
 
-# Dec-24 parse = pa.Parse_CL(category='ноутбук', scraper='selenium', num_outfile=1, interrupt=15).Pagination() #Следить - все ли (для rquest); selenium подрубается со второго запуска
-# Dec-24 parse = pa.Parse_DNS(category='ноутбук', scraper='selenium', num_outfile=2, interrupt=5).Pagination() #Следить - все ли
+# Jan-25 parse = pa.Parse_CL(category='ноутбук', scraper='selenium', num_outfile=1, interrupt=25).Pagination() #Следить - все ли (для rquest); selenium подрубается со второго запуска
+# jan-25 parse = pa.Parse_DNS(category='ноутбук', scraper='selenium', num_outfile=1, interrupt=5).Pagination(start=15) #Следить - все ли
 #parse = pa.Parse_El(category='ноутбук', scraper='selenium', num_outfile=2 , interrupt=8).Pagination(start=2, finish=101) #Не останавливаться, ставить стопы NB 35 https://www.eldorado.ru/c/noutbuki/
 #parse = pa.Parse_OZ(category='ноутбук', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
 #parse = pa.Parse_Ya(category='ноутбук', scraper='selenium', num_outfile=0, interrupt=0, user_id=1).\
@@ -15,8 +15,8 @@ import parse_universal_classes as pa
 # Nb ["Acer", "Alienware", "Apple", "Acer", "Apple", "Asus", "Dell", "Honor", "HP", "Huawei", "Lenovo", "MSI"]
 #"class": "_24Evj"
 
-# Dec-24 parse = pa.Parse_CL(category='монитор', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли
-# Dec-24 parse = pa.Parse_DNS(category='монитор', scraper='selenium', num_outfile=1, interrupt=5).Pagination()
+# Jan-25 parse = pa.Parse_CL(category='монитор', scraper='selenium', num_outfile=0, interrupt=15).Pagination() #Следить - все ли
+parse = pa.Parse_DNS(category='монитор', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
 #parse = pa.Parse_El(category='монитор', scraper='selenium', num_outfile=1, interrupt=1).Pagination(finish=26) # мониторы 17 https://www.eldorado.ru/c/monitory/
 # parse = pa.Parse_OZ(category='монитор', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
 # Aug-24 parse = pa.Parse_Ya(category='монитор', scraper='selenium', num_outfile=0, interrupt=2, user_id=1).\
@@ -38,4 +38,4 @@ import parse_universal_classes as pa
 #             'GE','DKC','Tripp Lite','AEG','Irbis','Sven','Hiper']
 
 #parse = pa.Parse_Ya(category='logitech', scraper='selenium', num_outfile=0, interrupt=1).Pagination(vendors=[])
-parse = pa.Parse_DNS(category='ибп', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
+#parse = pa.Parse_DNS(category='ибп', scraper='selenium', num_outfile=0, interrupt=5).Pagination()
