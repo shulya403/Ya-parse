@@ -283,20 +283,21 @@
                 "card_div": {
                   "teg": "div",
                   "attributes": {
-                    "class": "e12wdlvo0 app-catalog-1bogmvw e1loosed0"
+                    "data-meta-name": "ProductHorizontalSnippet"
                   }
                 },
                 "product_div": {
                   "teg": "div",
                   "re": "True",
                   "attributes": {
-                    "class": "app-catalog-1tp0ino"
+                    "class": "app-catalog-q2ndej"
                   }
                 },
                 "price_div": {
                   "teg": "span",
+                  "re": "True",
                   "attributes": {
-                    "class": "e1j9birj0 e106ikdt0 app-catalog-p2oaao e1gjr6xo0"
+                    "class": "e4ahr150 e1a7a4n70 app-catalog-"
                   }
                 }
        },
