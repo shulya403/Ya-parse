@@ -19,6 +19,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pickle
 import random
+import os
 
 #общий принцип парсинга - класс parse_common
 #Скачиваем json файл Categories
@@ -677,16 +678,27 @@ class Parse_DNS(Parse_Common):
         if self.scraper == 'selenium':
 
             options = webdriver.ChromeOptions()
-            # options.add_argument('--headless')
-            options.add_argument("--window-size=1920,1080")
-            options.add_argument ("--user-data-dir=C:/Users/shulya403/AppData/Local/Google/Chrome/User Data")
-            options.add_argument ("--profile-directory=Default")
-            options.add_argument ("--remote-debugging-port=9222")
 
-            #self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
-            self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\135.0.7049.115\\chromedriver-win32\\chromedriver.exe", options=options)
-            #C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\126.0.6478.127\\chromedriver-win32\\hromedriver.exe
-            #version="108.0.5359.71"
+            if os.getenv("USERNAME") == "DSH":
+                options.add_argument ("--window-size=1920,1080")
+                options.add_argument ("--user-data-dir=C:/Users/DSH/AppData/Local/Google/Chrome for Testing/User Data")
+                options.add_argument ("--profile-directory=Default")
+                self.driver = webdriver.Chrome (
+                    executable_path="C:\\Users\\DSH\\.wdm\\drivers\\chromedriver\\win32\\109.0.5414.74\\chromedriver.exe",
+                    options=options)
+            else:
+
+                options.binary_location = "C:\\Users\\shulya403\\Downloads\\chrome-win64\\chrome.exe"
+                options.add_argument("--window-size=1920,1080")
+                options.add_argument ("--user-data-dir=C:/Users/shulya403/AppData/Local/Google/Chrome for Testing/User Data")
+                options.add_argument ("--profile-directory=Default")
+                #options.add_argument ("--remote-debugging-port=9222")
+
+                #self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=options)
+                #self.driver = webdriver.Chrome("C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\136.0.7103.114\\chromedriver-win32\\chromedriver.exe", options=options)
+                #C:\\Users\\shulya403\\.wdm\\drivers\\chromedriver\\win64\\126.0.6478.127\\chromedriver-win32\\hromedriver.exe
+                #version="108.0.5359.71"
+                self.driver = webdriver.Chrome (executable_path="C:\\Users\\shulya403\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe", options=options)
 
     def Page_Webdriver(self, url_):
 
