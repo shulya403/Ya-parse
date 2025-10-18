@@ -855,7 +855,10 @@ class Parse_DNS(Parse_Common):
         try:
             re.compile('')
             offers = soup_offers.find('span').text
-            exit_ = "".join(re.findall(r'\d', offers))
+            if "магаз" in offers:
+                exit_ = "".join(re.findall(r'\d', offers))
+            else:
+                exit_ = ""
 
         except Exception:
             exit_ = None
